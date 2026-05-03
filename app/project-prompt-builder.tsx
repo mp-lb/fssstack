@@ -71,8 +71,7 @@ Use these values:
 name: ${config.name}
 slug: ${config.slug}
 emoji: ${config.emoji}
-gitUrl: ${config.gitUrl}
-packagePrefix: ${config.packagePrefix}
+${config.gitUrl ? `gitUrl: ${config.gitUrl}\n` : ""}packagePrefix: ${config.packagePrefix}
 backendServices: ${config.backendServices.join(", ")}
 frontendClients: ${config.frontendClients
   .map((client) => `${client.slug} (${client.type})`)
