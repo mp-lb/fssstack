@@ -74,8 +74,8 @@ emoji: ${config.emoji}
 ${config.gitUrl ? `gitUrl: ${config.gitUrl}\n` : ""}packagePrefix: ${config.packagePrefix}
 backendServices: ${config.backendServices.join(", ")}
 frontendClients: ${config.frontendClients
-  .map((client) => `${client.slug} (${client.type})`)
-  .join(", ")}`;
+    .map((client) => `${client.slug} (${client.type})`)
+    .join(", ")}`;
 
 const fieldId = (path: PropertyKey[]) =>
   path
@@ -141,22 +141,20 @@ export default function ProjectPromptBuilder() {
               Prompt config builder
             </div>
             <h1 className="text-3xl font-semibold tracking-normal text-white sm:text-4xl">
-              FSS Stack Project Prompt
+              Fssstack
             </h1>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <a
               href="https://github.com/mp-lb/fssstack"
-              target="_blank"
               rel="noreferrer"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-4 text-sm font-semibold text-cyan-50 transition hover:border-cyan-200 hover:bg-cyan-300/20"
             >
-              FSS Stack
+              GitHub Repo
               <ExternalLink size={16} aria-hidden="true" />
             </a>
             <a
-              href="https://mp-lb.dev"
-              target="_blank"
+              href="https://www.mp-lb.dev"
               rel="noreferrer"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-semibold text-zinc-100 transition hover:border-white/25 hover:bg-white/10"
             >
