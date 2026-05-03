@@ -150,7 +150,7 @@ export default function ProjectPromptBuilder() {
             <a
               href="https://github.com/mp-lb/fssstack"
               rel="noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-cyan-300/30 bg-cyan-300/10 px-4 text-sm font-semibold text-cyan-50 transition hover:border-cyan-200 hover:bg-cyan-300/20"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-semibold text-zinc-100 transition hover:border-white/25 hover:bg-white/10"
             >
               <GitCommit size={16} aria-hidden="true" />
               GitHub Repo
