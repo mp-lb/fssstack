@@ -1,0 +1,116 @@
+import { z } from "zod";
+
+const namePattern = /^[A-Za-z0-9 .,'&()/_:+#-]+$/;
+const slugPattern = /^[a-z]+(?:-[a-z]+)*$/;
+const npmOrgPattern = /^@[a-z0-9][a-z0-9-]*$/;
+const emojiPattern = /^(?=.*(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}))(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}|\uFE0F|\u200D)+$/u;
+
+export const toSlug = (value: string) => {
+  const slug = value
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
+
+  return slug || "project";
+};
+
+export const projectPromptSchema = z
+  .object({
+    name: z
+      .string()
+      .trim()
+      .min(1, "Name is required.")
+      .regex(
+        namePattern,
+        "Use letters, numbers, spaces, and basic punctuation only.",
+      ),
+    slug: z
+      .string()
+      .trim()
+      .min(1, "Slug is required.")
+      .regex(
+        slugPattern,
+        "Use lowercase letters separated by single hyphens.",
+      ),
+    emoji: z
+      .string()
+      .trim()
+      .min(1, "Emoji is required.")
+      .regex(emojiPattern, "Use emoji characters only."),
+    gitUrl: z
+      .string()
+      .trim()
+      .refine(
+        (value) => value === "" || z.string().url().safeParse(value).success,
+        "Enter a valid URL.",
+      ),
+    packagePrefix: z
+      .string()
+      .trim()
+      .default("@fssstack")
+      .pipe(
+        z
+          .string()
+          .min(2, "Package prefix is required.")
+          .max(214, "Package prefix is too long.")
+          .regex(npmOrgPattern, "Use a valid lowercase npm org, like @fssstack."),
+      ),
+    backendServices: z
+      .array(
+        z
+          .string()
+          .trim()
+          .min(1, "Service slug is required.")
+          .regex(slugPattern, "Use lowercase letters separated by single hyphens."),
+      )
+      .min(1, "Add at least one backend service.")
+      .default(["backend"]),
+    frontendClients: z
+      .array(
+        z.object({
+          slug: z
+            .string()
+            .trim()
+            .min(1, "Client slug is required.")
+            .regex(
+              slugPattern,
+              "Use lowercase letters separated by single hyphens.",
+            ),
+          type: z.enum(["react-vite", "react-nextjs"]),
+        }),
+      )
+      .min(1, "Add at least one frontend client.")
+      .default([{ slug: "frontend", type: "react-vite" }]),
+  })
+  .strict();
+
+export type ProjectPromptConfig = z.infer<typeof projectPromptSchema>;
+
+export const defaultProjectPromptConfig: ProjectPromptConfig = {
+  name: "My App",
+  slug: "my-app",
+  emoji: "🚀",
+  gitUrl: "",
+  packagePrefix: "@fssstack",
+  backendServices: ["backend"],
+  frontendClients: [{ slug: "frontend", type: "react-vite" }],
+};
+
+export const normalizeProjectPromptConfig = (
+  config: ProjectPromptConfig,
+): ProjectPromptConfig => ({
+  ...config,
+  name: config.name.trim(),
+  slug: toSlug(config.slug),
+  emoji: config.emoji.trim(),
+  gitUrl: config.gitUrl.trim(),
+  packagePrefix: config.packagePrefix.trim().toLowerCase(),
+  backendServices: config.backendServices.map(toSlug),
+  frontendClients: config.frontendClients.map((client) => ({
+    ...client,
+    slug: toSlug(client.slug),
+  })),
+});
