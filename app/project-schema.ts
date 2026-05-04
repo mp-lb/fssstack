@@ -14,7 +14,7 @@ export const toSlug = (value: string) => {
     .replace(/-+/g, "-")
     .replace(/^-|-$/g, "");
 
-  return slug || "project";
+  return slug;
 };
 
 export const projectPromptSchema = z
@@ -66,7 +66,6 @@ export const projectPromptSchema = z
           .min(1, "Service slug is required.")
           .regex(slugPattern, "Use lowercase letters separated by single hyphens."),
       )
-      .min(1, "Add at least one backend service.")
       .default(["backend"]),
     frontendClients: z
       .array(
@@ -82,10 +81,40 @@ export const projectPromptSchema = z
           type: z.enum(["react-vite", "react-nextjs"]),
         }),
       )
-      .min(1, "Add at least one frontend client.")
       .default([{ slug: "frontend", type: "react-vite" }]),
   })
-  .strict();
+  .strict()
+  .superRefine((config, context) => {
+    const slugCounts = new Map<string, number>();
+
+    for (const service of config.backendServices) {
+      slugCounts.set(service, (slugCounts.get(service) ?? 0) + 1);
+    }
+
+    for (const client of config.frontendClients) {
+      slugCounts.set(client.slug, (slugCounts.get(client.slug) ?? 0) + 1);
+    }
+
+    config.backendServices.forEach((service, index) => {
+      if ((slugCounts.get(service) ?? 0) > 1) {
+        context.addIssue({
+          code: "custom",
+          message: "Service and client slugs must be unique.",
+          path: ["backendServices", index],
+        });
+      }
+    });
+
+    config.frontendClients.forEach((client, index) => {
+      if ((slugCounts.get(client.slug) ?? 0) > 1) {
+        context.addIssue({
+          code: "custom",
+          message: "Service and client slugs must be unique.",
+          path: ["frontendClients", index, "slug"],
+        });
+      }
+    });
+  });
 
 export type ProjectPromptConfig = z.infer<typeof projectPromptSchema>;
 
@@ -108,9 +137,13 @@ export const normalizeProjectPromptConfig = (
   emoji: config.emoji.trim(),
   gitUrl: config.gitUrl.trim(),
   packagePrefix: config.packagePrefix.trim().toLowerCase(),
-  backendServices: config.backendServices.map(toSlug),
-  frontendClients: config.frontendClients.map((client) => ({
-    ...client,
-    slug: toSlug(client.slug),
-  })),
+  backendServices: config.backendServices
+    .map(toSlug)
+    .filter((service) => service !== ""),
+  frontendClients: config.frontendClients
+    .map((client) => ({
+      ...client,
+      slug: toSlug(client.slug),
+    }))
+    .filter((client) => client.slug !== ""),
 });

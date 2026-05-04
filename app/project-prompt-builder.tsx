@@ -1,18 +1,48 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import {
-  AlertCircle,
   Check,
-  Clipboard,
   Copy,
-  ExternalLink,
+  ChevronDown,
   FlaskConical,
   GitCommit,
+  Info,
   Plus,
-  Sparkles,
   Trash2,
+  X,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Field, FieldError, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
 import {
   defaultProjectPromptConfig,
   normalizeProjectPromptConfig,
@@ -28,46 +58,31 @@ const frontendTypes: { label: string; value: FrontendType }[] = [
   { label: "React Next.js", value: "react-nextjs" },
 ];
 
-const slugChoices = {
-  backend: [
-    "backend",
-    "backend-api",
-    "backend-worker",
-    "backend-jobs",
-    "backend-sync",
-    "backend-admin",
-  ],
-  frontend: [
-    "frontend",
-    "frontend-web",
-    "frontend-admin",
-    "frontend-dashboard",
-    "frontend-console",
-    "frontend-marketing",
-  ],
+const frontendTypeLabel = (value: FrontendType) =>
+  frontendTypes.find((type) => type.value === value)?.label ?? value;
+
+const includePrerequisitesStorageKey = "fssstack-start.include-prerequisites";
+const servicesHelpOpenStorageKey = "fssstack-start.services-help-open";
+
+const projectFieldHelp = {
+  name: "Used for generated README content and app titles.",
+  slug: "Used as the project slug in template placeholders and package naming.",
+  emoji: "Rendered into readme/favicon assets.",
+  packagePrefix:
+    "Combined with the project slug and app slugs to form workspace package names.",
+  gitUrl: "Optional repository metadata included in the setup prompt.",
 };
 
-const nextSlug = (kind: keyof typeof slugChoices, existing: string[]) => {
-  const used = new Set(existing);
-  const option = slugChoices[kind].find((slug) => !used.has(slug));
+const buildPrompt = (
+  config: ProjectPromptConfig,
+  includePrerequisites: boolean,
+) => `${includePrerequisites ? `Before starting, make sure the \`git\`, \`docker\`, \`node\`, \`pm2\`, and \`zapper\` commands are available. Install anything missing before continuing. On macOS, Homebrew is a reasonable default for Git, Docker, and Node; install PM2 and Zapper with \`npm install --global pm2 @mp-lb/zapper\`.
 
-  if (option) {
-    return option;
-  }
+` : ""}Start setup:
 
-  let slug = `${kind}-extra`;
-  while (used.has(slug)) {
-    slug = `${slug}-extra`;
-  }
-
-  return slug;
-};
-
-const buildPrompt = (config: ProjectPromptConfig) => `Set up this project in the current repository.
-
-1. Create a new directory in this repo called \`.fssstack\`.
-2. Download fssstack with \`curl -fsSL https://github.com/mp-lb/fssstack/archive/refs/heads/main.tar.gz | tar -xz --strip-components=1 -C .fssstack\`.
-3. Read \`.fssstack/SETUP_PROCESS.md\` and follow the instructions.
+1. Start in an empty git repository.
+2. Run \`mkdir .fssstack; curl -fsSL https://github.com/mp-lb/fssstack/archive/refs/heads/main.tar.gz | tar -xz --strip-components=1 -C .fssstack\`.
+3. Follow the instructions in \`.fssstack/SETUP_PROCESS.md\`.
 
 Use these values:
 name: ${config.name}
@@ -76,8 +91,8 @@ emoji: ${config.emoji}
 ${config.gitUrl ? `gitUrl: ${config.gitUrl}\n` : ""}packagePrefix: ${config.packagePrefix}
 backendServices: ${config.backendServices.join(", ")}
 frontendClients: ${config.frontendClients
-    .map((client) => `${client.slug} (${client.type})`)
-    .join(", ")}`;
+  .map((client) => `${client.slug} (${client.type})`)
+  .join(", ")}`;
 
 const fieldId = (path: PropertyKey[]) =>
   path
@@ -88,7 +103,14 @@ export default function ProjectPromptBuilder() {
   const [config, setConfig] = useState<ProjectPromptConfig>(
     defaultProjectPromptConfig,
   );
+  const [includePrerequisites, setIncludePrerequisites] =
+    useLocalStorageBoolean(includePrerequisitesStorageKey, true);
   const [copied, setCopied] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
+  const [servicesHelpOpen, setServicesHelpOpen] = useLocalStorageBoolean(
+    servicesHelpOpenStorageKey,
+    false,
+  );
 
   const normalizedConfig = useMemo(
     () => normalizeProjectPromptConfig(config),
@@ -98,21 +120,82 @@ export default function ProjectPromptBuilder() {
     () => projectPromptSchema.safeParse(normalizedConfig),
     [normalizedConfig],
   );
-  const prompt = result.success ? buildPrompt(result.data) : "";
+  const generatedPrompt = result.success
+    ? buildPrompt(result.data, includePrerequisites)
+    : "";
+  const [customPrompt, setCustomPrompt] = useState<string | null>(null);
+  const prompt = customPrompt ?? generatedPrompt;
+  const isPromptDirty =
+    customPrompt !== null && customPrompt !== generatedPrompt;
   const issues = result.success ? [] : result.error.issues;
+  const rawValues = JSON.stringify(normalizedConfig, null, 2);
+  const hasEmptyServiceField =
+    config.backendServices.some((service) => service.trim() === "") ||
+    config.frontendClients.some((client) => client.slug.trim() === "");
+  const serviceSlugs = [
+    ...config.backendServices.map(toSlug),
+    ...config.frontendClients.map((client) => toSlug(client.slug)),
+  ].filter((slug) => slug !== "");
+  const duplicateServiceSlugs = new Set(
+    serviceSlugs.filter(
+      (slug, index) => serviceSlugs.indexOf(slug) !== index,
+    ),
+  );
 
   const errorFor = (path: (string | number)[]) =>
     issues.find((issue) => fieldId(issue.path) === fieldId(path))?.message;
+  const duplicateServiceErrorFor = (slug: string) =>
+    duplicateServiceSlugs.has(toSlug(slug))
+      ? "Service and client slugs must be unique."
+      : undefined;
+
+  const updateConfig = (
+    nextConfig:
+      | ProjectPromptConfig
+      | ((current: ProjectPromptConfig) => ProjectPromptConfig),
+  ) => {
+    if (
+      isPromptDirty &&
+      !window.confirm(
+        "Changing inputs will reset your customized prompt. Continue?",
+      )
+    ) {
+      return;
+    }
+
+    setCustomPrompt(null);
+    setConfig(nextConfig);
+  };
+
+  const updateGeneratedSetting = (update: () => void) => {
+    if (
+      isPromptDirty &&
+      !window.confirm(
+        "Changing inputs will reset your customized prompt. Continue?",
+      )
+    ) {
+      return;
+    }
+
+    setCustomPrompt(null);
+    update();
+  };
+
+  const updateIncludePrerequisites = (value: boolean) => {
+    updateGeneratedSetting(() => {
+      setIncludePrerequisites(value);
+    });
+  };
 
   const setValue = <Key extends keyof ProjectPromptConfig>(
     key: Key,
     value: ProjectPromptConfig[Key],
   ) => {
-    setConfig((current) => ({ ...current, [key]: value }));
+    updateConfig((current) => ({ ...current, [key]: value }));
   };
 
   const updateName = (name: string) => {
-    setConfig((current) => {
+    updateConfig((current) => {
       const shouldSyncSlug = current.slug === toSlug(current.name);
 
       return {
@@ -134,75 +217,111 @@ export default function ProjectPromptBuilder() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0b0d12] text-zinc-100">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-8 px-4 py-5 sm:px-6 lg:px-8">
-        <header className="flex flex-col gap-4 border-b border-white/10 pb-5 lg:flex-row lg:items-end lg:justify-between">
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.24em] text-cyan-300">
-              <Sparkles size={15} aria-hidden="true" />
-              Prompt config builder
-            </div>
-            <h1 className="text-3xl font-semibold tracking-normal text-white sm:text-4xl">
-              Fssstack
+    <main className="min-h-svh bg-background text-foreground">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:px-5 lg:px-6">
+        <header className="flex flex-col gap-3 border-b pb-3 lg:flex-row lg:items-center lg:justify-between">
+          <div className="min-w-0">
+            <h1 className="text-2xl font-semibold tracking-normal sm:text-3xl">
+              Fssstack Start
             </h1>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+
+          <div className="flex flex-wrap items-center gap-4 text-sm">
+            <button
+              type="button"
+              className="inline-flex items-center gap-1.5 text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
+              onClick={() => setAboutOpen(true)}
+            >
+              <Info className="size-4" aria-hidden="true" />
+              What is this?
+            </button>
             <a
               href="https://github.com/mp-lb/fssstack"
-              rel="noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-semibold text-zinc-100 transition hover:border-white/25 hover:bg-white/10"
+              className="inline-flex items-center gap-1.5 text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
             >
-              <GitCommit size={16} aria-hidden="true" />
+              <GitCommit className="size-4" aria-hidden="true" />
               GitHub Repo
             </a>
             <a
-              href="https://www.mp-lb.dev"
-              rel="noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-white/10 bg-white/5 px-4 text-sm font-semibold text-zinc-100 transition hover:border-white/25 hover:bg-white/10"
+              href="https://www.mp-lb.dev/"
+              className="inline-flex items-center gap-1.5 text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
             >
-              <FlaskConical size={16} aria-hidden="true" />
+              <FlaskConical className="size-4" aria-hidden="true" />
               MAP Lab Home
             </a>
-            <div className="flex h-12 items-center gap-2 rounded-md border border-emerald-400/25 bg-emerald-400/10 px-3 text-sm text-emerald-100">
-              {result.success ? (
-                <Check size={16} aria-hidden="true" />
-              ) : (
-                <AlertCircle size={16} aria-hidden="true" />
-              )}
-              {result.success ? "Schema valid" : `${issues.length} validation issue${issues.length === 1 ? "" : "s"}`}
-            </div>
           </div>
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(420px,0.9fr)]">
-          <form className="space-y-5" onSubmit={(event) => event.preventDefault()}>
-            <section className="rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/20 sm:p-5">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <h2 className="text-lg font-semibold text-white">Project</h2>
-                <span className="font-mono text-xs text-zinc-500">strict JSON</span>
-              </div>
+        {aboutOpen && (
+          <div
+            className="fixed inset-0 z-50 grid place-items-center bg-background/80 p-4 backdrop-blur-sm"
+            role="presentation"
+            onClick={() => setAboutOpen(false)}
+          >
+            <Card
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="about-fssstack-title"
+              className="w-full max-w-2xl"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <CardHeader className="border-b">
+                <CardTitle id="about-fssstack-title">
+                  What is Fssstack?
+                </CardTitle>
+                <CardAction>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon-sm"
+                    aria-label="Close"
+                    onClick={() => setAboutOpen(false)}
+                  >
+                    <X aria-hidden="true" />
+                  </Button>
+                </CardAction>
+              </CardHeader>
+              <CardContent className="space-y-4 text-sm leading-6 text-muted-foreground">
+                <AboutFssstack />
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
-              <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid items-stretch gap-3 lg:grid-cols-2">
+          <Card size="sm" className="h-full">
+            <CardHeader className="border-b">
+              <CardTitle>Project info</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <form
+                className="grid gap-3 sm:grid-cols-2"
+                onSubmit={(event) => event.preventDefault()}
+              >
                 <TextField
                   label="Name"
+                  help={projectFieldHelp.name}
                   value={config.name}
                   error={errorFor(["name"])}
                   onChange={updateName}
                 />
                 <TextField
                   label="Slug"
+                  help={projectFieldHelp.slug}
                   value={config.slug}
                   error={errorFor(["slug"])}
                   onChange={(value) => setValue("slug", toSlug(value))}
                 />
                 <TextField
                   label="Emoji"
+                  help={projectFieldHelp.emoji}
                   value={config.emoji}
                   error={errorFor(["emoji"])}
                   onChange={(value) => setValue("emoji", value)}
                 />
                 <TextField
                   label="Package prefix"
+                  help={projectFieldHelp.packagePrefix}
                   value={config.packagePrefix}
                   error={errorFor(["packagePrefix"])}
                   onChange={(value) => setValue("packagePrefix", value)}
@@ -210,176 +329,271 @@ export default function ProjectPromptBuilder() {
                 <div className="sm:col-span-2">
                   <TextField
                     label="Git URL"
+                    help={projectFieldHelp.gitUrl}
                     value={config.gitUrl}
                     error={errorFor(["gitUrl"])}
+                    placeholder="Optional"
                     onChange={(value) => setValue("gitUrl", value)}
                   />
                 </div>
-              </div>
-            </section>
+              </form>
+            </CardContent>
+          </Card>
 
-            <section className="rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/20 sm:p-5">
-              <ListHeader
+          <Card size="sm" className="h-full">
+            <CardHeader className="border-b">
+              <div>
+                <CardTitle>Services and clients</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="grid min-h-0 gap-4 lg:grid-cols-2">
+              <ListPanel
                 title="Backend services"
+                disabled={hasEmptyServiceField}
                 onAdd={() =>
                   setValue("backendServices", [
                     ...config.backendServices,
-                    nextSlug("backend", config.backendServices),
+                    "",
                   ])
                 }
-              />
+              >
+                {config.backendServices.map((service, index) => {
+                  const serviceError =
+                    errorFor(["backendServices", index]) ??
+                    duplicateServiceErrorFor(service);
 
-              <div className="space-y-3">
-                {config.backendServices.map((service, index) => (
-                  <ListRow key={`${service}-${index}`} columns="two">
-                    <TextField
-                      label={`Service ${index + 1}`}
-                      value={service}
-                      error={errorFor(["backendServices", index])}
-                      onChange={(value) => {
-                        const next = [...config.backendServices];
-                        next[index] = toSlug(value);
-                        setValue("backendServices", next);
-                      }}
-                    />
-                    <IconButton
-                      label="Remove service"
-                      disabled={config.backendServices.length === 1}
-                      onClick={() =>
-                        setValue(
-                          "backendServices",
-                          config.backendServices.filter((_, itemIndex) => itemIndex !== index),
-                        )
-                      }
-                    >
-                      <Trash2 size={16} aria-hidden="true" />
-                    </IconButton>
-                  </ListRow>
-                ))}
-              </div>
-            </section>
+                  return (
+                    <CompactRow key={`backend-${index}`}>
+                      <Input
+                        aria-label={`Backend service ${index + 1}`}
+                        value={service}
+                        aria-invalid={Boolean(serviceError)}
+                        onChange={(event) => {
+                          const next = [...config.backendServices];
+                          next[index] = toSlug(event.target.value);
+                          setValue("backendServices", next);
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        title="Remove service"
+                        aria-label="Remove service"
+                        disabled={config.backendServices.length === 1}
+                        onClick={() =>
+                          setValue(
+                            "backendServices",
+                            config.backendServices.filter(
+                              (_, itemIndex) => itemIndex !== index,
+                            ),
+                          )
+                        }
+                      >
+                        <Trash2 aria-hidden="true" />
+                      </Button>
+                      {serviceError && (
+                        <p className="col-span-full px-1 text-xs text-destructive">
+                          {serviceError}
+                        </p>
+                      )}
+                    </CompactRow>
+                  );
+                })}
+              </ListPanel>
 
-            <section className="rounded-lg border border-white/10 bg-white/[0.04] p-4 shadow-2xl shadow-black/20 sm:p-5">
-              <ListHeader
+              <ListPanel
                 title="Frontend clients"
+                disabled={hasEmptyServiceField}
                 onAdd={() =>
                   setValue("frontendClients", [
                     ...config.frontendClients,
                     {
-                      slug: nextSlug(
-                        "frontend",
-                        config.frontendClients.map((client) => client.slug),
-                      ),
+                      slug: "",
                       type: "react-vite",
                     },
                   ])
                 }
-              />
+              >
+                {config.frontendClients.map((client, index) => {
+                  const clientError =
+                    errorFor(["frontendClients", index, "slug"]) ??
+                    duplicateServiceErrorFor(client.slug);
 
-              <div className="space-y-3">
-                {config.frontendClients.map((client, index) => (
-                  <ListRow key={`${client.slug}-${index}`} columns="three">
-                    <TextField
-                      label={`Client ${index + 1}`}
-                      value={client.slug}
-                      error={errorFor(["frontendClients", index, "slug"])}
-                      onChange={(value) => {
-                        const next = [...config.frontendClients];
-                        next[index] = { ...client, slug: toSlug(value) };
-                        setValue("frontendClients", next);
-                      }}
-                    />
-                    <label className="grid gap-2">
-                      <span className="text-sm font-medium text-zinc-300">Type</span>
-                      <select
-                        className="h-11 rounded-md border border-white/10 bg-zinc-950 px-3 text-sm text-white outline-none transition focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
-                        value={client.type}
+                  return (
+                    <CompactRow key={`frontend-${index}`}>
+                      <Input
+                        aria-label={`Frontend client ${index + 1}`}
+                        value={client.slug}
+                        aria-invalid={Boolean(clientError)}
                         onChange={(event) => {
                           const next = [...config.frontendClients];
                           next[index] = {
                             ...client,
-                            type: event.target.value as FrontendType,
+                            slug: toSlug(event.target.value),
+                          };
+                          setValue("frontendClients", next);
+                        }}
+                      />
+                      <Select
+                        value={client.type}
+                        onValueChange={(value) => {
+                          const next = [...config.frontendClients];
+                          next[index] = {
+                            ...client,
+                            type: value as FrontendType,
                           };
                           setValue("frontendClients", next);
                         }}
                       >
-                        {frontendTypes.map((type) => (
-                          <option key={type.value} value={type.value}>
-                            {type.label}
-                          </option>
-                        ))}
-                      </select>
-                    </label>
-                    <IconButton
-                      label="Remove client"
-                      disabled={config.frontendClients.length === 1}
-                      onClick={() =>
-                        setValue(
-                          "frontendClients",
-                          config.frontendClients.filter((_, itemIndex) => itemIndex !== index),
-                        )
-                      }
-                    >
-                      <Trash2 size={16} aria-hidden="true" />
-                    </IconButton>
-                  </ListRow>
-                ))}
-              </div>
-            </section>
-          </form>
-
-          <aside className="grid gap-6 lg:sticky lg:top-6 lg:self-start">
-            <section className="rounded-lg border border-white/10 bg-[#10141d] p-4 shadow-2xl shadow-black/30 sm:p-5">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <h2 className="text-lg font-semibold text-white">JSON object</h2>
-                  <p className="mt-1 text-sm text-zinc-400">
-                    Normalized before validation.
+                        <SelectTrigger
+                          aria-label={`Frontend client ${index + 1} type`}
+                          size="default"
+                          className="w-[126px]"
+                        >
+                          <SelectValue>
+                            {frontendTypeLabel(client.type)}
+                          </SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {frontendTypes.map((type) => (
+                            <SelectItem key={type.value} value={type.value}>
+                              {type.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        title="Remove client"
+                        aria-label="Remove client"
+                        disabled={config.frontendClients.length === 1}
+                        onClick={() =>
+                          setValue(
+                            "frontendClients",
+                            config.frontendClients.filter(
+                              (_, itemIndex) => itemIndex !== index,
+                            ),
+                          )
+                        }
+                      >
+                        <Trash2 aria-hidden="true" />
+                      </Button>
+                      {clientError && (
+                        <p className="col-span-full px-1 text-xs text-destructive">
+                          {clientError}
+                        </p>
+                      )}
+                    </CompactRow>
+                  );
+                })}
+              </ListPanel>
+              <div className="lg:col-span-2">
+                <InlineHelp
+                  open={servicesHelpOpen}
+                  onOpenChange={setServicesHelpOpen}
+                  title="How services and clients are used"
+                >
+                  <p>
+                    Backend slugs create Fastify/tRPC services in{" "}
+                    <code>apps/&lt;slug&gt;</code>. Client slugs create Vite or
+                    Next.js apps in <code>apps/&lt;slug&gt;</code>. Starter
+                    clients are wired to the primary backend through tRPC, and
+                    all slugs are rendered into <code>zap.yaml</code>,{" "}
+                    <code>.env.local</code>, and package names.
                   </p>
-                </div>
-                <Clipboard className="text-cyan-300" size={18} aria-hidden="true" />
+                </InlineHelp>
               </div>
-              <pre className="max-h-[320px] overflow-auto rounded-md border border-white/10 bg-black/45 p-4 font-mono text-xs leading-6 text-cyan-50">
-                {JSON.stringify(normalizedConfig, null, 2)}
-              </pre>
-            </section>
+            </CardContent>
+          </Card>
+        </div>
 
-            <section className="rounded-lg border border-white/10 bg-[#10141d] p-4 shadow-2xl shadow-black/30 sm:p-5">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <h2 className="text-lg font-semibold text-white">Generated prompt</h2>
-                  <p className="mt-1 text-sm text-zinc-400">
-                    Copy when the schema passes.
-                  </p>
-                </div>
-                <button
+        <Card size="sm">
+          <Tabs defaultValue="prompt">
+            <CardHeader className="border-b">
+              <div>
+                <CardTitle>Prompt</CardTitle>
+                <CardDescription className="text-xs">
+                  Copy this into your AI coding tool.
+                </CardDescription>
+              </div>
+              <CardAction className="flex items-center gap-2">
+                <TabsList>
+                  <TabsTrigger value="prompt">Prompt</TabsTrigger>
+                  <TabsTrigger value="raw">Raw values</TabsTrigger>
+                </TabsList>
+                {isPromptDirty && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCustomPrompt(null)}
+                  >
+                    Reset
+                  </Button>
+                )}
+                <Button
                   type="button"
-                  title="Copy generated prompt"
-                  aria-label="Copy generated prompt"
-                  disabled={!result.success}
+                  size="sm"
+                  disabled={!result.success || !prompt}
                   onClick={copyPrompt}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-cyan-300/30 bg-cyan-300/10 text-cyan-100 transition hover:border-cyan-200 hover:bg-cyan-300/20 disabled:cursor-not-allowed disabled:border-white/10 disabled:bg-white/5 disabled:text-zinc-600"
                 >
                   {copied ? (
-                    <Check size={17} aria-hidden="true" />
+                    <Check aria-hidden="true" />
                   ) : (
-                    <Copy size={17} aria-hidden="true" />
+                    <Copy aria-hidden="true" />
                   )}
-                </button>
-              </div>
-
-              {result.success ? (
-                <pre className="max-h-[420px] whitespace-pre-wrap overflow-auto rounded-md border border-white/10 bg-black/45 p-4 font-mono text-xs leading-6 text-zinc-100">
-                  {prompt}
-                </pre>
-              ) : (
-                <div className="rounded-md border border-red-400/25 bg-red-400/10 p-4 text-sm text-red-100">
-                  Fix validation issues before copying the prompt.
+                  {copied ? "Copied" : "Copy"}
+                </Button>
+              </CardAction>
+            </CardHeader>
+            <CardContent>
+              <TabsContent value="prompt" className="mt-0">
+                {result.success ? (
+                  <div className="space-y-2">
+                    <label className="flex w-fit items-center gap-2 text-sm text-muted-foreground">
+                      <input
+                        type="checkbox"
+                        checked={includePrerequisites}
+                        onChange={(event) =>
+                          updateIncludePrerequisites(event.target.checked)
+                        }
+                        className="size-4 rounded border border-input accent-primary"
+                      />
+                      Include prerequisites
+                    </label>
+                    <div>
+                      <Textarea
+                        value={prompt}
+                        onChange={(event) => setCustomPrompt(event.target.value)}
+                        className="min-h-[260px] resize-y overflow-auto rounded-lg bg-muted/30 p-4 font-mono text-xs leading-5 text-foreground"
+                      />
+                      <p className="mt-0 pl-4 text-[0.68rem] leading-4 text-muted-foreground">
+                        You are responsible for supervising your AI coding tool.
+                        Make sure it does not install, run, delete, or change
+                        anything without your approval.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
+                    Fix validation issues before copying the prompt.
+                  </div>
+                )}
+              </TabsContent>
+              <TabsContent value="raw" className="mt-0">
+                <div className="mb-2 text-xs text-muted-foreground">
+                  {result.success
+                    ? "Schema valid"
+                    : `${issues.length} validation issue${issues.length === 1 ? "" : "s"}`}
                 </div>
-              )}
-            </section>
-          </aside>
-        </div>
+                <CodeBlock>{rawValues}</CodeBlock>
+              </TabsContent>
+            </CardContent>
+          </Tabs>
+        </Card>
       </div>
     </main>
   );
@@ -387,93 +601,196 @@ export default function ProjectPromptBuilder() {
 
 function TextField({
   label,
+  help,
   value,
   error,
+  placeholder,
   onChange,
 }: {
   label: string;
+  help: string;
   value: string;
   error?: string;
+  placeholder?: string;
   onChange: (value: string) => void;
 }) {
   return (
-    <label className="grid gap-2">
-      <span className="text-sm font-medium text-zinc-300">{label}</span>
-      <input
-        className="h-11 min-w-0 rounded-md border border-white/10 bg-zinc-950 px-3 text-sm text-white outline-none transition placeholder:text-zinc-600 focus:border-cyan-300 focus:ring-2 focus:ring-cyan-300/20"
+    <Field data-invalid={Boolean(error)} className="gap-1.5">
+      <FieldLabel className="text-xs">
+        <Tooltip>
+          <TooltipTrigger className="cursor-help underline decoration-dotted underline-offset-4">
+            {label}
+          </TooltipTrigger>
+          <TooltipContent side="top" align="start">
+            {help}
+          </TooltipContent>
+        </Tooltip>
+      </FieldLabel>
+      <Input
         value={value}
+        placeholder={placeholder}
+        aria-invalid={Boolean(error)}
         onChange={(event) => onChange(event.target.value)}
       />
-      <span className="min-h-5 text-xs text-red-300">{error}</span>
-    </label>
+      <FieldError className="min-h-4 text-xs">{error}</FieldError>
+    </Field>
   );
 }
 
-function ListHeader({
+function AboutFssstack() {
+  return (
+    <>
+      <p>
+        Fssstack plugs into your agentic coding tool and gives it a working set
+        of standards for building with this stack. The point is not just
+        scaffolding; it gives the agent strong defaults for how code should be
+        organized, validated, tested, and maintained.
+      </p>
+
+      <div className="space-y-2">
+        <h2 className="text-sm font-medium text-foreground">
+          What the agent gets
+        </h2>
+        <ul className="list-disc space-y-1 pl-5">
+          <li>
+            Core stack assumptions such as TypeScript, tRPC, pnpm, Turbo,
+            app/service layout, linting, tests, logging, and environment
+            variable conventions.
+          </li>
+          <li>
+            Opinionated implementation guidance for keeping generated code
+            consistent instead of ad hoc.
+          </li>
+          <li>
+            A growing library of extension docs for optional capabilities such
+            as Clerk, BullMQ, S3, Redis, MongoDB, Playwright, and custom
+            domains.
+          </li>
+        </ul>
+      </div>
+      <p>
+        Read the{" "}
+        <a
+          href="https://github.com/mp-lb/fssstack/blob/main/SETUP_PROCESS.md"
+          target="_blank"
+          rel="noreferrer"
+          className="text-foreground underline underline-offset-4"
+        >
+          setup process
+        </a>{" "}
+        before copying the prompt to see what will run in the target repo.
+      </p>
+    </>
+  );
+}
+
+function useLocalStorageBoolean(key: string, defaultValue: boolean) {
+  const eventName = `local-storage:${key}`;
+  const getServerSnapshot = () => defaultValue;
+  const getSnapshot = () => {
+    const saved = window.localStorage.getItem(key);
+    return saved === null ? defaultValue : saved === "true";
+  };
+  const subscribe = (callback: () => void) => {
+    window.addEventListener("storage", callback);
+    window.addEventListener(eventName, callback);
+
+    return () => {
+      window.removeEventListener("storage", callback);
+      window.removeEventListener(eventName, callback);
+    };
+  };
+  const value = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot,
+  );
+
+  const setValue = (nextValue: boolean) => {
+    window.localStorage.setItem(key, String(nextValue));
+    window.dispatchEvent(new Event(eventName));
+  };
+
+  return [value, setValue] as const;
+}
+
+function InlineHelp({
+  open,
+  onOpenChange,
   title,
+  children,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <Collapsible open={open} onOpenChange={onOpenChange}>
+      <div className="rounded-lg border bg-muted/20">
+        <CollapsibleTrigger className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left text-xs font-medium text-muted-foreground">
+          {title}
+          <ChevronDown
+            aria-hidden="true"
+            className={cn("size-3.5 transition-transform", open && "rotate-180")}
+          />
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          <div className="border-t px-3 py-2 text-xs leading-5 text-muted-foreground [&_code]:rounded [&_code]:bg-muted [&_code]:px-1 [&_strong]:font-medium [&_strong]:text-foreground">
+            {children}
+          </div>
+        </CollapsibleContent>
+      </div>
+    </Collapsible>
+  );
+}
+
+function ListPanel({
+  title,
+  disabled,
   onAdd,
+  children,
 }: {
   title: string;
+  disabled: boolean;
   onAdd: () => void;
+  children: React.ReactNode;
 }) {
   return (
-    <div className="mb-4 flex items-center justify-between gap-3">
-      <h2 className="text-lg font-semibold text-white">{title}</h2>
-      <button
-        type="button"
-        title={`Add ${title.toLowerCase()}`}
-        aria-label={`Add ${title.toLowerCase()}`}
-        onClick={onAdd}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/5 text-zinc-100 transition hover:border-cyan-300/50 hover:bg-cyan-300/10 hover:text-cyan-100"
-      >
-        <Plus size={17} aria-hidden="true" />
-      </button>
-    </div>
+    <section className="min-h-0 space-y-2">
+      <div className="flex items-center justify-between gap-2">
+        <h2 className="text-sm font-medium">{title}</h2>
+        <Button
+          type="button"
+          variant="outline"
+          size="icon-xs"
+          title={`Add ${title.toLowerCase()}`}
+          aria-label={`Add ${title.toLowerCase()}`}
+          disabled={disabled}
+          onClick={onAdd}
+        >
+          <Plus aria-hidden="true" />
+        </Button>
+      </div>
+      <div className="space-y-1.5 pr-1">
+        {children}
+      </div>
+    </section>
   );
 }
 
-function ListRow({
-  columns,
-  children,
-}: Readonly<{
-  columns: "two" | "three";
-  children: ReactNode;
-}>) {
-  const columnClass =
-    columns === "two"
-      ? "sm:grid-cols-[minmax(0,1fr)_40px]"
-      : "sm:grid-cols-[minmax(0,1fr)_180px_40px]";
-
+function CompactRow({ children }: { children: React.ReactNode }) {
   return (
-    <div
-      className={`grid gap-3 rounded-md border border-white/10 bg-black/20 p-3 ${columnClass} sm:items-start`}
-    >
+    <div className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-1.5 rounded-lg border bg-muted/25 p-1">
       {children}
     </div>
   );
 }
 
-function IconButton({
-  label,
-  disabled,
-  onClick,
-  children,
-}: {
-  label: string;
-  disabled?: boolean;
-  onClick: () => void;
-  children: ReactNode;
-}) {
+function CodeBlock({ children }: { children: React.ReactNode }) {
   return (
-    <button
-      type="button"
-      title={label}
-      aria-label={label}
-      disabled={disabled}
-      onClick={onClick}
-      className="mt-7 inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/5 text-zinc-300 transition hover:border-red-300/50 hover:bg-red-300/10 hover:text-red-100 disabled:cursor-not-allowed disabled:opacity-35"
-    >
+    <pre className="min-h-[260px] overflow-auto rounded-lg border bg-muted/30 p-4 font-mono text-xs leading-5 text-foreground">
       {children}
-    </button>
+    </pre>
   );
 }
