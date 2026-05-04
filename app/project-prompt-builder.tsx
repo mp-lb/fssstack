@@ -221,12 +221,13 @@ export default function ProjectPromptBuilder() {
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-3 sm:px-5 lg:px-6">
         <header className="flex flex-col gap-3 border-b pb-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="min-w-0">
-            <h1 className="text-2xl font-semibold tracking-normal sm:text-3xl">
+            <h1 className="flex items-center gap-2 text-2xl font-semibold tracking-normal sm:text-3xl">
+              <span aria-hidden="true">🧰</span>
               Fssstack Start
             </h1>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 text-sm">
+          <div className="flex flex-col items-start gap-2 text-sm sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
             <button
               type="button"
               className="inline-flex items-center gap-1.5 text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
@@ -262,7 +263,7 @@ export default function ProjectPromptBuilder() {
               role="dialog"
               aria-modal="true"
               aria-labelledby="about-fssstack-title"
-              className="w-full max-w-2xl"
+              className="max-h-[calc(100svh-2rem)] w-full max-w-2xl overflow-y-auto"
               onClick={(event) => event.stopPropagation()}
             >
               <CardHeader className="border-b">
@@ -512,41 +513,43 @@ export default function ProjectPromptBuilder() {
 
         <Card size="sm">
           <Tabs defaultValue="prompt">
-            <CardHeader className="border-b">
+            <CardHeader className="border-b max-sm:grid-cols-1">
               <div>
                 <CardTitle>Prompt</CardTitle>
                 <CardDescription className="text-xs">
                   Copy this into your AI coding tool.
                 </CardDescription>
               </div>
-              <CardAction className="flex items-center gap-2">
+              <CardAction className="flex flex-wrap items-center gap-2 max-sm:col-start-1 max-sm:row-start-3 max-sm:mt-2 max-sm:justify-self-start">
                 <TabsList>
                   <TabsTrigger value="prompt">Prompt</TabsTrigger>
                   <TabsTrigger value="raw">Raw values</TabsTrigger>
                 </TabsList>
-                {isPromptDirty && (
+                <div className="flex flex-wrap items-center gap-2">
+                  {isPromptDirty && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => setCustomPrompt(null)}
+                    >
+                      Reset
+                    </Button>
+                  )}
                   <Button
                     type="button"
-                    variant="outline"
                     size="sm"
-                    onClick={() => setCustomPrompt(null)}
+                    disabled={!result.success || !prompt}
+                    onClick={copyPrompt}
                   >
-                    Reset
+                    {copied ? (
+                      <Check aria-hidden="true" />
+                    ) : (
+                      <Copy aria-hidden="true" />
+                    )}
+                    {copied ? "Copied" : "Copy"}
                   </Button>
-                )}
-                <Button
-                  type="button"
-                  size="sm"
-                  disabled={!result.success || !prompt}
-                  onClick={copyPrompt}
-                >
-                  {copied ? (
-                    <Check aria-hidden="true" />
-                  ) : (
-                    <Copy aria-hidden="true" />
-                  )}
-                  {copied ? "Copied" : "Copy"}
-                </Button>
+                </div>
               </CardAction>
             </CardHeader>
             <CardContent>
@@ -568,7 +571,7 @@ export default function ProjectPromptBuilder() {
                       <Textarea
                         value={prompt}
                         onChange={(event) => setCustomPrompt(event.target.value)}
-                        className="min-h-[260px] resize-y overflow-auto rounded-lg bg-muted/30 p-4 font-mono text-xs leading-5 text-foreground"
+                        className="min-h-[260px] resize-y overflow-auto rounded-lg bg-muted/30 p-4 font-mono text-xs leading-5 text-foreground lg:min-h-[200px]"
                       />
                       <p className="mt-0 pl-4 text-[0.68rem] leading-4 text-muted-foreground">
                         You are responsible for supervising your AI coding tool.
