@@ -70,25 +70,27 @@ const projectFieldHelp = {
   emoji: "Rendered into readme/favicon assets.",
   packagePrefix:
     "Combined with the project slug and app slugs to form workspace package names.",
-  gitUrl: "Optional repository metadata included in the setup prompt.",
+  description: "Included in generated README content and app metadata.",
 };
 
 const buildPrompt = (
   config: ProjectPromptConfig,
   includePrerequisites: boolean,
-) => `${includePrerequisites ? `Before starting, make sure the \`git\`, \`docker\`, \`node\`, \`pm2\`, and \`zapper\` commands are available. Install anything missing before continuing. On macOS, Homebrew is a reasonable default for Git, Docker, and Node; install PM2 and Zapper with \`npm install --global pm2 @mp-lb/zapper\`.
+) => `${includePrerequisites ? `Before starting, make sure the \`dx\`, \`git\`, \`docker\`, \`node\`, \`pm2\`, and \`zap\` commands are available. Install anything missing before continuing. Default to installing with Homebrew on macOS. For PM2, Zap, and Doctrine, install globally with npm using package names \`pm2\`, \`@mp-lb/zapper\`, and \`@mp-lb/doctrine-cli\`.
 
-` : ""}Start setup:
+` : ""}To start setup:
 
 1. Start in an empty git repository.
-2. Run \`mkdir .fssstack; curl -fsSL https://github.com/mp-lb/fssstack/archive/refs/heads/main.tar.gz | tar -xz --strip-components=1 -C .fssstack\`.
-3. Follow the instructions in \`.fssstack/SETUP_PROCESS.md\`.
+2. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
+3. Configure Doctrine with \`echo "store: fssstack" >> doctrine.yaml\`.
+4. Follow \`dx read SETUP_PROCESS.md\`.
 
 Use these values:
 name: ${config.name}
 slug: ${config.slug}
 emoji: ${config.emoji}
-${config.gitUrl ? `gitUrl: ${config.gitUrl}\n` : ""}packagePrefix: ${config.packagePrefix}
+description: ${config.description}
+packagePrefix: ${config.packagePrefix}
 backendServices: ${config.backendServices.join(", ")}
 frontendClients: ${config.frontendClients
   .map((client) => `${client.slug} (${client.type})`)
@@ -329,12 +331,13 @@ export default function ProjectPromptBuilder() {
                 />
                 <div className="sm:col-span-2">
                   <TextField
-                    label="Git URL"
-                    help={projectFieldHelp.gitUrl}
-                    value={config.gitUrl}
-                    error={errorFor(["gitUrl"])}
-                    placeholder="Optional"
-                    onChange={(value) => setValue("gitUrl", value)}
+                    label="Description"
+                    help={projectFieldHelp.description}
+                    value={config.description}
+                    error={errorFor(["description"])}
+                    maxLength={200}
+                    placeholder="Optional, up to 200 characters"
+                    onChange={(value) => setValue("description", value)}
                   />
                 </div>
               </form>
@@ -607,6 +610,7 @@ function TextField({
   help,
   value,
   error,
+  maxLength,
   placeholder,
   onChange,
 }: {
@@ -614,6 +618,7 @@ function TextField({
   help: string;
   value: string;
   error?: string;
+  maxLength?: number;
   placeholder?: string;
   onChange: (value: string) => void;
 }) {
@@ -632,6 +637,7 @@ function TextField({
       <Input
         value={value}
         placeholder={placeholder}
+        maxLength={maxLength}
         aria-invalid={Boolean(error)}
         onChange={(event) => onChange(event.target.value)}
       />

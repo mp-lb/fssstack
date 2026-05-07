@@ -40,13 +40,10 @@ export const projectPromptSchema = z
       .trim()
       .min(1, "Emoji is required.")
       .regex(emojiPattern, "Use emoji characters only."),
-    gitUrl: z
+    description: z
       .string()
       .trim()
-      .refine(
-        (value) => value === "" || z.string().url().safeParse(value).success,
-        "Enter a valid URL.",
-      ),
+      .max(200, "Description must be 200 characters or fewer."),
     packagePrefix: z
       .string()
       .trim()
@@ -122,7 +119,7 @@ export const defaultProjectPromptConfig: ProjectPromptConfig = {
   name: "My App",
   slug: "my-app",
   emoji: "🚀",
-  gitUrl: "",
+  description: "",
   packagePrefix: "@fssstack",
   backendServices: ["backend"],
   frontendClients: [{ slug: "frontend", type: "react-vite" }],
@@ -135,7 +132,7 @@ export const normalizeProjectPromptConfig = (
   name: config.name.trim(),
   slug: toSlug(config.slug),
   emoji: config.emoji.trim(),
-  gitUrl: config.gitUrl.trim(),
+  description: config.description.trim(),
   packagePrefix: config.packagePrefix.trim().toLowerCase(),
   backendServices: config.backendServices
     .map(toSlug)
