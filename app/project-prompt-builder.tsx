@@ -80,7 +80,7 @@ const buildPrompt = (
 
 ` : ""}To start setup:
 
-1. Start in an empty git repository.
+1. Start in an empty folder.
 2. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
 3. Configure Doctrine with \`echo "store: fssstack" >> doctrine.yaml\`.
 4. Follow \`dx read SETUP_PROCESS.md\`.
@@ -335,8 +335,9 @@ export default function ProjectPromptBuilder() {
                     help={projectFieldHelp.description}
                     value={config.description}
                     error={errorFor(["description"])}
+                    required
+                    minLength={1}
                     maxLength={200}
-                    placeholder="Optional, up to 200 characters"
                     onChange={(value) => setValue("description", value)}
                   />
                 </div>
@@ -610,6 +611,8 @@ function TextField({
   help,
   value,
   error,
+  required,
+  minLength,
   maxLength,
   placeholder,
   onChange,
@@ -618,6 +621,8 @@ function TextField({
   help: string;
   value: string;
   error?: string;
+  required?: boolean;
+  minLength?: number;
   maxLength?: number;
   placeholder?: string;
   onChange: (value: string) => void;
@@ -637,6 +642,8 @@ function TextField({
       <Input
         value={value}
         placeholder={placeholder}
+        required={required}
+        minLength={minLength}
         maxLength={maxLength}
         aria-invalid={Boolean(error)}
         onChange={(event) => onChange(event.target.value)}

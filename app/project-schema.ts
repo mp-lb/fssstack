@@ -43,6 +43,7 @@ export const projectPromptSchema = z
     description: z
       .string()
       .trim()
+      .min(1, "Description is required.")
       .max(200, "Description must be 200 characters or fewer."),
     packagePrefix: z
       .string()
