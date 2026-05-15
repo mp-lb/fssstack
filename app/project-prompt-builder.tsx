@@ -101,6 +101,8 @@ const fieldId = (path: PropertyKey[]) =>
     .filter((part): part is string | number => typeof part !== "symbol")
     .join(".");
 
+const fieldIsEmpty = (value: string) => value.trim() === "";
+
 export default function ProjectPromptBuilder() {
   const [config, setConfig] = useState<ProjectPromptConfig>(
     defaultProjectPromptConfig,
@@ -118,18 +120,38 @@ export default function ProjectPromptBuilder() {
     () => normalizeProjectPromptConfig(config),
     [config],
   );
+  const emptyRequiredFields = useMemo(() => {
+    const fields = [
+      { label: "Description", empty: fieldIsEmpty(config.description) },
+      ...config.backendServices.map((service, index) => ({
+        label: `Backend service ${index + 1}`,
+        empty: fieldIsEmpty(service),
+      })),
+      ...config.frontendClients.map((client, index) => ({
+        label: `Frontend client ${index + 1}`,
+        empty: fieldIsEmpty(client.slug),
+      })),
+    ];
+
+    return fields.filter((field) => field.empty);
+  }, [config]);
+  const hasEmptyRequiredFields = emptyRequiredFields.length > 0;
   const result = useMemo(
-    () => projectPromptSchema.safeParse(normalizedConfig),
-    [normalizedConfig],
+    () =>
+      hasEmptyRequiredFields
+        ? null
+        : projectPromptSchema.safeParse(normalizedConfig),
+    [hasEmptyRequiredFields, normalizedConfig],
   );
-  const generatedPrompt = result.success
+  const isValid = result?.success === true;
+  const generatedPrompt = isValid
     ? buildPrompt(result.data, includePrerequisites)
     : "";
   const [customPrompt, setCustomPrompt] = useState<string | null>(null);
   const prompt = customPrompt ?? generatedPrompt;
   const isPromptDirty =
     customPrompt !== null && customPrompt !== generatedPrompt;
-  const issues = result.success ? [] : result.error.issues;
+  const issues = result && !result.success ? result.error.issues : [];
   const rawValues = JSON.stringify(normalizedConfig, null, 2);
   const hasEmptyServiceField =
     config.backendServices.some((service) => service.trim() === "") ||
@@ -543,7 +565,7 @@ export default function ProjectPromptBuilder() {
                   <Button
                     type="button"
                     size="sm"
-                    disabled={!result.success || !prompt}
+                    disabled={!isValid || !prompt}
                     onClick={copyPrompt}
                   >
                     {copied ? (
@@ -558,7 +580,7 @@ export default function ProjectPromptBuilder() {
             </CardHeader>
             <CardContent>
               <TabsContent value="prompt" className="mt-0">
-                {result.success ? (
+                {isValid ? (
                   <div className="space-y-2">
                     <label className="flex w-fit items-center gap-2 text-sm text-muted-foreground">
                       <input
@@ -585,16 +607,27 @@ export default function ProjectPromptBuilder() {
                     </div>
                   </div>
                 ) : (
-                  <div className="rounded-lg border border-destructive/30 bg-destructive/10 p-4 text-sm text-destructive">
-                    Fix validation issues before copying the prompt.
+                  <div
+                    className={cn(
+                      "rounded-lg border p-4 text-sm",
+                      hasEmptyRequiredFields
+                        ? "border-border bg-muted/30 text-muted-foreground"
+                        : "border-destructive/30 bg-destructive/10 text-destructive",
+                    )}
+                  >
+                    {hasEmptyRequiredFields
+                      ? "Fill out all required fields to generate the prompt."
+                      : "Fix validation issues before copying the prompt."}
                   </div>
                 )}
               </TabsContent>
               <TabsContent value="raw" className="mt-0">
                 <div className="mb-2 text-xs text-muted-foreground">
-                  {result.success
-                    ? "Schema valid"
-                    : `${issues.length} validation issue${issues.length === 1 ? "" : "s"}`}
+                  {hasEmptyRequiredFields
+                    ? `${emptyRequiredFields.length} required field${emptyRequiredFields.length === 1 ? "" : "s"} empty`
+                    : isValid
+                      ? "Schema valid"
+                      : `${issues.length} validation issue${issues.length === 1 ? "" : "s"}`}
                 </div>
                 <CodeBlock>{rawValues}</CodeBlock>
               </TabsContent>
