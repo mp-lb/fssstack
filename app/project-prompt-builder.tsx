@@ -101,11 +101,12 @@ const fieldId = (path: PropertyKey[]) =>
     .filter((part): part is string | number => typeof part !== "symbol")
     .join(".");
 
-const fieldIsEmpty = (value: string) => value.trim() === "";
-
 export default function ProjectPromptBuilder() {
   const [config, setConfig] = useState<ProjectPromptConfig>(
     defaultProjectPromptConfig,
+  );
+  const [interactedFieldIds, setInteractedFieldIds] = useState<Set<string>>(
+    () => new Set(),
   );
   const [includePrerequisites, setIncludePrerequisites] =
     useLocalStorageBoolean(includePrerequisitesStorageKey, true);
@@ -120,38 +121,39 @@ export default function ProjectPromptBuilder() {
     () => normalizeProjectPromptConfig(config),
     [config],
   );
-  const emptyRequiredFields = useMemo(() => {
-    const fields = [
-      { label: "Description", empty: fieldIsEmpty(config.description) },
-      ...config.backendServices.map((service, index) => ({
-        label: `Backend service ${index + 1}`,
-        empty: fieldIsEmpty(service),
+  const validationConfig = useMemo<ProjectPromptConfig>(
+    () => ({
+      ...config,
+      name: config.name.trim(),
+      slug: toSlug(config.slug),
+      emoji: config.emoji.trim(),
+      description: config.description.trim(),
+      packagePrefix: config.packagePrefix.trim().toLowerCase(),
+      backendServices: config.backendServices.map(toSlug),
+      frontendClients: config.frontendClients.map((client) => ({
+        ...client,
+        slug: toSlug(client.slug),
       })),
-      ...config.frontendClients.map((client, index) => ({
-        label: `Frontend client ${index + 1}`,
-        empty: fieldIsEmpty(client.slug),
-      })),
-    ];
-
-    return fields.filter((field) => field.empty);
-  }, [config]);
-  const hasEmptyRequiredFields = emptyRequiredFields.length > 0;
-  const result = useMemo(
-    () =>
-      hasEmptyRequiredFields
-        ? null
-        : projectPromptSchema.safeParse(normalizedConfig),
-    [hasEmptyRequiredFields, normalizedConfig],
+    }),
+    [config],
   );
-  const isValid = result?.success === true;
+  const result = useMemo(
+    () => projectPromptSchema.safeParse(validationConfig),
+    [validationConfig],
+  );
+  const isValid = result.success;
   const generatedPrompt = isValid
-    ? buildPrompt(result.data, includePrerequisites)
+    ? buildPrompt(normalizedConfig, includePrerequisites)
     : "";
   const [customPrompt, setCustomPrompt] = useState<string | null>(null);
   const prompt = customPrompt ?? generatedPrompt;
   const isPromptDirty =
     customPrompt !== null && customPrompt !== generatedPrompt;
-  const issues = result && !result.success ? result.error.issues : [];
+  const issues = result.success ? [] : result.error.issues;
+  const visibleIssues = issues.filter((issue) =>
+    interactedFieldIds.has(fieldId(issue.path)),
+  );
+  const hasVisibleIssues = visibleIssues.length > 0;
   const rawValues = JSON.stringify(normalizedConfig, null, 2);
   const hasEmptyServiceField =
     config.backendServices.some((service) => service.trim() === "") ||
@@ -166,10 +168,24 @@ export default function ProjectPromptBuilder() {
     ),
   );
 
+  const fieldHasBeenInteractedWith = (path: (string | number)[]) =>
+    interactedFieldIds.has(fieldId(path));
+  const markFieldInteracted = (path: (string | number)[]) => {
+    setInteractedFieldIds((current) => {
+      const id = fieldId(path);
+
+      if (current.has(id)) {
+        return current;
+      }
+
+      return new Set(current).add(id);
+    });
+  };
   const errorFor = (path: (string | number)[]) =>
-    issues.find((issue) => fieldId(issue.path) === fieldId(path))?.message;
-  const duplicateServiceErrorFor = (slug: string) =>
-    duplicateServiceSlugs.has(toSlug(slug))
+    visibleIssues.find((issue) => fieldId(issue.path) === fieldId(path))
+      ?.message;
+  const duplicateServiceErrorFor = (slug: string, path: (string | number)[]) =>
+    fieldHasBeenInteractedWith(path) && duplicateServiceSlugs.has(toSlug(slug))
       ? "Service and client slugs must be unique."
       : undefined;
 
@@ -328,28 +344,40 @@ export default function ProjectPromptBuilder() {
                   help={projectFieldHelp.name}
                   value={config.name}
                   error={errorFor(["name"])}
-                  onChange={updateName}
+                  onChange={(value) => {
+                    markFieldInteracted(["name"]);
+                    updateName(value);
+                  }}
                 />
                 <TextField
                   label="Slug"
                   help={projectFieldHelp.slug}
                   value={config.slug}
                   error={errorFor(["slug"])}
-                  onChange={(value) => setValue("slug", toSlug(value))}
+                  onChange={(value) => {
+                    markFieldInteracted(["slug"]);
+                    setValue("slug", toSlug(value));
+                  }}
                 />
                 <TextField
                   label="Emoji"
                   help={projectFieldHelp.emoji}
                   value={config.emoji}
                   error={errorFor(["emoji"])}
-                  onChange={(value) => setValue("emoji", value)}
+                  onChange={(value) => {
+                    markFieldInteracted(["emoji"]);
+                    setValue("emoji", value);
+                  }}
                 />
                 <TextField
                   label="Package prefix"
                   help={projectFieldHelp.packagePrefix}
                   value={config.packagePrefix}
                   error={errorFor(["packagePrefix"])}
-                  onChange={(value) => setValue("packagePrefix", value)}
+                  onChange={(value) => {
+                    markFieldInteracted(["packagePrefix"]);
+                    setValue("packagePrefix", value);
+                  }}
                 />
                 <div className="sm:col-span-2">
                   <TextField
@@ -360,7 +388,10 @@ export default function ProjectPromptBuilder() {
                     required
                     minLength={1}
                     maxLength={200}
-                    onChange={(value) => setValue("description", value)}
+                    onChange={(value) => {
+                      markFieldInteracted(["description"]);
+                      setValue("description", value);
+                    }}
                   />
                 </div>
               </form>
@@ -385,9 +416,10 @@ export default function ProjectPromptBuilder() {
                 }
               >
                 {config.backendServices.map((service, index) => {
+                  const servicePath = ["backendServices", index];
                   const serviceError =
-                    errorFor(["backendServices", index]) ??
-                    duplicateServiceErrorFor(service);
+                    errorFor(servicePath) ??
+                    duplicateServiceErrorFor(service, servicePath);
 
                   return (
                     <CompactRow key={`backend-${index}`}>
@@ -397,6 +429,7 @@ export default function ProjectPromptBuilder() {
                         aria-invalid={Boolean(serviceError)}
                         onChange={(event) => {
                           const next = [...config.backendServices];
+                          markFieldInteracted(servicePath);
                           next[index] = toSlug(event.target.value);
                           setValue("backendServices", next);
                         }}
@@ -443,9 +476,10 @@ export default function ProjectPromptBuilder() {
                 }
               >
                 {config.frontendClients.map((client, index) => {
+                  const clientPath = ["frontendClients", index, "slug"];
                   const clientError =
-                    errorFor(["frontendClients", index, "slug"]) ??
-                    duplicateServiceErrorFor(client.slug);
+                    errorFor(clientPath) ??
+                    duplicateServiceErrorFor(client.slug, clientPath);
 
                   return (
                     <CompactRow key={`frontend-${index}`}>
@@ -455,6 +489,7 @@ export default function ProjectPromptBuilder() {
                         aria-invalid={Boolean(clientError)}
                         onChange={(event) => {
                           const next = [...config.frontendClients];
+                          markFieldInteracted(clientPath);
                           next[index] = {
                             ...client,
                             slug: toSlug(event.target.value),
@@ -610,12 +645,12 @@ export default function ProjectPromptBuilder() {
                   <div
                     className={cn(
                       "rounded-lg border p-4 text-sm",
-                      hasEmptyRequiredFields
+                      !hasVisibleIssues
                         ? "border-border bg-muted/30 text-muted-foreground"
                         : "border-destructive/30 bg-destructive/10 text-destructive",
                     )}
                   >
-                    {hasEmptyRequiredFields
+                    {!hasVisibleIssues
                       ? "Fill out all required fields to generate the prompt."
                       : "Fix validation issues before copying the prompt."}
                   </div>
@@ -623,11 +658,11 @@ export default function ProjectPromptBuilder() {
               </TabsContent>
               <TabsContent value="raw" className="mt-0">
                 <div className="mb-2 text-xs text-muted-foreground">
-                  {hasEmptyRequiredFields
-                    ? `${emptyRequiredFields.length} required field${emptyRequiredFields.length === 1 ? "" : "s"} empty`
+                  {!hasVisibleIssues && !isValid
+                    ? "Waiting for required fields"
                     : isValid
                       ? "Schema valid"
-                      : `${issues.length} validation issue${issues.length === 1 ? "" : "s"}`}
+                      : `${visibleIssues.length} validation issue${visibleIssues.length === 1 ? "" : "s"}`}
                 </div>
                 <CodeBlock>{rawValues}</CodeBlock>
               </TabsContent>
