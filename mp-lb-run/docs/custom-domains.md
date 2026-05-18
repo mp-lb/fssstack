@@ -2,7 +2,7 @@
 
 Custom domains are cloud deployment configuration.
 
-Set each app domain in `docs/fssstack-manifest.md`, then rerun setup if `terraform/terraform.tfvars` needs regeneration.
+Set each app domain in `fssstack.json`, then rerun setup if `terraform/terraform.tfvars` needs regeneration.
 
 For external DNS, set `manage_cloudflare_dns = false` in `terraform/terraform.tfvars` and copy DNS records from:
 
@@ -16,4 +16,3 @@ Verify:
 - Vercel shows frontend domains as valid
 - Cloud Run shows backend domain mappings as active
 - each backend `/health` URL responds
-

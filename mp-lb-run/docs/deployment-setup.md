@@ -10,7 +10,7 @@ Run:
 dx --store fssstack-deployment read SETUP_PROCESS.md
 ```
 
-The setup expects `docs/fssstack-manifest.md` and generates deployment files from it.
+The setup expects `fssstack.json` and generates deployment files from it.
 
 ## Cloud Accounts
 
@@ -36,4 +36,3 @@ App values belong in committed files:
 
 - `.env.production` for non-secrets
 - `secrets.enc.json` for encrypted secrets
-

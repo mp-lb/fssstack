@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 const importRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const cwdRoot = process.cwd();
 const repoRoot = [importRoot, cwdRoot].find((candidate) =>
-  fs.existsSync(path.join(candidate, "templates", "terraform", "main.tf")),
+  fs.existsSync(path.join(candidate, "templates", "main.tf")),
 ) ?? importRoot;
 const storeName = process.env.FSSSTACK_DEPLOYMENT_STORE ?? "fssstack-deployment";
 const terraformTemplates = [
@@ -48,17 +48,6 @@ const writeFile = (file, content) => {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, content);
   console.log(`write ${path.relative(targetRoot, file)}`);
-};
-
-const extractDeploymentJson = (markdown) => {
-  const blocks = [...markdown.matchAll(/```(?:json\s+deployment|deployment-json|json)?\s*\n([\s\S]*?)```/g)];
-  for (const block of blocks) {
-    const text = block[1].trim();
-    if (!text.startsWith("{")) continue;
-    const parsed = JSON.parse(text);
-    if (parsed.frontends || parsed.backends) return parsed;
-  }
-  throw new Error("docs/fssstack-manifest.md needs a fenced JSON deployment block.");
 };
 
 const sanitizeName = (value) => value.replace(/[^a-zA-Z0-9_-]/g, "-");
@@ -145,25 +134,28 @@ const renderWorkflow = (template, manifest) => {
     .replace("{{FRONTEND_DEPLOY_STEPS}}", frontendSteps);
 };
 
-const manifestPath = path.join(targetRoot, "docs", "fssstack-manifest.md");
+const manifestPath = path.join(targetRoot, "fssstack.json");
 if (!fs.existsSync(manifestPath)) {
   throw new Error(`Missing ${path.relative(targetRoot, manifestPath)}`);
 }
 
-const manifest = extractDeploymentJson(read(manifestPath));
+const manifest = JSON.parse(read(manifestPath));
+if (!manifest.frontends && !manifest.backends) {
+  throw new Error("fssstack.json must include frontends or backends.");
+}
 manifest.projectName = sanitizeName(manifest.projectName ?? path.basename(targetRoot));
 manifest.domain = manifest.domain ?? "example.com";
 
 for (const file of terraformTemplates) {
   writeFile(
     path.join(targetRoot, "terraform", file),
-    readRepoFile(path.join("templates", "terraform", file)),
+    readRepoFile(path.join("templates", file)),
   );
 }
 writeFile(path.join(targetRoot, "terraform", "terraform.tfvars"), renderTfvars(manifest));
 
 for (const backend of manifest.backends ?? []) {
-  const dockerfile = readRepoFile(path.join("templates", "backend", "Dockerfile"))
+  const dockerfile = readRepoFile(path.join("templates", "Dockerfile"))
     .replaceAll("{{BACKEND_PACKAGE}}", backend.package)
     .replaceAll("{{BACKEND_PORT}}", String(backend.port ?? 8080));
   writeFile(path.join(targetRoot, backend.path, "Dockerfile"), dockerfile);
@@ -171,12 +163,12 @@ for (const backend of manifest.backends ?? []) {
 
 writeFile(
   path.join(targetRoot, ".github", "workflows", "deploy.yml"),
-  renderWorkflow(readRepoFile(path.join("templates", "github-workflows", "deploy.yml")), manifest),
+  renderWorkflow(readRepoFile(path.join("templates", "deploy.yml")), manifest),
 );
 
 writeFile(
   path.join(targetRoot, "scripts", "build-runtime-tfvars.mjs"),
-  readRepoFile(path.join("templates", "scripts", "build-runtime-tfvars.mjs")),
+  readRepoFile(path.join("templates", "build-runtime-tfvars.mjs")),
 );
 
 writeFile(

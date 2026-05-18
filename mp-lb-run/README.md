@@ -105,14 +105,14 @@ FSS Stack projects can have any number of frontend apps and any number of backen
 
 The deployment layer should only need a small target-project contract:
 
-- `docs/fssstack-manifest.md`
+- `fssstack.json`
 - backend run/build commands
 - frontend build command/output path
 - domains
 - cloud/project identifiers
 - environment variable names
 
-`docs/fssstack-manifest.md` is expected to list the target project's frontend and backend apps. This repo does not need to infer app type from the file tree.
+`fssstack.json` is expected to list the target project's frontend and backend apps. This repo does not need to infer app type from the file tree.
 
 Frontend apps are React-based Vite or Next.js apps, and are generally deployed through similar Vercel flows.
 
@@ -122,7 +122,7 @@ The setup process should read the manifest, produce a reviewable deployment inve
 
 ## Template Model
 
-Base setup should copy or render Terraform templates into the target repo, then generate `terraform/terraform.tfvars` from the app manifest and deployment inputs.
+Base setup should copy or render Terraform templates into the target repo, then generate `terraform/terraform.tfvars` from `fssstack.json` and deployment inputs.
 
 Terraform should be driven by variables, especially maps of frontends and backends.
 
@@ -156,9 +156,8 @@ This repo can contain:
 - `SETUP_PROCESS.md`: base deployment setup entry point
 - `docs/`: reusable deployment documentation
 - `extensions/`: extension-specific cloud deployment docs
-- `templates/` or `layers/`: files rendered or copied into target projects
+- `templates/`: files rendered or copied into target projects, including Terraform templates
 - `scripts/`: small mechanical setup scripts
-- `terraform/`: current base Terraform source or templates
 - `archive/`: migration notes and historical snapshots that are not part of the product surface
 
 Docs should be concise, consistent, and practical. Prefer short setup steps, small examples, and clear boundaries over long explanations.

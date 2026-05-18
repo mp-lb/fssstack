@@ -17,7 +17,7 @@ dx --store fssstack-deployment read extensions/redis-deploy.md
 
 ## Worker Deployment
 
-Add each worker app to `docs/fssstack-manifest.md` as a backend-style deployable service.
+Add each worker app to `fssstack.json` as a backend-style deployable service.
 
 Give the worker:
 
@@ -36,4 +36,3 @@ Add non-secret worker values to `.env.production`.
 ## Verify
 
 Deploy and check worker logs for job processing.
-

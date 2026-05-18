@@ -24,9 +24,8 @@ Add backend secrets to `secrets.enc.json`:
 }
 ```
 
-Add those variable names to the relevant app `env` lists in `docs/fssstack-manifest.md`.
+Add those variable names to the relevant app `env` lists in `fssstack.json`.
 
 ## Verify
 
 Deploy and complete sign-in from each deployed frontend.
-

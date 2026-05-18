@@ -6,16 +6,16 @@ Run this from a generated FSS Stack target repo.
 
 The target repo must have:
 
-- `docs/fssstack-manifest.md`
+- `fssstack.json`
 - frontend and backend apps already working locally
 - production values ready for `.env.production`
 - encrypted secrets ready for `secrets.enc.json`
 
 ## Manifest
 
-`docs/fssstack-manifest.md` must include a fenced deployment JSON block:
+`fssstack.json` must list the deployable apps:
 
-```json deployment
+```json
 {
   "projectName": "my-project",
   "domain": "example.com",
@@ -85,4 +85,3 @@ Set CI secrets for infrastructure access:
 - one project-specific secret used to decrypt `secrets.enc.json`
 
 Push to the deployment branch or run the generated workflow manually.
-

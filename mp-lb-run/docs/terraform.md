@@ -2,7 +2,7 @@
 
 Terraform lives in `terraform/` in the target repo.
 
-Setup copies Terraform templates and generates `terraform/terraform.tfvars` from `docs/fssstack-manifest.md`.
+Setup copies Terraform templates and generates `terraform/terraform.tfvars` from `fssstack.json`.
 
 ## Base Resources
 
@@ -38,4 +38,3 @@ terraform init \
   -backend-config="bucket=${GCP_PROJECT_ID}-terraform-state" \
   -backend-config="prefix=terraform/state/${PROJECT_NAME}"
 ```
-

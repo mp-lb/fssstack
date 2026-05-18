@@ -12,11 +12,10 @@ For this deployment pattern, Upstash is the expected default.
 
 Add `REDIS_URL` to `secrets.enc.json`.
 
-Add `REDIS_URL` to each backend or worker `env` list in `docs/fssstack-manifest.md`.
+Add `REDIS_URL` to each backend or worker `env` list in `fssstack.json`.
 
 Rerun base setup if `terraform/terraform.tfvars` or `deployment/apps.json` needs regeneration.
 
 ## Verify
 
 Deploy and check the app logs for a successful Redis connection.
-
