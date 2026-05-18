@@ -18,7 +18,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: getsops/sops-action@v1
+      - name: Install SOPS
+        run: |
+          SOPS_VERSION=$(curl -fsSL https://api.github.com/repos/getsops/sops/releases/latest | node -e "let d=''; process.stdin.on('data', c => d += c).on('end', () => console.log(JSON.parse(d).tag_name))")
+          curl -fsSL "https://github.com/getsops/sops/releases/download/$SOPS_VERSION/sops-$SOPS_VERSION.linux.amd64" -o "$RUNNER_TEMP/sops"
+          chmod +x "$RUNNER_TEMP/sops"
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/sops" --version
 
       - name: Decrypt secrets
         run: |
