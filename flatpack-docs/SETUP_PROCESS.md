@@ -81,7 +81,7 @@ pnpm exec eslint . --fix
 
 ## Create AGENTS.md
 
-Follow `dx read standards/update-agents-md.md` expecting there to not be an existing file so just update the project info.
+Follow `dx read --store felixsebastian/mp-lb-dev update-agents-md.md` expecting there to not be an existing file so just update the project info.
 
 ## Validate
 

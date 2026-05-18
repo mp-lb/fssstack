@@ -101,7 +101,7 @@ ${buildManifestJson(config)}
 \`\`\`
 
 3. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
-4. Configure Doctrine with \`echo "store: fssstack" >> doctrine.yaml\`.
+4. Create \`doctrine.yaml\` with \`dx read --store felixsebastian/fssstack doctrine.example.yaml > doctrine.yaml\`.
 5. Follow \`dx read SETUP_PROCESS.md\`.
 
 Use these values:

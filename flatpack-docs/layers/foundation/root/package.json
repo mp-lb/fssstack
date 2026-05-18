@@ -8,6 +8,7 @@
     "build": "turbo build",
     "typecheck": "turbo typecheck",
     "test": "turbo test",
+    "test:serial": "turbo test -- --maxWorkers=1 --no-file-parallelism",
     "lint": "eslint ."
   }
 }

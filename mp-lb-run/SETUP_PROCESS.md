@@ -48,13 +48,13 @@ The target repo must have:
 Apply the deployment layer:
 
 ```bash
-dx --store mp-lb-run read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD"
+dx read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD"
 ```
 
 Use `--force` to overwrite generated deployment files:
 
 ```bash
-dx --store mp-lb-run read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD" --force
+dx read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD" --force
 ```
 
 ## Review

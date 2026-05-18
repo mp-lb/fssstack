@@ -6,7 +6,7 @@ This repository is the authoring workspace for three closely related projects:
 - `flatpack-docs/` is the Doctrine payload for creating a new FSS Stack target project.
 - `mp-lb-run/` is the Doctrine payload for deploying FSS Stack target projects with the mp-lb-run cloud pattern.
 
-Treat this repository as the place where changes are authored and reviewed. Treat Doctrine as the published runtime surface that downstream agents read with commands such as `dx read SETUP_PROCESS.md` and `dx --store mp-lb-run read SETUP_PROCESS.md`.
+Treat this repository as the place where changes are authored and reviewed. Treat Doctrine as the published runtime surface that downstream agents read with commands such as `dx read SETUP_PROCESS.md` and `dx read scripts/install-foundation.mjs`.
 
 ## Contribution Model
 

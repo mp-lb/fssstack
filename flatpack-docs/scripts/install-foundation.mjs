@@ -30,7 +30,6 @@ var foundationFiles = [
   ["layers/foundation/root/.gitignore", ".gitignore"],
   ["layers/foundation/root/.npmrc", ".npmrc"],
   ["layers/foundation/root/README.md", "README.md"],
-  ["layers/foundation/root/doctrine.example.yaml", "doctrine.yaml"],
   ["layers/foundation/root/eslint.config.js", "eslint.config.js"],
   ["layers/foundation/root/package.json", "package.json"],
   ["layers/foundation/root/pnpm-workspace.yaml", "pnpm-workspace.yaml"],

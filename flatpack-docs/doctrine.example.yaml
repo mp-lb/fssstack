@@ -1,3 +1,5 @@
+defaults:
+  store: felixsebastian/fssstack
 git:
   commit_message: Update doctrine docs
 sync:

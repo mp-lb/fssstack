@@ -12,7 +12,7 @@ BullMQ needs:
 Read Redis deployment first:
 
 ```bash
-dx --store mp-lb-run read extensions/redis-deploy.md
+dx read extensions/redis-deploy.md
 ```
 
 ## Worker Deployment

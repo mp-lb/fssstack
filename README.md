@@ -14,7 +14,7 @@ Agents that create or deploy projects usually do not have this repository locall
 
 ```bash
 dx read SETUP_PROCESS.md
-dx --store mp-lb-run read SETUP_PROCESS.md
+dx read scripts/install-foundation.mjs
 ```
 
 That is why built setup scripts remain inside `flatpack-docs/scripts/`, `mp-lb-run/scripts/`, and `mp-lb-run/templates/`. Their TypeScript sources live in root-level `scripts-src/`.
