@@ -35,7 +35,7 @@ dx read scripts/install-foundation.mjs | node --input-type=module - -- "$PWD"
 
 ## Apps and packages
 
-Install the shared packages and one backend app for each backend service:
+Install the shared packages and one backend app for each backend service. Each backend includes a tRPC procedure integration-test helper at `apps/<backend>/src/test/createTestTrpc.ts` and a starter `*.procedure.test.ts` example:
 
 ```
 dx read scripts/install-apps-packages.mjs | node --input-type=module - -- "$PWD" "<backend slugs comma separated>"
@@ -62,7 +62,7 @@ Replace template strings once after the foundation, apps/packages, and Vite over
 The render script generates the emoji favicon data URI and writes it into each `index.html` through the same template replacement pass:
 
 ```
-dx read scripts/render-template.mjs | node --input-type=module - -- "$PWD" "my-project" "@fssstack" "My Project" "One sentence project description." "🐱" "backend, baz" "frontend (react-vite), foobar (react-vite)"
+dx read scripts/render-template.mjs | node --input-type=module - -- "$PWD" "<slug>" "<packagePrefix>" "<name>" "<description>" "<emoji>" "<backendServices>" "<frontendClients>"
 ```
 
 Default app wiring is intentionally minimal and comes from generated env values, not from a pairing process. Every generated frontend reads the same `VITE_API_BASE_URL`, which points to the first backend service in the list. `FRONTEND_URL` points to the first frontend client for single-URL consumers. `FRONTEND_URLS` is one comma-separated list of every frontend URL for backend CORS allowlists. Extra backend services and extra frontend clients are created and runnable, but they are not paired with each other by setup.
@@ -70,8 +70,7 @@ Default app wiring is intentionally minimal and comes from generated env values,
 ## Dependencies
 
 ```
-pnpm add -w --save-exact lodash pino pino-pretty zod
-pnpm add -w --save-dev --save-exact turbo typescript vitest ts-node jsdom @types/node @types/lodash @types/pino eslint@9 @eslint/js@9 eslint-config-prettier eslint-plugin-import eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh globals typescript-eslint @testing-library/react @testing-library/jest-dom prettier prettier-plugin-tailwindcss tsx vite @vitejs/plugin-react @tailwindcss/vite react react-dom
+dx read scripts/install-root-dependencies.mjs | node --input-type=module - -- "$PWD"
 pnpm install
 pnpm dlx shadcn@latest add -c apps/frontend button card --yes --overwrite
 pnpm dlx shadcn@latest add -c apps/foobar button card --yes --overwrite
@@ -82,6 +81,8 @@ pnpm exec eslint . --fix
 ## Create AGENTS.md
 
 Follow `dx read --store felixsebastian/mp-lb-dev update-agents-md.md` expecting there to not be an existing file so just update the project info.
+
+When updating the project info, include this generated testing convention: put tRPC procedure integration tests in `apps/<backend>/src/*.procedure.test.ts` and use `apps/<backend>/src/test/createTestTrpc.ts` to call the real app router with an injected app context.
 
 ## Validate
 

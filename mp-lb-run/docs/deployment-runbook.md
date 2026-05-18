@@ -21,12 +21,11 @@ Production values are committed:
 - `.env.production` for non-secrets
 - `secrets.enc.json` for encrypted secrets
 
-CI needs one secret to decrypt `secrets.enc.json`.
+CI needs one GitHub secret, `SECRETS_KEY`, to decrypt `secrets.enc.json`.
 
 ## Troubleshooting
 
-- If Terraform cannot write DNS, check `CLOUDFLARE_ZONE_ID` and token permissions.
+- If Terraform cannot write DNS, check `CLOUDFLARE_ZONE_ID` in `.env.production` and `CLOUDFLARE_API_TOKEN` in decrypted `secrets.json`.
 - If a backend does not start, check Cloud Run logs.
 - If a frontend deploy fails, check the app build command and Vercel project.
 - If env values are missing, check `.env.production`, decrypted `secrets.json`, and `deployment/apps.json`.
-

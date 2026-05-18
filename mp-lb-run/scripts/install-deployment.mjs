@@ -96,7 +96,7 @@ var renderWorkflow = (template, manifest2) => {
     const envName = `IMAGE_${backend.name.replace(/[^A-Za-z0-9_]/g, "_").toUpperCase()}`;
     return `      - name: Build ${backend.name} image
         run: |
-          IMAGE="\${{ env.GCP_REGION }}-docker.pkg.dev/\${{ secrets.GCP_PROJECT_ID }}/\${{ env.PROJECT_NAME }}/${backend.name}:\${{ github.sha }}"
+          IMAGE="$GCP_REGION-docker.pkg.dev/$GCP_PROJECT_ID/$PROJECT_NAME/${backend.name}:\${{ github.sha }}"
           docker build -t "$IMAGE" -f ${backend.path}/Dockerfile .
           docker push "$IMAGE"
           echo "${envName}=$IMAGE" >> "$GITHUB_ENV"`;
@@ -108,10 +108,10 @@ var renderWorkflow = (template, manifest2) => {
       - name: Deploy ${frontend.name} to Vercel
         run: |
           PROJECT_ID=$(terraform -chdir=terraform output -json vercel_project_ids | node -e "let d=''; process.stdin.on('data', c => d += c).on('end', () => console.log(JSON.parse(d)['${frontend.name}']))")
-          ORG_ID=$(curl -s -H "Authorization: Bearer \${{ secrets.VERCEL_API_TOKEN }}" https://api.vercel.com/v2/user | node -e "let d=''; process.stdin.on('data', c => d += c).on('end', () => console.log(JSON.parse(d).user.id))")
-          VERCEL_PROJECT_ID="$PROJECT_ID" VERCEL_ORG_ID="$ORG_ID" npx vercel deploy ${frontend.outputDirectory} --prod --yes --token=\${{ secrets.VERCEL_API_TOKEN }}`;
+          ORG_ID=$(curl -s -H "Authorization: Bearer $VERCEL_API_TOKEN" https://api.vercel.com/v2/user | node -e "let d=''; process.stdin.on('data', c => d += c).on('end', () => console.log(JSON.parse(d).user.id))")
+          VERCEL_PROJECT_ID="$PROJECT_ID" VERCEL_ORG_ID="$ORG_ID" npx vercel deploy ${frontend.outputDirectory} --prod --yes --token="$VERCEL_API_TOKEN"`;
   }).join("\n\n");
-  return template.replaceAll("{{PROJECT_NAME}}", manifest2.projectName).replaceAll("{{GCP_REGION}}", manifest2.gcpRegion).replace("{{BACKEND_IMAGE_STEPS}}", backendImageSteps).replace("{{FRONTEND_DEPLOY_STEPS}}", frontendSteps);
+  return template.replaceAll("{{PROJECT_NAME}}", manifest2.projectName).replace("{{BACKEND_IMAGE_STEPS}}", backendImageSteps).replace("{{FRONTEND_DEPLOY_STEPS}}", frontendSteps);
 };
 var manifestPath = path.join(targetRoot, "fssstack.json");
 if (!fs.existsSync(manifestPath)) {
@@ -154,6 +154,10 @@ writeFile(
   readRepoFile(path.join("templates", "build-runtime-tfvars.mjs"))
 );
 writeFile(
+  path.join(targetRoot, "scripts", "load-deployment-env.mjs"),
+  readRepoFile(path.join("templates", "load-deployment-env.mjs"))
+);
+writeFile(
   path.join(targetRoot, "deployment", "apps.json"),
   `${JSON.stringify(
     {
@@ -166,5 +170,15 @@ writeFile(
   )}
 `
 );
-writeFile(path.join(targetRoot, ".env.production"), "APP_ENV=production\n");
+writeFile(
+  path.join(targetRoot, ".env.production"),
+  [
+    "APP_ENV=production",
+    "GCP_PROJECT_ID=",
+    `GCP_REGION=${manifest.gcpRegion}`,
+    "CLOUDFLARE_ACCOUNT_ID=",
+    "CLOUDFLARE_ZONE_ID=",
+    ""
+  ].join("\n")
+);
 writeFile(path.join(targetRoot, "secrets.enc.json"), "{\n}\n");

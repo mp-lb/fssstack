@@ -7,7 +7,6 @@ on:
 
 env:
   PROJECT_NAME: {{PROJECT_NAME}}
-  GCP_REGION: {{GCP_REGION}}
 
 jobs:
   deploy:
@@ -19,11 +18,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: google-github-actions/auth@v2
-        with:
-          credentials_json: ${{ secrets.GCP_SA_KEY }}
+      - uses: getsops/sops-action@v1
+
+      - name: Decrypt secrets
+        run: |
+          test -f secrets.enc.json
+          SOPS_AGE_KEY="${{ secrets.SECRETS_KEY }}" sops -d secrets.enc.json > secrets.json
+
+      - name: Load deployment env
+        id: deployment-env
+        run: node scripts/load-deployment-env.mjs
 
       - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Authenticate gcloud
+        run: gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
 
       - uses: hashicorp/setup-terraform@v3
         with:
@@ -36,13 +45,7 @@ jobs:
       - uses: pnpm/action-setup@v4
 
       - name: Configure Docker
-        run: gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
-
-      - name: Decrypt secrets
-        run: |
-          test -f secrets.enc.json
-          echo "Decrypt secrets.enc.json here using the project's chosen decrypt command."
-          echo "The command should use one CI secret and write secrets.json."
+        run: gcloud auth configure-docker "$GCP_REGION-docker.pkg.dev" --quiet
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -51,18 +54,18 @@ jobs:
         working-directory: terraform
         run: |
           terraform init \
-            -backend-config="bucket=${{ secrets.GCP_PROJECT_ID }}-terraform-state" \
-            -backend-config="prefix=terraform/state/${{ env.PROJECT_NAME }}"
+            -backend-config="bucket=$GCP_PROJECT_ID-terraform-state" \
+            -backend-config="prefix=terraform/state/$PROJECT_NAME"
 
       - name: Create Artifact Registry
         working-directory: terraform
         run: |
           terraform apply -auto-approve \
             -target=google_artifact_registry_repository.backend \
-            -var="gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" \
-            -var="vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" \
-            -var="cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
-            -var="cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}"
+            -var="gcp_project_id=$GCP_PROJECT_ID" \
+            -var="vercel_api_token=$VERCEL_API_TOKEN" \
+            -var="cloudflare_api_token=$CLOUDFLARE_API_TOKEN" \
+            -var="cloudflare_zone_id=$CLOUDFLARE_ZONE_ID"
 
 {{BACKEND_IMAGE_STEPS}}
 
@@ -73,10 +76,10 @@ jobs:
         working-directory: terraform
         run: |
           terraform apply -auto-approve \
-            -var="gcp_project_id=${{ secrets.GCP_PROJECT_ID }}" \
-            -var="vercel_api_token=${{ secrets.VERCEL_API_TOKEN }}" \
-            -var="cloudflare_api_token=${{ secrets.CLOUDFLARE_API_TOKEN }}" \
-            -var="cloudflare_zone_id=${{ secrets.CLOUDFLARE_ZONE_ID }}"
+            -var="gcp_project_id=$GCP_PROJECT_ID" \
+            -var="vercel_api_token=$VERCEL_API_TOKEN" \
+            -var="cloudflare_api_token=$CLOUDFLARE_API_TOKEN" \
+            -var="cloudflare_zone_id=$CLOUDFLARE_ZONE_ID"
 
 {{FRONTEND_DEPLOY_STEPS}}
 

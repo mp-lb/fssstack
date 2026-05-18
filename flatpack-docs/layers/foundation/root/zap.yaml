@@ -30,9 +30,9 @@ tasks:
     cmds:
       - pnpm turbo run build
   test:
-    aliases: [vitest]
+    aliases: [vitest, unit]
     cmds:
-      - pnpm test
+      - pnpm exec turbo test -- --maxWorkers=1 --no-file-parallelism
   worktree_setup:
     cmds:
       - pnpm install

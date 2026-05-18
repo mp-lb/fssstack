@@ -4,7 +4,9 @@ import { z } from "zod";
 
 export const helloWorld = (t: TRPCInstance) =>
   t.procedure
-    .input(z.object({ name: z.string().optional() }).optional())
-    .query(() => {
-      return { message };
+    .input(z.object({ name: z.string().min(1).optional() }).optional())
+    .query(({ input }) => {
+      return {
+        message: input?.name ? `Hello ${input.name}` : message,
+      };
     });

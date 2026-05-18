@@ -66,8 +66,16 @@ const backendFiles: Array<[string, string]> = [
   ["layers/apps/backend/tsconfig.json", "apps/backend/tsconfig.json"],
   ["layers/apps/backend/vitest.config.ts", "apps/backend/vitest.config.ts"],
   ["layers/apps/backend/src/config.ts", "apps/backend/src/config.ts"],
+  [
+    "layers/apps/backend/src/helloWorld.procedure.test.ts",
+    "apps/backend/src/helloWorld.procedure.test.ts",
+  ],
   ["layers/apps/backend/src/index.test.ts", "apps/backend/src/index.test.ts"],
   ["layers/apps/backend/src/index.ts", "apps/backend/src/index.ts"],
+  [
+    "layers/apps/backend/src/test/createTestTrpc.ts",
+    "apps/backend/src/test/createTestTrpc.ts",
+  ],
 ];
 
 const args = getScriptArgs();

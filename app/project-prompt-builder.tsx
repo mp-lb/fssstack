@@ -72,26 +72,32 @@ const projectFieldHelp = {
   emoji: "Rendered into readme/favicon assets.",
   packagePrefix:
     "Combined with the project slug and app slugs to form workspace package names.",
-  shadcnPreset:
-    "Passed to the shadcn CLI when scaffolding frontend clients.",
+  shadcnPreset: "Passed to the shadcn CLI when scaffolding frontend clients.",
   description: "Included in generated README content and app metadata.",
 };
 
 const buildManifestJson = (config: ProjectPromptConfig) =>
-  [
-    "{",
-    `  "frontends": ${JSON.stringify(config.frontendClients.map((client) => client.slug))},`,
-    `  "backends": ${JSON.stringify(config.backendServices)},`,
-    '  "extensions": []',
-    "}",
-  ].join("\n");
+  JSON.stringify(
+    {
+      projectSlug: config.slug,
+      frontends: config.frontendClients.map((client) => client.slug),
+      backends: config.backendServices,
+      extensions: [],
+    },
+    null,
+    2,
+  );
 
 const buildPrompt = (
   config: ProjectPromptConfig,
   includePrerequisites: boolean,
-) => `${includePrerequisites ? `Before starting, make sure the \`dx\`, \`git\`, \`docker\`, \`node\`, \`pm2\`, and \`zap\` commands are available. Install anything missing before continuing. Default to installing with Homebrew on macOS. For PM2, Zap, and Doctrine, install globally with npm using package names \`pm2\`, \`@mp-lb/zapper\`, and \`@mp-lb/doctrine-cli\`.
+) => `${
+  includePrerequisites
+    ? `Before starting, make sure the \`dx\`, \`git\`, \`docker\`, \`node\`, \`pm2\`, and \`zap\` commands are available. Install anything missing before continuing. Default to installing with Homebrew on macOS. For PM2, Zap, and Doctrine, install globally with npm using package names \`pm2\`, \`@mp-lb/zapper\`, and \`@mp-lb/doctrine-cli\`.
 
-` : ""}To start setup:
+`
+    : ""
+}To start setup:
 
 1. Start in an empty folder.
 2. Create \`manifest.json\` in the project root with exactly this JSON:
@@ -100,13 +106,13 @@ const buildPrompt = (
 ${buildManifestJson(config)}
 \`\`\`
 
-3. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
-4. Create \`doctrine.yaml\` with \`dx read --store felixsebastian/fssstack doctrine.example.yaml > doctrine.yaml\`.
-5. Follow \`dx read SETUP_PROCESS.md\`.
+3. Read \`projectSlug\` from \`manifest.json\` wherever the setup process asks for the project slug.
+4. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
+5. Create \`doctrine.yaml\` with \`dx read --store felixsebastian/fssstack doctrine.example.yaml > doctrine.yaml\`.
+6. Follow \`dx read SETUP_PROCESS.md\`.
 
 Use these values:
 name: ${config.name}
-slug: ${config.slug}
 emoji: ${config.emoji}
 description: ${config.description}
 packagePrefix: ${config.packagePrefix}
@@ -187,9 +193,7 @@ export default function ProjectPromptBuilder() {
     ...config.frontendClients.map((client) => toSlug(client.slug)),
   ].filter((slug) => slug !== "");
   const duplicateServiceSlugs = new Set(
-    serviceSlugs.filter(
-      (slug, index) => serviceSlugs.indexOf(slug) !== index,
-    ),
+    serviceSlugs.filter((slug, index) => serviceSlugs.indexOf(slug) !== index),
   );
 
   const fieldHasBeenInteractedWith = (path: (string | number)[]) =>
@@ -453,10 +457,7 @@ export default function ProjectPromptBuilder() {
                 title="Backend services"
                 disabled={hasEmptyServiceField}
                 onAdd={() =>
-                  setValue("backendServices", [
-                    ...config.backendServices,
-                    "",
-                  ])
+                  setValue("backendServices", [...config.backendServices, ""])
                 }
               >
                 {config.backendServices.map((service, index) => {
@@ -701,7 +702,9 @@ export default function ProjectPromptBuilder() {
                     <div>
                       <Textarea
                         value={prompt}
-                        onChange={(event) => setCustomPrompt(event.target.value)}
+                        onChange={(event) =>
+                          setCustomPrompt(event.target.value)
+                        }
                         className="min-h-[260px] resize-y overflow-auto rounded-lg bg-muted/30 p-4 font-mono text-xs leading-5 text-foreground lg:min-h-[200px]"
                       />
                       <p className="mt-0 pl-4 text-[0.68rem] leading-4 text-muted-foreground">
@@ -854,11 +857,7 @@ function useLocalStorageBoolean(key: string, defaultValue: boolean) {
       window.removeEventListener(eventName, callback);
     };
   };
-  const value = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    getServerSnapshot,
-  );
+  const value = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   const setValue = (nextValue: boolean) => {
     window.localStorage.setItem(key, String(nextValue));
@@ -886,7 +885,10 @@ function InlineHelp({
           {title}
           <ChevronDown
             aria-hidden="true"
-            className={cn("size-3.5 transition-transform", open && "rotate-180")}
+            className={cn(
+              "size-3.5 transition-transform",
+              open && "rotate-180",
+            )}
           />
         </CollapsibleTrigger>
         <CollapsibleContent>
@@ -926,9 +928,7 @@ function ListPanel({
           <Plus aria-hidden="true" />
         </Button>
       </div>
-      <div className="space-y-1.5 pr-1">
-        {children}
-      </div>
+      <div className="space-y-1.5 pr-1">{children}</div>
     </section>
   );
 }

@@ -71,17 +71,27 @@ Review generated files:
 
 Fill `.env.production` with non-secret production values.
 
-Fill `secrets.enc.json` with encrypted secret values using the project encryption tool.
+Fill `secrets.enc.json` with encrypted secret values. The generated workflow expects SOPS with an Age key stored in the GitHub repository secret `SECRETS_KEY`.
 
 ## Deploy
 
-Set CI secrets for infrastructure access:
+Set one CI secret:
+
+- `SECRETS_KEY`
+
+Store non-secret deployment identifiers in `.env.production`:
 
 - `GCP_PROJECT_ID`
+- `GCP_REGION`
+- `CLOUDFLARE_ACCOUNT_ID`
+- `CLOUDFLARE_ZONE_ID`
+
+Store sensitive deployment tokens in `secrets.enc.json`:
+
 - `GCP_SA_KEY`
 - `VERCEL_API_TOKEN`
 - `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ZONE_ID`
-- one project-specific secret used to decrypt `secrets.enc.json`
+
+`GCP_SA_KEY` may be the downloaded Google service-account JSON object directly. The workflow also accepts the older base64-encoded JSON string during migration.
 
 Push to the deployment branch or run the generated workflow manually.

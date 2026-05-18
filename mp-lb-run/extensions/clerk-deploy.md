@@ -2,30 +2,15 @@
 
 Use this after installing the Clerk app extension.
 
-## Clerk Dashboard
-
-Add deployed frontend URLs to Clerk redirect settings.
-
-Add backend API origins if the app uses them in Clerk-related flows.
-
 ## Environment
 
-Add frontend public keys to `.env.production`:
+Ask the user to provide a `CLERK_PUBLISHABLE_KEY` and add it to `.env.production`
 
 ```bash
+CLERK_PUBLISHABLE_KEY=...
 VITE_CLERK_PUBLISHABLE_KEY=...
 ```
 
-Add backend secrets to `secrets.enc.json`:
+## For the user
 
-```json
-{
-  "CLERK_SECRET_KEY": "..."
-}
-```
-
-Add those variable names to the relevant app `env` lists in `fssstack.json`.
-
-## Verify
-
-Deploy and complete sign-in from each deployed frontend.
+Ask the user to add `CLERK_SECRET_KEY` to `secrets.enc.json`.

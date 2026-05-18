@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { createLogger, handleTrpcError, logger, t } from "./index";
+import { createLogger, handleTrpcError, logger, t } from ".";
 
 describe("server package", () => {
   it("exports server infrastructure", () => {

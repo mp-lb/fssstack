@@ -1,4 +1,4 @@
-import pino from "pino";
+import pino, { type LevelWithSilent } from "pino";
 
 export type LogMeta = {
   id?: string;
@@ -33,9 +33,12 @@ export type LogMeta = {
 
 export type Logger = ReturnType<typeof createLogger>;
 
-export const createLogger = (baseMeta?: Partial<LogMeta>) => {
+export const createLogger = (
+  baseMeta?: Partial<LogMeta>,
+  options: { level?: LevelWithSilent } = {},
+) => {
   const base = pino({
-    level: process.env.LOG_LEVEL ?? "info",
+    level: options.level ?? process.env.LOG_LEVEL ?? "info",
     formatters: {
       level: (label) => ({ level: label }),
     },
@@ -74,7 +77,7 @@ export const createLogger = (baseMeta?: Partial<LogMeta>) => {
       meta?: Partial<LogMeta>,
     ) => log("debug", eventType, details, meta),
     child: (childMeta: Partial<LogMeta>) =>
-      createLogger({ ...baseMeta, ...childMeta }),
+      createLogger({ ...baseMeta, ...childMeta }, options),
   };
 };
 

@@ -7,6 +7,7 @@ export default defineConfig([
       "scripts-src/flatpack-docs/emoji-favicon.ts",
       "scripts-src/flatpack-docs/install-apps-packages.ts",
       "scripts-src/flatpack-docs/install-foundation.ts",
+      "scripts-src/flatpack-docs/install-root-dependencies.ts",
       "scripts-src/flatpack-docs/normalize-package-versions.ts",
       "scripts-src/flatpack-docs/patch-vite-layer.ts",
       "scripts-src/flatpack-docs/render-template.ts",
@@ -42,7 +43,10 @@ export default defineConfig([
     },
   },
   {
-    entry: ["scripts-src/mp-lb-run/build-runtime-tfvars.ts"],
+    entry: [
+      "scripts-src/mp-lb-run/build-runtime-tfvars.ts",
+      "scripts-src/mp-lb-run/load-deployment-env.ts",
+    ],
     outDir: "mp-lb-run/templates",
     tsconfig: "tsconfig.docs.json",
     format: ["esm"],

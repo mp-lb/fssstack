@@ -2,20 +2,12 @@
 
 Use this after installing the MongoDB app extension.
 
-## Database
-
-Create a managed MongoDB database.
-
-MongoDB Atlas is the usual default unless the deployment environment provides another managed MongoDB service.
-
 ## Environment
-
-Add `MONGODB_URL` to `secrets.enc.json`.
 
 Add `MONGODB_URL` to each backend `env` list in `fssstack.json`.
 
 Rerun base setup if `deployment/apps.json` needs regeneration.
 
-## Verify
+## For the user
 
-Deploy and check backend logs for a successful MongoDB connection.
+Ask the user to add `MONGODB_URL` to `secrets.enc.json`.

@@ -41,7 +41,11 @@ export default [
         tsconfigRootDir: import.meta.dirname,
       },
     },
-    plugins: { "react-hooks": reactHooks, react, "react-refresh": reactRefresh },
+    plugins: {
+      "react-hooks": reactHooks,
+      react,
+      "react-refresh": reactRefresh,
+    },
     rules: {
       ...reactHooks.configs.recommended.rules,
     },

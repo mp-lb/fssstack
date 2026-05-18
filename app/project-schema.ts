@@ -4,7 +4,8 @@ const namePattern = /^[A-Za-z0-9 .,'&()/_:+#-]+$/;
 const slugPattern = /^[a-z]+(?:-[a-z]+)*$/;
 const npmOrgPattern = /^@[a-z0-9][a-z0-9-]*$/;
 const shadcnPresetPattern = /^[A-Za-z0-9_-]+$/;
-const emojiPattern = /^(?=.*(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}))(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}|\uFE0F|\u200D)+$/u;
+const emojiPattern =
+  /^(?=.*(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}))(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}|\uFE0F|\u200D)+$/u;
 
 export const toSlug = (value: string) => {
   const slug = value
@@ -32,10 +33,7 @@ export const projectPromptSchema = z
       .string()
       .trim()
       .min(1, "Slug is required.")
-      .regex(
-        slugPattern,
-        "Use lowercase letters separated by single hyphens.",
-      ),
+      .regex(slugPattern, "Use lowercase letters separated by single hyphens."),
     emoji: z
       .string()
       .trim()
@@ -55,7 +53,10 @@ export const projectPromptSchema = z
           .string()
           .min(2, "Package prefix is required.")
           .max(214, "Package prefix is too long.")
-          .regex(npmOrgPattern, "Use a valid lowercase npm org, like @fssstack."),
+          .regex(
+            npmOrgPattern,
+            "Use a valid lowercase npm org, like @fssstack.",
+          ),
       ),
     shadcnPreset: z
       .string()
@@ -72,7 +73,10 @@ export const projectPromptSchema = z
           .string()
           .trim()
           .min(1, "Service slug is required.")
-          .regex(slugPattern, "Use lowercase letters separated by single hyphens."),
+          .regex(
+            slugPattern,
+            "Use lowercase letters separated by single hyphens.",
+          ),
       )
       .default(["backend"]),
     frontendClients: z

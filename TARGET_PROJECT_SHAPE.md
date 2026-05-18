@@ -32,7 +32,7 @@ After this stage, the repo is recognizable as a workspace, but it is not a compl
 
 ### Apps And Packages
 
-The apps/packages stage adds shared packages and backend apps based on the service names chosen for the project.
+The apps/packages stage adds shared packages and backend apps based on the service names chosen for the project. Each backend app includes a tRPC procedure integration-test helper at `src/test/createTestTrpc.ts` and a starter `*.procedure.test.ts` example so future backend behavior tests have an obvious home.
 
 Instructions should not assume a single backend named `backend`. The examples may use that name, but real generated projects can have multiple backend services with user-chosen names.
 

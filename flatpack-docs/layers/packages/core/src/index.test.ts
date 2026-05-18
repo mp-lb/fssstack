@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { message } from "./index";
+import { message } from ".";
 
 describe("core package", () => {
   it("exports the starter message", () => {

@@ -23,16 +23,17 @@ Create or choose:
 
 ## CI Secrets
 
-Set only infrastructure/decryption secrets in CI:
+Set one GitHub Actions secret:
 
-- `GCP_PROJECT_ID`
-- `GCP_SA_KEY`
-- `VERCEL_API_TOKEN`
-- `CLOUDFLARE_API_TOKEN`
-- `CLOUDFLARE_ZONE_ID`
-- one secret used to decrypt `secrets.enc.json`
+- `SECRETS_KEY`: SOPS Age private key used to decrypt `secrets.enc.json`
 
-App values belong in committed files:
+Deployment values belong in committed files:
 
 - `.env.production` for non-secrets
 - `secrets.enc.json` for encrypted secrets
+
+Put non-secret identifiers such as `GCP_PROJECT_ID`, `GCP_REGION`, `CLOUDFLARE_ACCOUNT_ID`, and `CLOUDFLARE_ZONE_ID` in `.env.production`.
+
+Put sensitive provider credentials such as `GCP_SA_KEY`, `VERCEL_API_TOKEN`, and `CLOUDFLARE_API_TOKEN` in `secrets.enc.json`.
+
+Prefer storing `GCP_SA_KEY` as the downloaded service-account JSON object inside `secrets.enc.json`. The generated workflow also accepts an existing base64-encoded JSON string.
