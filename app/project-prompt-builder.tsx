@@ -77,6 +77,17 @@ const projectFieldHelp = {
   description: "Included in generated README content and app metadata.",
 };
 
+const buildManifestJson = (config: ProjectPromptConfig) =>
+  JSON.stringify(
+    {
+      frontends: config.frontendClients.map((client) => client.slug),
+      backends: config.backendServices,
+      extensions: [],
+    },
+    null,
+    2,
+  );
+
 const buildPrompt = (
   config: ProjectPromptConfig,
   includePrerequisites: boolean,
@@ -85,9 +96,15 @@ const buildPrompt = (
 ` : ""}To start setup:
 
 1. Start in an empty folder.
-2. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
-3. Configure Doctrine with \`echo "store: fssstack" >> doctrine.yaml\`.
-4. Follow \`dx read SETUP_PROCESS.md\`.
+2. Before doing anything else, create \`manifest.json\` in the project root with exactly this JSON:
+
+\`\`\`json
+${buildManifestJson(config)}
+\`\`\`
+
+3. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
+4. Configure Doctrine with \`echo "store: fssstack" >> doctrine.yaml\`.
+5. Follow \`dx read SETUP_PROCESS.md\`.
 
 Use these values:
 name: ${config.name}
