@@ -1,6 +1,6 @@
-# fssstack-deployment
+# mp-lb-run
 
-`fssstack-deployment` is a Doctrine repo for one cloud deployment pattern for FSS Stack projects.
+`mp-lb-run` is a Doctrine repo for one cloud deployment pattern for FSS Stack projects.
 
 It is not the universal deployment layer. FSS Stack projects can subscribe to different deployment repos or patterns depending on where and how they need to run.
 
@@ -13,13 +13,13 @@ Agents read this repo through Doctrine.
 For base deployment setup:
 
 ```bash
-dx --store fssstack-deployment read SETUP_PROCESS.md
+dx --store mp-lb-run read SETUP_PROCESS.md
 ```
 
 For extension-specific cloud deployment guidance:
 
 ```bash
-dx --store fssstack-deployment read extensions/s3-deploy.md
+dx --store mp-lb-run read extensions/s3-deploy.md
 ```
 
 The base setup entry point should describe how to apply this deployment layer to a generated FSS Stack target project.
@@ -35,7 +35,7 @@ This repo owns cloud deployment for one deployment pattern.
 The split is:
 
 - `fssstack`: local development, Zapper, `zap.yaml`, app code integration, extension installation
-- `fssstack-deployment`: cloud deployment docs, templates, scripts, Terraform, CI/CD adapters, production routing and cloud infrastructure
+- `mp-lb-run`: cloud deployment docs, templates, scripts, Terraform, CI/CD adapters, production routing and cloud infrastructure
 
 When a cross-cutting extension needs both local and cloud work, the local work stays in `fssstack/extensions`, and the cloud work lives here in `extensions/*-deploy.md`.
 
@@ -92,9 +92,9 @@ Core FSS Stack extensions should not assume this repo is mandatory. They can poi
 Example pointer from a core extension:
 
 ```md
-For cloud deployment with the fssstack-deployment pattern, read:
+For cloud deployment with the mp-lb-run pattern, read:
 
-dx --store fssstack-deployment read extensions/s3-deploy.md
+dx --store mp-lb-run read extensions/s3-deploy.md
 ```
 
 ## Target Project Contract

@@ -7,7 +7,7 @@ This repo installs one cloud deployment pattern for FSS Stack projects.
 Run:
 
 ```bash
-dx --store fssstack-deployment read SETUP_PROCESS.md
+dx --store mp-lb-run read SETUP_PROCESS.md
 ```
 
 The setup expects `fssstack.json` and generates deployment files from it.

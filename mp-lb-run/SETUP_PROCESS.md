@@ -1,4 +1,4 @@
-# fssstack-deployment Setup
+# mp-lb-run Setup
 
 Run this from a generated FSS Stack target repo.
 
@@ -48,13 +48,13 @@ The target repo must have:
 Apply the deployment layer:
 
 ```bash
-dx --store fssstack-deployment read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD"
+dx --store mp-lb-run read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD"
 ```
 
 Use `--force` to overwrite generated deployment files:
 
 ```bash
-dx --store fssstack-deployment read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD" --force
+dx --store mp-lb-run read scripts/install-deployment.mjs | node --input-type=module - -- "$PWD" --force
 ```
 
 ## Review

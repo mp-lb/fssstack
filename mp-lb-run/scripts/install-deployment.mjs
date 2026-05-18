@@ -8,7 +8,7 @@ const cwdRoot = process.cwd();
 const repoRoot = [importRoot, cwdRoot].find((candidate) =>
   fs.existsSync(path.join(candidate, "templates", "main.tf")),
 ) ?? importRoot;
-const storeName = process.env.FSSSTACK_DEPLOYMENT_STORE ?? "fssstack-deployment";
+const storeName = process.env.MP_LB_RUN_STORE ?? "mp-lb-run";
 const terraformTemplates = [
   "backend.tf",
   "budget.tf",
