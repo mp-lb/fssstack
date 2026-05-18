@@ -1,0 +1,13 @@
+{
+  "name": "__PACKAGE_PREFIX__",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.10.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "lint": "eslint ."
+  }
+}

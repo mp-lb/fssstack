@@ -78,15 +78,13 @@ const projectFieldHelp = {
 };
 
 const buildManifestJson = (config: ProjectPromptConfig) =>
-  JSON.stringify(
-    {
-      frontends: config.frontendClients.map((client) => client.slug),
-      backends: config.backendServices,
-      extensions: [],
-    },
-    null,
-    2,
-  );
+  [
+    "{",
+    `  "frontends": ${JSON.stringify(config.frontendClients.map((client) => client.slug))},`,
+    `  "backends": ${JSON.stringify(config.backendServices)},`,
+    '  "extensions": []',
+    "}",
+  ].join("\n");
 
 const buildPrompt = (
   config: ProjectPromptConfig,
@@ -96,7 +94,7 @@ const buildPrompt = (
 ` : ""}To start setup:
 
 1. Start in an empty folder.
-2. Before doing anything else, create \`manifest.json\` in the project root with exactly this JSON:
+2. Create \`manifest.json\` in the project root with exactly this JSON:
 
 \`\`\`json
 ${buildManifestJson(config)}

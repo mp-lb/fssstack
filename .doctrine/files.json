@@ -1,0 +1,1312 @@
+{
+  "files": {
+    "flatpack-docs/AGENTS.md": {
+      "contentType": "text",
+      "hash": "sha256:89456672254e34e3a3d1103bdb5f0087e694633fbec37eb719de47fb7c927af5",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "d3645cf5-89e2-4f68-be56-793d85c9077e",
+      "remotePath": "/AGENTS.md",
+      "remoteUpdatedAt": "2026-05-18T09:10:39.001Z",
+      "remoteRevisionNumber": 6
+    },
+    "flatpack-docs/README.md": {
+      "contentType": "text",
+      "hash": "sha256:269d38e8e24b09672e7b1c88ec17d7392db5209ad3071fb8f9b492341d2e3f24",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "6b67d287-9f43-49c5-831a-abc899f14859",
+      "remotePath": "/README.md",
+      "remoteUpdatedAt": "2026-05-14T08:58:05.314Z",
+      "remoteRevisionNumber": 6
+    },
+    "flatpack-docs/SETUP_PROCESS.md": {
+      "contentType": "text",
+      "hash": "sha256:62105c726a72942a4d7f4cfaf1878eefe42088bfa182c691e144d62c60ca01b4",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "67fd9b53-2899-462f-ab12-24b1ab4791a8",
+      "remotePath": "/SETUP_PROCESS.md",
+      "remoteUpdatedAt": "2026-05-18T09:27:51.256Z",
+      "remoteRevisionNumber": 71
+    },
+    "flatpack-docs/TARGET_PROJECT_SHAPE.md": {
+      "contentType": "text",
+      "hash": "sha256:83d042d0a767291d81d0ce6e917ff89f14c2d748b5e2c4f78ab96cfd6e934559",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "691fea99-8078-464e-bc7f-071332f61b46",
+      "remotePath": "/TARGET_PROJECT_SHAPE.md",
+      "remoteUpdatedAt": "2026-05-18T09:13:17.196Z",
+      "remoteRevisionNumber": 2
+    },
+    "flatpack-docs/eslint.config.js": {
+      "contentType": "text",
+      "hash": "sha256:7403d5666e9b1821611df3b3dc47584fb53cd9f798805dd947c3f4fe839f866c",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "cbff381a-32bd-4fa0-b5cf-dc5854da08cf",
+      "remotePath": "/eslint.config.js",
+      "remoteUpdatedAt": "2026-05-14T08:56:58.716Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/extensions/bull.md": {
+      "contentType": "text",
+      "hash": "sha256:3942e5e62c31c0da8693ea83e2d295c0386ed1c3f2bc492165e781f0ff53664c",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "c63442cb-ae02-4520-923e-2c5650b6fa17",
+      "remotePath": "/extensions/bull.md",
+      "remoteUpdatedAt": "2026-05-18T15:23:12.787Z",
+      "remoteRevisionNumber": 149
+    },
+    "flatpack-docs/extensions/clerk.md": {
+      "contentType": "text",
+      "hash": "sha256:7b214101691fdf5b86389e9a6827495fe07191526c7a768ab7537ec1a1c12d8d",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "dddea607-4cf0-4a7d-906b-fe99fde2db86",
+      "remotePath": "/extensions/clerk.md",
+      "remoteUpdatedAt": "2026-05-18T15:23:12.787Z",
+      "remoteRevisionNumber": 10
+    },
+    "flatpack-docs/extensions/mongodb.md": {
+      "contentType": "text",
+      "hash": "sha256:958eda43676a35f16d63ff24223cb0624f621c5cc81ecb94d65eebda271c969e",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "47e3735b-4aea-40d6-b2e6-6318f4e02e3c",
+      "remotePath": "/extensions/mongodb.md",
+      "remoteUpdatedAt": "2026-05-18T15:23:12.789Z",
+      "remoteRevisionNumber": 18
+    },
+    "flatpack-docs/extensions/playwright.md": {
+      "contentType": "text",
+      "hash": "sha256:5fc17535de501ebaca3fa076515c28762cbe32278b8dcf95cc2cc55dedd2a6de",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "850c6366-89c4-44cf-8e03-acd279c12978",
+      "remotePath": "/extensions/playwright.md",
+      "remoteUpdatedAt": "2026-05-18T15:43:09.929Z",
+      "remoteRevisionNumber": 7
+    },
+    "flatpack-docs/extensions/redis.md": {
+      "contentType": "text",
+      "hash": "sha256:06a5ac4fb66d3bb7f575d71ee532f20132caeef709105a9ed32456da126822e4",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "e57105c9-ba75-4bec-9243-0fc3f244311d",
+      "remotePath": "/extensions/redis.md",
+      "remoteUpdatedAt": "2026-05-18T15:12:22.421Z",
+      "remoteRevisionNumber": 62
+    },
+    "flatpack-docs/extensions/s3.md": {
+      "contentType": "text",
+      "hash": "sha256:ef85038f7217ecd6e48543ac63368880a6931e5b4520076a679237e5a3898faa",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "ef8970a8-fa20-4d3c-b85b-aa93bc935efc",
+      "remotePath": "/extensions/s3.md",
+      "remoteUpdatedAt": "2026-05-18T15:12:22.422Z",
+      "remoteRevisionNumber": 22
+    },
+    "flatpack-docs/layers/apps/backend/package.json": {
+      "contentType": "text",
+      "hash": "sha256:153d7fc9e78acd6c4c147bdd900de4a685b718b0380e19e0b0dfa52735fcace7",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "d6e71777-d40b-4eeb-b658-b23a670fb7ea",
+      "remotePath": "/layers/apps/backend/package.json",
+      "remoteUpdatedAt": "2026-05-14T08:56:59.213Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/apps/backend/src/config.ts": {
+      "contentType": "text",
+      "hash": "sha256:073971aa83af7385ec4daaabffec37a92f9971a51e2963cc229dd0eee9be2e7d",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "57f412d8-9873-4d2f-b2f9-4d2b64780e50",
+      "remotePath": "/layers/apps/backend/src/config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:06.867Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/apps/backend/src/index.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:f7b5e669106b70ce53c6f9e1f3edff52418ce5eae17a8e2823799100532a5cff",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "1e0e301f-289e-4f16-b2fa-ea4c500a13fb",
+      "remotePath": "/layers/apps/backend/src/index.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:06.820Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/apps/backend/src/index.ts": {
+      "contentType": "text",
+      "hash": "sha256:711726ef2182dc3c9f7945b9b65a569a470ec34824e6fb2b568de6483352eac2",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "77a2da49-4fc2-4aab-b7eb-c2ae9b53b8b4",
+      "remotePath": "/layers/apps/backend/src/index.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:06.859Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/apps/backend/tsconfig.build.json": {
+      "contentType": "text",
+      "hash": "sha256:bf9b1687801d968a8dade0a3dd4e3cb1bf6df175cfa9a587213815a66a6d91da",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "4025c911-2b68-434b-bb20-a0c8d1b6af69",
+      "remotePath": "/layers/apps/backend/tsconfig.build.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.348Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/apps/backend/tsconfig.json": {
+      "contentType": "text",
+      "hash": "sha256:7bb0f647be8ccca57188a5dd347910ff80284a95b1b43fd10c4f3164ba1cf8c7",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "ce3d4faa-789c-4652-b11b-0332a2ce1773",
+      "remotePath": "/layers/apps/backend/tsconfig.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.350Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/apps/backend/vitest.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:20d85b017258e04fc8050162f9d623723dbd14326573d935fec2bc3b7a56c36f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "12550551-1f05-445c-8fda-f522db2886a2",
+      "remotePath": "/layers/apps/backend/vitest.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:56:59.549Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/environments.toml": {
+      "contentType": "text",
+      "hash": "sha256:60011b930884595fcfecc8ff9b1fa7e6d294fd2fb7289b80f064d209d707de19",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "80808764-9766-4409-a728-60b7ab6c144d",
+      "remotePath": "/layers/foundation/environments.toml",
+      "remoteUpdatedAt": "2026-05-14T08:56:59.552Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/tsconfig.base.json": {
+      "contentType": "text",
+      "hash": "sha256:e8bf6ac3fb3b2532f315483cfafdea360714e1185018134c7849f31bc9384226",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "e3ec9f82-3d79-4257-b80c-87619657bfb3",
+      "remotePath": "/layers/foundation/etc/tsconfig.base.json",
+      "remoteUpdatedAt": "2026-05-14T08:56:59.559Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/tsconfig.node.json": {
+      "contentType": "text",
+      "hash": "sha256:6a20ad3a94771f14d28fb98a578fe4f5cd48c726401116c4b4135830a165377e",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "fea934d8-5107-4498-9c02-6dc613784f9b",
+      "remotePath": "/layers/foundation/etc/tsconfig.node.json",
+      "remoteUpdatedAt": "2026-05-14T08:56:59.560Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/tsconfig.react-nextjs.json": {
+      "contentType": "text",
+      "hash": "sha256:31c063eab0eef319fa1ca99a0d93783cb19ac460e5e9f483f56cf49a54688380",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "f80ec180-dfb3-4a55-89e2-5d619badf166",
+      "remotePath": "/layers/foundation/etc/tsconfig.react-nextjs.json",
+      "remoteUpdatedAt": "2026-05-14T08:56:59.537Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/tsconfig.react-vite-app.json": {
+      "contentType": "text",
+      "hash": "sha256:475db76c1efe76b579e751a147aa2a264f3a15b2b06c4f44c3fad6ca43f56136",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "483bd0c7-3ef0-4ea4-a063-6f1d97ed2ba2",
+      "remotePath": "/layers/foundation/etc/tsconfig.react-vite-app.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.356Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/tsconfig.react-vite-node.json": {
+      "contentType": "text",
+      "hash": "sha256:8f35f81eee58f64312f674abdeea3f6483a0572658b67b3e1307c42749b87cc2",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "f46a097d-c119-456e-b94c-65ddca52662b",
+      "remotePath": "/layers/foundation/etc/tsconfig.react-vite-node.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.361Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/vitest.base.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:8c0d83a720b89c7a5230f739693553d36a36f8659c153051b35d05b5a24ae728",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "6ad78847-7696-422d-930c-42710f4976e9",
+      "remotePath": "/layers/foundation/etc/vitest.base.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:56:59.551Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/vitest.node.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:bd5dadbefee8ccd6b634f34a24bf2d77e1ddcbee0627257d0ee8007eb73f2a31",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "e71a9969-8d85-4e5c-8fd2-09a084256bc5",
+      "remotePath": "/layers/foundation/etc/vitest.node.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.016Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/etc/vitest.react.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:5607ab93683f4414dce8d46b38819726e2eaaaebaf9c41ec21033abb71977b6f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "ef82c4ae-9da7-48f8-9e8e-22c56c22902d",
+      "remotePath": "/layers/foundation/etc/vitest.react.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.038Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/.env.local": {
+      "contentType": "text",
+      "hash": "sha256:4c64c725466072ae091fa9b8b22e2d1a40714bf52c4ae581a4dbf0da4c7f74ab",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "c20fc8b0-0af6-4fe7-8da5-69c3e7cc2d98",
+      "remotePath": "/layers/foundation/root/.env.local",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.357Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/.gitignore": {
+      "contentType": "text",
+      "hash": "sha256:5b303dce0dd91e73e90b811e3129a1a52a2e9af45ec0a2eebf8a14eecbac8733",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "c6a2cd81-d8f3-42f3-a5b0-84cdb397510e",
+      "remotePath": "/layers/foundation/root/.gitignore",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.025Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/.npmrc": {
+      "contentType": "text",
+      "hash": "sha256:a560c7023781cdd96a09c51e26ffe11c7577ccabd1f45df68404bff79df684fa",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "36187409-fb70-449c-b4c8-8a6195a46662",
+      "remotePath": "/layers/foundation/root/.npmrc",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.363Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/README.md": {
+      "contentType": "text",
+      "hash": "sha256:041a54c958bf3c3e16c69c5435ce42821bb9dee7bc749fb109b7dfd7bb9ddb86",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "7944d176-2951-46ea-8261-5850209fef13",
+      "remotePath": "/layers/foundation/root/README.md",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.365Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/doctrine.example.yaml": {
+      "contentType": "text",
+      "hash": "sha256:c51d8945645af58452d895420cba1483129887f18aa14a80874ccde0235a831f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "6b629c77-1ca9-4ba8-aa5c-0d4fde8e620e",
+      "remotePath": "/layers/foundation/root/doctrine.example.yaml",
+      "remoteUpdatedAt": "2026-05-18T15:34:56.939Z",
+      "remoteRevisionNumber": 4
+    },
+    "flatpack-docs/layers/foundation/root/eslint.config.js": {
+      "contentType": "text",
+      "hash": "sha256:2bad4b6f532ba765fced6cf7d09216912e217ae05da1397f8b4fa4bdef270880",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "fc83490f-6cb6-4fe6-b76e-db736528c75b",
+      "remotePath": "/layers/foundation/root/eslint.config.js",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.008Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/package.json": {
+      "contentType": "text",
+      "hash": "sha256:95a90ec9afa32c5184ef2e33f8122faabe049535481b96b56805905cf98d0455",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "895de946-5a45-49a9-a3bb-87272c14eb53",
+      "remotePath": "/layers/foundation/root/package.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.373Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/pnpm-workspace.yaml": {
+      "contentType": "text",
+      "hash": "sha256:08d75840c97ab0e72d1d9b5b84a17e47a2e06cb159a5fbec5ee0a6a56682dad7",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "01da89d3-7206-4cbb-a9fa-e02f77fa9b1c",
+      "remotePath": "/layers/foundation/root/pnpm-workspace.yaml",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.361Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/turbo.json": {
+      "contentType": "text",
+      "hash": "sha256:f4be36c1c60fdef5424e959975be8fdd435bb9fe792297aa13befec732feb464",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "ea75ef9b-f69b-4807-b620-6d0f87b0ecbd",
+      "remotePath": "/layers/foundation/root/turbo.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.372Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/foundation/root/zap.yaml": {
+      "contentType": "text",
+      "hash": "sha256:59d17dc4bf9afca7c790fab9a2ea00ac01a1400f552d28d24435425f9de06c65",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "6a450142-ca71-44e5-bec2-d3323000b1ad",
+      "remotePath": "/layers/foundation/root/zap.yaml",
+      "remoteUpdatedAt": "2026-05-18T11:42:09.183Z",
+      "remoteRevisionNumber": 30
+    },
+    "flatpack-docs/layers/packages/core/package.json": {
+      "contentType": "text",
+      "hash": "sha256:7c0b1db21f1445cff8954dc2f7e337925c8d327976281d8951fb2f5762e69b48",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "9dabd246-6d82-4978-b753-7633bb0d4727",
+      "remotePath": "/layers/packages/core/package.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.360Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/core/src/index.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:24e2edab8e14fd8a78cef03348a02a5f53458b4c7c2798c01c7f5f1deb0c1d76",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "f0966405-73e2-4aad-afa4-10059b795ff7",
+      "remotePath": "/layers/packages/core/src/index.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.359Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/core/src/index.ts": {
+      "contentType": "text",
+      "hash": "sha256:a994527b82469f54723303086d87a22248cd830167f46c08cf6b85c5ce8615e7",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "708a868a-3479-48ce-9f44-d4badb148990",
+      "remotePath": "/layers/packages/core/src/index.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.853Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/core/tsconfig.build.json": {
+      "contentType": "text",
+      "hash": "sha256:bf9b1687801d968a8dade0a3dd4e3cb1bf6df175cfa9a587213815a66a6d91da",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "a18b07b1-0d35-4238-886b-6622469e5737",
+      "remotePath": "/layers/packages/core/tsconfig.build.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.769Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/core/tsconfig.json": {
+      "contentType": "text",
+      "hash": "sha256:fd60e0a855c16fdca68ac81c7bd7895e7a6eb1894c481f6d0f0124749b4d2712",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "a15a5915-9e99-466e-b264-c257116f6be6",
+      "remotePath": "/layers/packages/core/tsconfig.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.764Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/core/vitest.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:20d85b017258e04fc8050162f9d623723dbd14326573d935fec2bc3b7a56c36f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "05e0758b-7bb4-49d8-ac57-12df119b02ff",
+      "remotePath": "/layers/packages/core/vitest.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.766Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/package.json": {
+      "contentType": "text",
+      "hash": "sha256:f571627e382955fadf56db374499f1a49f314bc2f66ac217a64d5c5a86f4e08a",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "d774763c-cfb4-4882-bca5-e90d2320f300",
+      "remotePath": "/layers/packages/server/package.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.763Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/src/context.ts": {
+      "contentType": "text",
+      "hash": "sha256:dd08a0afd18381ef8682d0d86f8ad570bbac7ae3c50660211dee0e64d26f6b62",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "2b434cd4-b964-4650-9f6c-5f17b8cf0ca1",
+      "remotePath": "/layers/packages/server/src/context.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.916Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/src/index.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:6f902a00d725248a1be86db01b2b9b45ef6ba259df6058ca2dd99a822e84c9d4",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "b963db75-9f5f-4ba2-b4d8-538c652e0b57",
+      "remotePath": "/layers/packages/server/src/index.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.744Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/src/index.ts": {
+      "contentType": "text",
+      "hash": "sha256:acff28ba9fda0d9230d368506cd82dcdc04f5bcab94cb52b45f22537ee198e6c",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "64ccdc67-e749-4677-90e2-cd22253287bd",
+      "remotePath": "/layers/packages/server/src/index.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:00.759Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/src/logger.ts": {
+      "contentType": "text",
+      "hash": "sha256:b260f7ad1302659f687e79421168d597809be1b17f13a9f371125f629d45354e",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "c8fa6a88-7bc3-4b58-b732-80d012f0d005",
+      "remotePath": "/layers/packages/server/src/logger.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.857Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/src/trpc.ts": {
+      "contentType": "text",
+      "hash": "sha256:e907a2839de0d7760909addaccc7225e6e2503eab94b3cedd5f7294192de4be5",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "8de10ca7-9407-4c96-acf2-fb8f76e5b091",
+      "remotePath": "/layers/packages/server/src/trpc.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.042Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/src/trpcError.ts": {
+      "contentType": "text",
+      "hash": "sha256:05d510cf52cb3da537043bdf96982a2901508318299f740f20198b53454b8ef7",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "4f0bf2c5-6a29-453c-b225-a67daf8777ee",
+      "remotePath": "/layers/packages/server/src/trpcError.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.039Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/tsconfig.build.json": {
+      "contentType": "text",
+      "hash": "sha256:bf9b1687801d968a8dade0a3dd4e3cb1bf6df175cfa9a587213815a66a6d91da",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "9727b1c4-67f7-476f-8c55-4ff21c8698b8",
+      "remotePath": "/layers/packages/server/tsconfig.build.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.052Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/tsconfig.json": {
+      "contentType": "text",
+      "hash": "sha256:1a4e941adf7a59fd5b9657c4b9f537cdc8c5ae8d81b0fd196c1c564072ebc93c",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "0e952a41-ab6c-4570-a30c-ca628fcae568",
+      "remotePath": "/layers/packages/server/tsconfig.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.030Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/server/vitest.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:20d85b017258e04fc8050162f9d623723dbd14326573d935fec2bc3b7a56c36f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "9aaa68f6-36e6-4717-9e36-2eb2e7b84d14",
+      "remotePath": "/layers/packages/server/vitest.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.045Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/package.json": {
+      "contentType": "text",
+      "hash": "sha256:306ae80cb35e527b77e4547b19a8b0f8bc25b83a7c530deb0f13f92a003c3c57",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "fe723425-9260-470c-ac02-7bf22f93a8ed",
+      "remotePath": "/layers/packages/trpc/package.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.048Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/src/index.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:d4690b425024fc6b7610da0f1d405523d449bad4a7ac599e51ddeec20485a968",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "f222215d-cf57-4c8f-a328-76e07f2cf767",
+      "remotePath": "/layers/packages/trpc/src/index.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.851Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/src/index.ts": {
+      "contentType": "text",
+      "hash": "sha256:84016a81ef62e50de7267db2ece2e0c09d7c266a80d2043a40e2f3ea84fb9a32",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "ebbede3c-9b79-4853-9b59-76046078df2e",
+      "remotePath": "/layers/packages/trpc/src/index.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.032Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/src/procedures/helloWorld.ts": {
+      "contentType": "text",
+      "hash": "sha256:7706a820ab68a956256e5fe629f6e2617705657187291334cdc34e4b08ba385f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "c7d70a73-9702-4ac6-b70c-7a8fa572f75f",
+      "remotePath": "/layers/packages/trpc/src/procedures/helloWorld.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.857Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/src/server.ts": {
+      "contentType": "text",
+      "hash": "sha256:d9f961482ddcd5d1fbf6ca47c115e8d4bb259452100c68a5f3ed55c81287ae36",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "c0b1c84e-e629-4e11-bb5f-66390bcefa10",
+      "remotePath": "/layers/packages/trpc/src/server.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.351Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/tsconfig.build.json": {
+      "contentType": "text",
+      "hash": "sha256:bf9b1687801d968a8dade0a3dd4e3cb1bf6df175cfa9a587213815a66a6d91da",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "7647d8f0-c8ea-455d-a304-d8dba62833bf",
+      "remotePath": "/layers/packages/trpc/tsconfig.build.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.337Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/tsconfig.json": {
+      "contentType": "text",
+      "hash": "sha256:9d9d86afa055a0773062043719947af54506869e2c549b0e16215310f17a7478",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "5bdc8665-7431-44a9-9cb2-fb671b871b44",
+      "remotePath": "/layers/packages/trpc/tsconfig.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.356Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/packages/trpc/vitest.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:20d85b017258e04fc8050162f9d623723dbd14326573d935fec2bc3b7a56c36f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "226612b4-510a-4314-896b-cce9a42df7bd",
+      "remotePath": "/layers/packages/trpc/vitest.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.355Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/index.html": {
+      "contentType": "text",
+      "hash": "sha256:bc5d271a6b34a567ef9cd388e42a60acf2765ff2efff4ce177bc4e24c7b4eb23",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "b73dd29b-6ad3-4326-b1f6-d0d01b390c3d",
+      "remotePath": "/layers/vite/index.html",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.844Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/src/App.test.tsx": {
+      "contentType": "text",
+      "hash": "sha256:add3659627d252a3924c4c7835fddc0293519fcb26e85a1f7fbf03029b673caf",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "10f1a93e-c2b1-4301-a998-ce371844d829",
+      "remotePath": "/layers/vite/src/App.test.tsx",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.333Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/src/App.tsx": {
+      "contentType": "text",
+      "hash": "sha256:9b1a248f2cb04449b3e158f08ad1d45da31906a982a39e930f2f7fa37540383c",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "01923130-d9c8-4877-9333-f9192b41588d",
+      "remotePath": "/layers/vite/src/App.tsx",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.352Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/src/config.ts": {
+      "contentType": "text",
+      "hash": "sha256:819ae86ac7a13ed72aeb5f2bd5cde2d00fc47628df7f42eba9dd6cd96d0e0ce8",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "0cfe3d7f-12d8-4041-9cea-7b79ce6c178f",
+      "remotePath": "/layers/vite/src/config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.749Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/src/logger.ts": {
+      "contentType": "text",
+      "hash": "sha256:8c4a6ea35640e9977c1750817eeff5359886fa219c6d2d474ddb286aa7a92a5a",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "9bfc49eb-1a63-46c4-9d59-b7a1d276a07d",
+      "remotePath": "/layers/vite/src/logger.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.771Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/src/test-setup.ts": {
+      "contentType": "text",
+      "hash": "sha256:90ec9100c29e008c3d9194acd818e2cfa6dc6e177154bc8e10c5959aa35619ed",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "1cca37cc-2153-43a3-b06f-a2dfea11dc40",
+      "remotePath": "/layers/vite/src/test-setup.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.752Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/src/trpc.ts": {
+      "contentType": "text",
+      "hash": "sha256:6614b4b1a49d6535901e51a8e1641647b102a6d1ed7ed6d2bc131ab33b09164c",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "5dc258aa-d51e-46a1-9d44-f108caf7d629",
+      "remotePath": "/layers/vite/src/trpc.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.735Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/tsconfig.app.json": {
+      "contentType": "text",
+      "hash": "sha256:d94d7e77c63c2a9801b5eed9d6b0c5a5fc7747d1e323e5d2d699655ea691975e",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "ae6b3492-48fd-4c8f-8033-d98034d7ef54",
+      "remotePath": "/layers/vite/tsconfig.app.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.783Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/tsconfig.node.json": {
+      "contentType": "text",
+      "hash": "sha256:8699f129214a73d878cdc66c8b50a8ccf1112da588ff083f64f36e6308e07186",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "7f0ee2e8-b947-4a32-93d8-2e122ffbae14",
+      "remotePath": "/layers/vite/tsconfig.node.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.749Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/layers/vite/vitest.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:39b1d62c47297ebe802f7f50b4fd7a422f81dfcf58b60588c9e59e749daf7df8",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "0c98ba74-666f-4e7e-90ef-c48f52759a13",
+      "remotePath": "/layers/vite/vitest.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.746Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/package.json": {
+      "contentType": "text",
+      "hash": "sha256:439046f482360b1dc4e81ced54adfd628f62f05e5747cad4de7285e6a8ac380b",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "3550f105-7813-4377-b7c8-aea6562bcce4",
+      "remotePath": "/package.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:01.745Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/pnpm-lock.yaml": {
+      "contentType": "text",
+      "hash": "sha256:5036b45e25152c103f845278bd510de6ce06c576a3199f782ed286c63f51c198",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "094781bd-6f25-4b20-8efb-24fbf1574663",
+      "remotePath": "/pnpm-lock.yaml",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.311Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/apply-vite-layer.ts": {
+      "contentType": "text",
+      "hash": "sha256:e6ecec6f608188abfe8f53264bedfd7a43e50523f07630f5e8e827c3b1b134d6",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "818e88ff-0930-40da-a208-1147c66a3ea1",
+      "remotePath": "/scripts-src/apply-vite-layer.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:07.854Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/emoji-favicon.ts": {
+      "contentType": "text",
+      "hash": "sha256:e86de5640c7b14870a1c60efdd02fdcc1b5f9ae659f3bb6667cf24ad072d686f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "b95064da-6424-4a52-8fec-facab50018dd",
+      "remotePath": "/scripts-src/emoji-favicon.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:08.209Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/install-apps-packages.ts": {
+      "contentType": "text",
+      "hash": "sha256:13ab6fedc5da4882d337eeb0b4d8f9867b7c0f2bf47789e772c02582257d2460",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "6d720757-abc0-4092-8ef3-a009e1a01a72",
+      "remotePath": "/scripts-src/install-apps-packages.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.336Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/install-foundation.ts": {
+      "contentType": "text",
+      "hash": "sha256:0e4bde976f4a8cb9f4c11efe7985cb5123085e361e41e62b92f68c223b040ef6",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "eeb673eb-d2b6-430e-b6e3-f02154a327b7",
+      "remotePath": "/scripts-src/install-foundation.ts",
+      "remoteUpdatedAt": "2026-05-18T09:09:42.288Z",
+      "remoteRevisionNumber": 2
+    },
+    "flatpack-docs/scripts-src/lib/args.ts": {
+      "contentType": "text",
+      "hash": "sha256:aea0fd6d3a4ef68ebd47e41bb10594d8b87c84d0b0088695f748ca1494eff691",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "38b6f508-34bc-47c9-8a45-00dbae19f93d",
+      "remotePath": "/scripts-src/lib/args.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:08.210Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/lib/dx.ts": {
+      "contentType": "text",
+      "hash": "sha256:a329ae5ab9ab4bd70a36ee2026431222d6b9144a7ea7d985eb96f5507da86f50",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "4ac5eecb-b610-4e7b-b293-9924993e83bc",
+      "remotePath": "/scripts-src/lib/dx.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.308Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/lib/files.ts": {
+      "contentType": "text",
+      "hash": "sha256:9e2f946e50afb98c2f85a2b65e383681293b59602a90fb5dae179a0a8a65bf63",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "fcc02afb-db32-459b-a334-747f7d9adccc",
+      "remotePath": "/scripts-src/lib/files.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.738Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/lib/services.ts": {
+      "contentType": "text",
+      "hash": "sha256:27380902bd320ba62ca4e0f50f62328b136837b91f30515a60e355616d2d6a93",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "d7018be6-5e2a-4f8a-81ba-a594a089ba36",
+      "remotePath": "/scripts-src/lib/services.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.718Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/lib/template.ts": {
+      "contentType": "text",
+      "hash": "sha256:1ae3ed4bc26bcd9bcb253e5d8c40289a7779659ed41c803ca7d54ae6095fe45c",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "e7bb6018-37c9-409f-819f-532f6476053b",
+      "remotePath": "/scripts-src/lib/template.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.727Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/lib/vite.ts": {
+      "contentType": "text",
+      "hash": "sha256:de6b9af794fd4b7322a6b239c5c3ef92d90e9eeb1976471b4b7aba3ad4bb8984",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "f4ec96fd-46cd-494f-8acc-201b99e7a7b4",
+      "remotePath": "/scripts-src/lib/vite.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.724Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/normalize-package-versions.ts": {
+      "contentType": "text",
+      "hash": "sha256:1142f94db2f0f79630bfa5becc6a2539341eb686e79f4210d19545a69951bb23",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "20572e38-d0a6-4a4d-aa56-7f2abb7da364",
+      "remotePath": "/scripts-src/normalize-package-versions.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.723Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/patch-vite-layer.ts": {
+      "contentType": "text",
+      "hash": "sha256:5fe35745ec9cfcf53836607684ff9453f3b99a0c2652d2249ca59d2c2e02e737",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "86734d38-6e63-4025-96fe-6a0b5d1cc00c",
+      "remotePath": "/scripts-src/patch-vite-layer.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.722Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts-src/render-template.ts": {
+      "contentType": "text",
+      "hash": "sha256:5953e7dd2420f7d1b0098b51e2ad6def9cc1d43ed1dd47c2bea3b9dd7afd42a8",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "88e33d62-ac0d-44b3-965f-2dbb87c5dda7",
+      "remotePath": "/scripts-src/render-template.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.734Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts/apply-vite-layer.mjs": {
+      "contentType": "text",
+      "hash": "sha256:3b14c5b64ac55d00c328e54f5f562da0368ef0688f73939cc892a5e3f2364130",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "ec5ef9c4-8d8a-4023-bb62-2dff275baa9f",
+      "remotePath": "/scripts/apply-vite-layer.mjs",
+      "remoteUpdatedAt": "2026-05-14T08:57:02.720Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts/emoji-favicon.mjs": {
+      "contentType": "text",
+      "hash": "sha256:b14846ee1e82a759da2d0aa1eced90baea16f12a74432355076e4c0396876094",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "28fe8e13-9042-4d88-91a2-e13f421c2c21",
+      "remotePath": "/scripts/emoji-favicon.mjs",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.061Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts/install-apps-packages.mjs": {
+      "contentType": "text",
+      "hash": "sha256:00feea7afd1b7d997410b57179c9b76fe69556b4c87d9a793ba10d240ea502b1",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "fcb52ca6-17b8-4cdc-a8e1-e2f61036d34c",
+      "remotePath": "/scripts/install-apps-packages.mjs",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.087Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts/install-foundation.mjs": {
+      "contentType": "text",
+      "hash": "sha256:fb81a968fbb028ce20d494b35313861e8cdaeaaca14110b63bf966220a0c4b39",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "db90e673-4f4d-4996-8c1f-86152383d7c3",
+      "remotePath": "/scripts/install-foundation.mjs",
+      "remoteUpdatedAt": "2026-05-18T09:09:42.290Z",
+      "remoteRevisionNumber": 5
+    },
+    "flatpack-docs/scripts/normalize-package-versions.mjs": {
+      "contentType": "text",
+      "hash": "sha256:ea205a36bd48549cca0dc4d5219a5a8980dd80cded09c3cd67c1a7583162e289",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "92c1a073-1a75-481b-a55f-c85453a073a9",
+      "remotePath": "/scripts/normalize-package-versions.mjs",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.058Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts/patch-vite-layer.mjs": {
+      "contentType": "text",
+      "hash": "sha256:edc2d15fef8020065b57b121d3b779daaf77d45b01f011c1d41c8cce466648e7",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "638edd48-4019-4e3a-a185-d2961f50e35b",
+      "remotePath": "/scripts/patch-vite-layer.mjs",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.059Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/scripts/render-template.mjs": {
+      "contentType": "text",
+      "hash": "sha256:f91ff0054719bf5b3674352a7aba27a8f37d64307465c23a7aa57e0ed9786bef",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "b6386fca-d113-4fb2-874a-243c275b6016",
+      "remotePath": "/scripts/render-template.mjs",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.055Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/tests/files.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:1c1e6de5a3eec9514c656149f7d1f272ffdd5ea8e438d021eb080e644caf82dc",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "d1a69c16-22ab-4074-ac5d-06e581ae7f09",
+      "remotePath": "/tests/files.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.085Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/tests/services.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:9ffdd89ac3a20f5b517af65af85cb5f417934fd20ef042036eb566a3ee4ae048",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "3977b42d-769b-4985-9d90-beaf5cc0f038",
+      "remotePath": "/tests/services.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.474Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/tests/template.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:be429f69bbe6d217c9f0237136fe9a73ecc5230cdd3f25d99b82a2075f8e3ff5",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "4e7c2598-de75-495d-954e-986f3f6c15af",
+      "remotePath": "/tests/template.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.484Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/tests/vite.test.ts": {
+      "contentType": "text",
+      "hash": "sha256:4123b4305e6b728d841fae16c0a18ceb8bfc6ee1c7ad5292dc4d764084926c4f",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "0060a99b-65a5-410e-8994-24584b647c4c",
+      "remotePath": "/tests/vite.test.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.483Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/tsconfig.json": {
+      "contentType": "text",
+      "hash": "sha256:d5315a545ec800e8bafe8c92f34f81b6ee5132cb761e5efdc6f630b33d44ece2",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "208ceac4-2b9c-4db9-9637-162e7b961f5b",
+      "remotePath": "/tsconfig.json",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.476Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/tsup.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:3349302b56b911e49e1d0ed31e01fe7ad8eba2f49554471d4f1d6e2b9cabd4d1",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "0fb541c9-0d0a-4a3e-8a89-a9d532d8a0f1",
+      "remotePath": "/tsup.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.481Z",
+      "remoteRevisionNumber": 1
+    },
+    "flatpack-docs/vitest.config.ts": {
+      "contentType": "text",
+      "hash": "sha256:1bb46f59b740b5d64c1cce1f12b7514fcda570088291c1bf9a2a2e42c596ff0b",
+      "lastSyncedAt": "2026-05-18T15:45:42.849Z",
+      "remoteFileId": "fa72f9ae-9ba2-48d5-b5e5-abf8e4a990c2",
+      "remotePath": "/vitest.config.ts",
+      "remoteUpdatedAt": "2026-05-14T08:57:03.477Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/.gitignore": {
+      "contentType": "text",
+      "hash": "sha256:9fac60763a3c8858a703581362da83a4edc27b4986533654c2a26253aa200d71",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "4f857002-f9e2-46d7-abe7-b8b74f3c2c4e",
+      "remotePath": "/.gitignore",
+      "remoteUpdatedAt": "2026-05-18T15:19:05.099Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/README.md": {
+      "contentType": "text",
+      "hash": "sha256:a3b2e5ad35ac43bcda45ea6bdd69ecaba31e2060a61fa0381a4eb30281e53df9",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "2e339185-44f2-40ec-b06c-2855424e6f73",
+      "remotePath": "/README.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:42.224Z",
+      "remoteRevisionNumber": 2
+    },
+    "mp-lb-run/SETUP_PROCESS.md": {
+      "contentType": "text",
+      "hash": "sha256:03aac081095f4a6eef25bf4c05e564fe76d7acd1f6bb1caf493f654d85caff75",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "a48b945c-73b5-4e1e-97dd-031387055cf4",
+      "remotePath": "/SETUP_PROCESS.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:06.515Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/deploy-migration.md": {
+      "contentType": "text",
+      "hash": "sha256:9cd709923f7d45853decc7ac181189d1b26ef0d298a58663b3c15aacece8b93e",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "e6c059e9-57b8-4e74-a660-6bbff86ee988",
+      "remotePath": "/archive/deploy-migration.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:34.877Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/bull.md": {
+      "contentType": "text",
+      "hash": "sha256:fee227d65406ad64c644e5ea63be6f3cdfe803f12cf16676cea48f90928c870a",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "dbe2a3b3-1842-4cc9-9a97-614bddd75475",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/bull.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:35.663Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/clerk-rbac.md": {
+      "contentType": "text",
+      "hash": "sha256:41b0422058fc3a266f353065d52fc9a70f1beb6b163d656598482096eaf3fce7",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "49dd9084-0106-4962-a83e-0215cf71d3e8",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/clerk-rbac.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:36.306Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/clerk.md": {
+      "contentType": "text",
+      "hash": "sha256:46e95500d5ef2388774c228ece8b431b85f7cd38690a5986bdb0f1baa8304bc5",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "1c66bbcd-734b-4336-9ff1-198c68156c7a",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/clerk.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:37.116Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/custom-domains.md": {
+      "contentType": "text",
+      "hash": "sha256:50be76eec60b362962cc11c083ba123506ca0e0710820a7c74f3778ed74d4318",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "6cda6322-b06c-49cf-8925-219946aa8a04",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/custom-domains.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:37.769Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/mongodb.md": {
+      "contentType": "text",
+      "hash": "sha256:196829e660644c504abf245a3cf5639a30d431b8248b7babad6db728547cd56c",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "fb6ff642-d576-4f47-a888-51e9ac19bb22",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/mongodb.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:38.458Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/playwright.md": {
+      "contentType": "text",
+      "hash": "sha256:7f65d77e354512a8f79d1fbd8e287430ca73ab0f8fb4102ed811f19bbfa8e219",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "95ffa263-6316-4876-97a9-491be9b56f42",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/playwright.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:39.190Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/redis.md": {
+      "contentType": "text",
+      "hash": "sha256:506ebaa7f2fb56422053ad99b7029e83618ce5ce4579171bd2ef2d333215ec08",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "000e22da-df9f-4c9e-a462-d8d157ae8f12",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/redis.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:39.815Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/fssstack-extension-snapshot/fssstack-extensions/s3.md": {
+      "contentType": "text",
+      "hash": "sha256:028896d41e90e40be8335adbf95b9d16a3dd59380831b026cde07395f62ad37e",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "044cbf89-75bf-40aa-9f4f-2131ada778e3",
+      "remotePath": "/archive/fssstack-extension-snapshot/fssstack-extensions/s3.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:40.413Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/problem-map.md": {
+      "contentType": "text",
+      "hash": "sha256:b5b71118eaa5543a1bd6aaa5a4267315ee7d42dce63e6b3ad53c3e1237fb2550",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "1c644b8d-cf55-4c3c-89b6-06a01e9378a5",
+      "remotePath": "/archive/problem-map.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:41.050Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/archive/todo.md": {
+      "contentType": "text",
+      "hash": "sha256:07137e7385aef33bbdd107f43eb2520793b3cb51167a320cc9c6e09b6da783da",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "eb0b50c3-2b88-4c4c-a0ab-8519f1962861",
+      "remotePath": "/archive/todo.md",
+      "remoteUpdatedAt": "2026-05-18T15:26:41.726Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/docs/custom-domains.md": {
+      "contentType": "text",
+      "hash": "sha256:50db7e39cc140fe971ff56d796ec80c673dc1973c61de3bf3cac35009056a8af",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "b2165b37-0724-40ba-b19e-ede377f02a55",
+      "remotePath": "/docs/custom-domains.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:13.948Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/docs/deployment-runbook.md": {
+      "contentType": "text",
+      "hash": "sha256:42472c8517c58cb4c34804fcd01241953012b942af3ce4b2dc466d73c4812d37",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "c82a534b-4cb1-4c9b-9be7-e042fa574ebd",
+      "remotePath": "/docs/deployment-runbook.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:05.104Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/docs/deployment-setup.md": {
+      "contentType": "text",
+      "hash": "sha256:37a07e162e7c0c343029b13cb9b33045621aafca0da40d7f4bf69ce0a8b71e72",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "895a855c-ba08-4f03-9aab-00349a9f6083",
+      "remotePath": "/docs/deployment-setup.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:05.087Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/docs/terraform.md": {
+      "contentType": "text",
+      "hash": "sha256:dbdb2b794e292d07bac0c3cbd41fffeffcc746487ff36614d800f5d8dcc6bcb2",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "f27d846e-740b-447b-a18d-64faa17069bf",
+      "remotePath": "/docs/terraform.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:13.939Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/extensions/bull-deploy.md": {
+      "contentType": "text",
+      "hash": "sha256:be58a189f5220c5ed2d84148f3bffa2e0ffff006f1692605fe72415ab71d34c8",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "dc18976f-a654-46b5-b851-49bcc23c0e4d",
+      "remotePath": "/extensions/bull-deploy.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:13.945Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/extensions/clerk-deploy.md": {
+      "contentType": "text",
+      "hash": "sha256:af68350cea1ef129e5dcd6518885479425574d3eca081aff05e1e1c90049cca1",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "790c856e-1c8a-4966-b4ce-71f75625093d",
+      "remotePath": "/extensions/clerk-deploy.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:05.101Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/extensions/mongodb-deploy.md": {
+      "contentType": "text",
+      "hash": "sha256:857cec37277b16dbb5af0c053935da82322742efebdb74ee3570c32cdf69db87",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "f58347c5-8e1b-4916-b233-d3a9af7a38c8",
+      "remotePath": "/extensions/mongodb-deploy.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:05.787Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/extensions/redis-deploy.md": {
+      "contentType": "text",
+      "hash": "sha256:bfac6766f91b249c8e57c53bfefdd6a0fc59312d96a19d2faed66a00f60cc94e",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "ead296b7-a060-4b4e-81f7-bac43cc23c70",
+      "remotePath": "/extensions/redis-deploy.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:05.750Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/extensions/s3-deploy.md": {
+      "contentType": "text",
+      "hash": "sha256:feb375f0b217306f2b1ff5b3097001939049fc196348d7b1a9f324a594831e7a",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "e4a13a41-4440-4aab-9d95-8f8633eebe17",
+      "remotePath": "/extensions/s3-deploy.md",
+      "remoteUpdatedAt": "2026-05-18T15:19:05.802Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/scripts/install-deployment.mjs": {
+      "contentType": "text",
+      "hash": "sha256:bc8509e976a3ec78874c60df27351495900eda3b01ba3004f4f37abfd74bdb1c",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "691fdf93-3f01-4a46-8d14-0da49750a042",
+      "remotePath": "/scripts/install-deployment.mjs",
+      "remoteUpdatedAt": "2026-05-18T15:19:06.496Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/backend/Dockerfile": {
+      "contentType": "text",
+      "hash": "sha256:08a872a50f16a0d247d73417b79efe6b2775a0336a2f6e385cd68ec0c11b2b23",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "f213aa15-340a-4b81-b512-711fdd46178b",
+      "remotePath": "/templates/backend/Dockerfile",
+      "remoteUpdatedAt": "2026-05-18T15:19:15.861Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/github-workflows/deploy.yml": {
+      "contentType": "text",
+      "hash": "sha256:0dbd4cf80a9e07b4409762b06522059fe91cc87a486eb6821c4779040cfe383a",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "382624ff-5c3d-48c7-a196-5f4136dc5d27",
+      "remotePath": "/templates/github-workflows/deploy.yml",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.362Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/scripts/build-runtime-tfvars.mjs": {
+      "contentType": "text",
+      "hash": "sha256:f39908ce7cf8e3573bd228d47284637651ad9eb588fd9f077586d5a34d3951b8",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "be286da6-3252-4594-b526-7a7612927a4d",
+      "remotePath": "/templates/scripts/build-runtime-tfvars.mjs",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.309Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/backend.tf": {
+      "contentType": "text",
+      "hash": "sha256:9a4544c48812ac2e82f060d4c16fb45c6de6ad77d35cffc8ebb897e25346758e",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "9a59494e-484c-4031-b488-5dd0d44cd281",
+      "remotePath": "/templates/terraform/backend.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.311Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/budget.tf": {
+      "contentType": "text",
+      "hash": "sha256:87431f230e0ab0fe45ade59585e9c14925844942e3be617e241c20be2e4d9d04",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "d9ca08da-6052-4495-b870-13bd819a7d43",
+      "remotePath": "/templates/terraform/budget.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.308Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/dns.tf": {
+      "contentType": "text",
+      "hash": "sha256:59bdcc7ffc545a4285d8beefabcf410e2ad166bb4b9b7841079d926895813614",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "5b7d9675-c525-4e63-adb5-95c61069ad15",
+      "remotePath": "/templates/terraform/dns.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.331Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/frontend.tf": {
+      "contentType": "text",
+      "hash": "sha256:25616d5782bf24d5546bb3114332e6166fb173ae86fe66fb9f58225aa52b9f43",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "d8d0af25-8873-4330-b86f-32d4b064effe",
+      "remotePath": "/templates/terraform/frontend.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.272Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/main.tf": {
+      "contentType": "text",
+      "hash": "sha256:059969f2e7835392fa95dc513fdaaf3eb0f17021b08fcc58847d753c4e4c91bf",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "b332efce-a291-4866-ac40-0811b61215c9",
+      "remotePath": "/templates/terraform/main.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.312Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/outputs.tf": {
+      "contentType": "text",
+      "hash": "sha256:272082e07dc8c5eb32e9f5deb8a4a9246da09a0540c60ce3a3125f77bafbbc0a",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "88668172-68ae-4058-b151-7625e21f2db5",
+      "remotePath": "/templates/terraform/outputs.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:07.594Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/registry.tf": {
+      "contentType": "text",
+      "hash": "sha256:8fd02cb50bcda1af81f307f2e81e6ce5a6349435fe966f923615e3edd8ce6de2",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "1a770cbf-9be9-40f9-945d-9ae2038ec16a",
+      "remotePath": "/templates/terraform/registry.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:17.217Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/templates/terraform/variables.tf": {
+      "contentType": "text",
+      "hash": "sha256:581b2aff006de3f1a1d125d919cb36f356d0f5d2a25d29ab72a17182cea60f9c",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "5d6ad896-7111-40b5-9857-b59058f70b72",
+      "remotePath": "/templates/terraform/variables.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:17.208Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/backend.tf": {
+      "contentType": "text",
+      "hash": "sha256:9a4544c48812ac2e82f060d4c16fb45c6de6ad77d35cffc8ebb897e25346758e",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "92de9627-3473-45f5-a0b3-419ffaed7757",
+      "remotePath": "/terraform/backend.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:17.216Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/budget.tf": {
+      "contentType": "text",
+      "hash": "sha256:87431f230e0ab0fe45ade59585e9c14925844942e3be617e241c20be2e4d9d04",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "f165f20a-4938-4555-a3a0-d6009db62a46",
+      "remotePath": "/terraform/budget.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:25.546Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/dns.tf": {
+      "contentType": "text",
+      "hash": "sha256:59bdcc7ffc545a4285d8beefabcf410e2ad166bb4b9b7841079d926895813614",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "49a3a057-4132-410d-a8ae-edaa58ec5e20",
+      "remotePath": "/terraform/dns.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:25.546Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/frontend.tf": {
+      "contentType": "text",
+      "hash": "sha256:25616d5782bf24d5546bb3114332e6166fb173ae86fe66fb9f58225aa52b9f43",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "bd5dafdc-ebde-4170-a85d-d10c038edffc",
+      "remotePath": "/terraform/frontend.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:25.545Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/main.tf": {
+      "contentType": "text",
+      "hash": "sha256:059969f2e7835392fa95dc513fdaaf3eb0f17021b08fcc58847d753c4e4c91bf",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "4926db64-3052-40cb-a457-2a334a5b6ded",
+      "remotePath": "/terraform/main.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:25.541Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/outputs.tf": {
+      "contentType": "text",
+      "hash": "sha256:272082e07dc8c5eb32e9f5deb8a4a9246da09a0540c60ce3a3125f77bafbbc0a",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "76aad1ef-448e-4e2c-abe1-a4a8b31f36b4",
+      "remotePath": "/terraform/outputs.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:25.547Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/registry.tf": {
+      "contentType": "text",
+      "hash": "sha256:8fd02cb50bcda1af81f307f2e81e6ce5a6349435fe966f923615e3edd8ce6de2",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "6b77a201-29dc-420d-b09a-e2b1a14e3953",
+      "remotePath": "/terraform/registry.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:17.755Z",
+      "remoteRevisionNumber": 1
+    },
+    "mp-lb-run/terraform/variables.tf": {
+      "contentType": "text",
+      "hash": "sha256:581b2aff006de3f1a1d125d919cb36f356d0f5d2a25d29ab72a17182cea60f9c",
+      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "remoteFileId": "2b68da6b-8136-451c-9459-31463d5471d9",
+      "remotePath": "/terraform/variables.tf",
+      "remoteUpdatedAt": "2026-05-18T15:19:17.754Z",
+      "remoteRevisionNumber": 1
+    }
+  },
+  "references": {
+    "flatpack-docs/skills": {
+      "lastSeenAt": "2026-05-18T15:45:42.849Z",
+      "type": "store-reference"
+    },
+    "flatpack-docs/standards": {
+      "lastSeenAt": "2026-05-18T15:45:42.849Z",
+      "type": "store-reference"
+    }
+  },
+  "syncRules": {
+    "sha256:a8561e8ce1fa77aecce78d9c34880f689cdb3e89c94b9b67e80d0b620f0bfc86": {
+      "path": "",
+      "target": "flatpack-docs"
+    },
+    "sha256:bf71a126708acd6071b4137e8f832d0de061ca92fe0cc039c600ad6854e4ce2f": {
+      "path": "",
+      "target": "mp-lb-run"
+    }
+  },
+  "version": 1
+}

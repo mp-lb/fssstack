@@ -1,0 +1,7 @@
+git:
+  commit_message: "Update doctrine docs"
+sync:
+  - target: flatpack-docs
+    store: felixsebastian/fssstack
+  - target: mp-lb-run
+    store: felixsebastian/mp-lb-run
