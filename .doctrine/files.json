@@ -1,14 +1,5 @@
 {
   "files": {
-    "flatpack-docs/AGENTS.md": {
-      "contentType": "text",
-      "hash": "sha256:89456672254e34e3a3d1103bdb5f0087e694633fbec37eb719de47fb7c927af5",
-      "lastSyncedAt": "2026-05-18T17:59:26.039Z",
-      "remoteFileId": "d3645cf5-89e2-4f68-be56-793d85c9077e",
-      "remotePath": "/AGENTS.md",
-      "remoteUpdatedAt": "2026-05-18T09:10:39.001Z",
-      "remoteRevisionNumber": 6
-    },
     "flatpack-docs/SETUP_PROCESS.md": {
       "contentType": "text",
       "hash": "sha256:09a69fb5a85ba93143cc93620daf1dc3715f4c98030d4ef50d25c489abb97d6e",
@@ -921,11 +912,11 @@
   },
   "references": {
     "flatpack-docs/skills": {
-      "lastSeenAt": "2026-05-18T23:28:27.220Z",
+      "lastSeenAt": "2026-05-18T23:37:51.109Z",
       "type": "store-reference"
     },
     "flatpack-docs/standards": {
-      "lastSeenAt": "2026-05-18T23:28:27.220Z",
+      "lastSeenAt": "2026-05-18T23:37:51.109Z",
       "type": "store-reference"
     }
   },

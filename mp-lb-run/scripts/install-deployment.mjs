@@ -172,13 +172,6 @@ writeFile(
 );
 writeFile(
   path.join(targetRoot, ".env.production"),
-  [
-    "APP_ENV=production",
-    "GCP_PROJECT_ID=",
-    `GCP_REGION=${manifest.gcpRegion}`,
-    "CLOUDFLARE_ACCOUNT_ID=",
-    "CLOUDFLARE_ZONE_ID=",
-    ""
-  ].join("\n")
+  readRepoFile(path.join("templates", "env.production"))
 );
 writeFile(path.join(targetRoot, "secrets.enc.json"), "{\n}\n");

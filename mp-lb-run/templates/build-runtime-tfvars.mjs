@@ -29,7 +29,10 @@ if (!inventory) {
   throw new Error(`Missing ${path.relative(root, inventoryPath)}`);
 }
 var publicEnv = readEnvFile(path.join(root, ".env.production"));
-var secretEnv = readJson(path.join(root, "secrets.json"), {});
+var secretEnv = readJson(
+  path.join(root, "secrets.json"),
+  {}
+);
 var allEnv = { ...publicEnv, ...secretEnv };
 var backendImages = {};
 for (const backend of inventory.backends ?? []) {
@@ -51,6 +54,6 @@ fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(
   outputPath,
   `${JSON.stringify({ backend_images: backendImages, backend_env: backendEnv }, null, 2)}
-`,
+`
 );
 console.log(`Wrote ${path.relative(root, outputPath)}`);

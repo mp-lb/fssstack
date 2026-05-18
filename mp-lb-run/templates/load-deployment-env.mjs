@@ -25,8 +25,7 @@ var readEnvFile = (file) => {
   }
   return values;
 };
-var asEnvValue = (value) =>
-  typeof value === "string" ? value : JSON.stringify(value);
+var asEnvValue = (value) => typeof value === "string" ? value : JSON.stringify(value);
 var isLikelyBase64Json = (value) => {
   if (!/^[A-Za-z0-9+/=\s]+$/.test(value)) return false;
   try {
@@ -45,47 +44,44 @@ var serviceAccountJson = (value) => {
 };
 var appendGithubEnv = (key, value) => {
   if (!githubEnvPath) return;
-  fs.appendFileSync(
-    githubEnvPath,
-    `${key}=${value}
-`,
-  );
+  fs.appendFileSync(githubEnvPath, `${key}=${value}
+`);
 };
 var appendGithubOutput = (key, value) => {
   if (!githubOutputPath) return;
-  fs.appendFileSync(
-    githubOutputPath,
-    `${key}=${value}
-`,
-  );
+  fs.appendFileSync(githubOutputPath, `${key}=${value}
+`);
 };
 var publicEnv = readEnvFile(path.join(root, ".env.production"));
-var secretEnv = readJson(path.join(root, "secrets.json"), {});
+var secretEnv = readJson(
+  path.join(root, "secrets.json"),
+  {}
+);
 var allEnv = { ...publicEnv, ...secretEnv };
 var requiredKeys = [
   "GCP_PROJECT_ID",
   "GCP_REGION",
   "GCP_SA_KEY",
-  "VERCEL_API_TOKEN",
+  "VERCEL_API_TOKEN"
 ];
 var optionalKeys = [
   "CLOUDFLARE_ACCOUNT_ID",
   "CLOUDFLARE_API_TOKEN",
   "CLOUDFLARE_ZONE_ID",
   "GCP_BILLING_ACCOUNT",
-  "MONTHLY_BUDGET_USD",
+  "MONTHLY_BUDGET_USD"
 ];
 var missing = requiredKeys.filter((key) => !allEnv[key]);
 if (missing.length > 0) {
   throw new Error(
-    `Missing deployment environment values: ${missing.join(", ")}`,
+    `Missing deployment environment values: ${missing.join(", ")}`
   );
 }
 if (secretEnv.GCP_SA_KEY) {
   fs.mkdirSync(path.dirname(gcpCredentialsPath), { recursive: true });
   fs.writeFileSync(
     gcpCredentialsPath,
-    serviceAccountJson(secretEnv.GCP_SA_KEY),
+    serviceAccountJson(secretEnv.GCP_SA_KEY)
   );
   console.log("::add-mask::" + asEnvValue(secretEnv.GCP_SA_KEY));
   appendGithubEnv("GOOGLE_APPLICATION_CREDENTIALS", gcpCredentialsPath);
@@ -103,5 +99,5 @@ for (const key of [...requiredKeys, ...optionalKeys]) {
   appendGithubEnv(key, envValue);
 }
 console.log(
-  "Loaded deployment environment from .env.production and secrets.json",
+  "Loaded deployment environment from .env.production and secrets.json"
 );
