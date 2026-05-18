@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FSS Stack Authoring Repo
 
-## Getting Started
+This repository brings together three related surfaces:
 
-First, run the development server:
+- the FSS Stack landing page at the repository root
+- `flatpack-docs/`, the Doctrine payload that agents read to create FSS Stack target projects
+- `mp-lb-run/`, the Doctrine payload that agents read to deploy FSS Stack projects with the mp-lb-run cloud pattern
+
+The Doctrine folders are published copies. Treat this repository as the authoring workspace: edit here, build generated artifacts here, commit here, then publish the Doctrine payloads.
+
+## Working Model
+
+Agents that create or deploy projects usually do not have this repository locally. They read published files with commands such as:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+dx read SETUP_PROCESS.md
+dx --store mp-lb-run read SETUP_PROCESS.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+That is why built setup scripts remain inside `flatpack-docs/scripts/`, `mp-lb-run/scripts/`, and `mp-lb-run/templates/`. Their TypeScript sources live in root-level `scripts-src/`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Common Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Run the landing page locally with Zapper:
 
-## Learn More
+```bash
+pnpm dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+Useful process commands:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm dev:status
+pnpm dev:open
+pnpm dev:down
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Build the Doctrine setup scripts:
 
-## Deploy on Vercel
+```bash
+pnpm build:docs
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Validate the authoring-side docs tooling:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm check:docs
+```
+
+Use `dx pull`, `dx push`, or `dx git sync` when publishing Doctrine changes. `dx pull`/`dx push` are clearer when you want manual control over the Git commit.
+
+## Repo Map
+
+- `app/`, `components/`, `lib/`, `public/`: landing page
+- `zap.yaml`: local process management for the authoring workspace
+- `flatpack-docs/`: published FSS Stack project-creation docs and layer files
+- `mp-lb-run/`: published deployment docs, templates, and built scripts
+- `scripts-src/flatpack-docs/`: TypeScript sources for `flatpack-docs/scripts/*.mjs`
+- `scripts-src/mp-lb-run/`: TypeScript sources for mp-lb-run built scripts
+- `TARGET_PROJECT_SHAPE.md`: mental model for generated target repositories
+- `tests/`: authoring-side tests for setup script behavior
+- `examples/`: local example target repositories and experiments

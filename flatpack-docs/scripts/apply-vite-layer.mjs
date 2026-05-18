@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-// scripts-src/apply-vite-layer.ts
+// scripts-src/flatpack-docs/apply-vite-layer.ts
 import { join as join2 } from "path";
 import { rmSync } from "fs";
 
-// scripts-src/lib/args.ts
+// scripts-src/flatpack-docs/lib/args.ts
 var getScriptArgs = () => {
   const args2 = process.argv.slice(2);
   return args2[0] === "--" ? args2.slice(1) : args2;
@@ -14,7 +14,7 @@ var fail = (message) => {
   process.exit(1);
 };
 
-// scripts-src/lib/dx.ts
+// scripts-src/flatpack-docs/lib/dx.ts
 import { execFileSync } from "child_process";
 import { dirname } from "path";
 import { mkdirSync, writeFileSync } from "fs";
@@ -24,7 +24,7 @@ var installFromStore = (sourcePath, targetPath) => {
   writeFileSync(targetPath, readFromStore(sourcePath));
 };
 
-// scripts-src/lib/services.ts
+// scripts-src/flatpack-docs/lib/services.ts
 var serviceNamePattern = /^[a-z][a-z0-9-]*$/;
 var validateServiceName = (serviceName) => {
   if (!serviceNamePattern.test(serviceName)) {
@@ -35,7 +35,7 @@ var validateServiceName = (serviceName) => {
 };
 var portEnvName = (serviceName) => `${serviceName.toUpperCase().replaceAll("-", "_")}_PORT`;
 
-// scripts-src/lib/vite.ts
+// scripts-src/flatpack-docs/lib/vite.ts
 import { existsSync, readFileSync, writeFileSync as writeFileSync2 } from "fs";
 import { join } from "path";
 var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv) => {
@@ -79,7 +79,7 @@ var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv) => {
   writeFileSync2(mainPath, main);
 };
 
-// scripts-src/apply-vite-layer.ts
+// scripts-src/flatpack-docs/apply-vite-layer.ts
 var viteFiles = [
   ["layers/vite/index.html", "index.html"],
   ["layers/vite/tsconfig.app.json", "tsconfig.app.json"],

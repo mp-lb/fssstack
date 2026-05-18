@@ -1,0 +1,60 @@
+import { defineConfig } from "tsup";
+
+export default defineConfig([
+  {
+    entry: [
+      "scripts-src/flatpack-docs/apply-vite-layer.ts",
+      "scripts-src/flatpack-docs/emoji-favicon.ts",
+      "scripts-src/flatpack-docs/install-apps-packages.ts",
+      "scripts-src/flatpack-docs/install-foundation.ts",
+      "scripts-src/flatpack-docs/normalize-package-versions.ts",
+      "scripts-src/flatpack-docs/patch-vite-layer.ts",
+      "scripts-src/flatpack-docs/render-template.ts",
+    ],
+    outDir: "flatpack-docs/scripts",
+    tsconfig: "tsconfig.docs.json",
+    format: ["esm"],
+    target: "node20",
+    bundle: true,
+    splitting: false,
+    sourcemap: false,
+    clean: false,
+    dts: false,
+    outExtension: () => ({ js: ".mjs" }),
+    banner: {
+      js: "#!/usr/bin/env node",
+    },
+  },
+  {
+    entry: ["scripts-src/mp-lb-run/install-deployment.ts"],
+    outDir: "mp-lb-run/scripts",
+    tsconfig: "tsconfig.docs.json",
+    format: ["esm"],
+    target: "node20",
+    bundle: true,
+    splitting: false,
+    sourcemap: false,
+    clean: false,
+    dts: false,
+    outExtension: () => ({ js: ".mjs" }),
+    banner: {
+      js: "#!/usr/bin/env node",
+    },
+  },
+  {
+    entry: ["scripts-src/mp-lb-run/build-runtime-tfvars.ts"],
+    outDir: "mp-lb-run/templates",
+    tsconfig: "tsconfig.docs.json",
+    format: ["esm"],
+    target: "node20",
+    bundle: true,
+    splitting: false,
+    sourcemap: false,
+    clean: false,
+    dts: false,
+    outExtension: () => ({ js: ".mjs" }),
+    banner: {
+      js: "#!/usr/bin/env node",
+    },
+  },
+]);

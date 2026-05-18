@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-// scripts-src/install-apps-packages.ts
+// scripts-src/flatpack-docs/install-apps-packages.ts
 import { join as join2 } from "path";
 import { mkdirSync as mkdirSync2 } from "fs";
 
-// scripts-src/lib/args.ts
+// scripts-src/flatpack-docs/lib/args.ts
 var getScriptArgs = () => {
   const args2 = process.argv.slice(2);
   return args2[0] === "--" ? args2.slice(1) : args2;
@@ -14,7 +14,7 @@ var fail = (message) => {
   process.exit(1);
 };
 
-// scripts-src/lib/dx.ts
+// scripts-src/flatpack-docs/lib/dx.ts
 import { execFileSync } from "child_process";
 import { dirname } from "path";
 import { mkdirSync, writeFileSync } from "fs";
@@ -24,7 +24,7 @@ var installFromStore = (sourcePath, targetPath) => {
   writeFileSync(targetPath, readFromStore(sourcePath));
 };
 
-// scripts-src/lib/files.ts
+// scripts-src/flatpack-docs/lib/files.ts
 import { readdirSync, readFileSync, statSync, writeFileSync as writeFileSync2 } from "fs";
 import { basename, join, relative } from "path";
 var walkFiles = (root, options = {}) => {
@@ -56,7 +56,7 @@ var replaceInFiles = (files, replacements) => {
   }
 };
 
-// scripts-src/lib/services.ts
+// scripts-src/flatpack-docs/lib/services.ts
 var serviceNamePattern = /^[a-z][a-z0-9-]*$/;
 var parseServiceList = (raw) => raw.replaceAll(/\([^)]*\)/g, "").replaceAll(",", " ").split(/\s+/).map((part) => part.trim()).filter(Boolean);
 var validateServiceName = (serviceName) => {
@@ -78,7 +78,7 @@ var assertUniqueServices = (serviceNames, label = "service") => {
 };
 var portEnvName = (serviceName) => `${serviceName.toUpperCase().replaceAll("-", "_")}_PORT`;
 
-// scripts-src/install-apps-packages.ts
+// scripts-src/flatpack-docs/install-apps-packages.ts
 var packageFiles = [
   ["layers/packages/core/package.json", "packages/core/package.json"],
   [

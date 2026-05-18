@@ -1,0 +1,26 @@
+project: fssstack
+env_files:
+  - .env.local
+  - .env
+homepage: http://localhost:${PORT}
+ports: [PORT]
+native:
+  website:
+    cmd: pnpm dev:next
+    env: "*"
+tasks:
+  setup:
+    cmds:
+      - pnpm install
+  lint:
+    cmds:
+      - pnpm lint
+  build:
+    cmds:
+      - pnpm build
+  check_docs:
+    cmds:
+      - pnpm check:docs
+  worktree_setup:
+    cmds:
+      - pnpm install

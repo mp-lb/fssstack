@@ -1,18 +1,27 @@
-#!/usr/bin/env node
+import fs from "node:fs";
+import path from "node:path";
 
-// scripts-src/mp-lb-run/build-runtime-tfvars.ts
-import fs from "fs";
-import path from "path";
-var root = process.cwd();
-var inventoryPath = path.join(root, "deployment", "apps.json");
-var outputPath = path.join(root, "terraform", "runtime.auto.tfvars.json");
-var readJson = (file, fallback) => {
-  if (!fs.existsSync(file)) return fallback;
-  return JSON.parse(fs.readFileSync(file, "utf8"));
+type DeploymentApp = {
+  name: string;
+  env?: string[];
 };
-var readEnvFile = (file) => {
+
+type DeploymentInventory = {
+  backends?: DeploymentApp[];
+};
+
+const root = process.cwd();
+const inventoryPath = path.join(root, "deployment", "apps.json");
+const outputPath = path.join(root, "terraform", "runtime.auto.tfvars.json");
+
+const readJson = <T>(file: string, fallback: T): T => {
+  if (!fs.existsSync(file)) return fallback;
+  return JSON.parse(fs.readFileSync(file, "utf8")) as T;
+};
+
+const readEnvFile = (file: string) => {
   if (!fs.existsSync(file)) return {};
-  const values = {};
+  const values: Record<string, string> = {};
   for (const rawLine of fs.readFileSync(file, "utf8").split(/\r?\n/)) {
     const line = rawLine.trim();
     if (!line || line.startsWith("#")) continue;
@@ -24,36 +33,41 @@ var readEnvFile = (file) => {
   }
   return values;
 };
-var inventory = readJson(inventoryPath, null);
+
+const inventory = readJson<DeploymentInventory | null>(inventoryPath, null);
 if (!inventory) {
   throw new Error(`Missing ${path.relative(root, inventoryPath)}`);
 }
-var publicEnv = readEnvFile(path.join(root, ".env.production"));
-var secretEnv = readJson(
+
+const publicEnv = readEnvFile(path.join(root, ".env.production"));
+const secretEnv = readJson<Record<string, string>>(
   path.join(root, "secrets.json"),
-  {}
+  {},
 );
-var allEnv = { ...publicEnv, ...secretEnv };
-var backendImages = {};
+const allEnv = { ...publicEnv, ...secretEnv };
+
+const backendImages: Record<string, string> = {};
 for (const backend of inventory.backends ?? []) {
   const envName = `IMAGE_${backend.name.replace(/[^A-Za-z0-9_]/g, "_").toUpperCase()}`;
   if (process.env[envName]) {
     backendImages[backend.name] = process.env[envName];
   }
 }
-var backendEnv = {};
+
+const backendEnv: Record<string, Record<string, string>> = {};
 for (const backend of inventory.backends ?? []) {
   backendEnv[backend.name] = {};
   for (const key of backend.env ?? []) {
-    if (allEnv[key] !== void 0) {
+    if (allEnv[key] !== undefined) {
       backendEnv[backend.name][key] = allEnv[key];
     }
   }
 }
+
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(
   outputPath,
-  `${JSON.stringify({ backend_images: backendImages, backend_env: backendEnv }, null, 2)}
-`
+  `${JSON.stringify({ backend_images: backendImages, backend_env: backendEnv }, null, 2)}\n`,
 );
+
 console.log(`Wrote ${path.relative(root, outputPath)}`);

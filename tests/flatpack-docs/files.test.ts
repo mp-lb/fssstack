@@ -12,7 +12,7 @@ import {
   replaceInFiles,
   templateFiles,
   walkFiles,
-} from "../scripts-src/lib/files";
+} from "../../scripts-src/flatpack-docs/lib/files";
 
 const tempRoots: string[] = [];
 

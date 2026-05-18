@@ -1,6 +1,6 @@
 import { Buffer } from "node:buffer";
 import { describe, expect, it } from "vitest";
-import { emojiFaviconDataUri } from "../scripts-src/lib/template";
+import { emojiFaviconDataUri } from "../../scripts-src/flatpack-docs/lib/template";
 
 describe("emojiFaviconDataUri", () => {
   it("returns an SVG data URI", () => {

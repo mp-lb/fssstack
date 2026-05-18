@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-// scripts-src/render-template.ts
+// scripts-src/flatpack-docs/render-template.ts
 import { readFileSync as readFileSync2, writeFileSync as writeFileSync2 } from "fs";
 import { join as join2 } from "path";
 
-// scripts-src/lib/args.ts
+// scripts-src/flatpack-docs/lib/args.ts
 var getScriptArgs = () => {
   const args2 = process.argv.slice(2);
   return args2[0] === "--" ? args2.slice(1) : args2;
@@ -14,7 +14,7 @@ var fail = (message) => {
   process.exit(1);
 };
 
-// scripts-src/lib/files.ts
+// scripts-src/flatpack-docs/lib/files.ts
 import { readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 import { basename, join, relative } from "path";
 var templateFileNames = /* @__PURE__ */ new Set([
@@ -69,7 +69,7 @@ var fileExists = (path) => {
   }
 };
 
-// scripts-src/lib/services.ts
+// scripts-src/flatpack-docs/lib/services.ts
 var serviceNamePattern = /^[a-z][a-z0-9-]*$/;
 var parseServiceList = (raw) => raw.replaceAll(/\([^)]*\)/g, "").replaceAll(",", " ").split(/\s+/).map((part) => part.trim()).filter(Boolean);
 var validateServiceName = (serviceName) => {
@@ -91,7 +91,7 @@ var assertUniqueServices = (serviceNames, label = "service") => {
 };
 var portEnvName = (serviceName) => `${serviceName.toUpperCase().replaceAll("-", "_")}_PORT`;
 
-// scripts-src/lib/template.ts
+// scripts-src/flatpack-docs/lib/template.ts
 var emojiFaviconDataUri = (emoji) => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
   <text y="75" font-size="80">${emoji}</text>
@@ -99,7 +99,7 @@ var emojiFaviconDataUri = (emoji) => {
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
 };
 
-// scripts-src/render-template.ts
+// scripts-src/flatpack-docs/render-template.ts
 var args = getScriptArgs();
 if (args.length < 6 || args.length > 8) {
   fail(

@@ -26,6 +26,21 @@ docker:
 
 Add `MONGODB_URL` to `.env.local` as `MONGODB_URL=mongodb://localhost:${MONGO_PORT}/<database-name>?directConnection=true`. The port will be assigned automatically by zapper.
 
+### Reset task
+
+For local development, add a reset task that recreates the MongoDB volume:
+
+```yaml
+tasks:
+  db-reset:
+    cmds:
+      - zap down <backend-service> mongodb
+      - if docker volume inspect mongodb-data >/dev/null 2>&1; then docker volume rm mongodb-data; fi
+      - zap up mongodb <backend-service>
+```
+
+Include any workers or other services that hold MongoDB connections in the `zap down` and `zap up` commands.
+
 ## Code
 
 Create a connection manager in your app:

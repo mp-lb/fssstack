@@ -6,7 +6,7 @@ Use this when changing `SETUP_PROCESS.md`, extension markdown, layer files, or s
 
 ## Mental Model
 
-The flatpack repo is not the application. It is the source kit used to assemble an application somewhere else.
+The flatpack Doctrine payload is not the application. It is the published source kit used to assemble an application somewhere else.
 
 The target repo starts empty. Setup gradually unfolds it into a pnpm monorepo by reading files and scripts from doctrine with `dx read`, running a few external generators, rendering project-specific values, installing dependencies, and validating the generated result.
 
@@ -60,7 +60,7 @@ Commands that require installed packages belong here or later. Do not place them
 
 The target repo gets its own `AGENTS.md` during setup. That file is written for future work inside the generated application repo.
 
-The flatpack root `AGENTS.md` is only for agents editing the flatpack source kit. Do not copy its assumptions into the target repo.
+The authoring repo root `AGENTS.md` is only for agents editing this combined workspace. Do not copy its assumptions into the target repo.
 
 ### Validation
 
@@ -72,7 +72,7 @@ The goal is not to prove the flatpack repo is an app. The goal is to prove the g
 
 When changing setup markdown, be explicit about the stage where the instruction runs and the paths that exist at that stage.
 
-When changing script behavior, edit `scripts-src/`, run `pnpm build`, and inspect the generated `scripts/*.mjs` artifact. Target repos execute the built scripts through `dx read`.
+When changing script behavior, edit root-level `scripts-src/`, run `pnpm build:docs`, and inspect the generated `.mjs` artifacts in the Doctrine payload folders. Target repos execute the built scripts through `dx read`.
 
 When changing layer files, think about whether they are copied directly, applied as overlays, rendered later, or produced by an external generator. Keep fssstack overlays focused on project-specific wiring instead of taking ownership of generic scaffold code.
 

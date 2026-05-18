@@ -8,7 +8,7 @@ import {
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { patchViteLayer } from "../scripts-src/lib/vite";
+import { patchViteLayer } from "../../scripts-src/flatpack-docs/lib/vite";
 
 const tempRoots: string[] = [];
 

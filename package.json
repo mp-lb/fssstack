@@ -1,12 +1,21 @@
 {
-  "name": "nextjs",
+  "name": "fssstack-authoring",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "zap up",
+    "dev:next": "next dev --hostname 0.0.0.0 --port ${PORT:-3000}",
+    "dev:status": "zap status",
+    "dev:down": "zap down",
+    "dev:open": "zap open",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:docs": "tsup --config tsup.docs.config.ts",
+    "typecheck:docs": "tsc --project tsconfig.docs.json --noEmit",
+    "lint:docs": "eslint --config eslint.docs.config.mjs scripts-src tests tsup.docs.config.ts vitest.config.ts",
+    "test:docs": "vitest run --config vitest.config.ts",
+    "check:docs": "pnpm lint:docs && pnpm typecheck:docs && pnpm test:docs && pnpm build:docs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
@@ -22,13 +31,23 @@
     "zod": "^4.4.2"
   },
   "devDependencies": {
+    "@eslint/js": "9.39.4",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.4",
+    "globals": "16.5.0",
+    "pm2": "7.0.1",
+    "prettier": "3.8.1",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "tsup": "8.5.1",
+    "typescript": "^5",
+    "typescript-eslint": "8.57.1",
+    "vitest": "4.0.16",
+    "@mp-lb/zapper": "0.15.1"
   }
 }

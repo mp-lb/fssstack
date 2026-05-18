@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-// scripts-src/normalize-package-versions.ts
+// scripts-src/flatpack-docs/normalize-package-versions.ts
 import { existsSync, readFileSync, writeFileSync } from "fs";
 
-// scripts-src/lib/args.ts
+// scripts-src/flatpack-docs/lib/args.ts
 var getScriptArgs = () => {
   const args = process.argv.slice(2);
   return args[0] === "--" ? args.slice(1) : args;
@@ -13,7 +13,7 @@ var fail = (message) => {
   process.exit(1);
 };
 
-// scripts-src/normalize-package-versions.ts
+// scripts-src/flatpack-docs/normalize-package-versions.ts
 var dependencySections = [
   "dependencies",
   "devDependencies",

@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { parseServiceList, portEnvName } from "../scripts-src/lib/services";
+import {
+  parseServiceList,
+  portEnvName,
+} from "../../scripts-src/flatpack-docs/lib/services";
 
 describe("service helpers", () => {
   it("parses comma-separated services and strips type annotations", () => {

@@ -3,23 +3,28 @@ import prettier from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 import tseslint from "typescript-eslint";
 
-export default [
+const eslintDocsConfig = [
   {
     ignores: [
       ".doctrine/**",
+      ".next/**",
       "node_modules/**",
-      "scripts/**",
-      "layers/**",
-      "extensions/**",
+      "flatpack-docs/scripts/**",
+      "flatpack-docs/layers/**",
+      "flatpack-docs/extensions/**",
+      "mp-lb-run/scripts/**",
+      "mp-lb-run/templates/**",
     ],
   },
   eslintJs.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ["**/*.ts", "**/*.js"],
+    files: ["**/*.ts", "**/*.js", "**/*.mjs"],
     languageOptions: {
       globals: globals.node,
     },
   },
   prettier,
 ];
+
+export default eslintDocsConfig;

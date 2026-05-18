@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-// scripts-src/install-foundation.ts
+// scripts-src/flatpack-docs/install-foundation.ts
 import { join } from "path";
 import { mkdirSync as mkdirSync2 } from "fs";
 
-// scripts-src/lib/args.ts
+// scripts-src/flatpack-docs/lib/args.ts
 var getScriptArgs = () => {
   const args2 = process.argv.slice(2);
   return args2[0] === "--" ? args2.slice(1) : args2;
@@ -14,7 +14,7 @@ var fail = (message) => {
   process.exit(1);
 };
 
-// scripts-src/lib/dx.ts
+// scripts-src/flatpack-docs/lib/dx.ts
 import { execFileSync } from "child_process";
 import { dirname } from "path";
 import { mkdirSync, writeFileSync } from "fs";
@@ -24,7 +24,7 @@ var installFromStore = (sourcePath, targetPath) => {
   writeFileSync(targetPath, readFromStore(sourcePath));
 };
 
-// scripts-src/install-foundation.ts
+// scripts-src/flatpack-docs/install-foundation.ts
 var foundationFiles = [
   ["layers/foundation/root/.env.local", ".env.local"],
   ["layers/foundation/root/.gitignore", ".gitignore"],

@@ -4,7 +4,7 @@ Run this from an empty folder. If other project files already exist, stop and as
 
 The fssstack source kit is stored in doctrine. Do not clone it into the target repo and do not expect a local `.fssstack` directory. Read setup scripts and layer files from the store with `dx read`.
 
-Target setup scripts are built JavaScript artifacts in `scripts/*.mjs`. Their TypeScript sources live in `scripts-src/` in the flatpack repo, but target repos run only the built `.mjs` files with Node.
+Target setup scripts are built JavaScript artifacts in `scripts/*.mjs`. Their TypeScript sources live in the authoring repository's root-level `scripts-src/`, but target repos run only the built `.mjs` files with Node.
 
 ## Inputs
 
@@ -110,4 +110,3 @@ Commit:
 git add .
 git commit -m init
 ```
-

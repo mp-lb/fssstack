@@ -30,5 +30,13 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "flatpack-docs",
+    "mp-lb-run",
+    "scripts-src",
+    "tests",
+    "tsup.docs.config.ts",
+    "vitest.config.ts"
+  ]
 }

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-// scripts-src/lib/args.ts
+// scripts-src/flatpack-docs/lib/args.ts
 var getScriptArgs = () => {
   const args2 = process.argv.slice(2);
   return args2[0] === "--" ? args2.slice(1) : args2;
@@ -10,7 +10,7 @@ var fail = (message) => {
   process.exit(1);
 };
 
-// scripts-src/lib/vite.ts
+// scripts-src/flatpack-docs/lib/vite.ts
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
 var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv2) => {
@@ -54,7 +54,7 @@ var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv2) => {
   writeFileSync(mainPath, main);
 };
 
-// scripts-src/patch-vite-layer.ts
+// scripts-src/flatpack-docs/patch-vite-layer.ts
 var args = getScriptArgs();
 var targetRoot = args[0];
 var frontendClient = process.env.FRONTEND_CLIENT;
