@@ -5,9 +5,11 @@ import {
   Check,
   Copy,
   ChevronDown,
+  ExternalLink,
   FlaskConical,
   GitCommit,
   Info,
+  Palette,
   Plus,
   Trash2,
   X,
@@ -70,6 +72,8 @@ const projectFieldHelp = {
   emoji: "Rendered into readme/favicon assets.",
   packagePrefix:
     "Combined with the project slug and app slugs to form workspace package names.",
+  shadcnPreset:
+    "Passed to the shadcn CLI when scaffolding frontend clients.",
   description: "Included in generated README content and app metadata.",
 };
 
@@ -91,6 +95,7 @@ slug: ${config.slug}
 emoji: ${config.emoji}
 description: ${config.description}
 packagePrefix: ${config.packagePrefix}
+shadcnPreset: ${config.shadcnPreset}
 backendServices: ${config.backendServices.join(", ")}
 frontendClients: ${config.frontendClients
   .map((client) => `${client.slug} (${client.type})`)
@@ -129,6 +134,7 @@ export default function ProjectPromptBuilder() {
       emoji: config.emoji.trim(),
       description: config.description.trim(),
       packagePrefix: config.packagePrefix.trim().toLowerCase(),
+      shadcnPreset: config.shadcnPreset.trim(),
       backendServices: config.backendServices.map(toSlug),
       frontendClients: config.frontendClients.map((client) => ({
         ...client,
@@ -147,6 +153,9 @@ export default function ProjectPromptBuilder() {
     : "";
   const [customPrompt, setCustomPrompt] = useState<string | null>(null);
   const prompt = customPrompt ?? generatedPrompt;
+  const shadcnPresetPreviewUrl = `https://ui.shadcn.com/create?preset=${encodeURIComponent(
+    normalizedConfig.shadcnPreset,
+  )}`;
   const isPromptDirty =
     customPrompt !== null && customPrompt !== generatedPrompt;
   const issues = result.success ? [] : result.error.issues;
@@ -336,50 +345,70 @@ export default function ProjectPromptBuilder() {
             </CardHeader>
             <CardContent className="space-y-3">
               <form
-                className="grid gap-3 sm:grid-cols-2"
+                className="grid gap-3 sm:grid-cols-6"
                 onSubmit={(event) => event.preventDefault()}
               >
-                <TextField
-                  label="Name"
-                  help={projectFieldHelp.name}
-                  value={config.name}
-                  error={errorFor(["name"])}
-                  onChange={(value) => {
-                    markFieldInteracted(["name"]);
-                    updateName(value);
-                  }}
-                />
-                <TextField
-                  label="Slug"
-                  help={projectFieldHelp.slug}
-                  value={config.slug}
-                  error={errorFor(["slug"])}
-                  onChange={(value) => {
-                    markFieldInteracted(["slug"]);
-                    setValue("slug", toSlug(value));
-                  }}
-                />
-                <TextField
-                  label="Emoji"
-                  help={projectFieldHelp.emoji}
-                  value={config.emoji}
-                  error={errorFor(["emoji"])}
-                  onChange={(value) => {
-                    markFieldInteracted(["emoji"]);
-                    setValue("emoji", value);
-                  }}
-                />
-                <TextField
-                  label="Package prefix"
-                  help={projectFieldHelp.packagePrefix}
-                  value={config.packagePrefix}
-                  error={errorFor(["packagePrefix"])}
-                  onChange={(value) => {
-                    markFieldInteracted(["packagePrefix"]);
-                    setValue("packagePrefix", value);
-                  }}
-                />
+                <div className="sm:col-span-3">
+                  <TextField
+                    label="Name"
+                    help={projectFieldHelp.name}
+                    value={config.name}
+                    error={errorFor(["name"])}
+                    onChange={(value) => {
+                      markFieldInteracted(["name"]);
+                      updateName(value);
+                    }}
+                  />
+                </div>
+                <div className="sm:col-span-3">
+                  <TextField
+                    label="Slug"
+                    help={projectFieldHelp.slug}
+                    value={config.slug}
+                    error={errorFor(["slug"])}
+                    onChange={(value) => {
+                      markFieldInteracted(["slug"]);
+                      setValue("slug", toSlug(value));
+                    }}
+                  />
+                </div>
                 <div className="sm:col-span-2">
+                  <TextField
+                    label="Emoji"
+                    help={projectFieldHelp.emoji}
+                    value={config.emoji}
+                    error={errorFor(["emoji"])}
+                    onChange={(value) => {
+                      markFieldInteracted(["emoji"]);
+                      setValue("emoji", value);
+                    }}
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <TextField
+                    label="Package prefix"
+                    help={projectFieldHelp.packagePrefix}
+                    value={config.packagePrefix}
+                    error={errorFor(["packagePrefix"])}
+                    onChange={(value) => {
+                      markFieldInteracted(["packagePrefix"]);
+                      setValue("packagePrefix", value);
+                    }}
+                  />
+                </div>
+                <div className="sm:col-span-2">
+                  <TextField
+                    label="Preset"
+                    help={projectFieldHelp.shadcnPreset}
+                    value={config.shadcnPreset}
+                    error={errorFor(["shadcnPreset"])}
+                    onChange={(value) => {
+                      markFieldInteracted(["shadcnPreset"]);
+                      setValue("shadcnPreset", value.trim());
+                    }}
+                  />
+                </div>
+                <div className="sm:col-span-6">
                   <TextField
                     label="Description"
                     help={projectFieldHelp.description}
@@ -571,6 +600,32 @@ export default function ProjectPromptBuilder() {
             </CardContent>
           </Card>
         </div>
+
+        <section className="rounded-lg border bg-muted/25 px-3 py-2.5 text-sm leading-6 text-muted-foreground">
+          <div className="flex min-w-0 items-start gap-2">
+            <Palette
+              className="mt-1 size-4 shrink-0 text-foreground"
+              aria-hidden="true"
+            />
+            <p>
+              You picked shadcn preset{" "}
+              <code className="rounded bg-muted px-1 text-foreground">
+                {normalizedConfig.shadcnPreset || "unknown"}
+              </code>
+              .{" "}
+              <a
+                href={shadcnPresetPreviewUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-foreground underline underline-offset-4 transition hover:text-primary"
+              >
+                Open it to preview or edit the theme
+                <ExternalLink className="size-3.5" aria-hidden="true" />
+              </a>
+              , then update the form with the new token.
+            </p>
+          </div>
+        </section>
 
         <Card size="sm">
           <Tabs defaultValue="prompt">

@@ -3,6 +3,7 @@ import { z } from "zod";
 const namePattern = /^[A-Za-z0-9 .,'&()/_:+#-]+$/;
 const slugPattern = /^[a-z]+(?:-[a-z]+)*$/;
 const npmOrgPattern = /^@[a-z0-9][a-z0-9-]*$/;
+const shadcnPresetPattern = /^[A-Za-z0-9_-]+$/;
 const emojiPattern = /^(?=.*(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}))(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}|\uFE0F|\u200D)+$/u;
 
 export const toSlug = (value: string) => {
@@ -56,6 +57,15 @@ export const projectPromptSchema = z
           .max(214, "Package prefix is too long.")
           .regex(npmOrgPattern, "Use a valid lowercase npm org, like @fssstack."),
       ),
+    shadcnPreset: z
+      .string()
+      .trim()
+      .min(1, "shadcn preset is required.")
+      .regex(
+        shadcnPresetPattern,
+        "Use letters, numbers, underscores, and hyphens only.",
+      )
+      .default("b1VlIttI"),
     backendServices: z
       .array(
         z
@@ -122,6 +132,7 @@ export const defaultProjectPromptConfig: ProjectPromptConfig = {
   emoji: "🚀",
   description: "",
   packagePrefix: "@fssstack",
+  shadcnPreset: "b1VlIttI",
   backendServices: ["backend"],
   frontendClients: [{ slug: "frontend", type: "react-vite" }],
 };
@@ -135,6 +146,7 @@ export const normalizeProjectPromptConfig = (
   emoji: config.emoji.trim(),
   description: config.description.trim(),
   packagePrefix: config.packagePrefix.trim().toLowerCase(),
+  shadcnPreset: config.shadcnPreset.trim(),
   backendServices: config.backendServices
     .map(toSlug)
     .filter((service) => service !== ""),
