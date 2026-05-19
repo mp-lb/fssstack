@@ -11,6 +11,10 @@ sync:
     store: felixsebastian/fssstack
     path: extensions
     readonly: true
+  - target: docs/examples
+    store: felixsebastian/fssstack
+    path: examples
+    readonly: true
   - target: docs/skills
     store: felixsebastian/fssstack
     path: skills

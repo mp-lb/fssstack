@@ -4,6 +4,7 @@ export default defineConfig([
   {
     entry: [
       "scripts-src/flatpack-docs/apply-vite-layer.ts",
+      "scripts-src/flatpack-docs/apply-next-layer.ts",
       "scripts-src/flatpack-docs/emoji-favicon.ts",
       "scripts-src/flatpack-docs/install-apps-packages.ts",
       "scripts-src/flatpack-docs/install-foundation.ts",

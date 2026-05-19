@@ -55,7 +55,26 @@ dx read scripts/apply-vite-layer.mjs | node --input-type=module - -- "$PWD" <fro
 
 The shadcn CLI creates each app at `apps/<client-name>` when run with `--cwd apps --name <client-name>`. Do not run it with `--cwd apps/<client-name> --name <client-name>`, because that creates an accidental nested `apps/<client-name>/<client-name>` scaffold.
 
-The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffolding. The fssstack overlay should stay narrow: shared tsconfig wiring, frontend package scripts/dependencies, frontend logging/config/tRPC/test setup, `index.html` templating, and the demo `App.tsx` card plus its test.
+The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffolding. The fssstack overlay should stay narrow: shared tsconfig wiring, package scripts, deployment rewrites, `index.html` templating, cleanup of scaffold noise, and a blank app surface.
+
+## Next.js frontends
+
+For each React/Next.js frontend client, generate the frontend with the shadcn CLI, then apply the small fssstack Next.js overlay from doctrine:
+
+```
+mkdir -p apps
+CI=1 npx shadcn@latest init --preset <shadcnPreset> --template next --cwd apps --name <frontend slug> --no-monorepo --base radix --yes
+dx read scripts/apply-next-layer.mjs | node --input-type=module - -- "$PWD" <frontend slug>
+```
+
+The Next.js overlay removes app-local install artifacts, uses shared Next TypeScript and ESLint config, normalizes package versions, makes the dev script use the Zapper-managed app port, and leaves a blank page. Keep the scaffolded page disposable; the important generated assets are the Next config files, Tailwind/shadcn CSS setup, `components.json`, and shadcn utility/component layout.
+
+Frontend implementation and test examples live in:
+
+```
+docs/examples/frontend/web-request.md
+docs/examples/frontend/logging.md
+```
 
 ## Publishable packages
 
@@ -77,7 +96,7 @@ The render script generates the emoji favicon data URI and writes it into each `
 dx read scripts/render-template.mjs | node --input-type=module - -- "$PWD" "<slug>" "<packagePrefix>" "<name>" "<description>" "<emoji>" "<backendServices>" "<frontendClients>" "<cliPackages>" "<libraryPackages>"
 ```
 
-Default app wiring is intentionally minimal and comes from generated env values, not from a pairing process. Every generated frontend reads the same `VITE_API_BASE_URL`, which points to the first backend service in the list. `FRONTEND_URL` points to the first frontend client for single-URL consumers. `FRONTEND_URLS` is one comma-separated list of every frontend URL for backend CORS allowlists. Extra backend services and extra frontend clients are created and runnable, but they are not paired with each other by setup.
+Default app wiring is intentionally minimal and comes from generated env values, not from a pairing process. Vite frontends can read `VITE_API_BASE_URL`, which points to the first backend service in the list. `FRONTEND_URL` points to the first frontend client for single-URL consumers. `FRONTEND_URLS` is one comma-separated list of every frontend URL for backend CORS allowlists. Extra backend services and extra frontend clients are created and runnable, but they are not paired with each other by setup.
 
 ## Dependencies
 
@@ -115,7 +134,6 @@ zap up
 Verify:
 
 - each frontend loads
-- each frontend calls the first backend through tRPC
 - each backend `/health` returns `{ "ok": true }`
 - each CLI/library package builds when present
 - package names, app titles, readme/favicon values, env values, and Zap services use the chosen project values and service names

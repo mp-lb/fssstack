@@ -38,6 +38,7 @@ var portEnvName = (serviceName) => `${serviceName.toUpperCase().replaceAll("-", 
 // scripts-src/flatpack-docs/lib/vite.ts
 import { existsSync, readFileSync, writeFileSync as writeFileSync2 } from "fs";
 import { join } from "path";
+var stripRange = (value) => typeof value === "string" ? value.replace(/^[~^]/, "") : value;
 var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv) => {
   const frontendRoot2 = join(targetRoot2, "apps", frontendClient2);
   const packageJsonPath = join(frontendRoot2, "package.json");
@@ -53,22 +54,19 @@ var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv) => {
     test: "vitest run",
     "test:watch": "vitest"
   };
-  packageJson.dependencies = {
-    ...packageJson.dependencies,
-    "__PACKAGE_PREFIX__-trpc": "workspace:*",
-    "@tanstack/react-query": "5.90.12",
-    "@trpc/client": "11.7.1",
-    "@trpc/react-query": "11.7.1",
-    superjson: "2.2.6",
-    zod: "4.4.1"
-  };
   packageJson.devDependencies = {
     ...packageJson.devDependencies,
-    "@testing-library/jest-dom": "6.9.1",
-    "@testing-library/react": "16.3.2",
-    "@types/node": "24.12.0",
-    vite: "7.3.3"
+    "@types/node": "24.12.0"
   };
+  for (const dependencySet of [
+    packageJson.dependencies,
+    packageJson.devDependencies
+  ]) {
+    if (!dependencySet) continue;
+    for (const [name, version] of Object.entries(dependencySet)) {
+      dependencySet[name] = stripRange(version);
+    }
+  }
   writeFileSync2(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}
 `);
   if (!existsSync(mainPath)) return;
@@ -86,12 +84,7 @@ var viteFiles = [
   ["layers/vite/tsconfig.app.json", "tsconfig.app.json"],
   ["layers/vite/tsconfig.node.json", "tsconfig.node.json"],
   ["layers/vite/vitest.config.ts", "vitest.config.ts"],
-  ["layers/vite/src/App.test.tsx", "src/App.test.tsx"],
-  ["layers/vite/src/App.tsx", "src/App.tsx"],
-  ["layers/vite/src/config.ts", "src/config.ts"],
-  ["layers/vite/src/logger.ts", "src/logger.ts"],
-  ["layers/vite/src/test-setup.ts", "src/test-setup.ts"],
-  ["layers/vite/src/trpc.ts", "src/trpc.ts"]
+  ["layers/vite/src/App.tsx", "src/App.tsx"]
 ];
 var args = getScriptArgs();
 if (args.length < 1 || args.length > 2) {
@@ -107,7 +100,8 @@ for (const targetPath of [
   "package-lock.json",
   "public/vite.svg",
   "src/assets",
-  "src/App.css"
+  "src/App.css",
+  "src/index.css"
 ]) {
   rmSync(join2(frontendRoot, targetPath), { recursive: true, force: true });
 }

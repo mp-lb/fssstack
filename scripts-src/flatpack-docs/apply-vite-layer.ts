@@ -11,12 +11,7 @@ const viteFiles: Array<[string, string]> = [
   ["layers/vite/tsconfig.app.json", "tsconfig.app.json"],
   ["layers/vite/tsconfig.node.json", "tsconfig.node.json"],
   ["layers/vite/vitest.config.ts", "vitest.config.ts"],
-  ["layers/vite/src/App.test.tsx", "src/App.test.tsx"],
   ["layers/vite/src/App.tsx", "src/App.tsx"],
-  ["layers/vite/src/config.ts", "src/config.ts"],
-  ["layers/vite/src/logger.ts", "src/logger.ts"],
-  ["layers/vite/src/test-setup.ts", "src/test-setup.ts"],
-  ["layers/vite/src/trpc.ts", "src/trpc.ts"],
 ];
 
 const args = getScriptArgs();
@@ -39,6 +34,7 @@ for (const targetPath of [
   "public/vite.svg",
   "src/assets",
   "src/App.css",
+  "src/index.css",
 ]) {
   rmSync(join(frontendRoot, targetPath), { recursive: true, force: true });
 }

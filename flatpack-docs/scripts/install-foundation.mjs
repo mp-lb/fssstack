@@ -36,6 +36,7 @@ var foundationFiles = [
   ["layers/foundation/root/turbo.json", "turbo.json"],
   ["layers/foundation/root/zap.yaml", "zap.yaml"],
   ["layers/foundation/etc/tsconfig.base.json", "etc/tsconfig.base.json"],
+  ["layers/foundation/etc/eslint.next.config.js", "etc/eslint.next.config.js"],
   ["layers/foundation/etc/tsconfig.node.json", "etc/tsconfig.node.json"],
   [
     "layers/foundation/etc/tsconfig.react-nextjs.json",

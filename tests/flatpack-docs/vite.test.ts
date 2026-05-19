@@ -30,10 +30,10 @@ const createFrontend = () => {
           preview: "vite preview",
         },
         dependencies: {
-          react: "19.0.0",
+          react: "^19.0.0",
         },
         devDependencies: {
-          vite: "7.3.1",
+          vite: "^7.3.1",
           vitest: "4.0.0",
         },
       },
@@ -81,17 +81,9 @@ describe("patchViteLayer", () => {
     );
     expect(packageJson.scripts.preview).toBe("vite preview");
     expect(packageJson.dependencies.react).toBe("19.0.0");
-    expect(packageJson.dependencies["@tanstack/react-query"]).toBe("5.90.12");
-    expect(packageJson.dependencies["@trpc/client"]).toBe("11.7.1");
-    expect(packageJson.dependencies["@trpc/react-query"]).toBe("11.7.1");
-    expect(packageJson.dependencies["__PACKAGE_PREFIX__-trpc"]).toBe(
-      "workspace:*",
-    );
-    expect(packageJson.devDependencies["@testing-library/react"]).toBe(
-      "16.3.2",
-    );
-    expect(packageJson.devDependencies.vite).toBe("7.3.3");
+    expect(packageJson.devDependencies.vite).toBe("7.3.1");
     expect(packageJson.devDependencies.vitest).toBe("4.0.0");
+    expect(packageJson.devDependencies["@types/node"]).toBe("24.12.0");
   });
 
   it("uses the supplied client port env in the dev script", () => {

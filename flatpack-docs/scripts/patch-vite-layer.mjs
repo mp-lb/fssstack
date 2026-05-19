@@ -13,6 +13,7 @@ var fail = (message) => {
 // scripts-src/flatpack-docs/lib/vite.ts
 import { existsSync, readFileSync, writeFileSync } from "fs";
 import { join } from "path";
+var stripRange = (value) => typeof value === "string" ? value.replace(/^[~^]/, "") : value;
 var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv2) => {
   const frontendRoot = join(targetRoot2, "apps", frontendClient2);
   const packageJsonPath = join(frontendRoot, "package.json");
@@ -28,22 +29,19 @@ var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv2) => {
     test: "vitest run",
     "test:watch": "vitest"
   };
-  packageJson.dependencies = {
-    ...packageJson.dependencies,
-    "__PACKAGE_PREFIX__-trpc": "workspace:*",
-    "@tanstack/react-query": "5.90.12",
-    "@trpc/client": "11.7.1",
-    "@trpc/react-query": "11.7.1",
-    superjson: "2.2.6",
-    zod: "4.4.1"
-  };
   packageJson.devDependencies = {
     ...packageJson.devDependencies,
-    "@testing-library/jest-dom": "6.9.1",
-    "@testing-library/react": "16.3.2",
-    "@types/node": "24.12.0",
-    vite: "7.3.3"
+    "@types/node": "24.12.0"
   };
+  for (const dependencySet of [
+    packageJson.dependencies,
+    packageJson.devDependencies
+  ]) {
+    if (!dependencySet) continue;
+    for (const [name, version] of Object.entries(dependencySet)) {
+      dependencySet[name] = stripRange(version);
+    }
+  }
   writeFileSync(packageJsonPath, `${JSON.stringify(packageJson, null, 2)}
 `);
   if (!existsSync(mainPath)) return;
