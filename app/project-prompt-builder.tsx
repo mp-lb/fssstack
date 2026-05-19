@@ -76,19 +76,23 @@ const projectFieldHelp = {
   description: "Included in generated README content and app metadata.",
 };
 
+const manifestLine = (key: string, value: unknown, trailingComma = true) =>
+  `  "${key}": ${JSON.stringify(value)}${trailingComma ? "," : ""}`;
+
 const buildManifestJson = (config: ProjectPromptConfig) =>
-  JSON.stringify(
-    {
-      projectSlug: config.slug,
-      frontends: config.frontendClients.map((client) => client.slug),
-      backends: config.backendServices,
-      clis: config.cliPackages,
-      libs: config.libraryPackages,
-      extensions: [],
-    },
-    null,
-    2,
-  );
+  [
+    "{",
+    manifestLine("projectSlug", config.slug),
+    manifestLine(
+      "frontends",
+      config.frontendClients.map((client) => client.slug),
+    ),
+    manifestLine("backends", config.backendServices),
+    manifestLine("clis", config.cliPackages),
+    manifestLine("libs", config.libraryPackages),
+    manifestLine("extensions", [], false),
+    "}",
+  ].join("\n");
 
 const buildPrompt = (
   config: ProjectPromptConfig,
