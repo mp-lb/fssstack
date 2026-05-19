@@ -37,3 +37,5 @@ Put non-secret identifiers such as `GCP_PROJECT_ID`, `GCP_REGION`, `CLOUDFLARE_A
 Put sensitive provider credentials such as `GCP_SA_KEY`, `VERCEL_API_TOKEN`, and `CLOUDFLARE_API_TOKEN` in `secrets.json.enc`.
 
 Prefer storing `GCP_SA_KEY` as the downloaded service-account JSON object inside `secrets.json.enc`. The generated workflow also accepts an existing base64-encoded JSON string.
+
+For Terraform-provisioned Redis, put `UPSTASH_EMAIL` in `.env.production` and `UPSTASH_API_KEY` in `secrets.json.enc`. Optionally put `UPSTASH_REDIS_URL` in `secrets.json.enc` to use an existing Upstash Redis database.

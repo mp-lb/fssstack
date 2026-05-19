@@ -13,35 +13,45 @@ The target repo must have:
 
 ## Manifest
 
-`fssstack.json` must list the deployable apps:
+`fssstack.json` must list the deployable services:
 
 ```json
 {
   "projectName": "my-project",
-  "domain": "example.com",
+  "baseDomain": "mp-lb.dev",
   "gcpRegion": "asia-southeast1",
-  "frontends": [
+  "services": [
     {
-      "name": "frontend",
+      "type": "landing-page",
+      "subdomain": null,
+      "path": "apps/landing-page",
+      "package": "@scope/my-project-landing-page",
+      "buildCommand": "pnpm --filter=@scope/my-project-landing-page build",
+      "outputDirectory": "apps/landing-page/dist"
+    },
+    {
+      "type": "frontend",
+      "subdomain": "app",
       "path": "apps/frontend",
       "package": "@scope/my-project-frontend",
-      "domain": "my-project.example.com",
       "buildCommand": "pnpm --filter=@scope/my-project-frontend build",
       "outputDirectory": "apps/frontend/dist"
-    }
-  ],
-  "backends": [
+    },
     {
-      "name": "backend",
+      "type": "backend",
+      "subdomain": "api",
       "path": "apps/backend",
       "package": "@scope/my-project-backend",
-      "domain": "api.my-project.example.com",
       "port": 8080,
       "env": ["APP_ENV", "FRONTEND_URLS"]
     }
   ]
 }
 ```
+
+Services deploy under `<projectName>.<baseDomain>`. A `null` subdomain maps to the project root domain, such as `my-project.mp-lb.dev`. A string subdomain maps under the project domain, such as `app.my-project.mp-lb.dev` or `api.my-project.mp-lb.dev`.
+
+Setup validates service names, subdomains, and resolved domains for uniqueness before writing Terraform files. Legacy `frontends` and `backends` arrays are still accepted, and legacy `maplab.dev` domain values are migrated to `mp-lb.dev` during setup.
 
 ## Install
 
@@ -85,12 +95,15 @@ Store non-secret deployment identifiers in `.env.production`:
 - `GCP_REGION`
 - `CLOUDFLARE_ACCOUNT_ID`
 - `CLOUDFLARE_ZONE_ID`
+- `UPSTASH_EMAIL` when Redis is provisioned by Terraform
 
 Store sensitive deployment tokens in `secrets.json.enc`:
 
 - `GCP_SA_KEY`
 - `VERCEL_API_TOKEN`
 - `CLOUDFLARE_API_TOKEN`
+- `UPSTASH_API_KEY` when Redis is provisioned by Terraform
+- `UPSTASH_REDIS_URL` optionally, to use an existing Upstash Redis database instead of provisioning one
 
 `GCP_SA_KEY` may be the downloaded Google service-account JSON object directly. The workflow also accepts the older base64-encoded JSON string during migration.
 

@@ -79,6 +79,9 @@ const optionalKeys = [
   "CLOUDFLARE_ZONE_ID",
   "GCP_BILLING_ACCOUNT",
   "MONTHLY_BUDGET_USD",
+  "UPSTASH_API_KEY",
+  "UPSTASH_EMAIL",
+  "UPSTASH_REDIS_URL",
 ];
 
 const missing = requiredKeys.filter((key) => !allEnv[key]);

@@ -14,6 +14,8 @@ var repoRoot = [importRoot, cwdRoot].find(
   (candidate) => fs.existsSync(path.join(candidate, "templates", "main.tf"))
 ) ?? importRoot;
 var storeName = process.env.MP_LB_RUN_STORE ?? "mp-lb-run";
+var defaultDomain = "mp-lb.dev";
+var legacyDomain = "maplab.dev";
 var terraformTemplates = [
   "backend.tf",
   "budget.tf",
@@ -21,6 +23,7 @@ var terraformTemplates = [
   "frontend.tf",
   "main.tf",
   "outputs.tf",
+  "redis.tf",
   "registry.tf",
   "variables.tf"
 ];
@@ -52,7 +55,119 @@ var writeFile = (file, content) => {
   console.log(`write ${path.relative(targetRoot, file)}`);
 };
 var sanitizeName = (value) => value.replace(/[^a-zA-Z0-9_-]/g, "-");
+var isDnsLabel = (value) => /^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/.test(value);
+var isDomain = (value) => value.split(".").every((part) => isDnsLabel(part));
 var hclString = (value) => JSON.stringify(String(value));
+var serviceDeploymentType = (type) => type === "backend" ? "backend" : "frontend";
+var serviceName = (service) => service.name ?? service.subdomain ?? service.type;
+var serviceDomain = (projectName2, baseDomain2, service) => {
+  if (service.domain) return normalizeDomain(service.domain);
+  const projectDomain = `${projectName2}.${baseDomain2}`;
+  return service.subdomain === null ? projectDomain : `${service.subdomain}.${projectDomain}`;
+};
+var defaultAppDomain = (projectName2, type, appName, index) => {
+  const safeAppName = sanitizeName(appName).toLowerCase();
+  const safeProjectName = sanitizeName(projectName2).toLowerCase();
+  if (type === "frontend") {
+    return index === 0 ? `${safeProjectName}.${defaultDomain}` : `${safeAppName}-${safeProjectName}.${defaultDomain}`;
+  }
+  return index === 0 ? `api.${safeProjectName}.${defaultDomain}` : `${safeAppName}.${safeProjectName}.${defaultDomain}`;
+};
+var normalizeDomain = (domain) => {
+  if (domain === legacyDomain) return defaultDomain;
+  if (domain.endsWith(`.${legacyDomain}`)) {
+    return `${domain.slice(0, -legacyDomain.length)}${defaultDomain}`;
+  }
+  return domain;
+};
+var validateUnique = (errors, label, values) => {
+  const seen = /* @__PURE__ */ new Map();
+  for (const item of values) {
+    const previousOwner = seen.get(item.value);
+    if (previousOwner) {
+      errors.push(
+        `Duplicate ${label} "${item.value}" for ${previousOwner} and ${item.owner}.`
+      );
+      continue;
+    }
+    seen.set(item.value, item.owner);
+  }
+};
+var normalizeServices = (services, projectName2, baseDomain2) => {
+  const errors = [];
+  const serviceNames = [];
+  const serviceSubdomains = [];
+  const serviceDomains = [];
+  const frontends = [];
+  const backends = [];
+  for (const [index, service] of services.entries()) {
+    const owner = `services[${index}]`;
+    const name = serviceName(service);
+    const domain = serviceDomain(projectName2, baseDomain2, service);
+    const deploymentType = serviceDeploymentType(service.type);
+    serviceNames.push({ value: name, owner });
+    serviceDomains.push({ value: domain, owner });
+    if (service.subdomain !== null) {
+      serviceSubdomains.push({ value: service.subdomain, owner });
+    }
+    if (!isDnsLabel(name)) {
+      errors.push(`${owner}.name must be a DNS-safe label; received "${name}".`);
+    }
+    if (!["frontend", "backend", "landing-page"].includes(service.type)) {
+      errors.push(
+        `${owner}.type must be "frontend", "backend", or "landing-page"; received "${service.type}".`
+      );
+    }
+    if (!service.path) {
+      errors.push(`${owner}.path is required.`);
+    }
+    if (!service.package) {
+      errors.push(`${owner}.package is required.`);
+    }
+    if (deploymentType === "frontend" && !service.buildCommand) {
+      errors.push(`${owner}.buildCommand is required for frontend services.`);
+    }
+    if (deploymentType === "frontend" && !service.outputDirectory) {
+      errors.push(`${owner}.outputDirectory is required for frontend services.`);
+    }
+    if (service.subdomain !== null && typeof service.subdomain !== "string") {
+      errors.push(`${owner}.subdomain must be null or a DNS-safe label.`);
+    } else if (service.subdomain !== null && !isDnsLabel(service.subdomain)) {
+      errors.push(
+        `${owner}.subdomain must be null or a DNS-safe label; received "${service.subdomain}".`
+      );
+    }
+    if (!isDomain(domain)) {
+      errors.push(`${owner} resolves to invalid domain "${domain}".`);
+    }
+    const app = {
+      ...service,
+      name,
+      domain
+    };
+    delete app.type;
+    delete app.subdomain;
+    if (deploymentType === "backend") {
+      backends.push(app);
+    } else {
+      frontends.push(app);
+    }
+  }
+  validateUnique(errors, "service name", serviceNames);
+  validateUnique(errors, "service subdomain", serviceSubdomains);
+  validateUnique(errors, "service domain", serviceDomains);
+  if (errors.length > 0) {
+    throw new Error(`Invalid fssstack.json services:
+- ${errors.join("\n- ")}`);
+  }
+  return { frontends, backends };
+};
+var normalizeApps = (apps, projectName2, type) => apps.map((app, index) => ({
+  ...app,
+  domain: normalizeDomain(
+    app.domain ?? defaultAppDomain(projectName2, type, app.name, index)
+  )
+}));
 var renderTfvars = (manifest2) => {
   const lines = [
     `project_name = ${hclString(manifest2.projectName)}`,
@@ -118,19 +233,41 @@ if (!fs.existsSync(manifestPath)) {
   throw new Error(`Missing ${path.relative(targetRoot, manifestPath)}`);
 }
 var rawManifest = JSON.parse(read(manifestPath));
-if (!rawManifest.frontends && !rawManifest.backends) {
-  throw new Error("fssstack.json must include frontends or backends.");
+if (!rawManifest.services && !rawManifest.frontends && !rawManifest.backends) {
+  throw new Error("fssstack.json must include services, frontends, or backends.");
 }
+var projectName = sanitizeName(rawManifest.projectName ?? path.basename(targetRoot));
+var baseDomain = normalizeDomain(
+  rawManifest.baseDomain ?? rawManifest.domain ?? defaultDomain
+);
 var manifest = {
-  projectName: sanitizeName(
-    rawManifest.projectName ?? path.basename(targetRoot)
-  ),
-  domain: rawManifest.domain ?? "example.com",
+  projectName,
+  domain: baseDomain,
   gcpRegion: rawManifest.gcpRegion ?? "asia-southeast1",
   manageCloudflareDns: rawManifest.manageCloudflareDns !== false,
-  frontends: rawManifest.frontends ?? [],
-  backends: rawManifest.backends ?? []
+  frontends: [],
+  backends: []
 };
+if (rawManifest.services) {
+  const services = normalizeServices(
+    rawManifest.services,
+    manifest.projectName,
+    manifest.domain
+  );
+  manifest.frontends = services.frontends;
+  manifest.backends = services.backends;
+} else {
+  manifest.frontends = normalizeApps(
+    rawManifest.frontends ?? [],
+    manifest.projectName,
+    "frontend"
+  );
+  manifest.backends = normalizeApps(
+    rawManifest.backends ?? [],
+    manifest.projectName,
+    "backend"
+  );
+}
 for (const file of terraformTemplates) {
   writeFile(
     path.join(targetRoot, "terraform", file),

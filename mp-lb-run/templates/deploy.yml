@@ -64,7 +64,10 @@ jobs:
             -var="gcp_project_id=$GCP_PROJECT_ID" \
             -var="vercel_api_token=$VERCEL_API_TOKEN" \
             -var="cloudflare_api_token=$CLOUDFLARE_API_TOKEN" \
-            -var="cloudflare_zone_id=$CLOUDFLARE_ZONE_ID"
+            -var="cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
+            -var="upstash_email=$UPSTASH_EMAIL" \
+            -var="upstash_api_key=$UPSTASH_API_KEY" \
+            -var="redis_url_override=$UPSTASH_REDIS_URL"
 
 {{BACKEND_IMAGE_STEPS}}
 
@@ -78,7 +81,10 @@ jobs:
             -var="gcp_project_id=$GCP_PROJECT_ID" \
             -var="vercel_api_token=$VERCEL_API_TOKEN" \
             -var="cloudflare_api_token=$CLOUDFLARE_API_TOKEN" \
-            -var="cloudflare_zone_id=$CLOUDFLARE_ZONE_ID"
+            -var="cloudflare_zone_id=$CLOUDFLARE_ZONE_ID" \
+            -var="upstash_email=$UPSTASH_EMAIL" \
+            -var="upstash_api_key=$UPSTASH_API_KEY" \
+            -var="redis_url_override=$UPSTASH_REDIS_URL"
 
 {{FRONTEND_DEPLOY_STEPS}}
 

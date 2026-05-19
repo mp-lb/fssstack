@@ -44,6 +44,32 @@ variable "manage_cloudflare_dns" {
   default     = true
 }
 
+variable "upstash_email" {
+  description = "Upstash account email."
+  type        = string
+  default     = ""
+}
+
+variable "upstash_api_key" {
+  description = "Upstash API key."
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "redis_url_override" {
+  description = "Optional existing Upstash Redis URL. When empty and Redis is required, Terraform provisions Redis."
+  type        = string
+  sensitive   = true
+  default     = ""
+}
+
+variable "redis_backend_name" {
+  description = "Backend service that receives the managed Redis URL. Empty disables managed Redis."
+  type        = string
+  default     = ""
+}
+
 variable "frontends" {
   description = "Frontend apps to deploy on Vercel."
   type = map(object({

@@ -55,13 +55,27 @@ for (const backend of inventory.backends ?? []) {
 }
 
 const backendEnv: Record<string, Record<string, string>> = {};
+const missingBackendEnv: string[] = [];
 for (const backend of inventory.backends ?? []) {
   backendEnv[backend.name] = {};
   for (const key of backend.env ?? []) {
-    if (allEnv[key] !== undefined) {
-      backendEnv[backend.name][key] = allEnv[key];
+    if (key === "REDIS_URL") {
+      throw new Error(
+        `Do not list REDIS_URL in ${backend.name}.env. Set redis_backend_name in terraform/terraform.tfvars and let Terraform inject REDIS_URL.`,
+      );
     }
+    if (allEnv[key] === undefined || allEnv[key] === "") {
+      missingBackendEnv.push(`${backend.name}.${key}`);
+      continue;
+    }
+    backendEnv[backend.name][key] = allEnv[key];
   }
+}
+
+if (missingBackendEnv.length > 0) {
+  throw new Error(
+    `Missing deployment environment values: ${missingBackendEnv.join(", ")}`,
+  );
 }
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });

@@ -23,4 +23,4 @@ Give the worker:
 
 ## For the user
 
-Ask the user to make sure `REDIS_URL` is in `secrets.json.enc`.
+Ask the user to make sure the Redis deployment setup is complete and `redis_backend_name` points to the backend or worker that owns BullMQ. Do not put `REDIS_URL` in `secrets.json.enc`; Terraform injects it into Cloud Run.

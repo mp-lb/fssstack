@@ -69,7 +69,10 @@ var optionalKeys = [
   "CLOUDFLARE_API_TOKEN",
   "CLOUDFLARE_ZONE_ID",
   "GCP_BILLING_ACCOUNT",
-  "MONTHLY_BUDGET_USD"
+  "MONTHLY_BUDGET_USD",
+  "UPSTASH_API_KEY",
+  "UPSTASH_EMAIL",
+  "UPSTASH_REDIS_URL"
 ];
 var missing = requiredKeys.filter((key) => !allEnv[key]);
 if (missing.length > 0) {

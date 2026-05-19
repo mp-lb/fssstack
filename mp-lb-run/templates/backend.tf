@@ -6,7 +6,11 @@ locals {
 
   backend_env = {
     for name, app in var.backends :
-    name => merge(app.env, lookup(var.backend_env, name, {}))
+    name => merge(
+      app.env,
+      lookup(var.backend_env, name, {}),
+      local.redis_enabled && name == var.redis_backend_name ? { REDIS_URL = local.redis_url } : {}
+    )
   }
 }
 
@@ -28,7 +32,7 @@ resource "google_cloud_run_v2_service" "backend" {
         for_each = local.backend_env[each.key]
         content {
           name  = env.key
-          value = env.value
+          value = sensitive(env.value)
         }
       }
 
