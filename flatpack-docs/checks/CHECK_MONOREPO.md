@@ -40,11 +40,11 @@ Compare root files against current expectations:
 
 ## Validate
 
-Run the repo's normal checks:
+Run focused lint and typecheck first, then broader checks when the change touches shared repo behavior:
 
 ```bash
-pnpm lint
-pnpm turbo run typecheck
+zap t lint -- <changed-file...>
+zap t typecheck -- <app-or-package-dir...>
 pnpm test
 pnpm turbo run build
 ```

@@ -113,14 +113,19 @@ pnpm exec eslint . --fix
 
 Follow `dx read --store felixsebastian/mp-lb-dev update-agents-md.md` expecting there to not be an existing file so just update the project info.
 
-When updating the project info, include this generated testing convention: put tRPC procedure integration tests in `apps/<backend>/src/*.procedure.test.ts` and use `apps/<backend>/src/test/createTestTrpc.ts` to call the real app router with an injected app context.
+When updating the project info, include these generated project conventions:
+
+- Put tRPC procedure integration tests in `apps/<backend>/src/*.procedure.test.ts` and use `apps/<backend>/src/test/createTestTrpc.ts` to call the real app router with an injected app context.
+- For every change, run `zap t lint -- <file...>` to lint all touched files.
+- For every change, run `zap t typecheck -- <app-or-package-dir...>` to typecheck every touched app or package.
+- Run lint and typecheck as separate tasks. Do not tell agents to use a combined `check` task for targeted validation.
 
 ## Validate
 
 ```
 pnpm install
-pnpm lint
-pnpm turbo run typecheck
+zap t lint -- apps/backend/src/index.ts apps/frontend/src/App.tsx packages/core/src/index.ts packages/server/src/index.ts packages/trpc/src/index.ts
+zap t typecheck -- apps/backend apps/frontend packages/core packages/server packages/trpc
 pnpm test
 pnpm turbo run build --filter=<package-prefix>-backend
 pnpm turbo run build --filter=<package-prefix>-baz

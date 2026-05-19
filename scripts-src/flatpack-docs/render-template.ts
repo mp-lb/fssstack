@@ -8,6 +8,7 @@ import {
   portEnvName,
 } from "./lib/services";
 import { emojiFaviconDataUri } from "./lib/template";
+import { jsonToYaml } from "./lib/yaml";
 
 const args = getScriptArgs();
 
@@ -107,46 +108,52 @@ writeFileSync(
   ].join("\n"),
 );
 
-const ports = [...backendServices, ...frontendClients]
-  .map(portEnvName)
-  .join(", ");
-const nativeServices = [...backendServices, ...frontendClients]
-  .flatMap((serviceName) => [
-    `  ${serviceName}:`,
-    `    cmd: pnpm --filter=${packagePrefix}-${serviceName} dev`,
-    '    env: "*"',
-  ])
-  .join("\n");
+const ports = [...backendServices, ...frontendClients].map(portEnvName);
+const nativeServices = Object.fromEntries(
+  [...backendServices, ...frontendClients].map((serviceName) => [
+    serviceName,
+    {
+      cmd: `pnpm --filter=${packagePrefix}-${serviceName} dev`,
+      env: "*",
+    },
+  ]),
+);
 
 writeFileSync(
   join(targetRoot, "zap.yaml"),
-  [
-    `project: ${projectSlug}`,
-    "env_files:",
-    "  - .env.local",
-    "  - .env",
-    `homepage: http://localhost:\${${firstFrontendPortEnv}}`,
-    `ports: [${ports}]`,
-    "native:",
-    nativeServices,
-    "tasks:",
-    "  lint:",
-    "    cmds:",
-    "      - pnpm lint",
-    "  check:",
-    "    cmds:",
-    "      - pnpm lint",
-    "      - pnpm turbo run typecheck",
-    "  build:",
-    "    cmds:",
-    "      - pnpm turbo run build",
-    "  test:",
-    "    aliases: [vitest]",
-    "    cmds:",
-    "      - pnpm test",
-    "  worktree_setup:",
-    "    cmds:",
-    "      - pnpm install",
-    "",
-  ].join("\n"),
+  jsonToYaml({
+    project: projectSlug,
+    env_files: [".env.local", ".env"],
+    homepage: `http://localhost:\${${firstFrontendPortEnv}}`,
+    ports,
+    native: nativeServices,
+    tasks: {
+      lint: {
+        cmds: [
+          'test -n "{{REST}}" || (echo "usage: zap t lint -- <file...>" >&2; exit 1)',
+          "pnpm exec eslint {{REST}}",
+        ],
+      },
+      typecheck: {
+        cmds: [
+          'test -n "{{REST}}" || (echo "usage: zap t typecheck -- <app-or-package-dir...>" >&2; exit 1)',
+          [
+            "for app_or_package in {{REST}}; do",
+            '  pnpm --dir "$app_or_package" run typecheck',
+            "done",
+          ].join("\n"),
+        ],
+      },
+      build: {
+        cmds: ["pnpm turbo run build"],
+      },
+      test: {
+        aliases: ["vitest"],
+        cmds: ["pnpm test"],
+      },
+      worktree_setup: {
+        cmds: ["pnpm install"],
+      },
+    },
+  }),
 );

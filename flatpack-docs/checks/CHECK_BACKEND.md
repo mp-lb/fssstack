@@ -32,13 +32,13 @@ Compare each backend app under `apps/<backend>` against the current generated ba
 
 ## Validate
 
-Run focused checks first, then workspace checks:
+Run focused checks first:
 
 ```bash
-pnpm --filter=<backend-package> typecheck
+zap t lint -- <changed-file...>
+zap t typecheck -- <backend-app-dir>
 pnpm --filter=<backend-package> test
 pnpm --filter=<backend-package> build
-pnpm lint
 ```
 
 If several backends exist, repeat the focused checks for each backend.

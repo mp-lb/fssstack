@@ -14,7 +14,8 @@ tasks:
       - pnpm install
   lint:
     cmds:
-      - pnpm lint
+      - 'test -n "{{REST}}" || (echo "usage: zap t lint -- <file...>" >&2; exit 1)'
+      - pnpm exec eslint {{REST}}
   build:
     cmds:
       - pnpm build

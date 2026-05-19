@@ -99,6 +99,55 @@ var emojiFaviconDataUri = (emoji) => {
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
 };
 
+// scripts-src/flatpack-docs/lib/yaml.ts
+var scalarToYaml = (value) => {
+  if (value === null) return "null";
+  if (typeof value === "boolean" || typeof value === "number") {
+    return String(value);
+  }
+  return `'${value.replaceAll("'", "''")}'`;
+};
+var valueToYaml = (value, indent) => {
+  const pad = " ".repeat(indent);
+  if (value === null || typeof value === "boolean" || typeof value === "number" || typeof value === "string") {
+    if (typeof value === "string" && value.includes("\n")) {
+      return [
+        "|",
+        ...value.split("\n").map((line) => `${" ".repeat(indent)}${line}`)
+      ];
+    }
+    return [scalarToYaml(value)];
+  }
+  if (Array.isArray(value)) {
+    if (value.length === 0) return ["[]"];
+    return value.flatMap((item) => {
+      const rendered = valueToYaml(item, indent + 2);
+      const [firstLine = "", ...rest] = rendered;
+      if (item !== null && typeof item === "object" && !Array.isArray(item)) {
+        return [`${pad}- ${firstLine}`, ...rest];
+      }
+      return [`${pad}- ${firstLine}`, ...rest];
+    });
+  }
+  return objectToYaml(value, indent);
+};
+var objectToYaml = (value, indent) => {
+  const lines = [];
+  const pad = " ".repeat(indent);
+  for (const [key, item] of Object.entries(value)) {
+    const rendered = valueToYaml(item, indent + 2);
+    if (rendered.length === 1 && (item === null || typeof item === "boolean" || typeof item === "number" || typeof item === "string")) {
+      lines.push(`${pad}${key}: ${rendered[0]}`);
+      continue;
+    }
+    lines.push(`${pad}${key}:`);
+    lines.push(...rendered);
+  }
+  return lines;
+};
+var jsonToYaml = (value) => `${objectToYaml(value, 0).join("\n")}
+`;
+
 // scripts-src/flatpack-docs/render-template.ts
 var args = getScriptArgs();
 if (args.length < 6 || args.length > 10) {
@@ -169,41 +218,51 @@ writeFileSync2(
     ""
   ].join("\n")
 );
-var ports = [...backendServices, ...frontendClients].map(portEnvName).join(", ");
-var nativeServices = [...backendServices, ...frontendClients].flatMap((serviceName) => [
-  `  ${serviceName}:`,
-  `    cmd: pnpm --filter=${packagePrefix}-${serviceName} dev`,
-  '    env: "*"'
-]).join("\n");
+var ports = [...backendServices, ...frontendClients].map(portEnvName);
+var nativeServices = Object.fromEntries(
+  [...backendServices, ...frontendClients].map((serviceName) => [
+    serviceName,
+    {
+      cmd: `pnpm --filter=${packagePrefix}-${serviceName} dev`,
+      env: "*"
+    }
+  ])
+);
 writeFileSync2(
   join2(targetRoot, "zap.yaml"),
-  [
-    `project: ${projectSlug}`,
-    "env_files:",
-    "  - .env.local",
-    "  - .env",
-    `homepage: http://localhost:\${${firstFrontendPortEnv}}`,
-    `ports: [${ports}]`,
-    "native:",
-    nativeServices,
-    "tasks:",
-    "  lint:",
-    "    cmds:",
-    "      - pnpm lint",
-    "  check:",
-    "    cmds:",
-    "      - pnpm lint",
-    "      - pnpm turbo run typecheck",
-    "  build:",
-    "    cmds:",
-    "      - pnpm turbo run build",
-    "  test:",
-    "    aliases: [vitest]",
-    "    cmds:",
-    "      - pnpm test",
-    "  worktree_setup:",
-    "    cmds:",
-    "      - pnpm install",
-    ""
-  ].join("\n")
+  jsonToYaml({
+    project: projectSlug,
+    env_files: [".env.local", ".env"],
+    homepage: `http://localhost:\${${firstFrontendPortEnv}}`,
+    ports,
+    native: nativeServices,
+    tasks: {
+      lint: {
+        cmds: [
+          'test -n "{{REST}}" || (echo "usage: zap t lint -- <file...>" >&2; exit 1)',
+          "pnpm exec eslint {{REST}}"
+        ]
+      },
+      typecheck: {
+        cmds: [
+          'test -n "{{REST}}" || (echo "usage: zap t typecheck -- <app-or-package-dir...>" >&2; exit 1)',
+          [
+            "for app_or_package in {{REST}}; do",
+            '  pnpm --dir "$app_or_package" run typecheck',
+            "done"
+          ].join("\n")
+        ]
+      },
+      build: {
+        cmds: ["pnpm turbo run build"]
+      },
+      test: {
+        aliases: ["vitest"],
+        cmds: ["pnpm test"]
+      },
+      worktree_setup: {
+        cmds: ["pnpm install"]
+      }
+    }
+  })
 );

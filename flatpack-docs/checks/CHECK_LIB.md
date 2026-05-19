@@ -36,7 +36,8 @@ Compare each library package under `packages/<lib>` against the current generate
 Run focused checks first:
 
 ```bash
-pnpm --filter=<lib-package> typecheck
+zap t lint -- <changed-file...>
+zap t typecheck -- <lib-package-dir>
 pnpm --filter=<lib-package> test
 pnpm --filter=<lib-package> build
 pnpm --filter=<lib-package> pack --pack-destination /tmp

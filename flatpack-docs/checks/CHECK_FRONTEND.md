@@ -33,13 +33,13 @@ Read the local frontend examples in `docs/examples/frontend/` before changing re
 
 ## Validate
 
-Run focused checks first, then workspace checks:
+Run focused checks first:
 
 ```bash
-pnpm --filter=<frontend-package> typecheck
+zap t lint -- <changed-file...>
+zap t typecheck -- <frontend-app-dir>
 pnpm --filter=<frontend-package> test
 pnpm --filter=<frontend-package> build
-pnpm lint
 ```
 
 Check changed request and logging code against `docs/examples/frontend/web-request.md` and `docs/examples/frontend/logging.md`. Update stale local patterns.

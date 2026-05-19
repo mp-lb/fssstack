@@ -36,7 +36,8 @@ Compare each CLI package under `packages/<cli>` against the current generated CL
 Run focused checks first:
 
 ```bash
-pnpm --filter=<cli-package> typecheck
+zap t lint -- <changed-file...>
+zap t typecheck -- <cli-package-dir>
 pnpm --filter=<cli-package> test
 pnpm --filter=<cli-package> build
 pnpm --filter=<cli-package> pack --pack-destination /tmp
