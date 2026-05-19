@@ -82,6 +82,7 @@ var patchViteLayer = (targetRoot2, frontendClient2, clientPortEnv) => {
 // scripts-src/flatpack-docs/apply-vite-layer.ts
 var viteFiles = [
   ["layers/vite/index.html", "index.html"],
+  ["layers/vite/vercel.json", "public/vercel.json"],
   ["layers/vite/tsconfig.app.json", "tsconfig.app.json"],
   ["layers/vite/tsconfig.node.json", "tsconfig.node.json"],
   ["layers/vite/vitest.config.ts", "vitest.config.ts"],

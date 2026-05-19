@@ -2,12 +2,12 @@
   "files": {
     "flatpack-docs/SETUP_PROCESS.md": {
       "contentType": "text",
-      "hash": "sha256:09a69fb5a85ba93143cc93620daf1dc3715f4c98030d4ef50d25c489abb97d6e",
-      "lastSyncedAt": "2026-05-18T23:28:36.278Z",
+      "hash": "sha256:cfcb68e9b6af7a62233a75fd94675616039c4540d394d42f508385fa39e79545",
+      "lastSyncedAt": "2026-05-19T13:08:03.561Z",
       "remoteFileId": "67fd9b53-2899-462f-ab12-24b1ab4791a8",
       "remotePath": "/SETUP_PROCESS.md",
-      "remoteUpdatedAt": "2026-05-18T23:28:37.443Z",
-      "remoteRevisionNumber": 86
+      "remoteUpdatedAt": "2026-05-19T10:31:58.889Z",
+      "remoteRevisionNumber": 87
     },
     "flatpack-docs/doctrine.example.yaml": {
       "contentType": "text",
@@ -281,12 +281,12 @@
     },
     "flatpack-docs/layers/foundation/root/package.json": {
       "contentType": "text",
-      "hash": "sha256:dcd00ec50bc830fb3f86c7a372bd241bf6731d75ca1304c00c49b7f89e9b6a1e",
-      "lastSyncedAt": "2026-05-18T18:00:16.612Z",
+      "hash": "sha256:464e6f37c032b56a13c13b08867af386c004a402eea519648b40eb357ad5127e",
+      "lastSyncedAt": "2026-05-19T13:08:03.561Z",
       "remoteFileId": "895de946-5a45-49a9-a3bb-87272c14eb53",
       "remotePath": "/layers/foundation/root/package.json",
-      "remoteUpdatedAt": "2026-05-18T18:00:17.147Z",
-      "remoteRevisionNumber": 3
+      "remoteUpdatedAt": "2026-05-19T10:31:58.176Z",
+      "remoteRevisionNumber": 4
     },
     "flatpack-docs/layers/foundation/root/pnpm-workspace.yaml": {
       "contentType": "text",
@@ -659,12 +659,12 @@
     },
     "flatpack-docs/scripts/install-root-dependencies.mjs": {
       "contentType": "text",
-      "hash": "sha256:2d19e85175a829159edd62605d4149fc7f57ccbdf7215384857c9149c4451f50",
-      "lastSyncedAt": "2026-05-18T23:28:36.278Z",
+      "hash": "sha256:f5335151896dd3766af98e19284ea74b6ed8b4a0069213e46bbe6e72fc5a238a",
+      "lastSyncedAt": "2026-05-19T13:08:03.561Z",
       "remoteFileId": "b75bc605-324a-4e7c-9d46-e36d006ff323",
       "remotePath": "/scripts/install-root-dependencies.mjs",
-      "remoteUpdatedAt": "2026-05-18T23:28:37.404Z",
-      "remoteRevisionNumber": 1
+      "remoteUpdatedAt": "2026-05-19T10:31:58.883Z",
+      "remoteRevisionNumber": 2
     },
     "flatpack-docs/scripts/normalize-package-versions.mjs": {
       "contentType": "text",
@@ -686,12 +686,12 @@
     },
     "flatpack-docs/scripts/render-template.mjs": {
       "contentType": "text",
-      "hash": "sha256:27a90661831647a645dd8322cda228017e3c97d31d38755cec46dfbde0074ddd",
-      "lastSyncedAt": "2026-05-18T18:09:16.438Z",
+      "hash": "sha256:9c336f39684e1a02385ac83d5c243cd15479f8c0b04599d54326e7bad6faea6a",
+      "lastSyncedAt": "2026-05-19T13:08:03.561Z",
       "remoteFileId": "b6386fca-d113-4fb2-874a-243c275b6016",
       "remotePath": "/scripts/render-template.mjs",
-      "remoteUpdatedAt": "2026-05-18T18:09:17.430Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-05-19T10:31:58.886Z",
+      "remoteRevisionNumber": 3
     },
     "mp-lb-run/README.md": {
       "contentType": "text",
@@ -713,30 +713,30 @@
     },
     "mp-lb-run/docs/custom-domains.md": {
       "contentType": "text",
-      "hash": "sha256:9ae9ded271d08d77175f91cc0e9ddbb18a775903f21e793b4bc57959f4f9bc94",
-      "lastSyncedAt": "2026-05-18T16:33:30.694Z",
+      "hash": "sha256:689e93d0977bdb3d7bf8524095f9bacffdab0d22d89d475453267bf50415db19",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "b2165b37-0724-40ba-b19e-ede377f02a55",
       "remotePath": "/docs/custom-domains.md",
-      "remoteUpdatedAt": "2026-05-18T15:49:39.738Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-05-19T09:41:10.629Z",
+      "remoteRevisionNumber": 3
     },
     "mp-lb-run/docs/deployment-runbook.md": {
       "contentType": "text",
-      "hash": "sha256:e673956800a42c1f504640a4c406355c4b0a8c90ed4090b3d6f0a550aa27d308",
-      "lastSyncedAt": "2026-05-19T00:50:44.395Z",
+      "hash": "sha256:30ca3575990b97e9909e5e87b590548985e70f23c2b702e2dad189c4225a98f6",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "c82a534b-4cb1-4c9b-9be7-e042fa574ebd",
       "remotePath": "/docs/deployment-runbook.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.703Z",
-      "remoteRevisionNumber": 3
+      "remoteUpdatedAt": "2026-05-19T09:41:10.635Z",
+      "remoteRevisionNumber": 4
     },
     "mp-lb-run/docs/deployment-setup.md": {
       "contentType": "text",
-      "hash": "sha256:c4a2bd96866718ad0542476fc9c7ba7bb710bff2000292f198d9f6828156aaf3",
-      "lastSyncedAt": "2026-05-19T00:50:44.395Z",
+      "hash": "sha256:492246cb97282903aef25ce564fc2ef48f9f54b9582863d6729727781575bf83",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "895a855c-ba08-4f03-9aab-00349a9f6083",
       "remotePath": "/docs/deployment-setup.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.709Z",
-      "remoteRevisionNumber": 6
+      "remoteUpdatedAt": "2026-05-19T09:41:10.639Z",
+      "remoteRevisionNumber": 7
     },
     "mp-lb-run/docs/terraform.md": {
       "contentType": "text",
@@ -749,12 +749,12 @@
     },
     "mp-lb-run/extensions/bull-deploy.md": {
       "contentType": "text",
-      "hash": "sha256:4b0e75731216a644578db9b3920a976b29a4ce6901523723b371342c474c155b",
-      "lastSyncedAt": "2026-05-19T00:50:44.395Z",
+      "hash": "sha256:353f7fb63bddc7acfe855d9a3b81e862abd98645b139cb03f232c6b7ab9204b5",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "dc18976f-a654-46b5-b851-49bcc23c0e4d",
       "remotePath": "/extensions/bull-deploy.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.716Z",
-      "remoteRevisionNumber": 25
+      "remoteUpdatedAt": "2026-05-19T09:41:10.632Z",
+      "remoteRevisionNumber": 26
     },
     "mp-lb-run/extensions/clerk-deploy.md": {
       "contentType": "text",
@@ -776,12 +776,12 @@
     },
     "mp-lb-run/extensions/redis-deploy.md": {
       "contentType": "text",
-      "hash": "sha256:1890432aac05de85dfc8796ab250cd4d18ae03bb9bb0297ef6d6079b764a964c",
-      "lastSyncedAt": "2026-05-19T00:50:44.395Z",
+      "hash": "sha256:ad4beff93a04de5f419eef81b49db94532b40feb3960998524bd00488032d877",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "ead296b7-a060-4b4e-81f7-bac43cc23c70",
       "remotePath": "/extensions/redis-deploy.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.711Z",
-      "remoteRevisionNumber": 33
+      "remoteUpdatedAt": "2026-05-19T09:41:11.163Z",
+      "remoteRevisionNumber": 34
     },
     "mp-lb-run/extensions/s3-deploy.md": {
       "contentType": "text",
@@ -794,12 +794,12 @@
     },
     "mp-lb-run/scripts/install-deployment.mjs": {
       "contentType": "text",
-      "hash": "sha256:7e46c6c75e7b5d706cbba43d8212d2a821b44bbaf374b498e6d2441173ddafd7",
-      "lastSyncedAt": "2026-05-19T00:50:44.395Z",
+      "hash": "sha256:4a98b73e4f71f6e5ed897c1bcfb73be2b90cd4c1d10d297d02f8d7ced0f34d53",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "691fdf93-3f01-4a46-8d14-0da49750a042",
       "remotePath": "/scripts/install-deployment.mjs",
-      "remoteUpdatedAt": "2026-05-19T00:50:45.369Z",
-      "remoteRevisionNumber": 8
+      "remoteUpdatedAt": "2026-05-19T09:41:11.724Z",
+      "remoteRevisionNumber": 9
     },
     "mp-lb-run/templates/Dockerfile": {
       "contentType": "text",
@@ -812,12 +812,12 @@
     },
     "mp-lb-run/templates/backend.tf": {
       "contentType": "text",
-      "hash": "sha256:9a4544c48812ac2e82f060d4c16fb45c6de6ad77d35cffc8ebb897e25346758e",
-      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "hash": "sha256:f366ff0d47984650ae6763a46255b8ce13fcb90f57e625158d0f90b6c337a4dd",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "9a59494e-484c-4031-b488-5dd0d44cd281",
-      "remotePath": "/mp-lb-run/templates/backend.tf",
-      "remoteUpdatedAt": "2026-05-18T15:19:07.311Z",
-      "remoteRevisionNumber": 1
+      "remotePath": "/templates/backend.tf",
+      "remoteUpdatedAt": "2026-05-19T09:41:11.640Z",
+      "remoteRevisionNumber": 2
     },
     "mp-lb-run/templates/budget.tf": {
       "contentType": "text",
@@ -830,39 +830,39 @@
     },
     "mp-lb-run/templates/build-runtime-tfvars.mjs": {
       "contentType": "text",
-      "hash": "sha256:033c3293345f3bdbc753013fe2654b53036eb7319695affbd5d4ca43c9d95337",
-      "lastSyncedAt": "2026-05-18T23:48:25.331Z",
+      "hash": "sha256:fbbc8cc79212fbd1250e8a0d2696c291c929e73577f634e5897c29fb114ce924",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "be286da6-3252-4594-b526-7a7612927a4d",
       "remotePath": "/templates/build-runtime-tfvars.mjs",
-      "remoteUpdatedAt": "2026-05-18T23:48:25.544Z",
-      "remoteRevisionNumber": 4
+      "remoteUpdatedAt": "2026-05-19T09:41:11.647Z",
+      "remoteRevisionNumber": 5
     },
     "mp-lb-run/templates/deploy.yml": {
       "contentType": "text",
-      "hash": "sha256:f017d967955ce0caf2cb45c94eb18b17fcf410a3d4dfeb6a1ed06f246fa1978d",
-      "lastSyncedAt": "2026-05-19T00:50:44.395Z",
+      "hash": "sha256:c5ecd627bbc4c47ab5b0d393d47ca9796bb6ae37e5bb5ae743e91081bdf4cbd5",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "382624ff-5c3d-48c7-a196-5f4136dc5d27",
       "remotePath": "/templates/deploy.yml",
-      "remoteUpdatedAt": "2026-05-19T00:50:45.371Z",
-      "remoteRevisionNumber": 4
+      "remoteUpdatedAt": "2026-05-19T09:41:11.661Z",
+      "remoteRevisionNumber": 5
     },
     "mp-lb-run/templates/dns.tf": {
       "contentType": "text",
-      "hash": "sha256:59bdcc7ffc545a4285d8beefabcf410e2ad166bb4b9b7841079d926895813614",
-      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "hash": "sha256:5c88f33df3a931867b75fb3fc393595d094db7c6dd5d8371e6ad66a32efc0f6a",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "5b7d9675-c525-4e63-adb5-95c61069ad15",
-      "remotePath": "/mp-lb-run/templates/dns.tf",
-      "remoteUpdatedAt": "2026-05-18T15:19:07.331Z",
-      "remoteRevisionNumber": 1
+      "remotePath": "/templates/dns.tf",
+      "remoteUpdatedAt": "2026-05-19T09:41:11.658Z",
+      "remoteRevisionNumber": 2
     },
     "mp-lb-run/templates/env.production": {
       "contentType": "text",
-      "hash": "sha256:65f2d4aae69d14abebaa221a55d5cd7bf8211144132b121df3ba72e361cf8931",
-      "lastSyncedAt": "2026-05-18T23:48:25.331Z",
+      "hash": "sha256:4e71bdfc2e54cd415405bd24981bc88cbad9fe76ad0dab40660b8925f2519fdd",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "b64b90e4-7953-43fb-9d83-e46f2ee33d9e",
       "remotePath": "/templates/env.production",
-      "remoteUpdatedAt": "2026-05-18T23:48:25.543Z",
-      "remoteRevisionNumber": 1
+      "remoteUpdatedAt": "2026-05-19T09:41:12.002Z",
+      "remoteRevisionNumber": 2
     },
     "mp-lb-run/templates/frontend.tf": {
       "contentType": "text",
@@ -875,21 +875,21 @@
     },
     "mp-lb-run/templates/load-deployment-env.mjs": {
       "contentType": "text",
-      "hash": "sha256:5861fbab49e25e2e8adf1449c28a5b8d4784f626a7c2eff35cf0894be7752472",
-      "lastSyncedAt": "2026-05-18T23:48:25.331Z",
+      "hash": "sha256:ab06b6cc0ca68c4f340da216cd39bbf680d599a99b1ba74e9ca6e3f70492e8d6",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "be88e03c-4246-474a-bbe7-7a57705e4a96",
       "remotePath": "/templates/load-deployment-env.mjs",
-      "remoteUpdatedAt": "2026-05-18T23:48:25.542Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-05-19T09:41:11.933Z",
+      "remoteRevisionNumber": 3
     },
     "mp-lb-run/templates/main.tf": {
       "contentType": "text",
-      "hash": "sha256:059969f2e7835392fa95dc513fdaaf3eb0f17021b08fcc58847d753c4e4c91bf",
-      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "hash": "sha256:fdb91615e37ac26bec4e9617e531aa9a65294f83f406a6db76e521c5bd2f6a9a",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "b332efce-a291-4866-ac40-0811b61215c9",
-      "remotePath": "/mp-lb-run/templates/main.tf",
-      "remoteUpdatedAt": "2026-05-18T15:19:07.312Z",
-      "remoteRevisionNumber": 1
+      "remotePath": "/templates/main.tf",
+      "remoteUpdatedAt": "2026-05-19T09:41:12.622Z",
+      "remoteRevisionNumber": 2
     },
     "mp-lb-run/templates/outputs.tf": {
       "contentType": "text",
@@ -911,21 +911,21 @@
     },
     "mp-lb-run/templates/variables.tf": {
       "contentType": "text",
-      "hash": "sha256:581b2aff006de3f1a1d125d919cb36f356d0f5d2a25d29ab72a17182cea60f9c",
-      "lastSyncedAt": "2026-05-18T15:45:51.889Z",
+      "hash": "sha256:962ecf94ddb71e5a663857f7632307fa4d3254642675049af9e8e5cd8dc5860f",
+      "lastSyncedAt": "2026-05-19T13:08:05.552Z",
       "remoteFileId": "5d6ad896-7111-40b5-9857-b59058f70b72",
-      "remotePath": "/mp-lb-run/templates/variables.tf",
-      "remoteUpdatedAt": "2026-05-18T15:19:17.208Z",
-      "remoteRevisionNumber": 1
+      "remotePath": "/templates/variables.tf",
+      "remoteUpdatedAt": "2026-05-19T09:41:12.541Z",
+      "remoteRevisionNumber": 2
     }
   },
   "references": {
     "flatpack-docs/skills": {
-      "lastSeenAt": "2026-05-19T00:50:35.328Z",
+      "lastSeenAt": "2026-05-19T13:07:33.504Z",
       "type": "store-reference"
     },
     "flatpack-docs/standards": {
-      "lastSeenAt": "2026-05-19T00:50:35.328Z",
+      "lastSeenAt": "2026-05-19T13:07:33.504Z",
       "type": "store-reference"
     }
   },

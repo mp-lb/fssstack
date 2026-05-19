@@ -134,3 +134,20 @@ describe("patchViteLayer", () => {
     ).not.toThrow();
   });
 });
+
+describe("Vite layer files", () => {
+  it("ships Vercel SPA rewrites for direct sub-route requests", () => {
+    const vercelConfig = JSON.parse(
+      readFileSync(
+        join(__dirname, "../../flatpack-docs/layers/vite/vercel.json"),
+        "utf8",
+      ),
+    ) as {
+      rewrites: Array<{ source: string; destination: string }>;
+    };
+
+    expect(vercelConfig.rewrites).toEqual([
+      { source: "/(.*)", destination: "/index.html" },
+    ]);
+  });
+});
