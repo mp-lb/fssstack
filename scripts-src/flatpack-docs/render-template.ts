@@ -11,9 +11,9 @@ import { emojiFaviconDataUri } from "./lib/template";
 
 const args = getScriptArgs();
 
-if (args.length < 6 || args.length > 8) {
+if (args.length < 6 || args.length > 10) {
   fail(
-    "usage: render-template.mjs /path/to/target-project project-slug package-scope project-name project-description project-emoji [backend-services] [frontend-clients]",
+    "usage: render-template.mjs /path/to/target-project project-slug package-scope project-name project-description project-emoji [backend-services] [frontend-clients] [cli-packages] [library-packages]",
   );
 }
 
@@ -26,16 +26,36 @@ const [
   projectEmoji,
   backendServicesArg = "backend",
   frontendClientsArg = "frontend",
-] = args as [string, string, string, string, string, string, string?, string?];
+  cliPackagesArg = "",
+  libraryPackagesArg = "",
+] = args as [
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string?,
+  string?,
+  string?,
+  string?,
+];
 
 const backendServices = parseServiceList(backendServicesArg);
 const frontendClients = parseServiceList(frontendClientsArg);
+const cliPackages = parseServiceList(cliPackagesArg);
+const libraryPackages = parseServiceList(libraryPackagesArg);
 
 if (backendServices.length === 0 || frontendClients.length === 0) {
   fail("at least one backend service and one frontend client are required");
 }
 
-assertUniqueServices([...backendServices, ...frontendClients]);
+assertUniqueServices([
+  ...backendServices,
+  ...frontendClients,
+  ...cliPackages,
+  ...libraryPackages,
+]);
 
 const packagePrefix = `${packageScope}/${projectSlug}`;
 const firstBackendPortEnv = portEnvName(backendServices[0]!);

@@ -1,0 +1,3 @@
+# __PUBLISHABLE_PACKAGE_NAME__
+
+Publishable __PUBLISHABLE_KIND__ package for __PROJECT_NAME__.

@@ -18,10 +18,12 @@ Ask for any missing values:
 - Emoji for favicon/readme
 - Backend services, defaulting to `backend`
 - Frontend clients, defaulting to `frontend (react-vite)`
+- CLI packages, defaulting to none
+- Library packages, defaulting to none
 
 Use the chosen strings directly in commands and file edits. Do not rely on exported environment variables carrying across shell sessions.
 
-Service names must be unique and should use lowercase letters, numbers, and hyphens. The examples below use two backend services, `backend` and `baz`, and two React/Vite frontend clients, `frontend` and `foobar`.
+App and package names must be unique and should use lowercase letters, numbers, and hyphens. The examples below use two backend services, `backend` and `baz`, two React/Vite frontend clients, `frontend` and `foobar`, one CLI package, `toolbox`, and one library package, `sdk`.
 
 Other fssstack docs may use `backend` and `frontend` as role labels. When applying those docs, map the examples to the actual generated service names.
 
@@ -55,14 +57,24 @@ The shadcn CLI creates each app at `apps/<client-name>` when run with `--cwd app
 
 The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffolding. The fssstack overlay should stay narrow: shared tsconfig wiring, frontend package scripts/dependencies, frontend logging/config/tRPC/test setup, `index.html` templating, and the demo `App.tsx` card plus its test.
 
+## Publishable packages
+
+If the project has CLI or library packages, scaffold them as publishable TypeScript packages and install the direct-release Changesets workflow:
+
+```
+dx read scripts/install-publishable-packages.mjs | node --input-type=module - -- "$PWD" "<cli slugs comma separated or empty>" "<library slugs comma separated or empty>"
+```
+
+CLI packages use `etc/tsconfig.node.json`, add a package `bin`, and build executable `dist/index.js`. Library packages use `etc/tsconfig.base.json`. A committed changeset on `main` is the release trigger; do not use the Changesets release-PR flow.
+
 ## Render template
 
-Replace template strings once after the foundation, apps/packages, and Vite overlays are in place. Pass the backend service list and frontend client list so `zap.yaml`, `.env.local`, backend package names, frontend package names, service ports, and favicon/title values are generated together.
+Replace template strings once after the foundation, apps/packages, Vite overlays, and publishable package scaffolds are in place. Pass the backend, frontend, CLI, and library lists so `zap.yaml`, `.env.local`, package names, service ports, and favicon/title values are generated together.
 
 The render script generates the emoji favicon data URI and writes it into each `index.html` through the same template replacement pass:
 
 ```
-dx read scripts/render-template.mjs | node --input-type=module - -- "$PWD" "<slug>" "<packagePrefix>" "<name>" "<description>" "<emoji>" "<backendServices>" "<frontendClients>"
+dx read scripts/render-template.mjs | node --input-type=module - -- "$PWD" "<slug>" "<packagePrefix>" "<name>" "<description>" "<emoji>" "<backendServices>" "<frontendClients>" "<cliPackages>" "<libraryPackages>"
 ```
 
 Default app wiring is intentionally minimal and comes from generated env values, not from a pairing process. Every generated frontend reads the same `VITE_API_BASE_URL`, which points to the first backend service in the list. `FRONTEND_URL` points to the first frontend client for single-URL consumers. `FRONTEND_URLS` is one comma-separated list of every frontend URL for backend CORS allowlists. Extra backend services and extra frontend clients are created and runnable, but they are not paired with each other by setup.
@@ -95,6 +107,8 @@ pnpm turbo run build --filter=<package-prefix>-backend
 pnpm turbo run build --filter=<package-prefix>-baz
 pnpm turbo run build --filter=<package-prefix>-frontend
 pnpm turbo run build --filter=<package-prefix>-foobar
+pnpm turbo run build --filter=<package-prefix>-toolbox
+pnpm turbo run build --filter=<package-prefix>-sdk
 zap up
 ```
 
@@ -103,6 +117,7 @@ Verify:
 - each frontend loads
 - each frontend calls the first backend through tRPC
 - each backend `/health` returns `{ "ok": true }`
+- each CLI/library package builds when present
 - package names, app titles, readme/favicon values, env values, and Zap services use the chosen project values and service names
 
 Commit:

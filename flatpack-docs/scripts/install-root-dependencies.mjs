@@ -19,6 +19,7 @@ var devDependencies = [
   "turbo",
   "typescript",
   "vitest",
+  "@changesets/cli",
   "ts-node",
   "jsdom",
   "@types/node",

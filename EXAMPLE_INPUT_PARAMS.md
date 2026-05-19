@@ -6,3 +6,5 @@ packagePrefix: @fssstack
 shadcnPreset: b1VlIttI
 backendServices: backend
 frontendClients: frontend (react-vite)
+cliPackages: none
+libraryPackages: none

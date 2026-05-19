@@ -101,9 +101,9 @@ var emojiFaviconDataUri = (emoji) => {
 
 // scripts-src/flatpack-docs/render-template.ts
 var args = getScriptArgs();
-if (args.length < 6 || args.length > 8) {
+if (args.length < 6 || args.length > 10) {
   fail(
-    "usage: render-template.mjs /path/to/target-project project-slug package-scope project-name project-description project-emoji [backend-services] [frontend-clients]"
+    "usage: render-template.mjs /path/to/target-project project-slug package-scope project-name project-description project-emoji [backend-services] [frontend-clients] [cli-packages] [library-packages]"
   );
 }
 var [
@@ -114,14 +114,23 @@ var [
   projectDescription,
   projectEmoji,
   backendServicesArg = "backend",
-  frontendClientsArg = "frontend"
+  frontendClientsArg = "frontend",
+  cliPackagesArg = "",
+  libraryPackagesArg = ""
 ] = args;
 var backendServices = parseServiceList(backendServicesArg);
 var frontendClients = parseServiceList(frontendClientsArg);
+var cliPackages = parseServiceList(cliPackagesArg);
+var libraryPackages = parseServiceList(libraryPackagesArg);
 if (backendServices.length === 0 || frontendClients.length === 0) {
   fail("at least one backend service and one frontend client are required");
 }
-assertUniqueServices([...backendServices, ...frontendClients]);
+assertUniqueServices([
+  ...backendServices,
+  ...frontendClients,
+  ...cliPackages,
+  ...libraryPackages
+]);
 var packagePrefix = `${packageScope}/${projectSlug}`;
 var firstBackendPortEnv = portEnvName(backendServices[0]);
 var firstFrontendPortEnv = portEnvName(frontendClients[0]);

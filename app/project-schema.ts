@@ -79,6 +79,17 @@ export const projectPromptSchema = z
           ),
       )
       .default(["backend"]),
+    cliPackages: z
+      .array(
+        z
+          .string()
+          .trim()
+          .regex(
+            slugPattern,
+            "Use lowercase letters separated by single hyphens.",
+          ),
+      )
+      .default([]),
     frontendClients: z
       .array(
         z.object({
@@ -94,24 +105,38 @@ export const projectPromptSchema = z
         }),
       )
       .default([{ slug: "frontend", type: "react-vite" }]),
+    libraryPackages: z
+      .array(
+        z
+          .string()
+          .trim()
+          .regex(
+            slugPattern,
+            "Use lowercase letters separated by single hyphens.",
+          ),
+      )
+      .default([]),
   })
   .strict()
   .superRefine((config, context) => {
     const slugCounts = new Map<string, number>();
 
-    for (const service of config.backendServices) {
-      slugCounts.set(service, (slugCounts.get(service) ?? 0) + 1);
-    }
+    const slugs = [
+      ...config.backendServices,
+      ...config.frontendClients.map((client) => client.slug),
+      ...config.cliPackages,
+      ...config.libraryPackages,
+    ];
 
-    for (const client of config.frontendClients) {
-      slugCounts.set(client.slug, (slugCounts.get(client.slug) ?? 0) + 1);
+    for (const slug of slugs) {
+      slugCounts.set(slug, (slugCounts.get(slug) ?? 0) + 1);
     }
 
     config.backendServices.forEach((service, index) => {
       if ((slugCounts.get(service) ?? 0) > 1) {
         context.addIssue({
           code: "custom",
-          message: "Service and client slugs must be unique.",
+          message: "App and package slugs must be unique.",
           path: ["backendServices", index],
         });
       }
@@ -121,8 +146,28 @@ export const projectPromptSchema = z
       if ((slugCounts.get(client.slug) ?? 0) > 1) {
         context.addIssue({
           code: "custom",
-          message: "Service and client slugs must be unique.",
+          message: "App and package slugs must be unique.",
           path: ["frontendClients", index, "slug"],
+        });
+      }
+    });
+
+    config.cliPackages.forEach((cliPackage, index) => {
+      if ((slugCounts.get(cliPackage) ?? 0) > 1) {
+        context.addIssue({
+          code: "custom",
+          message: "App and package slugs must be unique.",
+          path: ["cliPackages", index],
+        });
+      }
+    });
+
+    config.libraryPackages.forEach((libraryPackage, index) => {
+      if ((slugCounts.get(libraryPackage) ?? 0) > 1) {
+        context.addIssue({
+          code: "custom",
+          message: "App and package slugs must be unique.",
+          path: ["libraryPackages", index],
         });
       }
     });
@@ -139,6 +184,8 @@ export const defaultProjectPromptConfig: ProjectPromptConfig = {
   shadcnPreset: "b1VlIttI",
   backendServices: ["backend"],
   frontendClients: [{ slug: "frontend", type: "react-vite" }],
+  cliPackages: [],
+  libraryPackages: [],
 };
 
 export const normalizeProjectPromptConfig = (
@@ -154,10 +201,14 @@ export const normalizeProjectPromptConfig = (
   backendServices: config.backendServices
     .map(toSlug)
     .filter((service) => service !== ""),
+  cliPackages: config.cliPackages.map(toSlug).filter((slug) => slug !== ""),
   frontendClients: config.frontendClients
     .map((client) => ({
       ...client,
       slug: toSlug(client.slug),
     }))
     .filter((client) => client.slug !== ""),
+  libraryPackages: config.libraryPackages
+    .map(toSlug)
+    .filter((slug) => slug !== ""),
 });

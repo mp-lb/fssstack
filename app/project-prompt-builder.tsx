@@ -82,6 +82,8 @@ const buildManifestJson = (config: ProjectPromptConfig) =>
       projectSlug: config.slug,
       frontends: config.frontendClients.map((client) => client.slug),
       backends: config.backendServices,
+      clis: config.cliPackages,
+      libs: config.libraryPackages,
       extensions: [],
     },
     null,
@@ -120,7 +122,9 @@ shadcnPreset: ${config.shadcnPreset}
 backendServices: ${config.backendServices.join(", ")}
 frontendClients: ${config.frontendClients
   .map((client) => `${client.slug} (${client.type})`)
-  .join(", ")}`;
+  .join(", ")}
+clis: ${config.cliPackages.join(", ") || "none"}
+libs: ${config.libraryPackages.join(", ") || "none"}`;
 
 const fieldId = (path: PropertyKey[]) =>
   path
@@ -157,10 +161,12 @@ export default function ProjectPromptBuilder() {
       packagePrefix: config.packagePrefix.trim().toLowerCase(),
       shadcnPreset: config.shadcnPreset.trim(),
       backendServices: config.backendServices.map(toSlug),
+      cliPackages: config.cliPackages.map(toSlug),
       frontendClients: config.frontendClients.map((client) => ({
         ...client,
         slug: toSlug(client.slug),
       })),
+      libraryPackages: config.libraryPackages.map(toSlug),
     }),
     [config],
   );
@@ -187,10 +193,16 @@ export default function ProjectPromptBuilder() {
   const rawValues = JSON.stringify(normalizedConfig, null, 2);
   const hasEmptyServiceField =
     config.backendServices.some((service) => service.trim() === "") ||
-    config.frontendClients.some((client) => client.slug.trim() === "");
+    config.frontendClients.some((client) => client.slug.trim() === "") ||
+    config.cliPackages.some((cliPackage) => cliPackage.trim() === "") ||
+    config.libraryPackages.some(
+      (libraryPackage) => libraryPackage.trim() === "",
+    );
   const serviceSlugs = [
     ...config.backendServices.map(toSlug),
     ...config.frontendClients.map((client) => toSlug(client.slug)),
+    ...config.cliPackages.map(toSlug),
+    ...config.libraryPackages.map(toSlug),
   ].filter((slug) => slug !== "");
   const duplicateServiceSlugs = new Set(
     serviceSlugs.filter((slug, index) => serviceSlugs.indexOf(slug) !== index),
@@ -214,7 +226,7 @@ export default function ProjectPromptBuilder() {
       ?.message;
   const duplicateServiceErrorFor = (slug: string, path: (string | number)[]) =>
     fieldHasBeenInteractedWith(path) && duplicateServiceSlugs.has(toSlug(slug))
-      ? "Service and client slugs must be unique."
+      ? "App and package slugs must be unique."
       : undefined;
 
   const updateConfig = (
@@ -449,7 +461,7 @@ export default function ProjectPromptBuilder() {
           <Card size="sm" className="h-full">
             <CardHeader className="border-b">
               <div>
-                <CardTitle>Services and clients</CardTitle>
+                <CardTitle>Apps and packages</CardTitle>
               </div>
             </CardHeader>
             <CardContent className="grid min-h-0 gap-4 lg:grid-cols-2">
@@ -597,19 +609,129 @@ export default function ProjectPromptBuilder() {
                   );
                 })}
               </ListPanel>
+
+              <ListPanel
+                title="CLI packages"
+                disabled={hasEmptyServiceField}
+                onAdd={() =>
+                  setValue("cliPackages", [...config.cliPackages, ""])
+                }
+              >
+                {config.cliPackages.map((cliPackage, index) => {
+                  const cliPath = ["cliPackages", index];
+                  const cliError =
+                    errorFor(cliPath) ??
+                    duplicateServiceErrorFor(cliPackage, cliPath);
+
+                  return (
+                    <CompactRow key={`cli-${index}`}>
+                      <Input
+                        aria-label={`CLI package ${index + 1}`}
+                        value={cliPackage}
+                        aria-invalid={Boolean(cliError)}
+                        onChange={(event) => {
+                          const next = [...config.cliPackages];
+                          markFieldInteracted(cliPath);
+                          next[index] = toSlug(event.target.value);
+                          setValue("cliPackages", next);
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        title="Remove CLI package"
+                        aria-label="Remove CLI package"
+                        onClick={() =>
+                          setValue(
+                            "cliPackages",
+                            config.cliPackages.filter(
+                              (_, itemIndex) => itemIndex !== index,
+                            ),
+                          )
+                        }
+                      >
+                        <Trash2 aria-hidden="true" />
+                      </Button>
+                      {cliError && (
+                        <p className="col-span-full px-1 text-xs text-destructive">
+                          {cliError}
+                        </p>
+                      )}
+                    </CompactRow>
+                  );
+                })}
+              </ListPanel>
+
+              <ListPanel
+                title="Library packages"
+                disabled={hasEmptyServiceField}
+                onAdd={() =>
+                  setValue("libraryPackages", [
+                    ...config.libraryPackages,
+                    "",
+                  ])
+                }
+              >
+                {config.libraryPackages.map((libraryPackage, index) => {
+                  const libraryPath = ["libraryPackages", index];
+                  const libraryError =
+                    errorFor(libraryPath) ??
+                    duplicateServiceErrorFor(libraryPackage, libraryPath);
+
+                  return (
+                    <CompactRow key={`library-${index}`}>
+                      <Input
+                        aria-label={`Library package ${index + 1}`}
+                        value={libraryPackage}
+                        aria-invalid={Boolean(libraryError)}
+                        onChange={(event) => {
+                          const next = [...config.libraryPackages];
+                          markFieldInteracted(libraryPath);
+                          next[index] = toSlug(event.target.value);
+                          setValue("libraryPackages", next);
+                        }}
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon-sm"
+                        title="Remove library package"
+                        aria-label="Remove library package"
+                        onClick={() =>
+                          setValue(
+                            "libraryPackages",
+                            config.libraryPackages.filter(
+                              (_, itemIndex) => itemIndex !== index,
+                            ),
+                          )
+                        }
+                      >
+                        <Trash2 aria-hidden="true" />
+                      </Button>
+                      {libraryError && (
+                        <p className="col-span-full px-1 text-xs text-destructive">
+                          {libraryError}
+                        </p>
+                      )}
+                    </CompactRow>
+                  );
+                })}
+              </ListPanel>
               <div className="lg:col-span-2">
                 <InlineHelp
                   open={servicesHelpOpen}
                   onOpenChange={setServicesHelpOpen}
-                  title="How services and clients are used"
+                  title="How apps and packages are used"
                 >
                   <p>
                     Backend slugs create Fastify/tRPC services in{" "}
                     <code>apps/&lt;slug&gt;</code>. Client slugs create Vite or
-                    Next.js apps in <code>apps/&lt;slug&gt;</code>. Starter
-                    clients are wired to the primary backend through tRPC, and
-                    all slugs are rendered into <code>zap.yaml</code>,{" "}
-                    <code>.env.local</code>, and package names.
+                    Next.js apps in <code>apps/&lt;slug&gt;</code>. CLI and
+                    library slugs create publishable TypeScript packages in{" "}
+                    <code>packages/&lt;slug&gt;</code>. App slugs are rendered
+                    into <code>zap.yaml</code>, <code>.env.local</code>, and
+                    package names.
                   </p>
                 </InlineHelp>
               </div>

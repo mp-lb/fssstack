@@ -704,12 +704,12 @@
     },
     "mp-lb-run/SETUP_PROCESS.md": {
       "contentType": "text",
-      "hash": "sha256:638709ee3466c2bd4516cb96e7b72465d0d060da078cd499a13efdfbe37f74a2",
-      "lastSyncedAt": "2026-05-19T00:50:44.395Z",
+      "hash": "sha256:9e3532b6aac05e56cd49bf8cd9e849366924ea075095bfd5556ee1eec9b318c1",
+      "lastSyncedAt": "2026-05-19T10:35:04.008Z",
       "remoteFileId": "a48b945c-73b5-4e1e-97dd-031387055cf4",
       "remotePath": "/SETUP_PROCESS.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:45.369Z",
-      "remoteRevisionNumber": 6
+      "remoteUpdatedAt": "2026-05-19T09:41:10.638Z",
+      "remoteRevisionNumber": 7
     },
     "mp-lb-run/docs/custom-domains.md": {
       "contentType": "text",
