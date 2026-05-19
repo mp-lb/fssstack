@@ -7,7 +7,7 @@ import { patchViteLayer } from "./lib/vite";
 
 const viteFiles: Array<[string, string]> = [
   ["layers/vite/index.html", "index.html"],
-  ["layers/vite/vercel.json", "public/vercel.json"],
+  ["layers/vite/vercel.json", "vercel.json"],
   ["layers/vite/tsconfig.app.json", "tsconfig.app.json"],
   ["layers/vite/tsconfig.node.json", "tsconfig.node.json"],
   ["layers/vite/vitest.config.ts", "vitest.config.ts"],

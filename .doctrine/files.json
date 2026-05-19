@@ -623,12 +623,12 @@
     },
     "flatpack-docs/scripts/apply-vite-layer.mjs": {
       "contentType": "text",
-      "hash": "sha256:90fc6f2287cd151d99addf1739ad6faab6e1b4b1f1a2c57c12173a0ad344f9ab",
-      "lastSyncedAt": "2026-05-18T18:09:16.438Z",
+      "hash": "sha256:19a1a6422e67224ddbe5c9d3c2f6d466244282c0ca9f448caec303210eb60d9c",
+      "lastSyncedAt": "2026-05-19T13:24:07.446Z",
       "remoteFileId": "ec5ef9c4-8d8a-4023-bb62-2dff275baa9f",
       "remotePath": "/scripts/apply-vite-layer.mjs",
-      "remoteUpdatedAt": "2026-05-18T18:09:16.816Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-05-19T13:24:18.131Z",
+      "remoteRevisionNumber": 3
     },
     "flatpack-docs/scripts/emoji-favicon.mjs": {
       "contentType": "text",
@@ -921,11 +921,11 @@
   },
   "references": {
     "flatpack-docs/skills": {
-      "lastSeenAt": "2026-05-19T13:07:33.504Z",
+      "lastSeenAt": "2026-05-19T13:24:07.446Z",
       "type": "store-reference"
     },
     "flatpack-docs/standards": {
-      "lastSeenAt": "2026-05-19T13:07:33.504Z",
+      "lastSeenAt": "2026-05-19T13:24:07.446Z",
       "type": "store-reference"
     }
   },
