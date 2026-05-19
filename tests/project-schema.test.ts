@@ -12,9 +12,20 @@ describe("project prompt schema", () => {
       description: "Example project.",
       cliPackages: ["toolbox"],
       libraryPackages: ["sdk"],
+      extensions: ["mongodb", "s3"],
     });
 
     expect(result.success).toBe(true);
+  });
+
+  it("rejects unknown extensions", () => {
+    const result = projectPromptSchema.safeParse({
+      ...defaultProjectPromptConfig,
+      description: "Example project.",
+      extensions: ["unknown"],
+    });
+
+    expect(result.success).toBe(false);
   });
 
   it("requires app and package slugs to be unique", () => {

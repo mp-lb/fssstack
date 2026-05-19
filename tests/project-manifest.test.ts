@@ -15,27 +15,41 @@ describe("buildManifestJson5", () => {
       ],
       cliPackages: ["toolbox"],
       libraryPackages: ["sdk", "ui"],
+      extensions: ["mongodb", "s3"],
     });
 
     expect(manifest).toBe(
       [
         "{",
+        "  name: 'My App',",
+        "  emoji: '🚀',",
+        "  description: '',",
         "  projectSlug: 'my-app',",
-        "  frontends: ['web','admin'],",
+        "  packagePrefix: '@fssstack',",
+        "  shadcnPreset: 'b1VlIttI',",
+        "  frontends: [{name:'web',type:'react-vite'},{name:'admin',type:'react-nextjs'}],",
         "  backends: ['api','worker'],",
         "  clis: ['toolbox'],",
         "  libs: ['sdk','ui'],",
-        "  extensions: []",
+        "  extensions: ['mongodb','s3']",
         "}",
       ].join("\n"),
     );
     expect(JSON5.parse(manifest)).toEqual({
+      name: "My App",
+      emoji: "🚀",
+      description: "",
       projectSlug: "my-app",
-      frontends: ["web", "admin"],
+      packagePrefix: "@fssstack",
+      shadcnPreset: "b1VlIttI",
+      frontends: [
+        { name: "web", type: "react-vite" },
+        { name: "admin", type: "react-nextjs" },
+      ],
       backends: ["api", "worker"],
       clis: ["toolbox"],
       libs: ["sdk", "ui"],
-      extensions: [],
+      extensions: ["mongodb", "s3"],
     });
   });
 });

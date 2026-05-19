@@ -2,13 +2,18 @@
 
 import { useMemo, useState, useSyncExternalStore } from "react";
 import {
+  Boxes,
   Check,
+  Cloud,
   Copy,
   ChevronDown,
+  Database,
   ExternalLink,
   FlaskConical,
   GitCommit,
   Info,
+  KeyRound,
+  ListChecks,
   Palette,
   Plus,
   Trash2,
@@ -55,6 +60,7 @@ import {
 import { buildManifestJson5 } from "./project-manifest";
 
 type FrontendType = ProjectPromptConfig["frontendClients"][number]["type"];
+type ExtensionSlug = ProjectPromptConfig["extensions"][number];
 
 const frontendTypes: { label: string; value: FrontendType }[] = [
   { label: "React Vite", value: "react-vite" },
@@ -63,6 +69,50 @@ const frontendTypes: { label: string; value: FrontendType }[] = [
 
 const frontendTypeLabel = (value: FrontendType) =>
   frontendTypes.find((type) => type.value === value)?.label ?? value;
+
+const extensionOptions: Array<{
+  slug: ExtensionSlug;
+  label: string;
+  accent: string;
+  Icon: React.ComponentType<{ className?: string; "aria-hidden"?: true }>;
+}> = [
+  {
+    slug: "clerk",
+    label: "Clerk",
+    accent: "text-violet-300 border-violet-300/60 bg-violet-400/10 shadow-[0_0_10px_rgba(167,139,250,0.18)]",
+    Icon: KeyRound,
+  },
+  {
+    slug: "mongodb",
+    label: "MongoDB",
+    accent: "text-emerald-300 border-emerald-300/60 bg-emerald-400/10 shadow-[0_0_10px_rgba(52,211,153,0.18)]",
+    Icon: Database,
+  },
+  {
+    slug: "s3",
+    label: "S3",
+    accent: "text-sky-300 border-sky-300/60 bg-sky-400/10 shadow-[0_0_10px_rgba(56,189,248,0.18)]",
+    Icon: Cloud,
+  },
+  {
+    slug: "bull",
+    label: "BullMQ",
+    accent: "text-lime-300 border-lime-300/60 bg-lime-400/10 shadow-[0_0_10px_rgba(190,242,100,0.18)]",
+    Icon: Boxes,
+  },
+  {
+    slug: "playwright",
+    label: "Playwright",
+    accent: "text-fuchsia-300 border-fuchsia-300/60 bg-fuchsia-400/10 shadow-[0_0_10px_rgba(240,171,252,0.18)]",
+    Icon: ListChecks,
+  },
+  {
+    slug: "redis",
+    label: "Redis",
+    accent: "text-red-300 border-red-300/60 bg-red-400/10 shadow-[0_0_10px_rgba(248,113,113,0.18)]",
+    Icon: Database,
+  },
+];
 
 const includePrerequisitesStorageKey = "fssstack-start.include-prerequisites";
 const servicesHelpOpenStorageKey = "fssstack-start.services-help-open";
@@ -89,29 +139,15 @@ const buildPrompt = (
 }To start setup:
 
 1. Start in an empty folder.
-2. Create \`manifest.json5\` in the project root with exactly this JSON5:
-
-\`\`\`json5
-${buildManifestJson5(config)}
-\`\`\`
-
-3. Read \`projectSlug\` from \`manifest.json5\` wherever the setup process asks for the project slug.
+2. Create \`manifest.json5\` from the JSON5 manifest shown below.
+3. Read setup values from \`manifest.json5\` wherever the setup process asks for project values, apps, packages, or extensions.
 4. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
 5. Create \`doctrine.yaml\` with \`dx read --store felixsebastian/fssstack doctrine.example.yaml > doctrine.yaml\`.
 6. Follow \`dx read SETUP_PROCESS.md\`.
 
-Use these values:
-name: ${config.name}
-emoji: ${config.emoji}
-description: ${config.description}
-packagePrefix: ${config.packagePrefix}
-shadcnPreset: ${config.shadcnPreset}
-backendServices: ${config.backendServices.join(", ")}
-frontendClients: ${config.frontendClients
-  .map((client) => `${client.slug} (${client.type})`)
-  .join(", ")}
-clis: ${config.cliPackages.join(", ") || "none"}
-libs: ${config.libraryPackages.join(", ") || "none"}`;
+\`\`\`json5
+${buildManifestJson5(config)}
+\`\`\``;
 
 const fieldId = (path: PropertyKey[]) =>
   path
@@ -194,6 +230,7 @@ export default function ProjectPromptBuilder() {
   const duplicateServiceSlugs = new Set(
     serviceSlugs.filter((slug, index) => serviceSlugs.indexOf(slug) !== index),
   );
+  const selectedExtensions = new Set(config.extensions);
 
   const fieldHasBeenInteractedWith = (path: (string | number)[]) =>
     interactedFieldIds.has(fieldId(path));
@@ -259,6 +296,14 @@ export default function ProjectPromptBuilder() {
     value: ProjectPromptConfig[Key],
   ) => {
     updateConfig((current) => ({ ...current, [key]: value }));
+  };
+  const toggleExtension = (extension: ExtensionSlug) => {
+    setValue(
+      "extensions",
+      selectedExtensions.has(extension)
+        ? config.extensions.filter((item) => item !== extension)
+        : [...config.extensions, extension],
+    );
   };
 
   const updateName = (name: string) => {
@@ -751,6 +796,39 @@ export default function ProjectPromptBuilder() {
             </p>
           </div>
         </section>
+
+        <Card size="sm">
+          <CardHeader className="border-b py-3">
+            <div>
+              <CardTitle>Extensions</CardTitle>
+            </div>
+          </CardHeader>
+          <CardContent className="py-3">
+            <div className="flex flex-wrap gap-2">
+              {extensionOptions.map(({ slug, label, accent, Icon }) => {
+                const selected = selectedExtensions.has(slug);
+
+                return (
+                  <button
+                    key={slug}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => toggleExtension(slug)}
+                    className={cn(
+                      "inline-flex h-9 shrink-0 items-center gap-2 rounded-md border px-2.5 text-xs font-medium transition",
+                      selected
+                        ? accent
+                        : "border-border bg-muted/20 text-muted-foreground hover:bg-muted/45",
+                    )}
+                  >
+                    <Icon className="size-4" aria-hidden={true} />
+                    <span>{label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
 
         <Card size="sm">
           <Tabs defaultValue="prompt">

@@ -138,6 +138,12 @@ Verify:
 - each CLI/library package builds when present
 - package names, app titles, readme/favicon values, env values, and Zap services use the chosen project values and service names
 
+## Extensions
+
+After the base project validates, apply any selected extensions from `manifest.json5`.
+
+For each extension slug, read the matching doc from `docs/extensions/<slug>.md` and apply it as a follow-up layer. Extensions are allowed to require project-specific judgment; keep the base setup complete and committed before taking responsibility for extension-specific behavior.
+
 Commit:
 
 ```

@@ -4,6 +4,14 @@ const namePattern = /^[A-Za-z0-9 .,'&()/_:+#-]+$/;
 const slugPattern = /^[a-z]+(?:-[a-z]+)*$/;
 const npmOrgPattern = /^@[a-z0-9][a-z0-9-]*$/;
 const shadcnPresetPattern = /^[A-Za-z0-9_-]+$/;
+const extensionSlugs = [
+  "bull",
+  "clerk",
+  "mongodb",
+  "playwright",
+  "redis",
+  "s3",
+] as const;
 const emojiPattern =
   /^(?=.*(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}))(?:\p{Emoji_Presentation}|\p{Extended_Pictographic}|\uFE0F|\u200D)+$/u;
 
@@ -67,6 +75,7 @@ export const projectPromptSchema = z
         "Use letters, numbers, underscores, and hyphens only.",
       )
       .default("b1VlIttI"),
+    extensions: z.array(z.enum(extensionSlugs)).default([]),
     backendServices: z
       .array(
         z
@@ -182,6 +191,7 @@ export const defaultProjectPromptConfig: ProjectPromptConfig = {
   description: "",
   packagePrefix: "@fssstack",
   shadcnPreset: "b1VlIttI",
+  extensions: [],
   backendServices: ["backend"],
   frontendClients: [{ slug: "frontend", type: "react-vite" }],
   cliPackages: [],
@@ -198,6 +208,7 @@ export const normalizeProjectPromptConfig = (
   description: config.description.trim(),
   packagePrefix: config.packagePrefix.trim().toLowerCase(),
   shadcnPreset: config.shadcnPreset.trim(),
+  extensions: [...new Set(config.extensions)],
   backendServices: config.backendServices
     .map(toSlug)
     .filter((service) => service !== ""),
