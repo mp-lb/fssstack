@@ -174,4 +174,4 @@ writeFile(
   path.join(targetRoot, ".env.production"),
   readRepoFile(path.join("templates", "env.production"))
 );
-writeFile(path.join(targetRoot, "secrets.enc.json"), "{\n}\n");
+writeFile(path.join(targetRoot, "secrets.json.enc"), "{\n}\n");

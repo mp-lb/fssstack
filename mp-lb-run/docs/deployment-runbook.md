@@ -19,9 +19,9 @@ After deployment:
 Production values are committed:
 
 - `.env.production` for non-secrets
-- `secrets.enc.json` for encrypted secrets
+- `secrets.json.enc` for encrypted secrets
 
-CI needs one GitHub secret, `SECRETS_KEY`, to decrypt `secrets.enc.json`.
+CI needs one GitHub secret, `SECRETS_KEY`, to decrypt `secrets.json.enc`.
 
 ## Troubleshooting
 

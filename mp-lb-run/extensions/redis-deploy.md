@@ -12,4 +12,4 @@ Add `UPSTASH_EMAIL=hi@felixsebastian.dev` to .env.production
 
 ## For the user
 
-Ask the user to make sure `REDIS_URL` is in `secrets.enc.json`.
+Ask the user to make sure `REDIS_URL` is in `secrets.json.enc`.

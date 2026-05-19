@@ -140,13 +140,13 @@ Environment variables should be committed to the target repo.
 
 Non-secret production values should live in `.env.production`.
 
-Sensitive values should live in `secrets.enc.json`.
+Sensitive values should live in `secrets.json.enc`.
 
-GitHub Actions should use one repository secret, `SECRETS_KEY`, to decrypt `secrets.enc.json`.
+GitHub Actions should use one repository secret, `SECRETS_KEY`, to decrypt `secrets.json.enc`.
 
 This replaces the old model where many app environment variables lived directly in GitHub secrets or in a `PRODUCTION_SECRETS` blob.
 
-Deployment docs and templates should use `.env.production` plus `secrets.enc.json`.
+Deployment docs and templates should use `.env.production` plus `secrets.json.enc`.
 
 ## Expected Repo Shape
 

@@ -13,4 +13,4 @@ VITE_CLERK_PUBLISHABLE_KEY=...
 
 ## For the user
 
-Ask the user to add `CLERK_SECRET_KEY` to `secrets.enc.json`.
+Ask the user to add `CLERK_SECRET_KEY` to `secrets.json.enc`.

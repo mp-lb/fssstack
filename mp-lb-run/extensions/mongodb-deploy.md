@@ -10,4 +10,4 @@ Rerun base setup if `deployment/apps.json` needs regeneration.
 
 ## For the user
 
-Ask the user to add `MONGODB_URL` to `secrets.enc.json`.
+Ask the user to add `MONGODB_URL` to `secrets.json.enc`.

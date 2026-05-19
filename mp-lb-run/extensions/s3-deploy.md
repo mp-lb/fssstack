@@ -24,4 +24,4 @@ AWS_S3_BUCKET=<bucket-name>
 
 ## For the user
 
-Ask the user to make sure to add `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` to `secrets.enc.json`.
+Ask the user to make sure to add `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` to `secrets.json.enc`.

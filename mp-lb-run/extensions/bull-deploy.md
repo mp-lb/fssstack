@@ -23,4 +23,4 @@ Give the worker:
 
 ## For the user
 
-Ask the user to make sure `REDIS_URL` is in `secrets.enc.json`.
+Ask the user to make sure `REDIS_URL` is in `secrets.json.enc`.
