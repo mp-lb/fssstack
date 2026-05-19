@@ -52,6 +52,7 @@ import {
   toSlug,
   type ProjectPromptConfig,
 } from "./project-schema";
+import { buildManifestJson5 } from "./project-manifest";
 
 type FrontendType = ProjectPromptConfig["frontendClients"][number]["type"];
 
@@ -76,24 +77,6 @@ const projectFieldHelp = {
   description: "Included in generated README content and app metadata.",
 };
 
-const manifestLine = (key: string, value: unknown, trailingComma = true) =>
-  `  "${key}": ${JSON.stringify(value)}${trailingComma ? "," : ""}`;
-
-const buildManifestJson = (config: ProjectPromptConfig) =>
-  [
-    "{",
-    manifestLine("projectSlug", config.slug),
-    manifestLine(
-      "frontends",
-      config.frontendClients.map((client) => client.slug),
-    ),
-    manifestLine("backends", config.backendServices),
-    manifestLine("clis", config.cliPackages),
-    manifestLine("libs", config.libraryPackages),
-    manifestLine("extensions", [], false),
-    "}",
-  ].join("\n");
-
 const buildPrompt = (
   config: ProjectPromptConfig,
   includePrerequisites: boolean,
@@ -106,13 +89,13 @@ const buildPrompt = (
 }To start setup:
 
 1. Start in an empty folder.
-2. Create \`manifest.json\` in the project root with exactly this JSON:
+2. Create \`manifest.json5\` in the project root with exactly this JSON5:
 
-\`\`\`json
-${buildManifestJson(config)}
+\`\`\`json5
+${buildManifestJson5(config)}
 \`\`\`
 
-3. Read \`projectSlug\` from \`manifest.json\` wherever the setup process asks for the project slug.
+3. Read \`projectSlug\` from \`manifest.json5\` wherever the setup process asks for the project slug.
 4. Make sure Doctrine CLI is logged in with \`dx auth status\`; otherwise ask the user to log in before continuing.
 5. Create \`doctrine.yaml\` with \`dx read --store felixsebastian/fssstack doctrine.example.yaml > doctrine.yaml\`.
 6. Follow \`dx read SETUP_PROCESS.md\`.
