@@ -4,7 +4,12 @@ variable "project_name" {
 }
 
 variable "domain" {
-  description = "Default base domain."
+  description = "Resolved root domain for the project."
+  type        = string
+}
+
+variable "dns_zone_domain" {
+  description = "Cloudflare DNS zone domain that contains the project records."
   type        = string
 }
 
@@ -32,8 +37,8 @@ variable "cloudflare_api_token" {
   default     = ""
 }
 
-variable "cloudflare_zone_id" {
-  description = "Cloudflare zone ID for managed DNS."
+variable "cloudflare_account_id" {
+  description = "Cloudflare account ID used to look up the managed DNS zone."
   type        = string
   default     = ""
 }

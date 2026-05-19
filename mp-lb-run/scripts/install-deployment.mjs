@@ -55,19 +55,19 @@ var writeFile = (file, content) => {
   console.log(`write ${path.relative(targetRoot, file)}`);
 };
 var sanitizeName = (value) => value.replace(/[^a-zA-Z0-9_-]/g, "-");
+var sanitizeSlug = (value) => value.toLowerCase().replace(/[^a-z0-9-]/g, "-").replace(/^-+|-+$/g, "");
 var isDnsLabel = (value) => /^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$/.test(value);
 var isDomain = (value) => value.split(".").every((part) => isDnsLabel(part));
 var hclString = (value) => JSON.stringify(String(value));
 var serviceDeploymentType = (type) => type === "backend" ? "backend" : "frontend";
 var serviceName = (service) => service.name ?? service.subdomain ?? service.type;
-var serviceDomain = (projectName2, baseDomain2, service) => {
+var serviceDomain = (rootDomain2, service) => {
   if (service.domain) return normalizeDomain(service.domain);
-  const projectDomain = `${projectName2}.${baseDomain2}`;
-  return service.subdomain === null ? projectDomain : `${service.subdomain}.${projectDomain}`;
+  return service.subdomain === null ? rootDomain2 : `${service.subdomain}.${rootDomain2}`;
 };
-var defaultAppDomain = (projectName2, type, appName, index) => {
+var defaultAppDomain = (projectName, type, appName, index) => {
   const safeAppName = sanitizeName(appName).toLowerCase();
-  const safeProjectName = sanitizeName(projectName2).toLowerCase();
+  const safeProjectName = sanitizeName(projectName).toLowerCase();
   if (type === "frontend") {
     return index === 0 ? `${safeProjectName}.${defaultDomain}` : `${safeAppName}-${safeProjectName}.${defaultDomain}`;
   }
@@ -93,7 +93,7 @@ var validateUnique = (errors, label, values) => {
     seen.set(item.value, item.owner);
   }
 };
-var normalizeServices = (services, projectName2, baseDomain2) => {
+var normalizeServices = (services, rootDomain2) => {
   const errors = [];
   const serviceNames = [];
   const serviceSubdomains = [];
@@ -103,7 +103,7 @@ var normalizeServices = (services, projectName2, baseDomain2) => {
   for (const [index, service] of services.entries()) {
     const owner = `services[${index}]`;
     const name = serviceName(service);
-    const domain = serviceDomain(projectName2, baseDomain2, service);
+    const domain = serviceDomain(rootDomain2, service);
     const deploymentType = serviceDeploymentType(service.type);
     serviceNames.push({ value: name, owner });
     serviceDomains.push({ value: domain, owner });
@@ -162,16 +162,17 @@ var normalizeServices = (services, projectName2, baseDomain2) => {
   }
   return { frontends, backends };
 };
-var normalizeApps = (apps, projectName2, type) => apps.map((app, index) => ({
+var normalizeApps = (apps, projectName, type) => apps.map((app, index) => ({
   ...app,
   domain: normalizeDomain(
-    app.domain ?? defaultAppDomain(projectName2, type, app.name, index)
+    app.domain ?? defaultAppDomain(projectName, type, app.name, index)
   )
 }));
 var renderTfvars = (manifest2) => {
   const lines = [
     `project_name = ${hclString(manifest2.projectName)}`,
     `domain       = ${hclString(manifest2.domain)}`,
+    `dns_zone_domain = ${hclString(manifest2.dnsZoneDomain)}`,
     `gcp_region   = ${hclString(manifest2.gcpRegion)}`,
     `manage_cloudflare_dns = ${manifest2.manageCloudflareDns ? "true" : "false"}`,
     "",
@@ -236,13 +237,28 @@ var rawManifest = JSON.parse(read(manifestPath));
 if (!rawManifest.services && !rawManifest.frontends && !rawManifest.backends) {
   throw new Error("fssstack.json must include services, frontends, or backends.");
 }
-var projectName = sanitizeName(rawManifest.projectName ?? path.basename(targetRoot));
-var baseDomain = normalizeDomain(
-  rawManifest.baseDomain ?? rawManifest.domain ?? defaultDomain
+var projectSlug = sanitizeSlug(
+  rawManifest.projectSlug ?? rawManifest.projectName ?? path.basename(targetRoot)
 );
+if (!projectSlug || !isDnsLabel(projectSlug)) {
+  throw new Error(`Invalid projectSlug "${rawManifest.projectSlug ?? rawManifest.projectName ?? path.basename(targetRoot)}".`);
+}
+var hasCustomDomain = Object.hasOwn(rawManifest, "customDomain");
+var customDomain = rawManifest.customDomain === null || rawManifest.customDomain === void 0 ? null : normalizeDomain(rawManifest.customDomain);
+var legacyManifestDomain = rawManifest.domain ? normalizeDomain(rawManifest.domain) : void 0;
+var legacyBaseDomain = rawManifest.baseDomain ? normalizeDomain(rawManifest.baseDomain) : void 0;
+var rootDomain = hasCustomDomain ? customDomain ?? `${projectSlug}.${defaultDomain}` : legacyManifestDomain ?? `${projectSlug}.${legacyBaseDomain ?? defaultDomain}`;
+var dnsZoneDomain = hasCustomDomain && customDomain === null ? defaultDomain : !hasCustomDomain && !legacyManifestDomain ? legacyBaseDomain ?? defaultDomain : rootDomain;
+if (!isDomain(rootDomain)) {
+  throw new Error(`Resolved root domain is invalid: "${rootDomain}".`);
+}
+if (!isDomain(dnsZoneDomain)) {
+  throw new Error(`Resolved DNS zone domain is invalid: "${dnsZoneDomain}".`);
+}
 var manifest = {
-  projectName,
-  domain: baseDomain,
+  projectName: projectSlug,
+  domain: rootDomain,
+  dnsZoneDomain,
   gcpRegion: rawManifest.gcpRegion ?? "asia-southeast1",
   manageCloudflareDns: rawManifest.manageCloudflareDns !== false,
   frontends: [],
@@ -251,7 +267,6 @@ var manifest = {
 if (rawManifest.services) {
   const services = normalizeServices(
     rawManifest.services,
-    manifest.projectName,
     manifest.domain
   );
   manifest.frontends = services.frontends;

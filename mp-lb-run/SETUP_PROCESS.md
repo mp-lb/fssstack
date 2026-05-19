@@ -17,8 +17,8 @@ The target repo must have:
 
 ```json
 {
-  "projectName": "my-project",
-  "baseDomain": "mp-lb.dev",
+  "projectSlug": "my-project",
+  "customDomain": null,
   "gcpRegion": "asia-southeast1",
   "services": [
     {
@@ -49,9 +49,11 @@ The target repo must have:
 }
 ```
 
-Services deploy under `<projectName>.<baseDomain>`. A `null` subdomain maps to the project root domain, such as `my-project.mp-lb.dev`. A string subdomain maps under the project domain, such as `app.my-project.mp-lb.dev` or `api.my-project.mp-lb.dev`.
+Services deploy under the resolved root domain. When `customDomain` is `null`, the root domain is `<projectSlug>.mp-lb.dev`, such as `my-project.mp-lb.dev`. When `customDomain` is a string, it is the root domain, such as `example.com`.
 
-Setup validates service names, subdomains, and resolved domains for uniqueness before writing Terraform files. Legacy `frontends` and `backends` arrays are still accepted, and legacy `maplab.dev` domain values are migrated to `mp-lb.dev` during setup.
+A `null` service subdomain maps to the root domain. A string subdomain maps under the root domain, such as `app.my-project.mp-lb.dev` or `api.my-project.mp-lb.dev`.
+
+Setup validates the root domain, DNS zone domain, service names, subdomains, and resolved domains for uniqueness before writing Terraform files. Legacy `projectName`, `domain`, `baseDomain`, `frontends`, and `backends` fields are still accepted, but new configs should use `projectSlug`, `customDomain`, and `services`.
 
 ## Install
 
@@ -94,7 +96,6 @@ Store non-secret deployment identifiers in `.env.production`:
 - `GCP_PROJECT_ID`
 - `GCP_REGION`
 - `CLOUDFLARE_ACCOUNT_ID`
-- `CLOUDFLARE_ZONE_ID`
 - `UPSTASH_EMAIL` when Redis is provisioned by Terraform
 
 Store sensitive deployment tokens in `secrets.json.enc`:

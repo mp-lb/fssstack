@@ -25,7 +25,7 @@ CI needs one GitHub secret, `SECRETS_KEY`, to decrypt `secrets.json.enc`.
 
 ## Troubleshooting
 
-- If Terraform cannot write DNS, check `CLOUDFLARE_ZONE_ID` in `.env.production` and `CLOUDFLARE_API_TOKEN` in decrypted `secrets.json`.
+- If Terraform cannot write DNS, check `CLOUDFLARE_ACCOUNT_ID` in `.env.production`, `CLOUDFLARE_API_TOKEN` in decrypted `secrets.json`, and that the account contains the app domain's active Cloudflare zone.
 - If Redis creation fails, check `UPSTASH_EMAIL` in `.env.production` and `UPSTASH_API_KEY` in decrypted `secrets.json`.
 - If a backend does not start, check Cloud Run logs.
 - If a frontend deploy fails, check the app build command and Vercel project.

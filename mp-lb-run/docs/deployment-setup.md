@@ -32,7 +32,7 @@ Deployment values belong in committed files:
 - `.env.production` for non-secrets
 - `secrets.json.enc` for encrypted secrets
 
-Put non-secret identifiers such as `GCP_PROJECT_ID`, `GCP_REGION`, `CLOUDFLARE_ACCOUNT_ID`, and `CLOUDFLARE_ZONE_ID` in `.env.production`.
+Put non-secret identifiers such as `GCP_PROJECT_ID`, `GCP_REGION`, and `CLOUDFLARE_ACCOUNT_ID` in `.env.production`. Terraform derives the Cloudflare zone from the app domain.
 
 Put sensitive provider credentials such as `GCP_SA_KEY`, `VERCEL_API_TOKEN`, and `CLOUDFLARE_API_TOKEN` in `secrets.json.enc`.
 

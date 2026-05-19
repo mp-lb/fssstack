@@ -2,7 +2,7 @@
 
 Custom domains are cloud deployment configuration.
 
-Set each app domain in `fssstack.json`, then rerun setup if `terraform/terraform.tfvars` needs regeneration.
+Set the root `domain` in `fssstack.json`, set each service `subdomain`, then rerun setup if `terraform/terraform.tfvars` needs regeneration. Use `subdomain: null` for the root domain.
 
 For external DNS, set `manage_cloudflare_dns = false` in `terraform/terraform.tfvars` and copy DNS records from:
 
