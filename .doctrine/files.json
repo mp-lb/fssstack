@@ -1146,11 +1146,11 @@
   },
   "references": {
     "flatpack-docs/skills": {
-      "lastSeenAt": "2026-05-19T21:14:57.634Z",
+      "lastSeenAt": "2026-05-19T21:32:15.904Z",
       "type": "store-reference"
     },
     "flatpack-docs/standards": {
-      "lastSeenAt": "2026-05-19T21:14:57.634Z",
+      "lastSeenAt": "2026-05-19T21:32:15.904Z",
       "type": "store-reference"
     }
   },
