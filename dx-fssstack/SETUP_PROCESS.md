@@ -7,7 +7,7 @@ Run this from an empty folder. If other project files already exist, stop and as
 Start by fetching the shell project files:
 
 ```bash
-dx --store felixsebastian/fssstack pull --path shell
+dx --store felixsebastian/fssstack pull --target . shell
 ```
 
 The shell contains some example apps/packages: `apps/example-backend`, `packages/example-cli`, and `packages/example-lib`.
