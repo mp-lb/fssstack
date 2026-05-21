@@ -1,3 +1,0 @@
-{
-  "extends": "../../etc/tsconfig.react-vite-node.json",
-}

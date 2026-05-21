@@ -1,27 +1,18 @@
 project: fssstack
 env_files:
-  - .env.local
-  - .env
-homepage: http://localhost:${PORT}
-ports: [PORT]
+  - flatpack-shell/.env.local
+  - flatpack-shell/.env
+homepage: http://localhost:${EXAMPLE_BACKEND_PORT}/health
+ports:
+  - EXAMPLE_BACKEND_PORT
 native:
-  website:
-    cmd: pnpm dev:next
+  example-backend:
+    cmd: pnpm -C flatpack-shell --filter @example/fss-shell-example-backend dev
     env: "*"
 tasks:
   setup:
     cmds:
-      - pnpm install
-  lint:
-    cmds:
-      - 'test -n "{{REST}}" || (echo "usage: zap t lint -- <file...>" >&2; exit 1)'
-      - pnpm exec eslint {{REST}}
-  build:
-    cmds:
-      - pnpm build
-  check_docs:
-    cmds:
-      - pnpm check:docs
+      - pnpm -C flatpack-shell install
   worktree_setup:
     cmds:
-      - pnpm install
+      - pnpm -C flatpack-shell install

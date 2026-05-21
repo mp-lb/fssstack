@@ -1,62 +1,118 @@
 # FSS Stack Authoring Repo
 
-This repository is the authoring workspace for three closely related projects:
+Always read this file when starting new chats.
 
-- The root Next.js app is the FSS Stack landing page and prompt builder.
-- `flatpack-docs/` is the Doctrine payload for creating a new FSS Stack target project.
-- `mp-lb-run/` is the Doctrine payload for deploying FSS Stack target projects with the mp-lb-run cloud pattern.
+This repository is the authoring wrapper for the FSS Stack setup system. It is not itself the target application. The target application is a separate repo assembled by an agent after reading the published Doctrine docs.
 
-Treat this repository as the place where changes are authored and reviewed. Treat Doctrine as the published runtime surface that downstream agents read with commands such as `dx read SETUP_PROCESS.md` and `dx read scripts/install-foundation.mjs`.
+## Repository Shape
 
-## Contribution Model
+The root of this git repo should stay thin. It is a wrapper with documentation and a few sibling projects:
+
+- `landing-page/` is the Next.js landing page and prompt builder.
+- `flatpack-shell/` is the minimal working target-repo shell monorepo.
+- `flatpack-docs/` is the Doctrine payload for creating FSS Stack target projects.
+- `mp-lb-run/` is the Doctrine payload for deploying FSS Stack target projects.
+- `authoring-tools/` contains authoring-time scripts, tests, and build tooling that may generate Doctrine payload files.
+
+Do not turn the repository root into an npm project. Run package-manager commands from the owning subproject with `pnpm -C <folder> ...`.
+
+## Mental Model
+
+Flatpack is a repo setup process. It gives an agent enough instructions and local building blocks to assemble a real target repo.
+
+The current direction is:
+
+1. Start from a real shell repo.
+2. Layer project types into that shell.
+3. Use standard scaffolding tools for thick app frameworks.
+4. Copy and augment simple local examples for lightweight project types.
+
+The shell is represented by `flatpack-shell/`. It should be a working monorepo, not pseudo-template code. It should install, typecheck, test, build, and run locally. When setup docs say to start from the base shell, the target-agent-facing form is expected to be something like:
+
+```bash
+dx clone example-repo ./
+```
+
+After that, target setup instructions can tell the agent to create Vite or Next.js apps with the appropriate external scaffolders, and to create simple backends, CLIs, and libraries by copying examples from the shell and running augment scripts.
+
+## What Belongs Where
+
+`flatpack-shell/` owns real example project files:
+
+- Basic monorepo config.
+- Basic package config.
+- Shared library packages.
+- A simple backend.
+- A simple CLI.
+- A simple publishable library.
+- Release docs and release wiring for the target repo.
+
+`flatpack-docs/` owns the setup instructions an agent reads from Doctrine:
+
+- Input collection.
+- Target repo shape.
+- Layering order.
+- Commands to scaffold Vite, Next.js, backend, CLI, and library projects.
+- Commands to validate the resulting target repo.
+- References to standards docs and release process docs that should exist in the generated target repo.
+
+Avoid putting fake working projects, copied package files, or framework app templates back into `flatpack-docs/`. The docs should describe how to assemble the target repo and should reference real shell content or external scaffolders.
+
+`mp-lb-run/` owns deployment instructions and deployment payload files. Do not mix deployment-specific cloud configuration into the local-development shell unless the target repo genuinely needs it to run locally.
+
+`authoring-tools/` is for scripts and tests used while maintaining this authoring repo. Some old setup scripts may be transitional while Flatpack moves from copied layer templates to shell plus augmentation.
+
+## Root Commands
+
+The root has no `package.json`. Use the owning folder:
+
+- Landing page dev: `pnpm -C landing-page dev`
+- Landing page build: `pnpm -C landing-page build`
+- Landing page lint: `pnpm -C landing-page lint`
+- Landing page test: `pnpm -C landing-page test`
+- Shell install: `pnpm -C flatpack-shell install`
+- Shell typecheck: `pnpm -C flatpack-shell typecheck`
+- Shell test: `pnpm -C flatpack-shell test`
+- Shell build: `pnpm -C flatpack-shell build`
+- Authoring docs check: `pnpm -C authoring-tools check:docs`
+- Authoring docs build: `pnpm -C authoring-tools build:docs`
+
+The root `zap.yaml` is only a convenience wrapper for quickly running the shell example. The target repo shell also has its own `flatpack-shell/zap.yaml`.
+
+## Doctrine Payload Rules
 
 Do not add `AGENTS.md` files inside `flatpack-docs/` or `mp-lb-run/`. Those folders are published payloads, not standalone working repos in this checkout.
 
 For Doctrine payload changes:
 
-1. Edit the relevant docs, templates, layers, or TypeScript source in this repository.
-2. If setup script behavior changes, edit root-level `scripts-src/`.
-3. Run `pnpm build:docs` so built `.mjs` artifacts are written into the Doctrine payload folders.
-4. Run focused validation, usually `pnpm check:docs` for setup-script changes.
+1. Edit the relevant docs, templates, shell files, deployment files, or authoring source in this repository.
+2. If generated script behavior changes, edit the source under `authoring-tools/` rather than hand-editing built artifacts.
+3. Run focused validation for the changed surface.
+4. If generated Doctrine artifacts are still involved, run `pnpm -C authoring-tools build:docs`.
 5. Commit changes in this repository.
-6. Publish Doctrine payloads with `dx pull`, `dx push`, or `dx git sync` as appropriate. Prefer separate `dx pull`/`dx push` when you want clearer control over what changed.
+6. Publish Doctrine payloads with `dx pull`, `dx push`, or `dx git sync` as appropriate.
 
-The Doctrine folders are still important: target agents execute and read the files that are published from them. The authoring source for generated scripts, however, belongs at the repository root.
+Do not edit built `.mjs` files directly unless doing an emergency published-artifact patch.
 
-## Source And Build Layout
+## Validation Expectations
 
-Root-owned authoring files:
+For `flatpack-shell/` changes, prefer:
 
-- `scripts-src/flatpack-docs/`: TypeScript source for `flatpack-docs/scripts/*.mjs`
-- `scripts-src/mp-lb-run/`: TypeScript source for `mp-lb-run/scripts/*.mjs` and generated template scripts
-- `tests/flatpack-docs/`: tests for flatpack setup helpers
-- `TARGET_PROJECT_SHAPE.md`: target-repo layout reference for authors
-- `examples/`: local generated repos and experiments
+```bash
+pnpm -C flatpack-shell install
+pnpm -C flatpack-shell typecheck
+pnpm -C flatpack-shell test
+pnpm -C flatpack-shell build
+```
 
-Published Doctrine payload files:
+When validating local run behavior, use Zapper:
 
-- `flatpack-docs/SETUP_PROCESS.md`
-- `flatpack-docs/extensions/`
-- `flatpack-docs/layers/`
-- `flatpack-docs/scripts/*.mjs`
-- `mp-lb-run/SETUP_PROCESS.md`
-- `mp-lb-run/docs/`
-- `mp-lb-run/extensions/`
-- `mp-lb-run/templates/`
-- `mp-lb-run/scripts/*.mjs`
+```bash
+zap t setup
+zap up
+zap o
+```
 
-Do not edit built `.mjs` files directly unless you are doing an emergency published-artifact patch. Normal changes go through `scripts-src/` and `pnpm build:docs`.
+For `landing-page/` changes, use the landing-page commands. Before changing framework-sensitive Next.js behavior, check the relevant guide in `landing-page/node_modules/next/dist/docs/`.
 
-## Landing Page Notes
-
-The root app uses Next.js. This installed Next version may differ from older training-data conventions. Before changing framework-sensitive behavior, check the relevant guide in `node_modules/next/dist/docs/`.
-
-Use Zapper for local process management in this authoring repo. `pnpm dev` runs `zap up`; the raw Next dev command is `pnpm dev:next` and is intended for the `website` service in `zap.yaml`. Use `pnpm dev:status`, `pnpm dev:open`, and `pnpm dev:down` for process inspection, opening, and shutdown.
-
-Use the existing app structure and UI components. Keep the landing page focused on helping a human generate a prompt for an AI agent that will read the published Doctrine docs.
-
-## Target Repo Mental Model
-
-The target project is a separate repository assembled by an AI agent. The agent generally starts from an empty directory, reads setup instructions from Doctrine, copies or renders files, installs packages, and validates the generated monorepo.
-
-Use `TARGET_PROJECT_SHAPE.md` when changing setup instructions, extension docs, layer files, or setup scripts. It explains which files exist at each setup stage and helps avoid instructions that assume this authoring checkout exists inside the generated target repo.
+For `flatpack-docs/` changes, read `TARGET_PROJECT_SHAPE.md` if present and compare the instructions against the actual `flatpack-shell/` shape. The docs must not assume this authoring checkout exists inside the generated target repo.

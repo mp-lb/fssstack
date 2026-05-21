@@ -1,7 +1,0 @@
-node_modules/
-dist/
-.turbo/
-.zap/
-.env
-secrets.json
-.DS_Store
