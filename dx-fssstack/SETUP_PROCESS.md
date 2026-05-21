@@ -4,10 +4,10 @@ Run this from an empty folder. If other project files already exist, stop and as
 
 ## Shell
 
-Start by cloning the working target repo shell from Doctrine into the empty target directory:
+Start by fetching the shell project files:
 
 ```bash
-dx clone example-repo ./
+dx --store felixsebastian/fssstack pull --path shell
 ```
 
 The shell contains some example apps/packages: `apps/example-backend`, `packages/example-cli`, and `packages/example-lib`.
@@ -82,6 +82,12 @@ The CLI augment step should:
 - update release docs if package names changed
 
 Remove `packages/example-cli` after all requested CLIs exist, unless the requested CLI slug is `example-cli`.
+
+## Delete examples
+
+- `rm -rf apps/example-backend`
+- `rm -rf packages/example-cli`
+- `rm -rf packages/example-lib`
 
 ## Library Packages
 
