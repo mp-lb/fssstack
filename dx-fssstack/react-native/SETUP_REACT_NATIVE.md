@@ -141,7 +141,7 @@ sudo xcode-select -s /Applications/Xcode.app/Contents/Developer
 npx expo-doctor
 ```
 
-In Xcode, sign in to the Apple Developer account under Settings -> Accounts. EAS can manage most credentials remotely, but local `expo run:ios` often still needs Xcode account/team setup.
+In Xcode, sign in to the Apple Developer account under Settings -&gt; Accounts. EAS can manage most credentials remotely, but local `expo run:ios` often still needs Xcode account/team setup.
 
 ## 6. Auth and deep links
 
@@ -313,3 +313,4 @@ npx expo-doctor
 - CI runs lint and typecheck on PRs.
 - CD can publish OTA updates.
 - Production EAS builds submit to TestFlight and Play Console.
+
