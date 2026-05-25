@@ -18,3 +18,4 @@ sync:
   - target: docs/skills
     store: felixsebastian/fssstack
     path: skills
+    readonly: true

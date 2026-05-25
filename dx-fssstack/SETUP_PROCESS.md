@@ -7,7 +7,7 @@ Run this from an empty folder. If other project files already exist, stop and as
 Start by fetching the shell project files:
 
 ```bash
-dx --store felixsebastian/fssstack pull --target . shell
+dx pull --direct --store felixsebastian/fssstack --path shell --target .
 ```
 
 The shell contains some example apps/packages: `apps/example-backend`, `packages/example-cli`, and `packages/example-lib`.
@@ -146,3 +146,4 @@ Commit:
 git add .
 git commit -m init
 ```
+
