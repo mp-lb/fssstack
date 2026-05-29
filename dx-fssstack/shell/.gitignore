@@ -4,3 +4,4 @@ coverage
 .env
 .zap
 *.tsbuildinfo
+AGENTS.local.md
