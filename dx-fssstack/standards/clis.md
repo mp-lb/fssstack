@@ -135,7 +135,7 @@ intro framing and cross-links; everything per-command is generated.
 
 ## Publishing and docs site
 
-The publishing surfaces — `docs/` vs `docs/internal/`, the Fumadocs site, the
+The publishing surfaces — `docs/` (internal) vs `docs/public/` (published), the Fumadocs site, the
 `llms-full.txt` bundle, and the `docs:gen` / `docs:check`-in-CI loop — are the
 **library** standard. See [libs.md](./libs.md). A CLI adds only the generated
 command reference above; everything else about shipping docs is the same as any
@@ -164,5 +164,5 @@ Docs:
 
 - [ ] `docs/commands.md` generated via `@mp-lb/cli-docs`; never hand-edited.
 - [ ] Narrative docs link to the reference instead of restating flags.
-- [ ] Library docs baseline met — `docs/` split, Fumadocs site, `docs:check` in
+- [ ] Library docs baseline met — `docs/public/` opt-in publish, Fumadocs site, `docs:check` in
   CI, `llms-full.txt` (see libs.md).

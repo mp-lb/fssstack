@@ -89,11 +89,26 @@ name (`<package-scope>/<project-slug>-<docs slug>`, collapsing to
 Package naming), shared TypeScript wiring, Zap service entry, port env name,
 deploy-safe static rewrites, title/favicon values, and cleanup of scaffold noise.
 
-A docs site renders the library's published `docs/` — the generated API
+A docs site renders the library's published `docs/public/` — the generated API
 reference plus hand-written guides. This is the plain Fumadocs setup with no
 extra dependencies; bringing a docs site up to internal house style (shared
 theme, global TypeScript config, generated-reference wiring) is a separate
 augmented flow and is not part of this template.
+
+### AGENTS.md docs layer
+
+A project with a docs site also needs its `AGENTS.md` to tell agents how the
+generated-docs workflow works. That guidance is a conditional layer, not part of
+the base template — copy it into the project's `docs/agents-md/` layers folder:
+
+```bash
+dx pull --direct --store felixsebastian/fssstack --path agents-md/docs-website.md --target docs/agents-md/docs-website.md
+```
+
+This is the conditional-snippet pattern: a project gets
+`docs/agents-md/docs-website.md` only when it has a docs site. The AGENTS.md
+compiler composes everything in `docs/agents-md/` into the final `AGENTS.md`, so
+once the file is in place our responsibility ends.
 
 ## Delete examples
 

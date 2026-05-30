@@ -44,9 +44,9 @@ Scale the effort to the library's surface area.
   door (install, a ~30-second example, links out). For a small utility this is
   the *entire* doc story — types + README, nothing more.
 - **Tier 1 — libraries with real surface area:** generate an API reference with
-  **TypeDoc → markdown** into `docs/`, render it with the shared **Fumadocs**
-  docs-site app type, emit the `llms-full.txt` bundle, and add a hand-written
-  guide for concepts and recipes.
+  **TypeDoc → markdown** into `docs/public/`, render it with the shared
+  **Fumadocs** docs-site app type, emit the `llms-full.txt` bundle, and add a
+  hand-written guide for concepts and recipes.
 
 Threshold: *if you can't comfortably navigate the API from the README alone,
 generate the reference.*
@@ -63,25 +63,28 @@ Visual component libraries (e.g. `jalco-ui`) are documented via a rendered
 **showcase** — we already use `shad` for this — not TypeDoc. The showcase is the
 reference; type docs add little for visual components.
 
-## Docs layout: published vs internal
+## Docs layout: internal by default, publish by opt-in
 
-Split docs by audience, with **internal as the safe default**:
+`docs/` is **internal by default** — working docs, design notes, studies,
+positioning, dev and release runbooks. None of it is published.
 
-- `docs/` — published, user-facing, curated. What the docs site builds and what
-  syncs to Doctrine.
-- `docs/internal/` — design docs, studies, positioning, dev and release
-  runbooks. Not published.
+Publishing is **opt-in**: a doc is published only once it lives under
+`docs/public/`. The docs site builds from `docs/public/` and nothing else.
 
-Use a folder boundary, not a per-file exclude list, so a new internal doc is
-unpublished by default without anyone remembering to exclude it. The docs site
-config builds only the published tier.
+- `docs/` — internal. The default home for any doc. Not published.
+- `docs/public/` — the opt-in published surface: the generated API reference
+  plus the hand-written guides the docs site renders.
+
+Use the folder boundary, not a per-file include list: a new doc is internal
+unless you deliberately move it under `docs/public/`, so nothing leaks by
+accident.
 
 ## Docs site
 
-A **Tier 1** library publishes its `docs/` as a site built with **Fumadocs** —
-the shared FSS Stack docs-site app type (React Router), augmented by the
-`@mp-lb/docs-site` preset: curated nav and sidebar, local search, and a "Raw"
-link to `llms-full.txt` for agents. Every page is one of two kinds:
+A **Tier 1** library publishes its `docs/public/` as a site built with
+**Fumadocs** — the shared FSS Stack docs-site app type (React Router), augmented
+by the `@mp-lb/docs-site` preset: curated nav and sidebar, local search, and a
+"Raw" link to `llms-full.txt` for agents. Every page is one of two kinds:
 
 - **Generated reference** — TypeDoc → markdown, never hand-edited.
 - **Hand-written guide** — quick start, concepts, recipes. The guide links to
@@ -94,11 +97,11 @@ Keep the committed reference from drifting with two package scripts:
   reference can't drift from the types.
 
 **The shared Fumadocs site is the default renderer, not a requirement.** What's
-standardized is the *generation*: docs land in `docs/` as markdown,
-`llms-full.txt` is bundled, and `docs:check` keeps them fresh in CI. A project
-with its own site — e.g. **Doctrine** — may render that same published `docs/`
-however it likes; it still follows the generation, layout, and freshness
-standard, and only the rendering differs.
+standardized is the *generation*: published docs land in `docs/public/` as
+markdown, `llms-full.txt` is bundled, and `docs:check` keeps them fresh in CI. A
+project with its own site — e.g. **Doctrine** — may render that same
+`docs/public/` however it likes; it still follows the generation, layout, and
+freshness standard, and only the rendering differs.
 
 A **Tier 0** library has no site — the README is the whole front door.
 
@@ -120,4 +123,4 @@ Bumping the preset updates every site; template-level changes roll out via
 - [ ] Tier 1 only: TypeDoc→markdown reference, Fumadocs site (shared preset), `llms-full.txt`.
 - [ ] Tier 1 only: `docs:gen` / `docs:check`, with `docs:check` wired into CI.
 - [ ] Component libraries documented via showcase, not TypeDoc.
-- [ ] `docs/` published, `docs/internal/` not.
+- [ ] `docs/` internal by default; published docs opt in under `docs/public/`.
