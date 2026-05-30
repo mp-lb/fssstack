@@ -12,6 +12,12 @@ dx pull --direct --store felixsebastian/fssstack --path shell --target .
 
 The shell contains some example apps/packages: `apps/example-backend` and `packages/example-lib`.
 
+## Package naming
+
+Every app and package is named `<package-scope>/<project-slug>-<slug>`, where `<slug>` is the backend/frontend/library slug.
+
+**Exception — collapse on match:** when a slug is identical to the project slug, drop the duplicate and name the package `<package-scope>/<project-slug>` (not `<package-scope>/<project-slug>-<project-slug>`). This applies to every augment step below.
+
 ## Backends
 
 For each backend service, duplicate the example backend and augment it:
@@ -23,7 +29,7 @@ node scripts/augment-backend.mjs "<backend slug>" "<package-scope>" "<project-sl
 
 The backend augment step should:
 
-- update `apps/<backend slug>/package.json` name to `<package-scope>/<project-slug>-<backend slug>`
+- update `apps/<backend slug>/package.json` name to `<package-scope>/<project-slug>-<backend slug>` (collapsing to `<package-scope>/<project-slug>` when the backend slug equals the project slug — see Package naming)
 - replace `example-backend` display/service labels with the backend slug
 - replace `EXAMPLE_BACKEND_PORT` with `<BACKEND_SLUG>_PORT`
 - add or update the matching Zap native service
@@ -43,7 +49,7 @@ node scripts/augment-vite-frontend.mjs "<frontend slug>" "<package-scope>" "<pro
 
 The shadcn CLI creates each app at `apps/<client-name>` when run with `--cwd apps --name <client-name>`. Do not run it with `--cwd apps/<client-name> --name <client-name>`, because that creates an accidental nested `apps/<client-name>/<client-name>` scaffold.
 
-The frontend augment step should stay narrow: package name, shared TypeScript wiring, Zap service entry, port env name, deploy-safe SPA rewrites when needed, title/favicon values, and cleanup of scaffold noise. The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold.
+The frontend augment step should stay narrow: package name (`<package-scope>/<project-slug>-<frontend slug>`, collapsing to `<package-scope>/<project-slug>` when the frontend slug equals the project slug — see Package naming), shared TypeScript wiring, Zap service entry, port env name, deploy-safe SPA rewrites when needed, title/favicon values, and cleanup of scaffold noise. The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold.
 
 ## Next.js Frontends
 
@@ -55,7 +61,7 @@ CI=1 npx shadcn@latest init --preset <shadcnPreset> --template next --cwd apps -
 node scripts/augment-next-frontend.mjs "<frontend slug>" "<package-scope>" "<project-slug>"
 ```
 
-The Next.js augment step should stay narrow: package name, shared config where appropriate, Zap service entry, port env name, title/favicon values, and cleanup of scaffold noise. Keep the scaffolded page disposable.
+The Next.js augment step should stay narrow: package name (`<package-scope>/<project-slug>-<frontend slug>`, collapsing to `<package-scope>/<project-slug>` when the frontend slug equals the project slug — see Package naming), shared config where appropriate, Zap service entry, port env name, title/favicon values, and cleanup of scaffold noise. Keep the scaffolded page disposable.
 
 Frontend implementation and test examples live in:
 
@@ -63,6 +69,31 @@ Frontend implementation and test examples live in:
 docs/examples/frontend/web-request.md
 docs/examples/frontend/logging.md
 ```
+
+## Docs Sites
+
+For a library that publishes a documentation site, scaffold a **Fumadocs** app on
+**React Router**, then apply the narrow fssstack wiring:
+
+```bash
+mkdir -p apps
+npm create fumadocs-app@latest <docs slug> --template react-router --cwd apps
+node scripts/augment-docs-site.mjs "<docs slug>" "<package-scope>" "<project-slug>"
+```
+
+Fumadocs owns the generic React Router + MDX + search scaffold (the
+`fumadocs-core` / `fumadocs-mdx` / `fumadocs-ui` stack with Orama local search).
+The docs-site augment step stays narrow, exactly like the frontend ones: package
+name (`<package-scope>/<project-slug>-<docs slug>`, collapsing to
+`<package-scope>/<project-slug>` when the docs slug equals the project slug — see
+Package naming), shared TypeScript wiring, Zap service entry, port env name,
+deploy-safe static rewrites, title/favicon values, and cleanup of scaffold noise.
+
+A docs site renders the library's published `docs/` — the generated API
+reference plus hand-written guides. This is the plain Fumadocs setup with no
+extra dependencies; bringing a docs site up to internal house style (shared
+theme, global TypeScript config, generated-reference wiring) is a separate
+augmented flow and is not part of this template.
 
 ## Delete examples
 
@@ -80,7 +111,7 @@ node scripts/augment-lib.mjs "<library slug>" "<package-scope>" "<project-slug>"
 
 The library augment step should:
 
-- update package name to `<package-scope>/<project-slug>-<library slug>`
+- update package name to `<package-scope>/<project-slug>-<library slug>` (collapsing to `<package-scope>/<project-slug>` when the library slug equals the project slug — see Package naming)
 - keep `files`, `exports`, `types`, and build scripts publish-safe
 - keep public exports small and explicit
 - update release docs if package names changed
