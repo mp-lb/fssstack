@@ -67,6 +67,10 @@ packageJson.scripts = {
   typecheck: "react-router typegen && fumadocs-mdx && tsc --noEmit",
   postinstall: "fumadocs-mdx"
 };
+packageJson.devDependencies = {
+  ...packageJson.devDependencies,
+  serve: "14.2.6"
+};
 for (const dependencySet of [packageJson.dependencies, packageJson.devDependencies]) {
   if (!dependencySet) continue;
   for (const [name, version] of Object.entries(dependencySet)) {
@@ -96,5 +100,13 @@ var tsconfig = {
 writeFileSync(
   join(docsRoot, "tsconfig.json"),
   `${JSON.stringify(tsconfig, null, 2)}
+`
+);
+var serveConfig = {
+  rewrites: [{ source: "/**", destination: "/__spa-fallback.html" }]
+};
+writeFileSync(
+  join(docsRoot, "serve.json"),
+  `${JSON.stringify(serveConfig, null, 2)}
 `
 );

@@ -8,7 +8,9 @@ import { portEnvName, validateServiceName } from "./lib/services";
 // scaffold; this script only patches the wiring we standardise —
 //   1. dev/start read the Zapper-injected port (`${<SLUG>_PORT}`),
 //   2. tsconfig extends our shared frontend base (`etc/tsconfig.frontend.json`),
-//   3. dependency ranges are pinned (matching the other layers).
+//   3. the `serve` dep + a `serve.json` exist so `start` works (static serving
+//      of the prerendered build),
+//   4. dependency ranges are pinned (matching the other layers).
 // ESLint needs nothing app-local: the repo's root flat config already globs
 // `apps/**`, so the docs app is covered once its tsconfig is in place.
 
@@ -72,6 +74,13 @@ packageJson.scripts = {
   postinstall: "fumadocs-mdx",
 };
 
+// `start` serves the prerendered build statically, so the `serve` tool has to be
+// a dependency (the scaffold doesn't include it).
+packageJson.devDependencies = {
+  ...packageJson.devDependencies,
+  serve: "14.2.6",
+};
+
 for (const dependencySet of [packageJson.dependencies, packageJson.devDependencies]) {
   if (!dependencySet) continue;
   for (const [name, version] of Object.entries(dependencySet)) {
@@ -105,4 +114,15 @@ const tsconfig = {
 writeFileSync(
   join(docsRoot, "tsconfig.json"),
   `${JSON.stringify(tsconfig, null, 2)}\n`,
+);
+
+// 3. serve.json — `start` runs `serve ./build/client --config serve.json`; the
+//    prerendered React Router build needs the SPA fallback for client routes.
+const serveConfig = {
+  rewrites: [{ source: "/**", destination: "/__spa-fallback.html" }],
+};
+
+writeFileSync(
+  join(docsRoot, "serve.json"),
+  `${JSON.stringify(serveConfig, null, 2)}\n`,
 );
