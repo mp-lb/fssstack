@@ -1,9 +1,10 @@
 # CLI Tools
 
-What we expect from a publishable library that ships a `bin` — a CLI is just a
-library with an executable entrypoint, not a separate package type. This doc
-covers the command-line behaviour on top of the library baseline in
-[libs.md](./libs.md). Two governing ideas run through everything below:
+A CLI is **just a library with a `bin`** — nothing special, not a separate
+package type. It follows the whole library standard in [libs.md](./libs.md); this
+doc is only the delta a `bin` adds: how the command-line behaves, and the one
+extra generated surface (a command reference). Two governing ideas run through
+everything below:
 
 1. **The command tree is the single source of truth.** The help screen and the
    reference docs are generated from it, never maintained by hand in parallel.
@@ -121,7 +122,7 @@ renderings of the same metadata, never two documents.
 
 ## Generating the reference
 
-Use **`@mp-lb/cli-docs`** (published from the libraries monorepo). It takes the
+Use **`@mp-lb/cli-docs`** (published from the `tools` repo). It takes the
 commander root `Command` and emits the reference page plus the `llms-full.txt`
 bundle. Wire two package scripts:
 
@@ -132,23 +133,13 @@ bundle. Wire two package scripts:
 The generated reference may be wrapped in a small hand-written header/footer for
 intro framing and cross-links; everything per-command is generated.
 
-## Docs layout: published vs internal
+## Publishing and docs site
 
-Split docs by audience, with **internal as the safe default**:
-
-- `docs/` — published, user-facing, curated. What the docs site builds and what
-  syncs to Doctrine.
-- `docs/internal/` — design docs, studies, positioning, dev and release
-  runbooks. Not published.
-
-Use a folder boundary, not a per-file exclude list, so a new internal doc is
-unpublished by default without anyone remembering to exclude it. The docs site
-config builds only the published tier.
-
-## Docs site
-
-Publish the user-facing docs with **VitePress**: curated nav and sidebar, local
-search, and a "Raw" link to `llms-full.txt` for agents.
+The publishing surfaces — `docs/` vs `docs/internal/`, the VitePress site, the
+`llms-full.txt` bundle, and the `docs:gen` / `docs:check`-in-CI loop — are the
+**library** standard. See [libs.md](./libs.md). A CLI adds only the generated
+command reference above; everything else about shipping docs is the same as any
+library.
 
 ## Checklist
 
@@ -172,7 +163,6 @@ Commands:
 Docs:
 
 - [ ] `docs/commands.md` generated via `@mp-lb/cli-docs`; never hand-edited.
-- [ ] `docs:check` wired into CI.
 - [ ] Narrative docs link to the reference instead of restating flags.
-- [ ] `docs/` published, `docs/internal/` not.
-- [ ] `llms-full.txt` generated and linked from the docs site.
+- [ ] Library docs baseline met — `docs/` split, VitePress site, `docs:check` in
+  CI, `llms-full.txt` (see libs.md).

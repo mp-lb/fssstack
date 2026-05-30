@@ -1,17 +1,22 @@
 # Libraries
 
 What we expect for documenting a publishable library (an importable package).
-Companion to [clis.md](./clis.md); for releasing, see
-[lib-release.md](./lib-release.md).
+A **library** is our first-class unit — the dashboard and setup docs recognise it
+as *the* package type. Everything below applies to every library.
 
-Governing idea, mirroring CLIs: **the types are the single source of truth.**
-Auto-generate what can be auto-generated, and keep hand-written narrative for
-what types can't express — narrative never restates the generated surface.
+**If your library ships a `bin`** (i.e. it's a CLI), also follow
+[clis.md](./clis.md) — a CLI is just a library with a `bin`, and that doc covers
+the extra it needs (command-line architecture, behaviour, and a generated command
+reference). For releasing, see [lib-release.md](./lib-release.md).
 
-The CLI parallel is exact, with one difference: a CLI's behaviour isn't visible
-from its types, so it *always* needs a generated reference. A library's surface
-often *is* fully visible from its types — so library docs can frequently stop at
-the types. That's where "keep it lightweight" comes from.
+Governing idea: **the types are the single source of truth.** Auto-generate what
+can be auto-generated, and keep hand-written narrative for what types can't
+express — narrative never restates the generated surface.
+
+A library's surface is often *fully visible from its types*, so its docs can stop
+there — that's where "keep it lightweight" comes from. The one exception is a
+library that ships a `bin`: a CLI's behaviour isn't visible from its types, so it
+always needs a generated command reference (see [clis.md](./clis.md)).
 
 ## Types are the documentation
 
@@ -57,12 +62,51 @@ Visual component libraries (e.g. `jalco-ui`) are documented via a rendered
 **showcase** — we already use `shad` for this — not TypeDoc. The showcase is the
 reference; type docs add little for visual components.
 
-## Shared publishing mechanics
+## Docs layout: published vs internal
 
-The publishing surfaces are identical to CLIs and are defined in
-[clis.md](./clis.md): `docs/` (published, curated) vs `docs/internal/` (not
-published), VitePress for the site, and `llms-full.txt` for agents. Follow those
-sections rather than restating them here.
+Split docs by audience, with **internal as the safe default**:
+
+- `docs/` — published, user-facing, curated. What the docs site builds and what
+  syncs to Doctrine.
+- `docs/internal/` — design docs, studies, positioning, dev and release
+  runbooks. Not published.
+
+Use a folder boundary, not a per-file exclude list, so a new internal doc is
+unpublished by default without anyone remembering to exclude it. The docs site
+config builds only the published tier.
+
+## Docs site
+
+A **Tier 1** library publishes its `docs/` as a site built with **VitePress**:
+curated nav and sidebar, local search, and a "Raw" link to `llms-full.txt` for
+agents. Every page is one of two kinds:
+
+- **Generated reference** — TypeDoc → markdown, never hand-edited.
+- **Hand-written guide** — quick start, concepts, recipes. The guide links to
+  the reference; it never restates signatures.
+
+Keep the committed reference from drifting with two package scripts:
+
+- `docs:gen` — regenerate the TypeDoc markdown and the `llms-full.txt` bundle.
+- `docs:check` — fail if the committed docs are stale. Run it in **CI** so the
+  reference can't drift from the types.
+
+**VitePress is the default renderer, not a requirement.** What's standardized is
+the *generation*: docs land in `docs/` as markdown, `llms-full.txt` is bundled,
+and `docs:check` keeps them fresh in CI. A project with its own site — e.g.
+**Doctrine** — may render that same published `docs/` however it likes; it still
+follows the generation, layout, and freshness standard, and only the rendering
+differs.
+
+A **Tier 0** library has no site — the README is the whole front door.
+
+## Keeping sites consistent across repos
+
+Libraries live in **separate repos** with no shared monorepo to hold one
+VitePress config, so the site setup must be kept aligned across repos by some
+deliberate mechanism — a published shared preset, or template-scaffolded config
+kept current via migrations. **Mechanism TBD.** Until it's decided: scaffold new
+sites from the FSS Stack template and reconcile drift through `migrations/`.
 
 ## Checklist
 
@@ -71,5 +115,6 @@ sections rather than restating them here.
 - [ ] TSDoc only where it adds value; no type-restating comments; public API only.
 - [ ] Tier assigned: Tier 0 (types + README) or Tier 1 (generated API reference).
 - [ ] Tier 1 only: TypeDoc→markdown reference, VitePress site, `llms-full.txt`.
+- [ ] Tier 1 only: `docs:gen` / `docs:check`, with `docs:check` wired into CI.
 - [ ] Component libraries documented via showcase, not TypeDoc.
-- [ ] `docs/` published, `docs/internal/` not (see clis.md).
+- [ ] `docs/` published, `docs/internal/` not.
