@@ -65,6 +65,7 @@ type ExtensionSlug = ProjectPromptConfig["extensions"][number];
 const frontendTypes: { label: string; value: FrontendType }[] = [
   { label: "React Vite", value: "react-vite" },
   { label: "React Next.js", value: "react-nextjs" },
+  { label: "Fumadocs Docs", value: "react-fumadocs" },
 ];
 
 const frontendTypeLabel = (value: FrontendType) =>

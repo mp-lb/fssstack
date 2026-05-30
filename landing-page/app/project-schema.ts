@@ -99,7 +99,7 @@ export const projectPromptSchema = z
               slugPattern,
               "Use lowercase letters separated by single hyphens.",
             ),
-          type: z.enum(["react-vite", "react-nextjs"]),
+          type: z.enum(["react-vite", "react-nextjs", "react-fumadocs"]),
         }),
       )
       .default([{ slug: "frontend", type: "react-vite" }]),
