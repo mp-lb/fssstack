@@ -164,5 +164,5 @@ Docs:
 
 - [ ] `docs/commands.md` generated via `@mp-lb/cli-docs`; never hand-edited.
 - [ ] Narrative docs link to the reference instead of restating flags.
-- [ ] Library docs baseline met — `docs/` split, VitePress site, `docs:check` in
+- [ ] Library docs baseline met — `docs/` split, Fumadocs site, `docs:check` in
   CI, `llms-full.txt` (see libs.md).
