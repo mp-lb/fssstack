@@ -4,13 +4,14 @@ Run this from an empty folder. If other project files already exist, stop and as
 
 ## Shell
 
-Start by fetching the shell project files:
+Start by fetching the shell project files and the augment scripts:
 
 ```bash
 dx pull --direct --store felixsebastian/fssstack --path shell --target .
+dx pull --direct --store felixsebastian/fssstack --path scripts --target scripts
 ```
 
-The shell contains some example apps/packages: `apps/example-backend` and `packages/example-lib`.
+The shell contains some example apps/packages: `apps/example-backend` and `packages/example-lib`. The **`scripts/` directory** holds the `augment-*.mjs` / `apply-*.mjs` helpers that the steps below invoke as `node scripts/<name>.mjs`. They live at the store's **top level, not inside `shell/`**, so the `shell` pull does not bring them — they need their own pull (above).
 
 ## Package naming
 
@@ -73,27 +74,49 @@ docs/examples/frontend/logging.md
 ## Docs Sites
 
 For a library that publishes a documentation site, scaffold a **Fumadocs** app on
-**React Router**, then apply the narrow fssstack wiring:
+**React Router**, run the augment script, then finish the small bit of wiring it
+deliberately leaves to you:
 
 ```bash
 mkdir -p apps
-npm create fumadocs-app@latest <docs slug> --template react-router --cwd apps
+(cd apps && CI=1 npm create fumadocs-app@latest <docs slug> --template react-router --search orama --pm pnpm --no-git)
 node scripts/augment-docs-site.mjs . "<docs slug>"
 ```
 
 Fumadocs owns the generic React Router + MDX + search scaffold (the
-`fumadocs-core` / `fumadocs-mdx` / `fumadocs-ui` stack with Orama local search).
-The docs-site augment step stays narrow, exactly like the frontend ones: package
-name (`<package-scope>/<project-slug>-<docs slug>`, collapsing to
-`<package-scope>/<project-slug>` when the docs slug equals the project slug — see
-Package naming), shared TypeScript wiring, Zap service entry, port env name,
-deploy-safe static rewrites, title/favicon values, and cleanup of scaffold noise.
+`fumadocs-core` / `fumadocs-mdx` / `fumadocs-ui` stack with Orama local search),
+prerendering every page to static HTML under `build/client`.
+
+**`CI=1` is required, and run it from inside `apps/`.** `create-fumadocs-app`
+prompts interactively (a linter `select`) even with flags passed, so `CI=1` makes
+it take defaults and run unattended; it also ignores `--cwd` (it scaffolds into
+`./<docs slug>` in the current directory), so run it from `apps/`.
+
+`augment-docs-site.mjs <target> [docs slug]` does **only** this:
+
+- rewrites `package.json` scripts so `dev` / `start` read the Zapper-injected
+  `${<DOCS_SLUG>_PORT}` (with a `4315` fallback), and adds `typecheck`;
+- adds the `serve` devDependency and writes `serve.json`, so `start` (static
+  serve of `build/client`) works out of the box;
+- writes `tsconfig.json` extending the shared `etc/tsconfig.frontend.json`
+  (creating that base if missing);
+- pins dependency ranges.
+
+It does **not** rename the package or touch `zap.yaml` — finish those by hand:
+
+- **Package name** — set `apps/<docs slug>/package.json` `name` to
+  `<package-scope>/<project-slug>-<docs slug>`, collapsing to
+  `<package-scope>/<project-slug>` when the docs slug equals the project slug
+  (see Package naming).
+- **Zap service** — add `<DOCS_SLUG>_PORT` to `ports:` and a native service
+  (`cmd: pnpm --filter <package-name> dev`, `env: "*"`); a `homepage:` pointing at
+  `http://localhost:${<DOCS_SLUG>_PORT}/docs` is handy.
+- **Cleanup** — the scaffolded sample pages under `content/docs/` are disposable.
 
 A docs site renders the library's published `docs/public/` — the generated API
-reference plus hand-written guides. This is the plain Fumadocs setup with no
-extra dependencies; bringing a docs site up to internal house style (shared
-theme, global TypeScript config, generated-reference wiring) is a separate
-augmented flow and is not part of this template.
+reference plus hand-written guides. Bringing a docs site up to internal house
+style (shared theme, generated-reference wiring) is a separate augmented flow,
+not part of this template.
 
 ### AGENTS.md docs layer
 
