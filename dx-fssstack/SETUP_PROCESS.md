@@ -73,21 +73,50 @@ docs/examples/frontend/logging.md
 ## Docs Sites
 
 For a library that publishes a documentation site, scaffold a **Fumadocs** app on
-**React Router**, then apply the narrow fssstack wiring:
+**React Router**, run the augment script, then finish the wiring the script
+deliberately leaves to you.
 
 ```bash
 mkdir -p apps
-npm create fumadocs-app@latest <docs slug> --template react-router --cwd apps
+(cd apps && CI=1 npm create fumadocs-app@latest <docs slug> --template react-router --search orama --pm pnpm --no-git)
 node scripts/augment-docs-site.mjs . "<docs slug>"
 ```
 
 Fumadocs owns the generic React Router + MDX + search scaffold (the
 `fumadocs-core` / `fumadocs-mdx` / `fumadocs-ui` stack with Orama local search).
-The docs-site augment step stays narrow, exactly like the frontend ones: package
-name (`<package-scope>/<project-slug>-<docs slug>`, collapsing to
-`<package-scope>/<project-slug>` when the docs slug equals the project slug — see
-Package naming), shared TypeScript wiring, Zap service entry, port env name,
-deploy-safe static rewrites, title/favicon values, and cleanup of scaffold noise.
+The `react-router` template prerenders every page to static HTML under
+`build/client` (so the docs deploy is static), and emits `llms-full.txt` /
+`llms.txt`.
+
+**`CI=1` is required.** `create-fumadocs-app` prompts interactively for a linter
+even when other options are passed as flags; `CI=1` makes it take defaults
+(linter disabled — the repo's root flat config already globs `apps/**`) so the
+command runs unattended. Run it from inside `apps/` (the tool creates
+`./<docs slug>`); `--cwd` is not honoured.
+
+What `augment-docs-site.mjs <target> [docs slug]` does — and only this:
+
+- rewrites the app's `package.json` scripts so `dev` / `start` read the
+  Zapper-injected `${<DOCS_SLUG>_PORT}` (with a `4315` fallback), and adds a
+  `typecheck` script;
+- pins every dependency range (matching the other layers);
+- writes the app's `tsconfig.json` to extend the shared
+  `etc/tsconfig.frontend.json` (creating that base if it's missing).
+
+It does **not** rename the package, touch `zap.yaml`, or create `serve.json`.
+Finish those by hand:
+
+- **Package name** — set `apps/<docs slug>/package.json` `name` to
+  `<package-scope>/<project-slug>-<docs slug>`, collapsing to
+  `<package-scope>/<project-slug>` when the docs slug equals the project slug
+  (see Package naming).
+- **Zap service** — add `<DOCS_SLUG>_PORT` to `ports:` and a native service
+  (`cmd: pnpm --filter <package-name> dev`, `env: "*"`); a `homepage:` pointing at
+  `http://localhost:${<DOCS_SLUG>_PORT}/docs` is handy.
+- **Static serving** — the `start` script runs `serve ./build/client --config
+  serve.json`, so add `serve` as a devDependency and a `serve.json` (at minimum
+  `{ "cleanUrls": true, "rewrites": [{ "source": "/", "destination": "/docs" }] }`).
+- **Cleanup** — the scaffolded sample pages under `content/docs/` are disposable.
 
 A docs site renders the library's published `docs/public/` — the generated API
 reference plus hand-written guides. This is the plain Fumadocs setup with no
