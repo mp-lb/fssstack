@@ -44,8 +44,9 @@ Scale the effort to the library's surface area.
   door (install, a ~30-second example, links out). For a small utility this is
   the *entire* doc story — types + README, nothing more.
 - **Tier 1 — libraries with real surface area:** generate an API reference with
-  **TypeDoc → markdown** into `docs/`, render it with VitePress, emit the
-  `llms-full.txt` bundle, and add a hand-written guide for concepts and recipes.
+  **TypeDoc → markdown** into `docs/`, render it with the shared **Fumadocs**
+  docs-site app type, emit the `llms-full.txt` bundle, and add a hand-written
+  guide for concepts and recipes.
 
 Threshold: *if you can't comfortably navigate the API from the README alone,
 generate the reference.*
@@ -77,9 +78,10 @@ config builds only the published tier.
 
 ## Docs site
 
-A **Tier 1** library publishes its `docs/` as a site built with **VitePress**:
-curated nav and sidebar, local search, and a "Raw" link to `llms-full.txt` for
-agents. Every page is one of two kinds:
+A **Tier 1** library publishes its `docs/` as a site built with **Fumadocs** —
+the shared FSS Stack docs-site app type (React Router), augmented by the
+`@mp-lb/docs-site` preset: curated nav and sidebar, local search, and a "Raw"
+link to `llms-full.txt` for agents. Every page is one of two kinds:
 
 - **Generated reference** — TypeDoc → markdown, never hand-edited.
 - **Hand-written guide** — quick start, concepts, recipes. The guide links to
@@ -91,22 +93,23 @@ Keep the committed reference from drifting with two package scripts:
 - `docs:check` — fail if the committed docs are stale. Run it in **CI** so the
   reference can't drift from the types.
 
-**VitePress is the default renderer, not a requirement.** What's standardized is
-the *generation*: docs land in `docs/` as markdown, `llms-full.txt` is bundled,
-and `docs:check` keeps them fresh in CI. A project with its own site — e.g.
-**Doctrine** — may render that same published `docs/` however it likes; it still
-follows the generation, layout, and freshness standard, and only the rendering
-differs.
+**The shared Fumadocs site is the default renderer, not a requirement.** What's
+standardized is the *generation*: docs land in `docs/` as markdown,
+`llms-full.txt` is bundled, and `docs:check` keeps them fresh in CI. A project
+with its own site — e.g. **Doctrine** — may render that same published `docs/`
+however it likes; it still follows the generation, layout, and freshness
+standard, and only the rendering differs.
 
 A **Tier 0** library has no site — the README is the whole front door.
 
 ## Keeping sites consistent across repos
 
-Libraries live in **separate repos** with no shared monorepo to hold one
-VitePress config, so the site setup must be kept aligned across repos by some
-deliberate mechanism — a published shared preset, or template-scaffolded config
-kept current via migrations. **Mechanism TBD.** Until it's decided: scaffold new
-sites from the FSS Stack template and reconcile drift through `migrations/`.
+Libraries live in **separate repos**, so consistency comes from two shared
+pieces rather than copy-paste: every docs site is scaffolded from the FSS Stack
+**Fumadocs docs-site app type**, then augmented by the published
+**`@mp-lb/docs-site`** preset (shared theme, config, and global tsconfig).
+Bumping the preset updates every site; template-level changes roll out via
+`migrations/`.
 
 ## Checklist
 
@@ -114,7 +117,7 @@ sites from the FSS Stack template and reconcile drift through `migrations/`.
 - [ ] README is a real front door (install, short example, links).
 - [ ] TSDoc only where it adds value; no type-restating comments; public API only.
 - [ ] Tier assigned: Tier 0 (types + README) or Tier 1 (generated API reference).
-- [ ] Tier 1 only: TypeDoc→markdown reference, VitePress site, `llms-full.txt`.
+- [ ] Tier 1 only: TypeDoc→markdown reference, Fumadocs site (shared preset), `llms-full.txt`.
 - [ ] Tier 1 only: `docs:gen` / `docs:check`, with `docs:check` wired into CI.
 - [ ] Component libraries documented via showcase, not TypeDoc.
 - [ ] `docs/` published, `docs/internal/` not.

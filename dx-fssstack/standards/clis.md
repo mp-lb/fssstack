@@ -135,7 +135,7 @@ intro framing and cross-links; everything per-command is generated.
 
 ## Publishing and docs site
 
-The publishing surfaces — `docs/` vs `docs/internal/`, the VitePress site, the
+The publishing surfaces — `docs/` vs `docs/internal/`, the Fumadocs site, the
 `llms-full.txt` bundle, and the `docs:gen` / `docs:check`-in-CI loop — are the
 **library** standard. See [libs.md](./libs.md). A CLI adds only the generated
 command reference above; everything else about shipping docs is the same as any
