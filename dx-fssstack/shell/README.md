@@ -10,7 +10,6 @@ It intentionally avoids frontend frameworks and deployment code. It exists so th
 - `packages/core`: shared runtime-safe constants and helpers.
 - `packages/server`: Node/server helpers used by the backend.
 - `packages/trpc`: placeholder API contract package.
-- `packages/example-cli`: simple executable CLI package.
 - `packages/example-lib`: simple publishable library package.
 - `docs/standards/release.md`: standard Changesets release process.
 
@@ -27,6 +26,5 @@ zap up
 The placeholder names are deliberately obvious:
 
 - `example-backend`
-- `@example/fss-shell-example-cli`
 - `@example/fss-shell-example-lib`
 - `EXAMPLE_BACKEND_PORT`

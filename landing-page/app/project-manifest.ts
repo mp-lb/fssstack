@@ -21,7 +21,6 @@ export const buildManifestJson5 = (config: ProjectPromptConfig) =>
       })),
     ),
     manifestLine("backends", config.backendServices),
-    manifestLine("clis", config.cliPackages),
     manifestLine("libs", config.libraryPackages),
     manifestLine("extensions", config.extensions, false),
     "}",

@@ -3,9 +3,12 @@ import { join } from "node:path";
 import { fail, getScriptArgs } from "./lib/args";
 import { installFromStore } from "./lib/dx";
 import { replaceInFiles, walkFiles } from "./lib/files";
-import { assertUniqueServices, parseServiceList } from "./lib/services";
+import { assertUniqueServices } from "./lib/services";
 
-type PublishableKind = "cli" | "lib";
+// A publishable package is always a library. A library may opt into shipping an
+// executable by marking its slug `(bin)` in the input list — there is no
+// separate "CLI" package type anymore.
+type LibrarySpec = { slug: string; executable: boolean };
 
 const publishableFiles: Array<[string, string]> = [
   ["layers/packages/publishable/package.json", "package.json"],
@@ -26,20 +29,33 @@ const releaseFiles: Array<[string, string]> = [
   ],
 ];
 
-const optionalServiceList = (raw: string | undefined): string[] => {
+// Parse a comma-separated library list where each entry is `slug` or
+// `slug (bin)`. The `(bin)` marker opts the library into shipping an executable.
+const parseLibrarySpecs = (raw: string | undefined): LibrarySpec[] => {
   const value = raw?.trim() ?? "";
 
   if (value === "" || value === "-" || value.toLowerCase() === "none") {
     return [];
   }
 
-  return parseServiceList(value);
+  return value
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean)
+    .map((entry) => {
+      const [slug = "", ...markers] = entry.split(/\s+/);
+      const executable = markers.some(
+        (marker) => marker.toLowerCase() === "(bin)",
+      );
+
+      return { slug, executable };
+    });
 };
 
 const installPublishablePackage = (
   targetRoot: string,
   packageSlug: string,
-  kind: PublishableKind,
+  executable: boolean,
 ) => {
   const packageRoot = join(targetRoot, "packages", packageSlug);
 
@@ -49,12 +65,13 @@ const installPublishablePackage = (
 
   replaceInFiles(walkFiles(packageRoot), {
     __PUBLISHABLE_PACKAGE_NAME__: packageSlug,
-    __PUBLISHABLE_KIND__: kind === "cli" ? "CLI" : "library",
-    __PUBLISHABLE_TSCONFIG__:
-      kind === "cli" ? "tsconfig.node.json" : "tsconfig.base.json",
+    __PUBLISHABLE_KIND__: executable ? "executable library" : "library",
+    __PUBLISHABLE_TSCONFIG__: executable
+      ? "tsconfig.node.json"
+      : "tsconfig.base.json",
   });
 
-  if (kind === "cli") {
+  if (executable) {
     const packageJsonPath = join(packageRoot, "package.json");
     const indexPath = join(packageRoot, "src", "index.ts");
     const packageJson = JSON.parse(readFileSync(packageJsonPath, "utf8")) as {
@@ -80,33 +97,26 @@ const installPublishablePackage = (
 
 const args = getScriptArgs();
 
-if (args.length < 1 || args.length > 3) {
+if (args.length < 1 || args.length > 2) {
   fail(
-    "usage: install-publishable-packages.mjs /path/to/target-project [cli-packages] [library-packages]",
+    "usage: install-publishable-packages.mjs /path/to/target-project [library-packages]",
   );
 }
 
-const [targetRoot, cliPackagesArg, libraryPackagesArg] = args as [
-  string,
-  string?,
-  string?,
-];
-const cliPackages = optionalServiceList(cliPackagesArg);
-const libraryPackages = optionalServiceList(libraryPackagesArg);
-const publishablePackages = [...cliPackages, ...libraryPackages];
+const [targetRoot, libraryPackagesArg] = args as [string, string?];
+const librarySpecs = parseLibrarySpecs(libraryPackagesArg);
 
-if (publishablePackages.length === 0) {
+if (librarySpecs.length === 0) {
   process.exit(0);
 }
 
-assertUniqueServices(publishablePackages, "publishable package");
+assertUniqueServices(
+  librarySpecs.map((spec) => spec.slug),
+  "publishable package",
+);
 
-for (const packageSlug of cliPackages) {
-  installPublishablePackage(targetRoot, packageSlug, "cli");
-}
-
-for (const packageSlug of libraryPackages) {
-  installPublishablePackage(targetRoot, packageSlug, "lib");
+for (const { slug, executable } of librarySpecs) {
+  installPublishablePackage(targetRoot, slug, executable);
 }
 
 for (const [sourcePath, targetPath] of releaseFiles) {

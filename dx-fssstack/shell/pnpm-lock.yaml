@@ -32,12 +32,6 @@ importers:
 
   packages/core: {}
 
-  packages/example-cli:
-    dependencies:
-      '@example/fss-shell-example-lib':
-        specifier: workspace:*
-        version: link:../example-lib
-
   packages/example-lib: {}
 
   packages/server:

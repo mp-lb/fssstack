@@ -1,0 +1,7 @@
+{
+  name: 'FSS Stack',
+  emoji: '🧰',
+  description: 'FSS Stack template authoring repo (landing page + Doctrine payloads)',
+  homepageUrl: 'https://fssstack.mp-lb.dev/',
+  internalDeps: ['zapper']
+}

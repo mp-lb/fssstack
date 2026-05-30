@@ -10,7 +10,7 @@ Start by fetching the shell project files:
 dx pull --direct --store felixsebastian/fssstack --path shell --target .
 ```
 
-The shell contains some example apps/packages: `apps/example-backend`, `packages/example-cli`, and `packages/example-lib`.
+The shell contains some example apps/packages: `apps/example-backend` and `packages/example-lib`.
 
 ## Backends
 
@@ -64,29 +64,9 @@ docs/examples/frontend/web-request.md
 docs/examples/frontend/logging.md
 ```
 
-## CLI Packages
-
-For each CLI package, duplicate the example CLI and augment it:
-
-```bash
-cp -R packages/example-cli packages/<cli slug>
-node scripts/augment-cli.mjs "<cli slug>" "<package-scope>" "<project-slug>"
-```
-
-The CLI augment step should:
-
-- update package name to `<package-scope>/<project-slug>-<cli slug>`
-- update `bin` to expose the requested command name
-- keep the Node shebang on the entrypoint
-- keep `files`, `exports`, `types`, and build scripts publish-safe
-- update release docs if package names changed
-
-Remove `packages/example-cli` after all requested CLIs exist, unless the requested CLI slug is `example-cli`.
-
 ## Delete examples
 
 - `rm -rf apps/example-backend`
-- `rm -rf packages/example-cli`
 - `rm -rf packages/example-lib`
 
 ## Library Packages
@@ -104,6 +84,8 @@ The library augment step should:
 - keep `files`, `exports`, `types`, and build scripts publish-safe
 - keep public exports small and explicit
 - update release docs if package names changed
+
+A library that ships a command-line tool is still a library: add a package `bin`, the Node tsconfig, and a `#!/usr/bin/env node` shebang on the entrypoint. There is no separate CLI package type. See `docs/standards/clis.md` for command-line behaviour on top of the library baseline.
 
 Remove `packages/example-lib` after all requested libraries exist, unless the requested library slug is `example-lib`.
 

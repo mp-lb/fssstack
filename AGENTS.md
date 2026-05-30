@@ -33,7 +33,7 @@ The shell is represented by `flatpack-shell/`. It should be a working monorepo, 
 dx clone example-repo ./
 ```
 
-After that, target setup instructions can tell the agent to create Vite or Next.js apps with the appropriate external scaffolders, and to create simple backends, CLIs, and libraries by copying examples from the shell and running augment scripts.
+After that, target setup instructions can tell the agent to create Vite or Next.js apps with the appropriate external scaffolders, and to create simple backends and libraries by copying examples from the shell and running augment scripts.
 
 ## What Belongs Where
 
@@ -43,7 +43,6 @@ After that, target setup instructions can tell the agent to create Vite or Next.
 - Basic package config.
 - Shared library packages.
 - A simple backend.
-- A simple CLI.
 - A simple publishable library.
 - Release docs and release wiring for the target repo.
 
@@ -52,7 +51,7 @@ After that, target setup instructions can tell the agent to create Vite or Next.
 - Input collection.
 - Target repo shape.
 - Layering order.
-- Commands to scaffold Vite, Next.js, backend, CLI, and library projects.
+- Commands to scaffold Vite, Next.js, backend, and library projects.
 - Commands to validate the resulting target repo.
 - References to standards docs and release process docs that should exist in the generated target repo.
 

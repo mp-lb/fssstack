@@ -184,7 +184,6 @@ export default function ProjectPromptBuilder() {
       packagePrefix: config.packagePrefix.trim().toLowerCase(),
       shadcnPreset: config.shadcnPreset.trim(),
       backendServices: config.backendServices.map(toSlug),
-      cliPackages: config.cliPackages.map(toSlug),
       frontendClients: config.frontendClients.map((client) => ({
         ...client,
         slug: toSlug(client.slug),
@@ -217,14 +216,12 @@ export default function ProjectPromptBuilder() {
   const hasEmptyServiceField =
     config.backendServices.some((service) => service.trim() === "") ||
     config.frontendClients.some((client) => client.slug.trim() === "") ||
-    config.cliPackages.some((cliPackage) => cliPackage.trim() === "") ||
     config.libraryPackages.some(
       (libraryPackage) => libraryPackage.trim() === "",
     );
   const serviceSlugs = [
     ...config.backendServices.map(toSlug),
     ...config.frontendClients.map((client) => toSlug(client.slug)),
-    ...config.cliPackages.map(toSlug),
     ...config.libraryPackages.map(toSlug),
   ].filter((slug) => slug !== "");
   const duplicateServiceSlugs = new Set(
@@ -643,59 +640,6 @@ export default function ProjectPromptBuilder() {
               </ListPanel>
 
               <ListPanel
-                title="CLI packages"
-                disabled={hasEmptyServiceField}
-                onAdd={() =>
-                  setValue("cliPackages", [...config.cliPackages, ""])
-                }
-              >
-                {config.cliPackages.map((cliPackage, index) => {
-                  const cliPath = ["cliPackages", index];
-                  const cliError =
-                    errorFor(cliPath) ??
-                    duplicateServiceErrorFor(cliPackage, cliPath);
-
-                  return (
-                    <CompactRow key={`cli-${index}`}>
-                      <Input
-                        aria-label={`CLI package ${index + 1}`}
-                        value={cliPackage}
-                        aria-invalid={Boolean(cliError)}
-                        onChange={(event) => {
-                          const next = [...config.cliPackages];
-                          markFieldInteracted(cliPath);
-                          next[index] = toSlug(event.target.value);
-                          setValue("cliPackages", next);
-                        }}
-                      />
-                      <Button
-                        type="button"
-                        variant="ghost"
-                        size="icon-sm"
-                        title="Remove CLI package"
-                        aria-label="Remove CLI package"
-                        onClick={() =>
-                          setValue(
-                            "cliPackages",
-                            config.cliPackages.filter(
-                              (_, itemIndex) => itemIndex !== index,
-                            ),
-                          )
-                        }
-                      >
-                        <Trash2 aria-hidden="true" />
-                      </Button>
-                      {cliError && (
-                        <p className="col-span-full px-1 text-xs text-destructive">
-                          {cliError}
-                        </p>
-                      )}
-                    </CompactRow>
-                  );
-                })}
-              </ListPanel>
-
-              <ListPanel
                 title="Library packages"
                 disabled={hasEmptyServiceField}
                 onAdd={() =>
@@ -759,8 +703,8 @@ export default function ProjectPromptBuilder() {
                   <p>
                     Backend slugs create Fastify/tRPC services in{" "}
                     <code>apps/&lt;slug&gt;</code>. Client slugs create Vite or
-                    Next.js apps in <code>apps/&lt;slug&gt;</code>. CLI and
-                    library slugs create publishable TypeScript packages in{" "}
+                    Next.js apps in <code>apps/&lt;slug&gt;</code>. Library slugs
+                    create publishable TypeScript packages in{" "}
                     <code>packages/&lt;slug&gt;</code>. App slugs are rendered
                     into <code>zap.yaml</code>, <code>.env.local</code>, and
                     package names.

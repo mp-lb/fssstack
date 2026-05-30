@@ -48,9 +48,9 @@ Instructions should not assume a single frontend named `frontend`. Real generate
 
 ### Publishable Packages
 
-CLI and library packages live under `packages/<slug>` alongside the fixed internal packages. They are normal TypeScript workspace packages with package names rendered from the project package prefix and slug.
+Library packages live under `packages/<slug>` alongside the fixed internal packages. They are normal TypeScript workspace packages with package names rendered from the project package prefix and slug.
 
-CLI packages use the node tsconfig, include a package `bin`, and build an executable `dist/index.js`. Library packages use the base tsconfig unless the target app needs a more specific runtime. If any publishable package exists, setup installs the shared Changesets direct-release workflow; a pushed changeset on `main` releases without a release PR.
+Library packages use the base tsconfig unless the target app needs a more specific runtime. A library that ships an executable just adds a package `bin` and builds an executable `dist/index.js` — it's still a library. If any publishable package exists, setup installs the shared Changesets direct-release workflow; a pushed changeset on `main` releases without a release PR.
 
 ### Template Rendering
 

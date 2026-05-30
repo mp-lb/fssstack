@@ -6,11 +6,10 @@ import {
 } from "../app/project-schema";
 
 describe("project prompt schema", () => {
-  it("accepts CLI and library package lists", () => {
+  it("accepts library package lists", () => {
     const result = projectPromptSchema.safeParse({
       ...defaultProjectPromptConfig,
       description: "Example project.",
-      cliPackages: ["toolbox"],
       libraryPackages: ["sdk"],
       extensions: ["mongodb", "s3"],
     });
@@ -32,7 +31,7 @@ describe("project prompt schema", () => {
     const result = projectPromptSchema.safeParse({
       ...defaultProjectPromptConfig,
       description: "Example project.",
-      cliPackages: ["backend"],
+      libraryPackages: ["backend"],
     });
 
     expect(result.success).toBe(false);
@@ -43,16 +42,14 @@ describe("project prompt schema", () => {
     }
   });
 
-  it("normalizes CLI and library package slugs", () => {
+  it("normalizes library package slugs", () => {
     expect(
       normalizeProjectPromptConfig({
         ...defaultProjectPromptConfig,
-        cliPackages: ["Tool Box"],
-        libraryPackages: ["SDK"],
+        libraryPackages: ["Tool Box", "SDK"],
       }),
     ).toMatchObject({
-      cliPackages: ["tool-box"],
-      libraryPackages: ["sdk"],
+      libraryPackages: ["tool-box", "sdk"],
     });
   });
 });

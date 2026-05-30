@@ -12,9 +12,9 @@ import { jsonToYaml } from "./lib/yaml";
 
 const args = getScriptArgs();
 
-if (args.length < 6 || args.length > 10) {
+if (args.length < 6 || args.length > 9) {
   fail(
-    "usage: render-template.mjs /path/to/target-project project-slug package-scope project-name project-description project-emoji [backend-services] [frontend-clients] [cli-packages] [library-packages]",
+    "usage: render-template.mjs /path/to/target-project project-slug package-scope project-name project-description project-emoji [backend-services] [frontend-clients] [library-packages]",
   );
 }
 
@@ -27,7 +27,6 @@ const [
   projectEmoji,
   backendServicesArg = "backend",
   frontendClientsArg = "frontend",
-  cliPackagesArg = "",
   libraryPackagesArg = "",
 ] = args as [
   string,
@@ -39,12 +38,10 @@ const [
   string?,
   string?,
   string?,
-  string?,
 ];
 
 const backendServices = parseServiceList(backendServicesArg);
 const frontendClients = parseServiceList(frontendClientsArg);
-const cliPackages = parseServiceList(cliPackagesArg);
 const libraryPackages = parseServiceList(libraryPackagesArg);
 
 if (backendServices.length === 0 || frontendClients.length === 0) {
@@ -54,7 +51,6 @@ if (backendServices.length === 0 || frontendClients.length === 0) {
 assertUniqueServices([
   ...backendServices,
   ...frontendClients,
-  ...cliPackages,
   ...libraryPackages,
 ]);
 

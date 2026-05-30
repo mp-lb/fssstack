@@ -13,7 +13,6 @@ describe("buildManifestJson5", () => {
         { slug: "web", type: "react-vite" },
         { slug: "admin", type: "react-nextjs" },
       ],
-      cliPackages: ["toolbox"],
       libraryPackages: ["sdk", "ui"],
       extensions: ["mongodb", "s3"],
     });
@@ -29,7 +28,6 @@ describe("buildManifestJson5", () => {
         "  shadcnPreset: 'b1VlIttI',",
         "  frontends: [{name:'web',type:'react-vite'},{name:'admin',type:'react-nextjs'}],",
         "  backends: ['api','worker'],",
-        "  clis: ['toolbox'],",
         "  libs: ['sdk','ui'],",
         "  extensions: ['mongodb','s3']",
         "}",
@@ -47,7 +45,6 @@ describe("buildManifestJson5", () => {
         { name: "admin", type: "react-nextjs" },
       ],
       backends: ["api", "worker"],
-      clis: ["toolbox"],
       libs: ["sdk", "ui"],
       extensions: ["mongodb", "s3"],
     });
