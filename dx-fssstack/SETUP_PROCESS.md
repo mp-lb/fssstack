@@ -78,7 +78,7 @@ For a library that publishes a documentation site, scaffold a **Fumadocs** app o
 ```bash
 mkdir -p apps
 npm create fumadocs-app@latest <docs slug> --template react-router --cwd apps
-node scripts/augment-docs-site.mjs "<docs slug>" "<package-scope>" "<project-slug>"
+node scripts/augment-docs-site.mjs . "<docs slug>"
 ```
 
 Fumadocs owns the generic React Router + MDX + search scaffold (the
