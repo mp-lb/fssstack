@@ -1,5 +1,5 @@
 project: stackforge
-env_files:
+env-files:
   - flatpack-shell/.env.local
   - flatpack-shell/.env
 homepage: http://localhost:${EXAMPLE_BACKEND_PORT}/health
@@ -13,6 +13,6 @@ tasks:
   setup:
     cmds:
       - pnpm -C flatpack-shell install
-  worktree_setup:
+  worktree-setup:
     cmds:
       - pnpm -C flatpack-shell install
