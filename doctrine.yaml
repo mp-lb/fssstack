@@ -1,7 +1,7 @@
 git:
   commit_message: "Update doctrine docs"
 sync:
-  - target: dx-fssstack
+  - target: fssstack
     store: felixsebastian/fssstack
-  - target: dx-mp-lb-run
+  - target: mp-lb-run
     store: felixsebastian/mp-lb-run

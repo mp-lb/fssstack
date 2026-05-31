@@ -1,16 +1,16 @@
-# FSS Stack Authoring Repo
+# Stackforge
 
 Always read this file when starting new chats.
 
-This repository is the authoring wrapper for the FSS Stack setup system. It is not itself the target application. The target application is a separate repo assembled by an agent after reading the published Doctrine docs.
+Stackforge is the authoring workbench for the FSS Stack setup system. It is not itself the target application. The target application is a separate repo assembled by an agent after reading the published Doctrine docs.
 
 ## Repository Shape
 
 The root of this git repo should stay thin. It is a wrapper with documentation and a few sibling projects:
 
-- `landing-page/` is the Next.js landing page and prompt builder.
+- `fssstack-start/` is the Next.js landing page and prompt builder.
 - `flatpack-shell/` is the minimal working target-repo shell monorepo.
-- `flatpack-docs/` is the Doctrine payload for creating FSS Stack target projects.
+- `fssstack/` is the Doctrine payload for creating FSS Stack target projects.
 - `mp-lb-run/` is the Doctrine payload for deploying FSS Stack target projects.
 - `authoring-tools/` contains authoring-time scripts, tests, and build tooling that may generate Doctrine payload files.
 
@@ -46,7 +46,7 @@ After that, target setup instructions can tell the agent to create Vite or Next.
 - A simple publishable library.
 - Release docs and release wiring for the target repo.
 
-`flatpack-docs/` owns the setup instructions an agent reads from Doctrine:
+`fssstack/` owns the setup instructions an agent reads from Doctrine:
 
 - Input collection.
 - Target repo shape.
@@ -55,7 +55,7 @@ After that, target setup instructions can tell the agent to create Vite or Next.
 - Commands to validate the resulting target repo.
 - References to standards docs and release process docs that should exist in the generated target repo.
 
-Avoid putting fake working projects, copied package files, or framework app templates back into `flatpack-docs/`. The docs should describe how to assemble the target repo and should reference real shell content or external scaffolders.
+Avoid putting fake working projects, copied package files, or framework app templates back into `fssstack/`. The docs should describe how to assemble the target repo and should reference real shell content or external scaffolders.
 
 `mp-lb-run/` owns deployment instructions and deployment payload files. Do not mix deployment-specific cloud configuration into the local-development shell unless the target repo genuinely needs it to run locally.
 
@@ -65,10 +65,10 @@ Avoid putting fake working projects, copied package files, or framework app temp
 
 The root has no `package.json`. Use the owning folder:
 
-- Landing page dev: `pnpm -C landing-page dev`
-- Landing page build: `pnpm -C landing-page build`
-- Landing page lint: `pnpm -C landing-page lint`
-- Landing page test: `pnpm -C landing-page test`
+- Landing page dev: `pnpm -C fssstack-start dev`
+- Landing page build: `pnpm -C fssstack-start build`
+- Landing page lint: `pnpm -C fssstack-start lint`
+- Landing page test: `pnpm -C fssstack-start test`
 - Shell install: `pnpm -C flatpack-shell install`
 - Shell typecheck: `pnpm -C flatpack-shell typecheck`
 - Shell test: `pnpm -C flatpack-shell test`
@@ -80,7 +80,7 @@ The root `zap.yaml` is only a convenience wrapper for quickly running the shell 
 
 ## Doctrine Payload Rules
 
-Do not add `AGENTS.md` files inside `flatpack-docs/` or `mp-lb-run/`. Those folders are published payloads, not standalone working repos in this checkout.
+Do not add `AGENTS.md` files inside `fssstack/` or `mp-lb-run/`. Those folders are published payloads, not standalone working repos in this checkout.
 
 For Doctrine payload changes:
 
@@ -112,6 +112,6 @@ zap up
 zap o
 ```
 
-For `landing-page/` changes, use the landing-page commands. Before changing framework-sensitive Next.js behavior, check the relevant guide in `landing-page/node_modules/next/dist/docs/`.
+For `fssstack-start/` changes, use the fssstack-start commands. Before changing framework-sensitive Next.js behavior, check the relevant guide in `fssstack-start/node_modules/next/dist/docs/`.
 
-For `flatpack-docs/` changes, read `TARGET_PROJECT_SHAPE.md` if present and compare the instructions against the actual `flatpack-shell/` shape. The docs must not assume this authoring checkout exists inside the generated target repo.
+For `fssstack/` changes, read `TARGET_PROJECT_SHAPE.md` if present and compare the instructions against the actual `flatpack-shell/` shape. The docs must not assume this authoring checkout exists inside the generated target repo.

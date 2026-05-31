@@ -1,4 +1,4 @@
-project: fssstack
+project: stackforge
 env_files:
   - flatpack-shell/.env.local
   - flatpack-shell/.env
