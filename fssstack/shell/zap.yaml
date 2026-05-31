@@ -1,5 +1,5 @@
 project: fss-shell
-env_files:
+env-files:
   - .env.local
   - .env
 homepage: http://localhost:${EXAMPLE_BACKEND_PORT}/health
@@ -22,7 +22,7 @@ tasks:
   test:
     cmds:
       - pnpm test
-  worktree_setup:
+  worktree-setup:
     cmds:
       - pnpm install
       - cp "$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")/.env" . 2>/dev/null || true

@@ -119,7 +119,7 @@ writeFileSync(
   join(targetRoot, "zap.yaml"),
   jsonToYaml({
     project: projectSlug,
-    env_files: [".env.local", ".env"],
+    "env-files": [".env.local", ".env"],
     homepage: `http://localhost:\${${firstFrontendPortEnv}}`,
     ports,
     native: nativeServices,
@@ -147,7 +147,7 @@ writeFileSync(
         aliases: ["vitest"],
         cmds: ["pnpm test"],
       },
-      worktree_setup: {
+      "worktree-setup": {
         cmds: ["pnpm install"],
       },
     },
