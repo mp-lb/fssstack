@@ -347,7 +347,7 @@ export default function ProjectPromptBuilder() {
               What is this?
             </button>
             <a
-              href="https://github.com/mp-lb/fssstack"
+              href="https://github.com/mp-lb/stackforge"
               className="inline-flex items-center gap-1.5 text-muted-foreground underline underline-offset-4 transition hover:text-foreground"
             >
               <GitCommit className="size-4" aria-hidden="true" />
@@ -960,7 +960,7 @@ function AboutFssstack() {
       <p>
         Read the{" "}
         <a
-          href="https://github.com/mp-lb/fssstack/blob/main/SETUP_PROCESS.md"
+          href="https://github.com/mp-lb/stackforge/blob/main/fssstack/SETUP_PROCESS.md"
           target="_blank"
           rel="noreferrer"
           className="text-foreground underline underline-offset-4"
