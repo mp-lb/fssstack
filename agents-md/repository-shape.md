@@ -1,0 +1,11 @@
+## Repository Shape
+
+The root of this git repo should stay thin. It is a wrapper with documentation and a few sibling projects:
+
+- `fssstack-start/` is the Next.js landing page and prompt builder.
+- `flatpack-shell/` is the minimal working target-repo shell monorepo.
+- `fssstack/` is the Doctrine payload for creating FSS Stack target projects.
+- `mp-lb-run/` is the Doctrine payload for deploying FSS Stack target projects.
+- `authoring-tools/` contains authoring-time scripts, tests, and build tooling that may generate Doctrine payload files.
+
+Do not turn the repository root into an npm project. Run package-manager commands from the owning subproject with `pnpm -C <folder> ...`.
