@@ -18,6 +18,15 @@
       "remoteUpdatedAt": "2026-05-30T23:03:13.576Z",
       "remoteRevisionNumber": 12
     },
+    "fssstack/agents-md/code-style.md": {
+      "storageClass": "text",
+      "hash": "sha256:bafa194bfe6bfa89a4aa70ba9abcdc0fac2ddb8b6059f2aa5d189d84da422202",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "90c426f8-1443-4dfe-8d36-f939f2e1d4db",
+      "remotePath": "/agents-md/code-style.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:44.028Z",
+      "remoteRevisionNumber": 1
+    },
     "fssstack/agents-md/docs-website.md": {
       "storageClass": "text",
       "hash": "sha256:e657e78fe9da410e5b9aeaeda9ca3a6afa4b33bd0ef04d3515d5df875bbf0edc",
@@ -25,6 +34,69 @@
       "remoteFileId": "b769dcc3-4b27-43ab-b79e-6f75b4a8f79b",
       "remotePath": "/agents-md/docs-website.md",
       "remoteUpdatedAt": "2026-05-30T22:29:52.079Z",
+      "remoteRevisionNumber": 1
+    },
+    "fssstack/agents-md/doctrine.md": {
+      "storageClass": "text",
+      "hash": "sha256:33b0023b410bf0e9cb69b2a6bd22216c6f05d54f1b57b27edff6d584a9865a95",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "f7e78093-18cf-4343-a5a4-620e33a8f01f",
+      "remotePath": "/agents-md/doctrine.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:41.935Z",
+      "remoteRevisionNumber": 1
+    },
+    "fssstack/agents-md/documentation-layout.md": {
+      "storageClass": "text",
+      "hash": "sha256:bb756213401592edce2e842f796b2ffa9c59f76b728c1df3f1dccee226ab59a7",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "835d01bf-2fdd-43d3-a905-fdb463cf7b93",
+      "remotePath": "/agents-md/documentation-layout.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:45.209Z",
+      "remoteRevisionNumber": 1
+    },
+    "fssstack/agents-md/global.md": {
+      "storageClass": "text",
+      "hash": "sha256:51ef51dde1efb10369902085cadec8f2aa96cd55d1954c1d6a78c0cd11f8d4fd",
+      "lastSyncedAt": "2026-06-01T10:46:55.302Z",
+      "remoteFileId": "59a060b1-300b-4e2d-ab8e-365ff1e830e3",
+      "remotePath": "/agents-md/global.md",
+      "remoteUpdatedAt": "2026-06-01T10:46:56.595Z",
+      "remoteRevisionNumber": 1
+    },
+    "fssstack/agents-md/process-management.md": {
+      "storageClass": "text",
+      "hash": "sha256:1ae7352752845a5998887b203532f45603bd024c4b639685d9d16d8090a6834b",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "242fdf4f-9648-49d3-86fd-3ecd58c843b6",
+      "remotePath": "/agents-md/process-management.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:43.857Z",
+      "remoteRevisionNumber": 1
+    },
+    "fssstack/agents-md/tech-stack.md": {
+      "storageClass": "text",
+      "hash": "sha256:b0444ad4bbf2074a251708637aaddd75202fa5d6bac35eee98bb16ed5e951609",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "f45fc284-608a-4457-9fef-d5a041dcf631",
+      "remotePath": "/agents-md/tech-stack.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:44.920Z",
+      "remoteRevisionNumber": 1
+    },
+    "fssstack/agents-md/ui.md": {
+      "storageClass": "text",
+      "hash": "sha256:0190a2e2b7716ae089dec5b32c8e05dd9e518a669aafba07602da938cee2b2a7",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "227d821a-53c6-4a34-8810-0d5682ad92dc",
+      "remotePath": "/agents-md/ui.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:45.409Z",
+      "remoteRevisionNumber": 1
+    },
+    "fssstack/agents-md/working-locally.md": {
+      "storageClass": "text",
+      "hash": "sha256:5d9cbda82a801bc6b1f761e288d83c50bc2f459e9f7d261a0039ab33695345aa",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "e48b237a-58bd-4c03-a30b-c814c8090d3c",
+      "remotePath": "/agents-md/working-locally.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:42.936Z",
       "remoteRevisionNumber": 1
     },
     "fssstack/doctrine.example.yaml": {
@@ -132,7 +204,7 @@
     "fssstack/react-native/SETUP_REACT_NATIVE.md": {
       "storageClass": "text",
       "hash": "sha256:8e785d4f81325cda57d67614848052a5a554c4971ef248f732cc310abd05cacd",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "a949c1d3-cb83-4761-b169-cf3981cff6af",
       "remotePath": "/react-native/SETUP_REACT_NATIVE.md",
       "remoteUpdatedAt": "2026-05-24T15:35:07.919Z",
@@ -141,7 +213,7 @@
     "fssstack/react-native/snippets/.github/workflows/cd.yml": {
       "storageClass": "text",
       "hash": "sha256:0bab568849a5e661ffec8a23e1811797742191cc13b3f82dd4a6ab56d52f549d",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "4cc9a375-7070-4420-a109-f2f875d13c7c",
       "remotePath": "/react-native/snippets/.github/workflows/cd.yml",
       "remoteUpdatedAt": "2026-05-24T15:27:27.880Z",
@@ -150,7 +222,7 @@
     "fssstack/react-native/snippets/.github/workflows/ci.yml": {
       "storageClass": "text",
       "hash": "sha256:3b180bf7149c73c52c981ecad48037bb1fe8e4d2961ce3e837c79a69c3f86aaa",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "a964a6a6-df62-4ed1-99a1-30bc5cc40c20",
       "remotePath": "/react-native/snippets/.github/workflows/ci.yml",
       "remoteUpdatedAt": "2026-05-24T15:27:27.880Z",
@@ -159,7 +231,7 @@
     "fssstack/react-native/snippets/.github/workflows/test-eas-connection.yml": {
       "storageClass": "text",
       "hash": "sha256:f7bebdabfc8efa5b514cfdb278396957f7aecaf276769f71a2b6f6a3a2cbabca",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "13c12c9f-2491-4bbc-b689-85144475a1bd",
       "remotePath": "/react-native/snippets/.github/workflows/test-eas-connection.yml",
       "remoteUpdatedAt": "2026-05-24T15:27:27.881Z",
@@ -168,7 +240,7 @@
     "fssstack/react-native/snippets/app.json": {
       "storageClass": "text",
       "hash": "sha256:27a69558c3cd472cc25e859ac0f2743fe1f16ba27a0cf85b17b99c6da8095d99",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "b33ab250-2c05-42b8-bb12-a050e9d059b6",
       "remotePath": "/react-native/snippets/app.json",
       "remoteUpdatedAt": "2026-05-24T15:27:27.882Z",
@@ -177,7 +249,7 @@
     "fssstack/react-native/snippets/eas.json": {
       "storageClass": "text",
       "hash": "sha256:2708b819a653f3223bc479483fdaed4f81646e34e0be38c767d8a3360a0b8600",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "415916ca-e216-4b15-aae2-de2856879c71",
       "remotePath": "/react-native/snippets/eas.json",
       "remoteUpdatedAt": "2026-05-24T15:27:27.882Z",
@@ -186,7 +258,7 @@
     "fssstack/react-native/snippets/npmrc.example": {
       "storageClass": "text",
       "hash": "sha256:4c89e37689d29f7f54d28497c740f6a50adc292a7f56c979bf9e017bef632b5b",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "46c230dc-7ff7-40fd-aaae-d54e2296ccca",
       "remotePath": "/react-native/snippets/npmrc.example",
       "remoteUpdatedAt": "2026-05-24T15:27:27.879Z",
@@ -673,12 +745,12 @@
     },
     "fssstack/shell/zap.yaml": {
       "storageClass": "text",
-      "hash": "sha256:04a0e7c11bc94c1a48898f4082a077952a12376ad9be30484554a73954a2a026",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "hash": "sha256:7541808eaa97ce089f885ef3199129d55799a8017a82a85ba99b8f44ad81ff02",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "069597de-7560-437b-807c-7be617690502",
       "remotePath": "/shell/zap.yaml",
-      "remoteUpdatedAt": "2026-05-30T22:20:33.907Z",
-      "remoteRevisionNumber": 5
+      "remoteUpdatedAt": "2026-06-01T10:05:45.588Z",
+      "remoteRevisionNumber": 6
     },
     "fssstack/skills/marketing-positioning.md": {
       "storageClass": "text",
@@ -728,12 +800,12 @@
     },
     "fssstack/standards/agents-md-template.txt": {
       "storageClass": "text",
-      "hash": "sha256:73f6a74f53e66f586b5e563497feec3647f7f985334498d98da50a2ab71ca9f2",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "hash": "sha256:e93cc96c7e0a8d3a0b2c9c7acf6532c604e0b2302e627e2e09a7991d1a94d8b3",
+      "lastSyncedAt": "2026-06-01T10:46:55.302Z",
       "remoteFileId": "d360c234-3e99-4e68-a59c-b98c1e7982e7",
       "remotePath": "/standards/agents-md-template.txt",
-      "remoteUpdatedAt": "2026-05-30T22:46:57.145Z",
-      "remoteRevisionNumber": 701,
+      "remoteUpdatedAt": "2026-06-01T10:35:22.620Z",
+      "remoteRevisionNumber": 702,
       "source": "reference"
     },
     "fssstack/standards/clerk-rbac.md": {
@@ -744,6 +816,16 @@
       "remotePath": "/standards/clerk-rbac.md",
       "remoteUpdatedAt": "2026-05-18T11:02:18.000Z",
       "remoteRevisionNumber": 2,
+      "source": "reference"
+    },
+    "fssstack/standards/cli-release.md": {
+      "storageClass": "text",
+      "hash": "sha256:c4359fe828189d6049673d5be7624fcc596d37387a8b72bd78d54586602aa6b3",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "c334c1e7-1e13-4612-a024-952fb79ff9d5",
+      "remotePath": "/standards/cli-release.md",
+      "remoteUpdatedAt": "2026-05-31T12:39:15.274Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/clis.md": {
@@ -818,12 +900,12 @@
     },
     "fssstack/standards/extensions.md": {
       "storageClass": "text",
-      "hash": "sha256:e0c067c7efe139448a539ef5c71b518fbaba56277442b79584e4055c2f16fa8a",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "hash": "sha256:35b87b66f852cfceb5f840735b5a0b917444aba63c6c064e7693cfe5bc2d31c1",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "f27c52d7-fad0-41d4-817c-28f4da00b165",
       "remotePath": "/standards/extensions.md",
-      "remoteUpdatedAt": "2026-05-14T08:58:28.842Z",
-      "remoteRevisionNumber": 1,
+      "remoteUpdatedAt": "2026-05-31T12:53:59.128Z",
+      "remoteRevisionNumber": 2,
       "source": "reference"
     },
     "fssstack/standards/first-class-jobs.md": {
@@ -844,6 +926,16 @@
       "remotePath": "/standards/formatting.md",
       "remoteUpdatedAt": "2026-05-19T13:56:59.780Z",
       "remoteRevisionNumber": 2,
+      "source": "reference"
+    },
+    "fssstack/standards/freshness.md": {
+      "storageClass": "text",
+      "hash": "sha256:78c031bdf40ea293babb0521f64fc79a6ba8bc6987e66c6adc0d2b4a6dfb39f1",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
+      "remoteFileId": "f80f36b1-bb26-4221-aea9-38653c9191b0",
+      "remotePath": "/standards/freshness.md",
+      "remoteUpdatedAt": "2026-05-31T04:13:23.732Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/global-system-collection.md": {
@@ -988,12 +1080,12 @@
     },
     "fssstack/standards/services.md": {
       "storageClass": "text",
-      "hash": "sha256:4bf2aeca442c059a85ae95d03554af3efd504c42c064cbb1c8169f1f75bfefe4",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "hash": "sha256:c232898300397bb97b4a07001ce775d5a81afec1353c216bf5c0ab241cb0d121",
+      "lastSyncedAt": "2026-06-01T10:05:39.908Z",
       "remoteFileId": "7918a84e-30fe-4a8c-8bbc-5ff60ab5cadd",
       "remotePath": "/standards/services.md",
-      "remoteUpdatedAt": "2026-05-14T08:58:29.186Z",
-      "remoteRevisionNumber": 1,
+      "remoteUpdatedAt": "2026-05-31T12:53:59.526Z",
+      "remoteRevisionNumber": 2,
       "source": "reference"
     },
     "fssstack/standards/states.md": {
@@ -1063,6 +1155,15 @@
       "remotePath": "/SETUP_PROCESS.md",
       "remoteUpdatedAt": "2026-05-19T09:41:10.638Z",
       "remoteRevisionNumber": 7
+    },
+    "mp-lb-run/agents-md/releases.md": {
+      "storageClass": "text",
+      "hash": "sha256:fcfa322b6d099d1ce851efe2ecfaa0740b15c27cb0740cdba81333518eb6816f",
+      "lastSyncedAt": "2026-06-01T10:05:47.763Z",
+      "remoteFileId": "a26efa7d-05ba-4d62-a4c0-fb53effe5324",
+      "remotePath": "/agents-md/releases.md",
+      "remoteUpdatedAt": "2026-06-01T10:05:48.375Z",
+      "remoteRevisionNumber": 1
     },
     "mp-lb-run/docs/custom-domains.md": {
       "storageClass": "text",
@@ -1229,7 +1330,7 @@
     "mp-lb-run/templates/load-deployment-env.mjs": {
       "storageClass": "text",
       "hash": "sha256:ab06b6cc0ca68c4f340da216cd39bbf680d599a99b1ba74e9ca6e3f70492e8d6",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
+      "lastSyncedAt": "2026-06-01T10:46:58.414Z",
       "remoteFileId": "be88e03c-4246-474a-bbe7-7a57705e4a96",
       "remotePath": "/templates/load-deployment-env.mjs",
       "remoteUpdatedAt": "2026-05-19T09:41:11.933Z",
@@ -1283,7 +1384,7 @@
   },
   "references": {
     "fssstack/standards": {
-      "lastSeenAt": "2026-05-31T00:06:01.297Z",
+      "lastSeenAt": "2026-06-01T10:46:55.302Z",
       "type": "store-reference"
     }
   },
@@ -1297,5 +1398,6 @@
       "target": "mp-lb-run"
     }
   },
+  "ignorePatterns": [],
   "version": 1
 }
