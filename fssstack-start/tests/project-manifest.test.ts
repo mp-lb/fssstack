@@ -20,6 +20,7 @@ describe("buildManifestJson5", () => {
     expect(manifest).toBe(
       [
         "{",
+        "  type: 'fssstack',",
         "  name: 'My App',",
         "  emoji: '🚀',",
         "  description: '',",
@@ -34,6 +35,7 @@ describe("buildManifestJson5", () => {
       ].join("\n"),
     );
     expect(JSON5.parse(manifest)).toEqual({
+      type: "fssstack",
       name: "My App",
       emoji: "🚀",
       description: "",

@@ -7,6 +7,7 @@ const manifestLine = (key: string, value: unknown, trailingComma = true) =>
 export const buildManifestJson5 = (config: ProjectPromptConfig) =>
   [
     "{",
+    manifestLine("type", "fssstack"),
     manifestLine("name", config.name),
     manifestLine("emoji", config.emoji),
     manifestLine("description", config.description),
