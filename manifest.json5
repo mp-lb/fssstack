@@ -2,6 +2,5 @@
   name: 'Stackforge',
   emoji: '🧰',
   description: 'Workbench for the Fssstack template store, the mp-lb-run deploy store, and the landing page',
-  homepageUrl: 'https://fssstack.mp-lb.dev/',
-  internalDeps: ['zapper']
+  homepageUrl: 'https://fssstack.mp-lb.dev/'
 }

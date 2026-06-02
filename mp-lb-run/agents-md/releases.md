@@ -1,5 +1,5 @@
 ## Releases
 
-For package releases, read the relevant release standard:
-- docs/standards/cli-release.md - For publishable CLI packages
-- docs/standards/lib-release.md - For publishable library packages
+For package releases, read the library release standard:
+- docs/standards/lib-release.md - For any publishable package (a CLI is just a
+  library that ships a `bin`; see docs/standards/clis.md for CLI behaviour)
