@@ -24,23 +24,10 @@ type PackageJson = {
 const stripRange = (value: unknown) =>
   typeof value === "string" ? value.replace(/^[~^]/, "") : value;
 
+// The shared frontend base is a thin re-export of the published preset, never an
+// inline copy — see @mp-lb/fssstack-config/tsconfig/frontend.json.
 const FRONTEND_TSCONFIG = {
-  compilerOptions: {
-    target: "esnext",
-    module: "esnext",
-    moduleResolution: "bundler",
-    jsx: "react-jsx",
-    lib: ["DOM", "DOM.Iterable", "ES2022"],
-    esModuleInterop: true,
-    verbatimModuleSyntax: true,
-    resolveJsonModule: true,
-    noEmit: true,
-    strict: true,
-    skipLibCheck: true,
-    noUncheckedIndexedAccess: true,
-    noUnusedLocals: true,
-    noUnusedParameters: true,
-  },
+  extends: "@mp-lb/fssstack-config/tsconfig/frontend.json",
 };
 
 const args = getScriptArgs();

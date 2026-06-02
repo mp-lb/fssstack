@@ -4,65 +4,130 @@ Run this from an empty folder. If other project files already exist, stop and as
 
 ## Shell
 
-Start by fetching the shell project files and the augment scripts:
+Start by fetching the shell project files and the helper scripts:
 
 ```bash
 dx pull --direct --store felixsebastian/fssstack --path shell --target .
 dx pull --direct --store felixsebastian/fssstack --path scripts --target scripts
 ```
 
-The shell contains some example apps/packages: `apps/example-backend` and `packages/example-lib`. The **`scripts/` directory** holds the `augment-*.mjs` / `apply-*.mjs` helpers that the steps below invoke as `node scripts/<name>.mjs`. They live at the store's **top level, not inside `shell/`**, so the `shell` pull does not bring them — they need their own pull (above).
+The shell is a working monorepo: the root workspace config, the shared
+`etc/` config that re-exports our published presets, the internal `core` /
+`server` / `trpc` packages, an `apps/example-backend`, and a publishable
+`packages/example-lib` + `packages/example-cli`. It already depends on and uses
+the shared packages — there is nothing to install or wire at the foundation
+level:
+
+- **`@mp-lb/fssstack-config`** (devDep) — `etc/tsconfig.base.json` re-exports
+  `@mp-lb/fssstack-config/tsconfig/base.json`, and the root `eslint.config.js`
+  calls `createBaseEslintConfig`.
+- **`@mp-lb/fssstack-testing`** (devDep) — `etc/vitest.{base,node,react}.config.ts`
+  re-export the testing presets; each package's `vitest.config.ts` re-exports
+  `../../etc/vitest.node.config`.
+- **`@mp-lb/fssstack-platform`** (dep of `server` / `trpc`) — the server uses
+  `createTrpc`, the structured logger, `AppError`, and the event schema.
+
+The **`scripts/` directory** holds the one remaining helper, `augment-docs-site.mjs`
+(used only when a library ships a docs site). It lives at the store's **top
+level, not inside `shell/`**, so the `shell` pull does not bring it — it needs
+its own pull (above). Everything else below is done by copying a shell example
+and editing it by hand.
 
 ## Package naming
 
 Every app and package is named `<package-scope>/<project-slug>-<slug>`, where `<slug>` is the backend/frontend/library slug.
 
-**Exception — collapse on match:** when a slug is identical to the project slug, drop the duplicate and name the package `<package-scope>/<project-slug>` (not `<package-scope>/<project-slug>-<project-slug>`). This applies to every augment step below.
+**Exception — collapse on match:** when a slug is identical to the project slug, drop the duplicate and name the package `<package-scope>/<project-slug>` (not `<package-scope>/<project-slug>-<project-slug>`). This applies to every step below.
 
 ## Backends
 
-For each backend service, duplicate the example backend and augment it:
+For each backend service, duplicate the example backend and edit it by hand:
 
 ```bash
 cp -R apps/example-backend apps/<backend slug>
-node scripts/augment-backend.mjs "<backend slug>" "<package-scope>" "<project-slug>"
 ```
 
-The backend augment step should:
+Then, in `apps/<backend slug>`:
 
-- update `apps/<backend slug>/package.json` name to `<package-scope>/<project-slug>-<backend slug>` (collapsing to `<package-scope>/<project-slug>` when the backend slug equals the project slug — see Package naming)
-- replace `example-backend` display/service labels with the backend slug
-- replace `EXAMPLE_BACKEND_PORT` with `<BACKEND_SLUG>_PORT`
-- add or update the matching Zap native service
-- keep `/health` returning `{ "ok": true, "service": "<backend slug>" }`
+- set `package.json` `name` to `<package-scope>/<project-slug>-<backend slug>`
+  (collapsing to `<package-scope>/<project-slug>` when the backend slug equals
+  the project slug — see Package naming);
+- replace the `example-backend` service label in `src/index.ts` with the backend
+  slug;
+- replace `EXAMPLE_BACKEND_PORT` with `<BACKEND_SLUG>_PORT`;
+- add or update the matching Zap native service in the root `zap.yaml`;
+- keep `/health` returning the example greeting (or your own) so the service is
+  verifiable.
 
-If the project has multiple backends, repeat the copy and augment step for every backend. Remove `apps/example-backend` after all requested backends exist, unless the requested backend slug is `example-backend`.
+The example backend already builds on `@mp-lb/fssstack-platform` (server context,
+logger, tRPC router) — keep that wiring; you are only renaming.
+
+If the project has multiple backends, repeat the copy + edit for every backend. Remove `apps/example-backend` after all requested backends exist, unless the requested backend slug is `example-backend`.
+
+**No backend at all?** The `core` / `server` / `trpc` packages exist to support tRPC backends. A project with no backend should remove `packages/server` and `packages/trpc` (and `packages/core` if nothing else uses it) so it carries no unused infra.
 
 ## Vite Frontends
 
-For each React/Vite frontend client, generate the frontend with the shadcn CLI, then apply the narrow fssstack frontend wiring:
+For each React/Vite frontend client, generate the frontend with the shadcn CLI, then apply the narrow fssstack frontend wiring by hand:
 
 ```bash
 mkdir -p apps
 CI=1 npx shadcn@latest init --preset <shadcnPreset> --template vite --cwd apps --name <frontend slug>
-node scripts/augment-vite-frontend.mjs "<frontend slug>" "<package-scope>" "<project-slug>"
 ```
 
 The shadcn CLI creates each app at `apps/<client-name>` when run with `--cwd apps --name <client-name>`. Do not run it with `--cwd apps/<client-name> --name <client-name>`, because that creates an accidental nested `apps/<client-name>/<client-name>` scaffold.
 
-The frontend augment step should stay narrow: package name (`<package-scope>/<project-slug>-<frontend slug>`, collapsing to `<package-scope>/<project-slug>` when the frontend slug equals the project slug — see Package naming), shared TypeScript wiring, Zap service entry, port env name, deploy-safe SPA rewrites when needed, title/favicon values, and cleanup of scaffold noise. The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold.
+The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold. The fssstack overlay stays narrow — wire it to our shared config:
+
+- **Package name** — set `apps/<frontend slug>/package.json` `name` per Package
+  naming, and add `@mp-lb/fssstack-config` + `@mp-lb/fssstack-testing` as
+  devDependencies (plus `@vitejs/plugin-react`, `jsdom`, `@testing-library/*` if
+  the app has component tests).
+- **Shared tsconfig** — add the two re-export files to `etc/` (one line each)
+  if they are not already present, then point the app's tsconfigs at them:
+  ```jsonc
+  // etc/tsconfig.react-vite-app.json
+  { "extends": "@mp-lb/fssstack-config/tsconfig/react-vite-app.json" }
+  // etc/tsconfig.react-vite-node.json
+  { "extends": "@mp-lb/fssstack-config/tsconfig/react-vite-node.json" }
+  ```
+  The app's `tsconfig.app.json` extends `../../etc/tsconfig.react-vite-app.json`
+  and its `tsconfig.node.json` extends `../../etc/tsconfig.react-vite-node.json`.
+- **Vitest** — the app's `vitest.config.ts` merges the React preset (`@mp-lb/fssstack-testing/vitest/react`) with the Vite plugin / aliases it needs.
+- **ESLint** — the root `eslint.config.js` already globs `apps/**`, so the app
+  needs no eslint config of its own; remove the one shadcn generates.
+- **Zap + ports** — add `<FRONTEND_SLUG>_PORT` to `zap.yaml` `ports:` and a
+  native service that runs the dev server on that port; add deploy-safe SPA
+  rewrites (`vercel.json`) where needed.
+- **Cleanup** — title/favicon values and removal of scaffold noise; keep the app
+  surface blank/disposable.
 
 ## Next.js Frontends
 
-For each React/Next.js frontend client, generate the frontend with the shadcn CLI, then apply the narrow fssstack frontend wiring:
+For each React/Next.js frontend client, generate the frontend with the shadcn CLI, then apply the narrow wiring by hand:
 
 ```bash
 mkdir -p apps
 CI=1 npx shadcn@latest init --preset <shadcnPreset> --template next --cwd apps --name <frontend slug> --no-monorepo --base radix --yes
-node scripts/augment-next-frontend.mjs "<frontend slug>" "<package-scope>" "<project-slug>"
 ```
 
-The Next.js augment step should stay narrow: package name (`<package-scope>/<project-slug>-<frontend slug>`, collapsing to `<package-scope>/<project-slug>` when the frontend slug equals the project slug — see Package naming), shared config where appropriate, Zap service entry, port env name, title/favicon values, and cleanup of scaffold noise. Keep the scaffolded page disposable.
+The shadcn CLI owns the generic Next.js, React, Tailwind, and shadcn/ui scaffold. The fssstack overlay:
+
+- **Package name** — set `package.json` `name` per Package naming; add
+  `@mp-lb/fssstack-config` as a devDependency, plus `eslint-config-next` (the
+  optional peer the Next eslint preset needs).
+- **Shared tsconfig** — add `etc/tsconfig.react-nextjs.json`
+  (`{ "extends": "@mp-lb/fssstack-config/tsconfig/react-nextjs.json" }`) if
+  absent, and have the app's `tsconfig.json` extend `../../etc/tsconfig.react-nextjs.json`.
+- **ESLint** — replace the generated `eslint.config.mjs` with:
+  ```js
+  import { createNextEslintConfig } from "@mp-lb/fssstack-config/eslint/next";
+
+  export default createNextEslintConfig();
+  ```
+- **Zap + ports** — add `<FRONTEND_SLUG>_PORT` and a native service that runs the
+  Next dev server on that port.
+- **Cleanup** — title/favicon values; keep the scaffolded page disposable.
 
 Frontend implementation and test examples live in:
 
@@ -137,38 +202,42 @@ once the file is in place our responsibility ends.
 
 - `rm -rf apps/example-backend`
 - `rm -rf packages/example-lib`
+- `rm -rf packages/example-cli`
 
 ## Library Packages
 
-For each library package, duplicate the example library and augment it:
+For each library package, duplicate the example library and edit it by hand:
 
 ```bash
 cp -R packages/example-lib packages/<library slug>
-node scripts/augment-lib.mjs "<library slug>" "<package-scope>" "<project-slug>"
 ```
 
-The library augment step should:
+Then, in `packages/<library slug>`:
 
-- update package name to `<package-scope>/<project-slug>-<library slug>` (collapsing to `<package-scope>/<project-slug>` when the library slug equals the project slug — see Package naming)
-- keep `files`, `exports`, `types`, and build scripts publish-safe
-- keep public exports small and explicit
-- update release docs if package names changed
+- set `package.json` `name` to `<package-scope>/<project-slug>-<library slug>`
+  (collapsing to `<package-scope>/<project-slug>` when the library slug equals
+  the project slug — see Package naming);
+- keep `files`, `exports`, `types`, and the build scripts publish-safe (the
+  example is already shaped this way — `tsconfig.json` for typecheck,
+  `tsconfig.build.json` for the emitted `dist`);
+- keep public exports small and explicit;
+- update release docs if package names changed.
 
-A library that ships a command-line tool is still a library: add a package `bin`, the Node tsconfig, and a `#!/usr/bin/env node` shebang on the entrypoint. There is no separate CLI package type. See `docs/standards/clis.md` for command-line behaviour on top of the library baseline.
+A library that ships a command-line tool is still a library: add a package `bin`, a `#!/usr/bin/env node` shebang on the entrypoint, and `chmod +x dist/index.js` in the build (see `packages/example-cli` for the shape). There is no separate CLI package type. See `docs/standards/clis.md` for command-line behaviour on top of the library baseline.
 
-Remove `packages/example-lib` after all requested libraries exist, unless the requested library slug is `example-lib`.
+Remove `packages/example-lib` and `packages/example-cli` after all requested libraries exist, unless a requested library slug matches one of them.
 
 ## Dependencies
 
-After shell augmentation and app/package creation:
+After the apps/packages exist and have been renamed:
 
 ```bash
 pnpm install
-pnpm dlx shadcn@latest add -c apps/admin button card --yes --overwrite
-pnpm dlx shadcn@latest add -c apps/landing-page button card --yes --overwrite
+pnpm dlx shadcn@latest add -c apps/<frontend slug> button card --yes --overwrite
+pnpm exec eslint . --fix
 ```
 
-Only run shadcn component installs for frontend apps that actually exist, and use each real frontend slug.
+Only run shadcn component installs for frontend apps that actually exist, and use each real frontend slug. The `eslint . --fix` pass reformats anything the renames shifted (e.g. an import that now fits on one line), so the project lands lint-clean.
 
 ## Create AGENTS.md
 
@@ -183,7 +252,7 @@ zap task setup
 zap up
 ```
 
-Run basic validation as per the AGENTS.md.
+Then run the standard checks — `pnpm typecheck`, `pnpm lint`, `pnpm test`, `pnpm build` — and confirm the dev server serves. See the AGENTS.md for project-specific validation.
 
 ## Extensions
 
@@ -197,4 +266,3 @@ Commit:
 git add .
 git commit -m init
 ```
-

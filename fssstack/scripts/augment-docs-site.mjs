@@ -28,22 +28,7 @@ var portEnvName = (serviceName) => `${serviceName.toUpperCase().replaceAll("-", 
 // scripts-src/flatpack-docs/augment-docs-site.ts
 var stripRange = (value) => typeof value === "string" ? value.replace(/^[~^]/, "") : value;
 var FRONTEND_TSCONFIG = {
-  compilerOptions: {
-    target: "esnext",
-    module: "esnext",
-    moduleResolution: "bundler",
-    jsx: "react-jsx",
-    lib: ["DOM", "DOM.Iterable", "ES2022"],
-    esModuleInterop: true,
-    verbatimModuleSyntax: true,
-    resolveJsonModule: true,
-    noEmit: true,
-    strict: true,
-    skipLibCheck: true,
-    noUncheckedIndexedAccess: true,
-    noUnusedLocals: true,
-    noUnusedParameters: true
-  }
+  extends: "@mp-lb/fssstack-config/tsconfig/frontend.json"
 };
 var args = getScriptArgs();
 if (args.length < 1 || args.length > 2) {
