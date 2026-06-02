@@ -2,19 +2,7 @@ import { defineConfig } from "tsup";
 
 export default defineConfig([
   {
-    entry: [
-      "scripts-src/flatpack-docs/apply-vite-layer.ts",
-      "scripts-src/flatpack-docs/apply-next-layer.ts",
-      "scripts-src/flatpack-docs/emoji-favicon.ts",
-      "scripts-src/flatpack-docs/install-apps-packages.ts",
-      "scripts-src/flatpack-docs/install-foundation.ts",
-      "scripts-src/flatpack-docs/install-publishable-packages.ts",
-      "scripts-src/flatpack-docs/install-root-dependencies.ts",
-      "scripts-src/flatpack-docs/normalize-package-versions.ts",
-      "scripts-src/flatpack-docs/patch-vite-layer.ts",
-      "scripts-src/flatpack-docs/render-template.ts",
-      "scripts-src/flatpack-docs/augment-docs-site.ts",
-    ],
+    entry: ["scripts-src/flatpack-docs/augment-docs-site.ts"],
     outDir: "../fssstack/scripts",
     tsconfig: "tsconfig.docs.json",
     format: ["esm"],
