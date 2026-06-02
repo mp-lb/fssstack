@@ -1,15 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { createHealthStatus, shellName } from "./index.js";
+import { createGreeting, greetingInputSchema } from ".";
 
 describe("core", () => {
-  it("creates health status", () => {
-    expect(createHealthStatus("example-backend")).toEqual({
-      ok: true,
-      service: "example-backend",
+  it("creates a greeting", () => {
+    expect(createGreeting({ name: "Ada" })).toEqual({
+      message: "Hello, Ada.",
     });
   });
 
-  it("exports the shell name", () => {
-    expect(shellName).toBe("fss-shell");
+  it("rejects an empty name", () => {
+    expect(greetingInputSchema.safeParse({ name: "" }).success).toBe(false);
   });
 });

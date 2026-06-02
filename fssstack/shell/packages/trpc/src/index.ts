@@ -1,7 +1,44 @@
-import type { HealthStatus } from "@example/fss-shell-core";
+import { createGreeting, greetingInputSchema } from "@example/fss-shell-core";
+import {
+  NotFoundError,
+  publicProcedure,
+  router,
+} from "@example/fss-shell-server";
+import { eventSchema } from "@mp-lb/fssstack-platform/events";
 
-export type ExampleApi = {
-  health: () => HealthStatus;
-};
+const greetings = new Map<string, string>();
 
-export const apiPackageName = "@example/fss-shell-trpc";
+/**
+ * The app's tRPC router. Procedures share the platform-backed `router` /
+ * `publicProcedure` from the server package, log through the context logger,
+ * and signal failure with the platform error types.
+ */
+export const appRouter = router({
+  greet: publicProcedure
+    .input(greetingInputSchema)
+    .mutation(({ ctx, input }) => {
+      const greeting = createGreeting(input);
+
+      greetings.set(input.name, greeting.message);
+      ctx.logger.info("greeting.created", { name: input.name });
+
+      return greeting;
+    }),
+  greeting: publicProcedure.input(greetingInputSchema).query(({ input }) => {
+    const message = greetings.get(input.name);
+
+    if (message === undefined) {
+      throw new NotFoundError(`no greeting for ${input.name}`);
+    }
+
+    return { message };
+  }),
+  // Accepts anything conforming to the canonical event schema and logs it.
+  recordEvent: publicProcedure.input(eventSchema).mutation(({ ctx, input }) => {
+    ctx.logger.info(input.eventType, input.details);
+
+    return { recorded: true };
+  }),
+});
+
+export type AppRouter = typeof appRouter;

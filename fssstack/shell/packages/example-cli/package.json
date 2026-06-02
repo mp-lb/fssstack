@@ -23,11 +23,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json && chmod +x dist/index.js",
+    "build": "tsc --project tsconfig.build.json && chmod +x dist/index.js",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "test": "vitest run"
-  },
-  "dependencies": {
-    "@example/fss-shell-example-lib": "workspace:*"
   }
 }

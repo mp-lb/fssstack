@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { createExampleBackend } from "./index.js";
+import { createExampleBackend } from ".";
 
 describe("example backend", () => {
-  it("serves health", async () => {
+  it("serves a greeting on /health", async () => {
     const server = createExampleBackend();
 
     await new Promise<void>((resolve) => {
@@ -10,6 +10,7 @@ describe("example backend", () => {
     });
 
     const address = server.address();
+
     if (address === null || typeof address === "string") {
       throw new Error("Expected TCP server address");
     }
@@ -25,6 +26,6 @@ describe("example backend", () => {
     });
 
     expect(response.status).toBe(200);
-    expect(body).toEqual({ ok: true, service: "example-backend" });
+    expect(body).toEqual({ ok: true, message: "Hello, example-backend." });
   });
 });

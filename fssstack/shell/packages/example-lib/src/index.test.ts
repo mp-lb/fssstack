@@ -1,10 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { exampleGreeting } from "./index.js";
+import { slugify } from ".";
 
-describe("example library", () => {
-  it("greets by name", () => {
-    expect(exampleGreeting("Shell")).toBe(
-      "Hello from the example library, Shell.",
-    );
+describe("slugify", () => {
+  it("slugifies a string", () => {
+    expect(slugify("  Hello, World! ")).toBe("hello-world");
   });
 });

@@ -1,8 +1,25 @@
+import { createCallerFactory, createContext } from "@example/fss-shell-server";
 import { describe, expect, it } from "vitest";
-import { apiPackageName } from "./index.js";
+import { appRouter } from ".";
 
-describe("trpc placeholder", () => {
-  it("exports a stable package name", () => {
-    expect(apiPackageName).toBe("@example/fss-shell-trpc");
+const createCaller = createCallerFactory(appRouter);
+
+describe("appRouter", () => {
+  it("greets and reads the greeting back", async () => {
+    const caller = createCaller(createContext());
+
+    await caller.greet({ name: "Ada" });
+
+    expect(await caller.greeting({ name: "Ada" })).toEqual({
+      message: "Hello, Ada.",
+    });
+  });
+
+  it("throws NotFoundError for an unknown greeting", async () => {
+    const caller = createCaller(createContext());
+
+    await expect(caller.greeting({ name: "Nobody" })).rejects.toThrow(
+      /no greeting/,
+    );
   });
 });

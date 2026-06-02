@@ -1,14 +1,17 @@
 import { describe, expect, it } from "vitest";
-import { healthJson, parsePort } from "./index.js";
+import { createContext, NotFoundError } from ".";
 
-describe("server helpers", () => {
-  it("serializes health json", () => {
-    expect(healthJson("example-backend")).toBe(
-      '{"ok":true,"service":"example-backend"}\n',
-    );
+describe("server", () => {
+  it("builds a context with a logger", () => {
+    const context = createContext();
+
+    expect(typeof context.logger.info).toBe("function");
   });
 
-  it("parses valid ports", () => {
-    expect(parsePort("3101", 3000)).toBe(3101);
+  it("maps NotFoundError to platform error codes", () => {
+    const error = new NotFoundError();
+
+    expect(error.appCode).toBe("NOT_FOUND");
+    expect(error.trpcCode).toBe("NOT_FOUND");
   });
 });

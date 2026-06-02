@@ -3,20 +3,24 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
     }
   },
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "rm -rf dist && tsc --project tsconfig.build.json",
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
-    "@example/fss-shell-core": "workspace:*"
+    "@example/fss-shell-core": "workspace:*",
+    "@example/fss-shell-server": "workspace:*",
+    "@mp-lb/fssstack-platform": "0.1.0",
+    "@trpc/server": "11.7.1",
+    "zod": "4.4.3"
   }
 }
