@@ -79,10 +79,20 @@ The shadcn CLI creates each app at `apps/<client-name>` when run with `--cwd app
 
 The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold. The fssstack overlay stays narrow — wire it to our shared config:
 
-- **Package name** — set `apps/<frontend slug>/package.json` `name` per Package
-  naming, and add `@mp-lb/fssstack-config` + `@mp-lb/fssstack-testing` as
-  devDependencies (plus `@vitejs/plugin-react`, `jsdom`, `@testing-library/*` if
-  the app has component tests).
+- **Package name + Fssstack deps** — set `apps/<frontend slug>/package.json`
+  `name` per Package naming, then add the Fssstack dev dependencies:
+  ```bash
+  pnpm --filter <frontend-package> add -D @mp-lb/fssstack-config @mp-lb/fssstack-testing
+  ```
+  If the app has component tests, add the test helpers with the package manager:
+  ```bash
+  pnpm --filter <frontend-package> add -D jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
+  ```
+  `@vitejs/plugin-react` is normally installed by the shadcn Vite scaffold. If
+  it is missing, add it with:
+  ```bash
+  pnpm --filter <frontend-package> add -D @vitejs/plugin-react
+  ```
 - **Shared tsconfig** — add the two re-export files to `etc/` (one line each)
   if they are not already present, then point the app's tsconfigs at them:
   ```jsonc
