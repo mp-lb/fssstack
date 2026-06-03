@@ -1,6 +1,6 @@
 {
   name: 'Stackforge',
   emoji: '🧰',
-  description: 'Workbench for the Fssstack template store, the mp-lb-run deploy store, and the landing page',
+  description: 'Platform-engineering workbench: canon (the Fssstack template + mp-lb-run deploy store) plus a guides/ tier (electron, publishing, security, react-native, observability) and the landing page',
   homepageUrl: 'https://fssstack.mp-lb.dev/'
 }

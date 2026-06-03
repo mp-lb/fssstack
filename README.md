@@ -9,6 +9,7 @@ Stackforge is the workbench for FSS Stack: a thin wrapper around separate workin
 - `authoring-tools/`: npm project for building and testing generated Doctrine scripts.
 - `fssstack/`: Doctrine payload (store `felixsebastian/fssstack`) for creating FSS Stack target projects.
 - `mp-lb-run/`: Doctrine payload (store `felixsebastian/mp-lb-run`) for deploying FSS Stack target projects.
+- `guides/`: the **advisory** tier — strong-default playbooks where deviation is expected (electron, macos, security, publishing as single files; `react-native/` and `observability/` as subfolders because they carry snippets / rollout state). Contrast with the **canon** tier above (`fssstack/`, `mp-lb-run/`), which is followed to a tee. Plain git for now.
 - `examples/`: local generated repos and experiments.
 
 ## Commands
