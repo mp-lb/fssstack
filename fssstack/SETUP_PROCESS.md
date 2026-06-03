@@ -103,6 +103,8 @@ The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold. T
   ```
   The app's `tsconfig.app.json` extends `../../etc/tsconfig.react-vite-app.json`
   and its `tsconfig.node.json` extends `../../etc/tsconfig.react-vite-node.json`.
+  Keep `noEmit: true` in both app tsconfigs so `tsc -b` typechecks without
+  emitting stale `vite.config.js` / `.d.ts` files.
 - **Vitest** — the app's `vitest.config.ts` merges the React preset (`@mp-lb/fssstack-testing/vitest/react`) with the Vite plugin / aliases it needs.
 - **ESLint** — the root `eslint.config.js` already globs `apps/**`, so the app
   needs no eslint config of its own; remove the one shadcn generates.
