@@ -107,8 +107,16 @@ The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold. T
 - **ESLint** — the root `eslint.config.js` already globs `apps/**`, so the app
   needs no eslint config of its own; remove the one shadcn generates.
 - **Zap + ports** — add `<FRONTEND_SLUG>_PORT` to `zap.yaml` `ports:` and a
-  native service that runs the dev server on that port; add deploy-safe SPA
-  rewrites (`vercel.json`) where needed.
+  native service that runs the dev server on that port:
+  ```yaml
+  ports:
+    - <FRONTEND_SLUG>_PORT
+  native:
+    <frontend slug>:
+      cmd: pnpm --filter <frontend-package> dev --host 0.0.0.0 --port ${<FRONTEND_SLUG>_PORT}
+      env: "*"
+  ```
+  Add deploy-safe SPA rewrites (`vercel.json`) where needed.
 - **Cleanup** — title/favicon values and removal of scaffold noise; keep the app
   surface blank/disposable.
 
