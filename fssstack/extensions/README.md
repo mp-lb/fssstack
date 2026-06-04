@@ -9,9 +9,4 @@ packages, code changes, local services, environment variables, and Zapper
 configuration.
 
 If an extension also needs cloud deployment work, use the deployment adapter docs
-for that project. For the MAP Lab `mp-lb-run` deployment pattern, extension
-deployment docs live in:
-
-```bash
-dx --store mp-lb-run ls extensions
-```
+for that project.

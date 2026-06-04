@@ -12,6 +12,7 @@ when it outgrows one file — i.e. it carries `snippets/`, sub-docs, or living s
 ## Guides
 
 - **[electron/](./electron/)** — Electron desktop apps (folder: carries the release-workflow templates). Documents the **release pipeline only**; the build/app side is an explicit, written-down gap. Native macOS lives here as a parked appendix.
+- **[clerk.md](./clerk.md)** — Clerk auth setup choices and CLI-assisted setup.
 - **[security.md](./security.md)** — security practices (blank canvas — nothing exists yet).
 - **[publishing.md](./publishing.md)** — publishing npm packages via CI. A pointer-guide: the substance is canon (`fssstack/standards/*`) and is **referenced, not copied**.
 - **[react-native/](./react-native/)** — standing up an Expo mobile app (folder: carries `snippets/`).

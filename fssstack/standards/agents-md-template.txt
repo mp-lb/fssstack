@@ -42,7 +42,6 @@ Read these before making changes:
 - docs/standards/style-guide.md - For significant code changes
 - docs/standards/crud.md - For implementing simple CRUD patterns
 - docs/standards/errors.md - For throwing and handling errors
-- docs/standards/services.md - For adding/removing services, frontends, databases, or updating infrastructure configuration
 - docs/standards/trpc.md - For doing frontend queries/mutations
 - docs/standards/logging.md - For logging on backend (via tRPC context) and frontend
 - docs/standards/event-schema.md - For sending/storing any kind of events: errors, logs, analytics, real time events follow this
