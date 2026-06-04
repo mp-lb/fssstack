@@ -96,6 +96,13 @@ const spanMiddleware = createTrpcSpanMiddleware(t);
 export const publicProcedure = t.procedure.use(spanMiddleware);
 ```
 
+## 3a. Add request correlation
+
+Follow [request-correlation.md](./request-correlation.md): clients send
+`X-Request-ID`, the backend returns the effective ID, request/procedure/error logs
+include `requestId`, and failed client calls print or log the ID. Return/print a
+trace ID too when the active span makes that cheap.
+
 ## 4. Config validation (`src/config.ts`)
 
 ```ts

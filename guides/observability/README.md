@@ -10,6 +10,8 @@ every project does essentially the same thing, so we want one canonical recipe a
 one place that tracks who's done.
 
 - **[recipe.md](./recipe.md)** — the canonical per-project recipe. Follow it verbatim.
+- **[request-correlation.md](./request-correlation.md)** — small standard for
+  request IDs, trace IDs, client error output, and Axiom lookup.
 - **[rollout.md](./rollout.md)** — per-project status + the checklist to tick off.
 - **[decisions.md](./decisions.md)** — why we chose this shape (and what we rejected).
 - **[open-questions.md](./open-questions.md)** — unsettled questions + conditional integrations (Sentry-vs-OTel, MongoDB-only glue).
