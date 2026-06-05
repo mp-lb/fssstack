@@ -44,6 +44,13 @@ The target repo must have:
       "package": "@scope/my-project-backend",
       "port": 8080,
       "env": ["APP_ENV", "FRONTEND_URLS"]
+    },
+    {
+      "type": "worker",
+      "name": "worker",
+      "path": "apps/worker",
+      "package": "@scope/my-project-worker",
+      "env": ["APP_ENV", "QUEUE_NAME"]
     }
   ]
 }
@@ -54,6 +61,8 @@ Services deploy under the resolved root domain. When `customDomain` is `null`, t
 A `null` service subdomain maps to the root domain. A string subdomain maps under the root domain, such as `app.my-project.mp-lb.dev` or `api.my-project.mp-lb.dev`.
 
 Setup validates the root domain, DNS zone domain, service names, subdomains, and resolved domains for uniqueness before writing Terraform files. Legacy `projectName`, `domain`, `baseDomain`, `frontends`, and `backends` fields are still accepted, but new configs should use `projectSlug`, `customDomain`, and `services`.
+
+`env` arrays are the service runtime environment inventory. They list variable names, not values. Setup renders the canonical deployment inventory to `deployment/apps.json`, preserving frontend, backend, worker, landing-page, and docs-site entries where they apply. Do not add a long-lived `env-map.yaml`; if a simple env map is needed for tool compatibility, generate it from `deployment/apps.json`.
 
 ## Install
 
@@ -76,7 +85,7 @@ Review generated files:
 - `terraform/`
 - `.github/workflows/deploy.yml`
 - `deployment/apps.json`
-- `scripts/build-runtime-tfvars.mjs`
+- `scripts/load-deployment-env.mjs`
 - backend `Dockerfile` files
 - `.env.production`
 - `secrets.json.enc`
@@ -84,6 +93,8 @@ Review generated files:
 Fill `.env.production` with non-secret production values.
 
 Fill `secrets.json.enc` with Doctrine-encrypted secret values. The generated workflow expects the Doctrine recipient secret stored in the GitHub repository secret `SECRETS_KEY`.
+
+Review `deployment/apps.json` as the canonical deployment inventory. Its `deploymentEnv` array names required provider/CI values needed by the deployment workflow, while each service `env` array names runtime values for that service. Add extension-specific provider keys to `deploymentEnv` only when the workflow must require and export them. `@mp-lb/tools-env-mapper` owns merging `.env.production` with decrypted `secrets.json`, masking secret values, normalizing `GCP_SA_KEY`, writing GitHub env values, and rendering Terraform runtime env vars. `mp-lb-run` owns the generated inventory, templates, Terraform shape, and workflow composition.
 
 ## Deploy
 
@@ -107,5 +118,11 @@ Store sensitive deployment tokens in `secrets.json.enc`:
 - `UPSTASH_REDIS_URL` optionally, to use an existing Upstash Redis database instead of provisioning one
 
 `GCP_SA_KEY` may be the downloaded Google service-account JSON object directly. The workflow also accepts the older base64-encoded JSON string during migration.
+
+The generated workflow decrypts `secrets.json.enc` with `SECRETS_KEY`, loads deployment env through a thin mapper wrapper, then runs:
+
+```bash
+node scripts/load-deployment-env.mjs tfvars
+```
 
 Push to the deployment branch or run the generated workflow manually.

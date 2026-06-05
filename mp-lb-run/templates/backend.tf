@@ -8,7 +8,7 @@ locals {
     for name, app in var.backends :
     name => merge(
       app.env,
-      lookup(var.backend_env, name, {}),
+      lookup(var.runtime_env_vars, name, {}),
       local.redis_enabled && name == var.redis_backend_name ? { REDIS_URL = local.redis_url } : {}
     )
   }

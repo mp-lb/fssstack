@@ -23,11 +23,13 @@ The important generated variables are:
 - `frontends`
 - `backends`
 - `backend_images`
-- `backend_env`
+- `runtime_env_vars`
 
 `frontends` and `backends` come from the manifest.
 
-`backend_images` and `backend_env` are generated during CI from built images, `.env.production`, and decrypted `secrets.json`.
+`backend_images` is generated during CI from built images.
+
+`runtime_env_vars` is generated during CI by `@mp-lb/tools-env-mapper` from `.env.production`, decrypted `secrets.json`, and `deployment/apps.json`. Terraform reads only the service keys it needs for deployed backends; extra inventory entries such as workers are allowed for extension-specific deployment layers.
 
 ## State
 

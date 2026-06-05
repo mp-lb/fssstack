@@ -22,6 +22,12 @@ For extension-specific cloud deployment guidance:
 dx --store mp-lb-run read extensions/s3-deploy.md
 ```
 
+For existing-project env mapper adoption notes:
+
+```bash
+dx --store mp-lb-run read docs/env-mapper-rollout.md
+```
+
 The base setup entry point should describe how to apply this deployment layer to a generated FSS Stack target project.
 
 Extension deployment docs are read when an app extension from `fssstack/extensions` also needs cloud deployment work.
@@ -110,7 +116,7 @@ The deployment layer should only need a small target-project contract:
 - frontend build command/output path
 - domains
 - cloud/project identifiers
-- environment variable names
+- environment variable names in deployment inventory `env` arrays
 
 `fssstack.json` is expected to list the target project's frontend and backend apps. This repo does not need to infer app type from the file tree.
 
@@ -118,7 +124,7 @@ Frontend apps are React-based Vite or Next.js apps, and are generally deployed t
 
 Backend apps come from the FSS Stack backend template.
 
-The setup process should read the manifest, produce a reviewable deployment inventory, and generate the deployment variable files from that inventory.
+The setup process should read the manifest, produce a reviewable deployment inventory at `deployment/apps.json`, and generate the deployment variable files from that inventory. `deployment/apps.json` is the canonical env inventory for this adapter: `deploymentEnv` lists CI/provider variables, and service `env` arrays list runtime values for frontends, backends, workers, landing pages, and docs apps where applicable. Do not maintain a separate long-lived `env-map.yaml` beside it.
 
 ## Template Model
 
@@ -147,6 +153,8 @@ GitHub Actions should use one repository secret, `SECRETS_KEY`, to decrypt `secr
 This replaces the old model where many app environment variables lived directly in GitHub secrets or in a `PRODUCTION_SECRETS` blob.
 
 Deployment docs and templates should use `.env.production` plus `secrets.json.enc`.
+
+`@mp-lb/tools-env-mapper` owns env parsing and rendering: merging public and secret values, masking secrets in GitHub Actions, normalizing `GCP_SA_KEY`, writing `$GITHUB_ENV`, and producing Terraform runtime env vars. `mp-lb-run` owns the generated files, target-project deployment shape, Terraform variables, and GitHub Actions workflow composition.
 
 ## Expected Repo Shape
 

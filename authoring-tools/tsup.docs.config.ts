@@ -34,10 +34,7 @@ export default defineConfig([
     },
   },
   {
-    entry: [
-      "scripts-src/mp-lb-run/build-runtime-tfvars.ts",
-      "scripts-src/mp-lb-run/load-deployment-env.ts",
-    ],
+    entry: ["scripts-src/mp-lb-run/load-deployment-env.ts"],
     outDir: "../mp-lb-run/templates",
     tsconfig: "tsconfig.docs.json",
     format: ["esm"],

@@ -31,6 +31,7 @@ Deployment values belong in committed files:
 
 - `.env.production` for non-secrets
 - `secrets.json.enc` for encrypted secrets
+- `deployment/apps.json` for the deployment env inventory
 
 Put non-secret identifiers such as `GCP_PROJECT_ID`, `GCP_REGION`, and `CLOUDFLARE_ACCOUNT_ID` in `.env.production`. Terraform derives the Cloudflare zone from the app domain.
 
@@ -39,3 +40,5 @@ Put sensitive provider credentials such as `GCP_SA_KEY`, `VERCEL_API_TOKEN`, and
 Prefer storing `GCP_SA_KEY` as the downloaded service-account JSON object inside `secrets.json.enc`. The generated workflow also accepts an existing base64-encoded JSON string.
 
 For Terraform-provisioned Redis, put `UPSTASH_EMAIL` in `.env.production` and `UPSTASH_API_KEY` in `secrets.json.enc`. Optionally put `UPSTASH_REDIS_URL` in `secrets.json.enc` to use an existing Upstash Redis database.
+
+`deployment/apps.json` is generated from `fssstack.json` and is the canonical target-repo inventory for this deployment adapter. Keep required provider/CI variable names in `deploymentEnv` and service runtime variable names in each service `env` array. Add extension-specific provider keys to `deploymentEnv` only when the workflow must require and export them. The generated workflow uses `@mp-lb/tools-env-mapper` to merge `.env.production` with decrypted `secrets.json`, mask secret values, normalize `GCP_SA_KEY`, write GitHub env values, and render `terraform/runtime.auto.tfvars.json`.

@@ -30,7 +30,7 @@ jobs:
 
       - name: Load deployment env
         id: deployment-env
-        run: node scripts/load-deployment-env.mjs
+        run: node scripts/load-deployment-env.mjs github-env
 
       - uses: google-github-actions/setup-gcloud@v2
 
@@ -75,8 +75,10 @@ jobs:
 
 {{BACKEND_IMAGE_STEPS}}
 
+{{BACKEND_IMAGE_TFVARS_STEP}}
+
       - name: Build runtime Terraform vars
-        run: node scripts/build-runtime-tfvars.mjs
+        run: node scripts/load-deployment-env.mjs tfvars
 
       - name: Terraform apply
         working-directory: terraform

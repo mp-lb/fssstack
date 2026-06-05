@@ -1,106 +1,92 @@
 #!/usr/bin/env node
 
 // scripts-src/mp-lb-run/load-deployment-env.ts
+import { execFileSync } from "child_process";
 import fs from "fs";
+import os from "os";
 import path from "path";
 var root = process.cwd();
-var githubEnvPath = process.env.GITHUB_ENV;
-var githubOutputPath = process.env.GITHUB_OUTPUT;
-var gcpCredentialsPath = path.join(root, ".deployment", "gcp-sa-key.json");
-var readJson = (file, fallback) => {
-  if (!fs.existsSync(file)) return fallback;
-  return JSON.parse(fs.readFileSync(file, "utf8"));
-};
-var readEnvFile = (file) => {
-  if (!fs.existsSync(file)) return {};
-  const values = {};
-  for (const rawLine of fs.readFileSync(file, "utf8").split(/\r?\n/)) {
-    const line = rawLine.trim();
-    if (!line || line.startsWith("#")) continue;
-    const index = line.indexOf("=");
-    if (index === -1) continue;
-    const key = line.slice(0, index).trim();
-    const value = line.slice(index + 1).trim();
-    values[key] = value.replace(/^"(.*)"$/, "$1");
-  }
-  return values;
-};
-var asEnvValue = (value) => typeof value === "string" ? value : JSON.stringify(value);
-var isLikelyBase64Json = (value) => {
-  if (!/^[A-Za-z0-9+/=\s]+$/.test(value)) return false;
-  try {
-    return Buffer.from(value, "base64").toString("utf8").trim().startsWith("{");
-  } catch {
-    return false;
-  }
-};
-var serviceAccountJson = (value) => {
-  if (typeof value !== "string") return JSON.stringify(value, null, 2);
-  if (value.trim().startsWith("{")) return value;
-  if (isLikelyBase64Json(value)) {
-    return Buffer.from(value, "base64").toString("utf8");
-  }
-  return value;
-};
-var appendGithubEnv = (key, value) => {
-  if (!githubEnvPath) return;
-  fs.appendFileSync(githubEnvPath, `${key}=${value}
-`);
-};
-var appendGithubOutput = (key, value) => {
-  if (!githubOutputPath) return;
-  fs.appendFileSync(githubOutputPath, `${key}=${value}
-`);
-};
-var publicEnv = readEnvFile(path.join(root, ".env.production"));
-var secretEnv = readJson(
-  path.join(root, "secrets.json"),
-  {}
-);
-var allEnv = { ...publicEnv, ...secretEnv };
-var requiredKeys = [
+var inventoryPath = path.join(root, "deployment", "apps.json");
+var mode = process.argv[2] ?? "github-env";
+var requiredDeploymentEnv = [
   "GCP_PROJECT_ID",
   "GCP_REGION",
   "GCP_SA_KEY",
   "VERCEL_API_TOKEN"
 ];
-var optionalKeys = [
-  "CLOUDFLARE_ACCOUNT_ID",
-  "CLOUDFLARE_API_TOKEN",
-  "CLOUDFLARE_ZONE_ID",
-  "GCP_BILLING_ACCOUNT",
-  "MONTHLY_BUDGET_USD",
-  "UPSTASH_API_KEY",
-  "UPSTASH_EMAIL",
-  "UPSTASH_REDIS_URL"
-];
-var missing = requiredKeys.filter((key) => !allEnv[key]);
-if (missing.length > 0) {
-  throw new Error(
-    `Missing deployment environment values: ${missing.join(", ")}`
-  );
-}
-if (secretEnv.GCP_SA_KEY) {
-  fs.mkdirSync(path.dirname(gcpCredentialsPath), { recursive: true });
-  fs.writeFileSync(
-    gcpCredentialsPath,
-    serviceAccountJson(secretEnv.GCP_SA_KEY)
-  );
-  console.log("::add-mask::" + asEnvValue(secretEnv.GCP_SA_KEY));
-  appendGithubEnv("GOOGLE_APPLICATION_CREDENTIALS", gcpCredentialsPath);
-}
-for (const key of [...requiredKeys, ...optionalKeys]) {
-  const value = allEnv[key];
-  if (value === void 0) continue;
-  if (key === "GCP_SA_KEY") continue;
-  const envValue = asEnvValue(value);
-  if (secretEnv[key]) {
-    console.log(`::add-mask::${envValue}`);
-  } else {
-    appendGithubOutput(key, envValue);
+var readJson = (file) => {
+  if (!fs.existsSync(file)) {
+    throw new Error(`Missing ${path.relative(root, file)}`);
   }
-  appendGithubEnv(key, envValue);
+  return JSON.parse(fs.readFileSync(file, "utf8"));
+};
+var unique = (values) => [...new Set(values)];
+var shellQuote = (value) => `'${value.replaceAll("'", "'\\''")}'`;
+var mapperCli = `node "$(node -e 'console.log(require("node:fs").realpathSync(process.argv[1]))' "$(command -v tools-env-mapper)")"`;
+var runMapper = (args) => {
+  execFileSync(
+    "npx",
+    [
+      "-y",
+      "--package",
+      "@mp-lb/tools-env-mapper",
+      "-c",
+      [mapperCli, ...args.map(shellQuote)].join(" ")
+    ],
+    { stdio: "inherit" }
+  );
+};
+var renderYamlMap = (map) => `${Object.entries(map).map(
+  ([service, keys]) => keys.length === 0 ? `${service}: []` : `${service}:
+${keys.map((key) => `  - ${key}`).join("\n")}`
+).join("\n")}
+`;
+var inventory = readJson(inventoryPath);
+if (mode === "tfvars") {
+  runMapper([
+    "tfvars",
+    "--secrets",
+    "secrets.json",
+    "--public",
+    ".env.production",
+    "--map",
+    "deployment/apps.json",
+    "--out",
+    "terraform/runtime.auto.tfvars.json"
+  ]);
+  process.exit(0);
 }
-console.log(
-  "Loaded deployment environment from .env.production and secrets.json"
-);
+if (mode !== "github-env") {
+  throw new Error(`Unknown deployment env mode: ${mode}`);
+}
+var envMap = {
+  deployment: unique([
+    ...requiredDeploymentEnv,
+    ...inventory.deploymentEnv ?? []
+  ])
+};
+for (const app of [
+  ...inventory.frontends ?? [],
+  ...inventory.backends ?? [],
+  ...inventory.workers ?? []
+]) {
+  envMap[app.name] = app.env ?? [];
+}
+var tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "mp-lb-env-map-"));
+var mapPath = path.join(tempDir, "env-map.yaml");
+try {
+  fs.writeFileSync(mapPath, renderYamlMap(envMap));
+  runMapper([
+    "github-env",
+    "--secrets",
+    "secrets.json",
+    "--public",
+    ".env.production",
+    "--map",
+    mapPath,
+    "--gcp-credentials",
+    process.env.RUNNER_TEMP ? path.join(process.env.RUNNER_TEMP, "gcp-sa-key.json") : path.join(root, ".deployment", "gcp-sa-key.json")
+  ]);
+} finally {
+  fs.rmSync(tempDir, { recursive: true, force: true });
+}
