@@ -118,7 +118,21 @@ The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold. T
       cmd: pnpm --filter <frontend-package> dev --host 0.0.0.0 --port ${<FRONTEND_SLUG>_PORT}
       env: "*"
   ```
-  Add deploy-safe SPA rewrites (`vercel.json`) where needed.
+- **Vercel static SPA config** — add `apps/<frontend slug>/vercel.json` for
+  Vite SPAs. Vercel needs the rewrite for direct loads of client routes such as
+  `/dashboard`:
+  ```json
+  {
+    "cleanUrls": true,
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ],
+    "trailingSlash": false
+  }
+  ```
 - **Cleanup** — title/favicon values and removal of scaffold noise; keep the app
   surface blank/disposable.
 
