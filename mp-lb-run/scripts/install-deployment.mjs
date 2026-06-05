@@ -223,9 +223,10 @@ var renderWorkflow = (template, manifest2) => {
 
       - name: Deploy ${frontend.name} to Vercel
         run: |
+          cp ${frontend.path}/vercel.json ${frontend.outputDirectory}/vercel.json
           PROJECT_ID=$(terraform -chdir=terraform output -json vercel_project_ids | node -e "let d=''; process.stdin.on('data', c => d += c).on('end', () => console.log(JSON.parse(d)['${frontend.name}']))")
           ORG_ID=$(curl -s -H "Authorization: Bearer $VERCEL_API_TOKEN" https://api.vercel.com/v2/user | node -e "let d=''; process.stdin.on('data', c => d += c).on('end', () => console.log(JSON.parse(d).user.id))")
-          VERCEL_PROJECT_ID="$PROJECT_ID" VERCEL_ORG_ID="$ORG_ID" npx vercel deploy ${frontend.outputDirectory} --prod --yes --local-config ${frontend.path}/vercel.json --token="$VERCEL_API_TOKEN"`;
+          VERCEL_PROJECT_ID="$PROJECT_ID" VERCEL_ORG_ID="$ORG_ID" npx vercel deploy ${frontend.outputDirectory} --prod --yes --token="$VERCEL_API_TOKEN"`;
   }).join("\n\n");
   return template.replaceAll("{{PROJECT_NAME}}", manifest2.projectName).replace("{{BACKEND_IMAGE_STEPS}}", backendImageSteps).replace("{{FRONTEND_DEPLOY_STEPS}}", frontendSteps);
 };
