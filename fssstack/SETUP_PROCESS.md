@@ -127,7 +127,7 @@ The shadcn CLI owns the generic Vite, React, Tailwind, and shadcn/ui scaffold. T
     "rewrites": [
       {
         "source": "/(.*)",
-        "destination": "/index.html"
+        "destination": "/"
       }
     ],
     "trailingSlash": false
