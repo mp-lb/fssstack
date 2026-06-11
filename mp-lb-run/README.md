@@ -1,5 +1,11 @@
 # mp-lb-run
 
+> **Superseded for new deploys (2026-06-12).** New app deploys go via **Zap
+> Arc** — Zapper's deploy subsystem (`zap arc deploy`, see the zapper repo's
+> `docs/tech/arc.md`) — on **ArcNet**, MAP Lab's network (config and decisions
+> in `mgr/arcnet/`; how-to in `mgr/processes/deploy.md`). This store remains
+> canon only for stacks not yet migrated off the per-project `infra/` pattern.
+
 `mp-lb-run` is a Doctrine repo for one cloud deployment pattern for FSS Stack projects.
 
 It is not the universal deployment layer. FSS Stack projects can subscribe to different deployment repos or patterns depending on where and how they need to run.
