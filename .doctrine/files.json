@@ -2,21 +2,21 @@
   "files": {
     "fssstack/README.md": {
       "storageClass": "text",
-      "hash": "sha256:1e72f8bc60b56cd83dfd0c9f1a53682d3e317b7c1186abc0d84105b24b98aa21",
-      "lastSyncedAt": "2026-06-04T15:29:18.047Z",
+      "hash": "sha256:7374d43e86e96517624821d2650ab1c7c0812d70f400decefe9cc60f019f6ee5",
+      "lastSyncedAt": "2026-06-12T18:43:12.853Z",
       "remoteFileId": "9825b4a9-6445-42eb-92a2-834068c8f914",
       "remotePath": "/README.md",
-      "remoteUpdatedAt": "2026-06-02T10:50:41.608Z",
-      "remoteRevisionNumber": 5
+      "remoteUpdatedAt": "2026-06-12T18:43:13.432Z",
+      "remoteRevisionNumber": 6
     },
     "fssstack/SETUP_PROCESS.md": {
       "storageClass": "text",
-      "hash": "sha256:2409816a91d2acc1a11a6c36277a7e7f2f4c6fde546891be2ffea986bae7f005",
-      "lastSyncedAt": "2026-06-04T15:29:23.274Z",
+      "hash": "sha256:93069c4b5ddca7dce31484d79aae6ab6aa837366dfbf23353d3aa64efbf75e52",
+      "lastSyncedAt": "2026-06-12T18:34:13.214Z",
       "remoteFileId": "8f834cb5-cd1a-4434-abb8-241ad5a18c8d",
       "remotePath": "/SETUP_PROCESS.md",
-      "remoteUpdatedAt": "2026-06-04T15:29:23.730Z",
-      "remoteRevisionNumber": 16
+      "remoteUpdatedAt": "2026-06-06T01:20:22.577Z",
+      "remoteRevisionNumber": 19
     },
     "fssstack/agents-md/code-style.md": {
       "storageClass": "text",
@@ -48,11 +48,11 @@
     "fssstack/agents-md/documentation-layout.md": {
       "storageClass": "text",
       "hash": "sha256:7ff6754065641f6c8d1d62f84a82860db47af5f7dd7a013734960f220bc38dc9",
-      "lastSyncedAt": "2026-06-02T17:06:51.185Z",
-      "remoteFileId": "835d01bf-2fdd-43d3-a905-fdb463cf7b93",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "fffbea40-da1f-4efb-9eb6-527f778b9733",
       "remotePath": "/agents-md/documentation-layout.md",
-      "remoteUpdatedAt": "2026-06-02T10:00:31.584Z",
-      "remoteRevisionNumber": 6
+      "remoteUpdatedAt": "2026-06-08T11:54:29.696Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/agents-md/global.md": {
       "storageClass": "text",
@@ -66,11 +66,11 @@
     "fssstack/agents-md/process-management.md": {
       "storageClass": "text",
       "hash": "sha256:b7df3cabadb4c817bdd5c513f2a6d2e078bda00021afefeed2a56ea5d97c34ef",
-      "lastSyncedAt": "2026-06-01T23:59:33.387Z",
-      "remoteFileId": "242fdf4f-9648-49d3-86fd-3ecd58c843b6",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "347c14a9-bacc-4d1c-acaa-dc878db9ba58",
       "remotePath": "/agents-md/process-management.md",
-      "remoteUpdatedAt": "2026-06-01T23:59:34.309Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-06-08T11:55:42.161Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/agents-md/tech-stack.md": {
       "storageClass": "text",
@@ -110,69 +110,66 @@
     },
     "fssstack/extensions/README.md": {
       "storageClass": "text",
-      "hash": "sha256:90ef651633236ee513346323fa018348421978b3b2545a12c4b22d02604c9b44",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "ed9449ed-1200-4500-9ffe-60a8838afde9",
+      "hash": "sha256:0c0fad61a581251c2371aca5c6aebd3115f5169d4c792fc013695339ee8385b6",
+      "lastSyncedAt": "2026-06-12T18:41:59.327Z",
+      "remoteFileId": "8cde747f-92ad-4610-9336-4bcdb310a8e7",
       "remotePath": "/extensions/README.md",
-      "remoteUpdatedAt": "2026-06-03T23:24:58.185Z",
-      "remoteRevisionNumber": 1
+      "remoteUpdatedAt": "2026-06-12T18:42:00.592Z",
+      "remoteRevisionNumber": 2
     },
     "fssstack/extensions/bull.md": {
       "storageClass": "text",
       "hash": "sha256:8ff869a18347336bb24f1808e1b6a5557a656b532675afc1b31f3353a0740f09",
-      "lastSyncedAt": "2026-06-04T15:29:15.457Z",
-      "remoteFileId": "39da86a9-0a96-4ea7-a0f8-ece0d8b6e283",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "a8b0fa0c-8c29-4353-bc78-94ff0c9799ca",
       "remotePath": "/extensions/bull.md",
-      "remoteUpdatedAt": "2026-06-04T06:09:17.654Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-06-08T11:47:48.188Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/extensions/clerk-rbac.md": {
       "storageClass": "text",
       "hash": "sha256:4c2565b2bfb34c104ad959f9158f5692282d223056ae886651d8be7bad80be80",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "5563abe6-af96-423d-bc6b-35697e1bfaff",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "0e5d1f03-98a5-4a07-bb7e-b8f9e01514b4",
       "remotePath": "/extensions/clerk-rbac.md",
-      "remoteUpdatedAt": "2026-05-29T16:51:27.210Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-06-08T11:48:15.203Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/extensions/clerk.md": {
       "storageClass": "text",
       "hash": "sha256:7b214101691fdf5b86389e9a6827495fe07191526c7a768ab7537ec1a1c12d8d",
-      "isExecutable": true,
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "68dd3a6d-1b88-450a-be21-d537c5932d04",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "ac12ce39-22c8-4b50-b532-6f74278f5777",
       "remotePath": "/extensions/clerk.md",
-      "remoteUpdatedAt": "2026-05-29T18:24:15.872Z",
-      "remoteRevisionNumber": 3
+      "remoteUpdatedAt": "2026-06-08T11:48:51.736Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/extensions/custom-domains.md": {
       "storageClass": "text",
       "hash": "sha256:cc9e3e8d74f12f7e8bd46a66c7863accb7b4a72461cea774e310cf6bcb79e9c4",
-      "lastSyncedAt": "2026-06-04T15:29:21.619Z",
-      "remoteFileId": "ff4ab47e-159f-4547-abf5-4671bb3cf284",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "7f2947c2-eb79-4c11-984e-d3fa1ad2f486",
       "remotePath": "/extensions/custom-domains.md",
-      "remoteUpdatedAt": "2026-06-04T15:29:22.379Z",
-      "remoteRevisionNumber": 4
+      "remoteUpdatedAt": "2026-06-08T11:49:23.082Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/extensions/mongodb.md": {
       "storageClass": "text",
       "hash": "sha256:596e144a0ad18a76ac16f8a9ef5e81764f1a19a6c444b98096e7a33176d03605",
-      "isExecutable": true,
-      "lastSyncedAt": "2026-06-04T15:29:16.857Z",
-      "remoteFileId": "75644b08-de11-4b14-afe8-4dccc9efb16f",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "8c473ba0-896f-4bfa-baf8-319fa0c15367",
       "remotePath": "/extensions/mongodb.md",
-      "remoteUpdatedAt": "2026-06-04T05:03:30.848Z",
-      "remoteRevisionNumber": 4
+      "remoteUpdatedAt": "2026-06-08T11:50:09.660Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/extensions/playwright.md": {
       "storageClass": "text",
       "hash": "sha256:85b9492f5f0937d1753b85022ea7600cefe41865be34fa9ffb5d08edfbdc3c69",
-      "isExecutable": true,
-      "lastSyncedAt": "2026-06-02T17:06:51.185Z",
-      "remoteFileId": "95dc58d9-3006-40db-8985-c2e464483e65",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "6b94c822-0c87-4839-be88-a80b90855dd9",
       "remotePath": "/extensions/playwright.md",
-      "remoteUpdatedAt": "2026-06-02T10:00:30.542Z",
-      "remoteRevisionNumber": 11
+      "remoteUpdatedAt": "2026-06-08T11:50:50.790Z",
+      "remoteRevisionNumber": 1
     },
     "fssstack/extensions/redis.md": {
       "storageClass": "text",
@@ -185,21 +182,21 @@
     },
     "fssstack/extensions/s3.md": {
       "storageClass": "text",
-      "hash": "sha256:a485f8dafe31ea0f62037c83713142082c5354a124142d1a7beea64c68e7e4b6",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "287efb3c-e4d9-453d-bc2a-c95c8c86018c",
+      "hash": "sha256:2bccc7296d36baaf2406c728bc6254e38127f1ffdab5bb166de45fb52df73fbb",
+      "lastSyncedAt": "2026-06-12T18:34:10.773Z",
+      "remoteFileId": "f4496322-9378-4f0e-8d2d-b8c7bcd13c94",
       "remotePath": "/extensions/s3.md",
-      "remoteUpdatedAt": "2026-06-04T01:32:26.631Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-06-08T12:02:17.545Z",
+      "remoteRevisionNumber": 3
     },
     "fssstack/processes/adding-a-service.md": {
       "storageClass": "text",
-      "hash": "sha256:caa89f35cf63d422c20886c2087802e9505a81a6c7bcde2b54f3a5c4931da6b7",
-      "lastSyncedAt": "2026-06-04T06:35:02.333Z",
+      "hash": "sha256:b6f6c577720d9a3900462fb3a0ce5c615dd7ab4720582d0c5ff2934b4cda6de7",
+      "lastSyncedAt": "2026-06-12T18:41:59.327Z",
       "remoteFileId": "d6cc70f5-aa18-4259-af92-ce4f112cf1d6",
       "remotePath": "/processes/adding-a-service.md",
-      "remoteUpdatedAt": "2026-06-04T06:09:18.095Z",
-      "remoteRevisionNumber": 1
+      "remoteUpdatedAt": "2026-06-12T18:42:00.277Z",
+      "remoteRevisionNumber": 2
     },
     "fssstack/proj/angles/git-google-docs-workspace.md": {
       "storageClass": "text",
@@ -241,7 +238,7 @@
     "fssstack/shell/.env.local": {
       "storageClass": "text",
       "hash": "sha256:4c64c725466072ae091fa9b8b22e2d1a40714bf52c4ae581a4dbf0da4c7f74ab",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
       "remoteFileId": "61ef84c8-bf5d-4e2a-8b86-6f52da2359ec",
       "remotePath": "/shell/.env.local",
       "remoteUpdatedAt": "2026-05-25T13:18:57.670Z",
@@ -276,21 +273,21 @@
     },
     "fssstack/shell/.zap/state.json": {
       "storageClass": "text",
-      "hash": "sha256:b9a4bac6224b2270ca188ecfdd5ebf31279200eaba369f689d1c66ca102b8ae7",
-      "lastSyncedAt": "2026-06-04T06:35:02.333Z",
+      "hash": "sha256:254612e2d3bc93751cf3be2cab3e634b0dbc929aa575afa990d46bd04d4aacfc",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
       "remoteFileId": "5f1e9dd5-c513-4fb1-b87e-54fcb4845ba5",
       "remotePath": "/shell/.zap/state.json",
-      "remoteUpdatedAt": "2026-06-04T06:09:15.860Z",
-      "remoteRevisionNumber": 1
+      "remoteUpdatedAt": "2026-06-11T02:49:48.855Z",
+      "remoteRevisionNumber": 3
     },
     "fssstack/shell/README.md": {
       "storageClass": "text",
-      "hash": "sha256:005f8ce621e5e27e2b8ad015c1724d752032e94af753d0dd9eb90b6edd10fb33",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
+      "hash": "sha256:2655021214f6694904a7e8d8332b087f09570dd29c41d2694f574d25501d04ea",
+      "lastSyncedAt": "2026-06-12T18:34:15.099Z",
       "remoteFileId": "253d8ec0-a189-4681-8b87-dae85091a803",
       "remotePath": "/shell/README.md",
-      "remoteUpdatedAt": "2026-05-30T21:38:12.026Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-06-05T16:44:32.787Z",
+      "remoteRevisionNumber": 3
     },
     "fssstack/shell/apps/example-backend/dist/index.d.ts": {
       "storageClass": "text",
@@ -787,33 +784,42 @@
       "remoteUpdatedAt": "2026-05-25T13:19:03.272Z",
       "remoteRevisionNumber": 1
     },
+    "fssstack/shell/scripts/context-files.mjs": {
+      "storageClass": "text",
+      "hash": "sha256:ebe58c24c4114906935c741096b59c7fa2bb51519256d9cb16c3a698f3db0968",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "4817a66e-c513-4dc0-b58f-c12cf4ffd139",
+      "remotePath": "/shell/scripts/context-files.mjs",
+      "remoteUpdatedAt": "2026-06-06T01:20:23.936Z",
+      "remoteRevisionNumber": 1
+    },
     "fssstack/shell/zap.yaml": {
       "storageClass": "text",
-      "hash": "sha256:ed39b65273d263df0cd4a4c7a32c2ef9e36461a45a9164009d0dbcc07eca3b81",
-      "lastSyncedAt": "2026-06-04T15:29:47.392Z",
+      "hash": "sha256:42582783b42c916644e05277a56ea5af7553f961db3ca3086d5de156b4777edb",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
       "remoteFileId": "069597de-7560-437b-807c-7be617690502",
       "remotePath": "/shell/zap.yaml",
-      "remoteUpdatedAt": "2026-06-04T15:30:04.904Z",
-      "remoteRevisionNumber": 7
+      "remoteUpdatedAt": "2026-06-06T01:22:52.449Z",
+      "remoteRevisionNumber": 9
     },
     "fssstack/skills/AGENTS.md": {
       "storageClass": "text",
-      "hash": "sha256:4860f8269f39ba5905ed491b811b414ead101e996420adc25331f7185192579f",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "7788bdac-9eac-461d-9fcf-c8d2031db219",
+      "hash": "sha256:e60b35bd59147cdeca3761ef78caea2b77c7af674db60f575dc04ee02c0282b8",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "e88ad1e5-6884-4b8b-87b0-9888b85a5eb9",
       "remotePath": "/skills/AGENTS.md",
-      "remoteUpdatedAt": "2026-05-22T19:27:32.273Z",
-      "remoteRevisionNumber": 3,
+      "remoteUpdatedAt": "2026-06-12T08:10:36.311Z",
+      "remoteRevisionNumber": 2,
       "source": "reference"
     },
     "fssstack/skills/README.md": {
       "storageClass": "text",
-      "hash": "sha256:8071287525d9f6854952826dd3e1fe97f0fbe4395e1a4cc927a5588141c1eb7e",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "5a4ed3be-9db7-4cc9-a1e0-4c84fbecb4c4",
+      "hash": "sha256:c4ebe646efd5d76f4bd86e0a377a7f56747498dca7c0696f9e4c84ef6cff066e",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "ed03e488-836d-4901-beaa-acf2ea026e5a",
       "remotePath": "/skills/README.md",
-      "remoteUpdatedAt": "2026-05-22T21:55:43.366Z",
-      "remoteRevisionNumber": 10,
+      "remoteUpdatedAt": "2026-06-12T08:10:37.903Z",
+      "remoteRevisionNumber": 2,
       "source": "reference"
     },
     "fssstack/skills/SKILL.md": {
@@ -829,21 +835,21 @@
     "fssstack/skills/authored-skills/value-analysis/SKILL.md": {
       "storageClass": "text",
       "hash": "sha256:bc0a4222bbb2bdefcd0798d2114bca16b6e5c90dd951ef5f4f849d4c7d51db96",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "852b99a5-33ce-4c67-b16f-2b76848bb9d9",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "ad93dc74-f4dd-43a2-a006-db6b4c8417be",
       "remotePath": "/skills/authored-skills/value-analysis/SKILL.md",
-      "remoteUpdatedAt": "2026-05-22T22:22:44.983Z",
-      "remoteRevisionNumber": 5,
+      "remoteUpdatedAt": "2026-06-05T16:29:12.203Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/skills/authored-skills/value-analysis/references/index.md": {
       "storageClass": "text",
       "hash": "sha256:16eb742d32440a8e61479df4e3515af2d6b82a34a1d6bfcd53a3fc990bab5ea4",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "b7f45df2-d0ac-4930-94bd-85f7288e3879",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "560178d6-6307-4037-bd59-e05b2fc2fe32",
       "remotePath": "/skills/authored-skills/value-analysis/references/index.md",
-      "remoteUpdatedAt": "2026-05-22T22:28:04.170Z",
-      "remoteRevisionNumber": 6,
+      "remoteUpdatedAt": "2026-06-05T16:29:13.093Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/skills/authored-skills/value-analysis/references/inputs.md": {
@@ -859,11 +865,11 @@
     "fssstack/skills/authored-skills/value-analysis/references/marketing-positioning.md": {
       "storageClass": "text",
       "hash": "sha256:cb9b2d6aa559cb7a5a3c78f1949e95601121d4319fd55b6ebec99f3be32666a9",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "7f2c1b0b-1d03-4ff0-85ea-a1b5791f0d69",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "878f7227-02a2-4105-9f70-769ce9d0d46d",
       "remotePath": "/skills/authored-skills/value-analysis/references/marketing-positioning.md",
-      "remoteUpdatedAt": "2026-05-22T21:52:36.617Z",
-      "remoteRevisionNumber": 3,
+      "remoteUpdatedAt": "2026-06-05T16:29:14.393Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/skills/process.md": {
@@ -1049,11 +1055,11 @@
     "fssstack/skills/value-analysis/index.md": {
       "storageClass": "text",
       "hash": "sha256:e0aa83055efe21cbad37a6eb14336e78135062cd6739cba442715d3160e9b5d5",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "161f865d-80a6-427f-92a0-9a2f6a9be4d3",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "e759f641-a531-4c30-8893-c1765bb7992a",
       "remotePath": "/skills/value-analysis/index.md",
-      "remoteUpdatedAt": "2026-05-22T22:13:41.457Z",
-      "remoteRevisionNumber": 38,
+      "remoteUpdatedAt": "2026-06-05T16:29:39.882Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/skills/value-analysis/inputs.md": {
@@ -1069,11 +1075,11 @@
     "fssstack/skills/value-analysis/marketing-positioning.md": {
       "storageClass": "text",
       "hash": "sha256:e26c34f0b64bd4156e0c3f3ef5b435bc9d725d6219017f94a53858abc202cf78",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "d74aaea9-ab3b-48e3-b143-d8ad49a4cc0b",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "e129928b-7b4c-44e5-9cac-00d5848a24ee",
       "remotePath": "/skills/value-analysis/marketing-positioning.md",
-      "remoteUpdatedAt": "2026-05-22T19:34:26.239Z",
-      "remoteRevisionNumber": 30,
+      "remoteUpdatedAt": "2026-06-05T16:29:41.600Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/admin-panel-pattern.md": {
@@ -1089,21 +1095,81 @@
     "fssstack/standards/agents-md-template.txt": {
       "storageClass": "text",
       "hash": "sha256:08a126a28bde481b1eb0ef28eb4b4b4aeda1cbe2e5930666f5ff38228486c4d2",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "d360c234-3e99-4e68-a59c-b98c1e7982e7",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "e44f14f6-2489-470b-bb55-12784b62137e",
       "remotePath": "/standards/agents-md-template.txt",
-      "remoteUpdatedAt": "2026-06-03T23:46:25.152Z",
-      "remoteRevisionNumber": 703,
+      "remoteUpdatedAt": "2026-06-08T11:45:28.643Z",
+      "remoteRevisionNumber": 1,
+      "source": "reference"
+    },
+    "fssstack/standards/agents/evals.md": {
+      "storageClass": "text",
+      "hash": "sha256:6c2fa69f1818ed1278f84aa1061ba333fe0a1abca324c479eee78f843787f58c",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "9ac0778d-eb16-495b-a63e-c32a5bb67c7a",
+      "remotePath": "/standards/agents/evals.md",
+      "remoteUpdatedAt": "2026-06-10T02:52:26.285Z",
+      "remoteRevisionNumber": 1,
+      "source": "reference"
+    },
+    "fssstack/standards/agents/harnesses.md": {
+      "storageClass": "text",
+      "hash": "sha256:ad4711f6d2e977e3487a10b79f49fca5455913ca9f2ce460307ceb56abe56d64",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "461db860-f1bb-4f08-b8cf-30fd0d407eca",
+      "remotePath": "/standards/agents/harnesses.md",
+      "remoteUpdatedAt": "2026-06-10T02:52:26.739Z",
+      "remoteRevisionNumber": 1,
+      "source": "reference"
+    },
+    "fssstack/standards/agents/index.md": {
+      "storageClass": "text",
+      "hash": "sha256:0a9c110d4814c86ec5e541741b81712838cbd932bd05f714d8b26469470dd444",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "4dd69520-4e52-4520-a210-5dff67547532",
+      "remotePath": "/standards/agents/index.md",
+      "remoteUpdatedAt": "2026-06-10T02:52:26.504Z",
+      "remoteRevisionNumber": 1,
+      "source": "reference"
+    },
+    "fssstack/standards/agents/logs-and-context.md": {
+      "storageClass": "text",
+      "hash": "sha256:5ac9fa60d6f20eab671cbdc6922a4296a49aaeea7773b440f03e861a80c01e95",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "127fd99f-8378-4523-a2d4-db4752b9c2ed",
+      "remotePath": "/standards/agents/logs-and-context.md",
+      "remoteUpdatedAt": "2026-06-10T02:52:26.608Z",
+      "remoteRevisionNumber": 1,
+      "source": "reference"
+    },
+    "fssstack/standards/agents/prompts.md": {
+      "storageClass": "text",
+      "hash": "sha256:ab03ef5c82c02a3bc558a783b2f76d4dcc2b8a6afe4badec8e29a177dc27b4f5",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "df60bd8d-2bb2-45ed-88f7-c64805b9e99d",
+      "remotePath": "/standards/agents/prompts.md",
+      "remoteUpdatedAt": "2026-06-10T02:52:27.022Z",
+      "remoteRevisionNumber": 1,
+      "source": "reference"
+    },
+    "fssstack/standards/agents/tools.md": {
+      "storageClass": "text",
+      "hash": "sha256:69d0cce5f0193fe55373d1c760f5993116df178b4b3a2dd9d8d5c685790f050b",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "65bb6e2b-f9dd-49bf-9dce-eda9174047b1",
+      "remotePath": "/standards/agents/tools.md",
+      "remoteUpdatedAt": "2026-06-10T02:52:26.422Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/clerk-rbac.md": {
       "storageClass": "text",
       "hash": "sha256:0295eef12be4d4485a927e5e949083edcd6905b4cc66bf582103ee91c45d7768",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "d9afdb9b-fc1c-4fc9-8ceb-42920d7c5e21",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "a98b2914-6916-4125-a823-29d64cb41c76",
       "remotePath": "/standards/clerk-rbac.md",
-      "remoteUpdatedAt": "2026-05-18T11:02:18.000Z",
-      "remoteRevisionNumber": 2,
+      "remoteUpdatedAt": "2026-06-08T11:45:30.788Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/clis.md": {
@@ -1119,41 +1185,51 @@
     "fssstack/standards/component-decomposition.md": {
       "storageClass": "text",
       "hash": "sha256:30e031f8e24301e608225372be913972d822eba873a52a0e619b22c0c199d6c8",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "e33fa9b7-02f5-4ab4-b647-c82b76a713c9",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "f95a3fb4-0000-4162-b022-65c0058b90c7",
       "remotePath": "/standards/component-decomposition.md",
-      "remoteUpdatedAt": "2026-05-18T07:25:13.315Z",
-      "remoteRevisionNumber": 226,
+      "remoteUpdatedAt": "2026-06-08T11:45:33.951Z",
+      "remoteRevisionNumber": 1,
+      "source": "reference"
+    },
+    "fssstack/standards/context-files.md": {
+      "storageClass": "text",
+      "hash": "sha256:2ab9619b35391182afe5721b7896101de356b2c07503dda51f84918816dfeb53",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "bc8743c5-8da5-4020-ba93-5e5738ab6e85",
+      "remotePath": "/standards/context-files.md",
+      "remoteUpdatedAt": "2026-06-06T01:10:57.080Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/crud.md": {
       "storageClass": "text",
       "hash": "sha256:f12a810928a3689ca6ec7115db5e2a67c0693d980a1dd9b5c542d6024a5020a4",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "11bb2be3-638e-4c98-9f82-22dd6b074b0d",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "f7a6109f-a4e4-416e-9843-65408766d5d4",
       "remotePath": "/standards/crud.md",
-      "remoteUpdatedAt": "2026-05-15T06:17:35.507Z",
-      "remoteRevisionNumber": 3,
+      "remoteUpdatedAt": "2026-06-08T11:45:36.411Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/domain-extraction.md": {
       "storageClass": "text",
       "hash": "sha256:1f1743ed7784d985d64b52eaf9aa3f876e7464b34a353cbaa88f535838e722bc",
-      "lastSyncedAt": "2026-06-04T02:35:57.460Z",
-      "remoteFileId": "b99e456c-89b2-4b8f-85ae-f3ad8512afc4",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "d94906a9-ff5e-4305-89a6-f483866b10a6",
       "remotePath": "/standards/domain-extraction.md",
-      "remoteUpdatedAt": "2026-06-03T23:24:58.499Z",
-      "remoteRevisionNumber": 2,
+      "remoteUpdatedAt": "2026-06-08T11:45:38.140Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/env-vars.md": {
       "storageClass": "text",
       "hash": "sha256:91648cb389e5c9b085b2dc6f88f8179bd6fdee0cd55d2786c4f12993d634cfa3",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "3fbb76ce-ce98-42b4-94be-c3c55089fca6",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "43c962cf-89ec-49c5-916b-9a38458526d0",
       "remotePath": "/standards/env-vars.md",
-      "remoteUpdatedAt": "2026-05-30T02:32:08.518Z",
-      "remoteRevisionNumber": 2,
+      "remoteUpdatedAt": "2026-06-08T11:45:39.688Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/errors.md": {
@@ -1168,11 +1244,21 @@
     },
     "fssstack/standards/event-schema.md": {
       "storageClass": "text",
-      "hash": "sha256:a4321cc4a5ac9b21a94f9308cccaebede076cf5b164ad4d76662d22e65b8884a",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "03049d29-3d0b-44d8-b795-c93620f96057",
+      "hash": "sha256:9d5261f00a3778b64b5d8aa01247ee0fe3e74f6739f64ff10aec9a1b228ddd2b",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "ac33957e-dc4c-4f19-be7c-424ee791675f",
       "remotePath": "/standards/event-schema.md",
-      "remoteUpdatedAt": "2026-05-14T08:58:28.851Z",
+      "remoteUpdatedAt": "2026-06-10T13:42:55.117Z",
+      "remoteRevisionNumber": 2,
+      "source": "reference"
+    },
+    "fssstack/standards/event-sourcing.md": {
+      "storageClass": "text",
+      "hash": "sha256:2d4fecd327f3307e34d1340d3f37e8509c3cdc08b359ab6ee9eae17139d50c4e",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "066d34d9-3a35-4e07-806b-4cf398136802",
+      "remotePath": "/standards/event-sourcing.md",
+      "remoteUpdatedAt": "2026-06-10T13:42:57.421Z",
       "remoteRevisionNumber": 1,
       "source": "reference"
     },
@@ -1189,21 +1275,21 @@
     "fssstack/standards/first-class-jobs.md": {
       "storageClass": "text",
       "hash": "sha256:d99020e31db8865828e0220511eb64573d45204b04af9b36569c2174c6b93da5",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "57adff6b-eed4-45dc-98c1-0b9b0b1023ee",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "0a6e4b89-3b1b-4b3a-9ad8-97c7749904c3",
       "remotePath": "/standards/first-class-jobs.md",
-      "remoteUpdatedAt": "2026-05-17T07:15:47.551Z",
-      "remoteRevisionNumber": 3,
+      "remoteUpdatedAt": "2026-06-08T11:45:46.578Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/formatting.md": {
       "storageClass": "text",
       "hash": "sha256:fe75ee4ea155dfad7447d60ea06c90b0a509d06bbb7a08eec99164c3d78a84e3",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "9027a935-bc04-499d-af96-b78c07dd60cf",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "dde7b668-e9e7-4102-8c9c-d749fff6f93c",
       "remotePath": "/standards/formatting.md",
-      "remoteUpdatedAt": "2026-05-19T13:56:59.780Z",
-      "remoteRevisionNumber": 2,
+      "remoteUpdatedAt": "2026-06-08T11:45:48.266Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/freshness.md": {
@@ -1219,11 +1305,11 @@
     "fssstack/standards/global-system-collection.md": {
       "storageClass": "text",
       "hash": "sha256:4d57f47fc24448066d021465a7d3bf72a3193eabd69c53c41a2a7d34bfeac663",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "1acafcdc-778a-46ab-9ae1-87d35cba8f1c",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "00fb4812-e534-4a77-9f3b-43424d1f796d",
       "remotePath": "/standards/global-system-collection.md",
-      "remoteUpdatedAt": "2026-05-29T18:24:28.191Z",
-      "remoteRevisionNumber": 7,
+      "remoteUpdatedAt": "2026-06-08T11:45:52.038Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/integration-process.md": {
@@ -1249,21 +1335,21 @@
     "fssstack/standards/layout.md": {
       "storageClass": "text",
       "hash": "sha256:a5a4fbc1a97f3815702244f75a292af76d390caa26e69a4369c64073374d9be8",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "048cd2b8-47fa-4170-b61d-904f5ff578d4",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "a7fd28a8-984f-4881-81bb-6796867ace2d",
       "remotePath": "/standards/layout.md",
-      "remoteUpdatedAt": "2026-05-21T10:28:17.211Z",
-      "remoteRevisionNumber": 4,
+      "remoteUpdatedAt": "2026-06-08T11:45:56.762Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/lib-release.md": {
       "storageClass": "text",
       "hash": "sha256:66340741e3a5f3dd01beadbcfd17bb94649165ae2b9ab0b425c96faeb3dd6e81",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "65ff7ad7-0b86-4def-ad60-e3f8651601a9",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "faa43b9d-c381-4445-884d-c03d2d469425",
       "remotePath": "/standards/lib-release.md",
-      "remoteUpdatedAt": "2026-05-29T18:24:38.054Z",
-      "remoteRevisionNumber": 5,
+      "remoteUpdatedAt": "2026-06-08T11:45:58.586Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/libs.md": {
@@ -1289,41 +1375,41 @@
     "fssstack/standards/modal-layer.md": {
       "storageClass": "text",
       "hash": "sha256:6d1770d0371ddb42e9db475a9aa1dd16ab339f444d8f4086b1d6fd83df4bfee1",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "a984376b-61ce-4094-84d2-560bb6f52f47",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "933c5bee-d138-44be-b1e2-cde66d32f0d1",
       "remotePath": "/standards/modal-layer.md",
-      "remoteUpdatedAt": "2026-05-15T16:41:06.898Z",
-      "remoteRevisionNumber": 3,
+      "remoteUpdatedAt": "2026-06-08T11:46:03.933Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/modular-monolith.md": {
       "storageClass": "text",
       "hash": "sha256:aed6b142924aec42ba384bacd8fe1568ae335c6401e107cae6264664aefaac39",
-      "lastSyncedAt": "2026-06-01T13:27:08.147Z",
-      "remoteFileId": "f23d4b6f-6cb1-4c3c-9ef3-25b48fed2b78",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "ed3a3f49-783f-45ae-a4f0-92dedf57d76c",
       "remotePath": "/standards/modular-monolith.md",
-      "remoteUpdatedAt": "2026-06-01T10:51:39.859Z",
-      "remoteRevisionNumber": 2,
+      "remoteUpdatedAt": "2026-06-08T11:46:05.525Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/onboarding-guard-pattern.md": {
       "storageClass": "text",
       "hash": "sha256:098571d667b007dde1047df52e1f6f068ff390612ace9d79641a40bff7f0552e",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "35012a07-edb2-46e2-b286-22ca1b403141",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "dbcafdaa-05bd-4a50-b581-bb12b8c77677",
       "remotePath": "/standards/onboarding-guard-pattern.md",
-      "remoteUpdatedAt": "2026-05-18T11:36:29.912Z",
-      "remoteRevisionNumber": 4,
+      "remoteUpdatedAt": "2026-06-08T11:46:07.073Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/optimistic-updates-abstraction.md": {
       "storageClass": "text",
       "hash": "sha256:e83020aa7f5a426ffacd6af6ebe98f995087b6f51d12420c68b520d99b4b42e3",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "5ce9c2f7-da2f-40ee-8270-4229a955ace7",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "56bafb61-cf71-4727-aed6-ae78a484d2b8",
       "remotePath": "/standards/optimistic-updates-abstraction.md",
-      "remoteUpdatedAt": "2026-05-18T09:25:17.378Z",
-      "remoteRevisionNumber": 12,
+      "remoteUpdatedAt": "2026-06-08T11:46:09.665Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/plug-in-module-pattern.md": {
@@ -1339,11 +1425,11 @@
     "fssstack/standards/prompt-layer.md": {
       "storageClass": "text",
       "hash": "sha256:6dc1ff7840d67e43b9809cc0da19dea00fee60114323225259902d05e8c691b1",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "d06e7549-4ba6-482d-9efe-903b44f6e053",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "090a57ae-2a77-4c01-9561-579cc8223141",
       "remotePath": "/standards/prompt-layer.md",
-      "remoteUpdatedAt": "2026-05-20T08:45:23.265Z",
-      "remoteRevisionNumber": 2,
+      "remoteUpdatedAt": "2026-06-08T11:46:18.069Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/prompt-writing.md": {
@@ -1369,31 +1455,31 @@
     "fssstack/standards/states.md": {
       "storageClass": "text",
       "hash": "sha256:18408588fb1e44b0afe1060e7ba410ba0055c7e5bceec861630e2a3137e1ad86",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "d82c3ae7-a4df-4ed2-976c-70a35e2d39dd",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "d55681f9-b91f-4c92-b193-16a66d270e58",
       "remotePath": "/standards/states.md",
-      "remoteUpdatedAt": "2026-05-30T02:32:05.761Z",
-      "remoteRevisionNumber": 4,
+      "remoteUpdatedAt": "2026-06-08T11:46:23.179Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/style-guide.md": {
       "storageClass": "text",
       "hash": "sha256:1ee6797c2a8d339359769b9b5fdf53339f62ca729b0ca27204005fb00b835766",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "65bac2f1-d54a-4734-bd96-f83081006da6",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "38642ef4-7ff6-42af-9754-c779ddbcf6f3",
       "remotePath": "/standards/style-guide.md",
-      "remoteUpdatedAt": "2026-05-18T07:12:25.233Z",
-      "remoteRevisionNumber": 21,
+      "remoteUpdatedAt": "2026-06-08T11:46:26.153Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/token-regen.md": {
       "storageClass": "text",
       "hash": "sha256:19a3b04db59badf643cde3d8422b24855113228a1a6dbe2eec5f05221181bd29",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "18b097e3-c9da-492b-976b-a2772de3f5e0",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "1b5c36e5-bd3c-4f8f-a17a-03ae9a2671db",
       "remotePath": "/standards/token-regen.md",
-      "remoteUpdatedAt": "2026-05-29T18:24:38.967Z",
-      "remoteRevisionNumber": 8,
+      "remoteUpdatedAt": "2026-06-08T11:46:33.605Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/trpc.md": {
@@ -1409,11 +1495,11 @@
     "fssstack/standards/update-agents-md.md": {
       "storageClass": "text",
       "hash": "sha256:9fe776cd6bb93c8cd30313ee4a9b7a28d7fd2f813603d8c379a1ac1cef205673",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "9f597e51-e46d-49d6-810c-e3675dd92d73",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "f29ce531-d01b-4f41-ad46-5798deb78d89",
       "remotePath": "/standards/update-agents-md.md",
-      "remoteUpdatedAt": "2026-05-16T22:13:41.351Z",
-      "remoteRevisionNumber": 121,
+      "remoteUpdatedAt": "2026-06-08T11:46:39.104Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "fssstack/standards/web-request.md": {
@@ -1428,264 +1514,30 @@
     "fssstack/standards/worktree-merge.md": {
       "storageClass": "text",
       "hash": "sha256:43234614258c5c0ac930104dfce26a05550935eaaebddc7f09abec9e146b6de4",
-      "lastSyncedAt": "2026-05-31T00:05:21.389Z",
-      "remoteFileId": "d96e3d88-644c-47e2-89fa-86c4b2753a3c",
+      "lastSyncedAt": "2026-06-12T18:31:49.425Z",
+      "remoteFileId": "b7b3d149-f0bf-4471-ae28-070b4e56c068",
       "remotePath": "/standards/worktree-merge.md",
-      "remoteUpdatedAt": "2026-05-26T11:43:01.034Z",
-      "remoteRevisionNumber": 13,
+      "remoteUpdatedAt": "2026-06-08T11:46:42.541Z",
+      "remoteRevisionNumber": 1,
       "source": "reference"
     },
     "mp-lb-run/README.md": {
       "storageClass": "text",
-      "hash": "sha256:bd7bc6b210dad5ee6e8d7c2f37d41cbb42fc4343114ae0de6430d7c3cac2ee2d",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
+      "hash": "sha256:939450672810e253539fc148bf267819f1f738843e4e25aa2967e016894be2c0",
+      "lastSyncedAt": "2026-06-12T18:37:11.742Z",
       "remoteFileId": "2e339185-44f2-40ec-b06c-2855424e6f73",
       "remotePath": "/README.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.705Z",
-      "remoteRevisionNumber": 7
-    },
-    "mp-lb-run/SETUP_PROCESS.md": {
-      "storageClass": "text",
-      "hash": "sha256:9e3532b6aac05e56cd49bf8cd9e849366924ea075095bfd5556ee1eec9b318c1",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "a48b945c-73b5-4e1e-97dd-031387055cf4",
-      "remotePath": "/SETUP_PROCESS.md",
-      "remoteUpdatedAt": "2026-05-19T09:41:10.638Z",
-      "remoteRevisionNumber": 7
-    },
-    "mp-lb-run/agents-md/releases.md": {
-      "storageClass": "text",
-      "hash": "sha256:11625a4c6afb4ed24091a00a0f216b7f36163b15992aa8536e51769bac874f22",
-      "lastSyncedAt": "2026-06-04T15:29:20.643Z",
-      "remoteFileId": "a26efa7d-05ba-4d62-a4c0-fb53effe5324",
-      "remotePath": "/agents-md/releases.md",
-      "remoteUpdatedAt": "2026-06-02T13:28:56.157Z",
-      "remoteRevisionNumber": 2
-    },
-    "mp-lb-run/docs/custom-domains.md": {
-      "storageClass": "text",
-      "hash": "sha256:689e93d0977bdb3d7bf8524095f9bacffdab0d22d89d475453267bf50415db19",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "b2165b37-0724-40ba-b19e-ede377f02a55",
-      "remotePath": "/docs/custom-domains.md",
-      "remoteUpdatedAt": "2026-05-19T09:41:10.629Z",
-      "remoteRevisionNumber": 3
-    },
-    "mp-lb-run/docs/deployment-runbook.md": {
-      "storageClass": "text",
-      "hash": "sha256:30ca3575990b97e9909e5e87b590548985e70f23c2b702e2dad189c4225a98f6",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "c82a534b-4cb1-4c9b-9be7-e042fa574ebd",
-      "remotePath": "/docs/deployment-runbook.md",
-      "remoteUpdatedAt": "2026-05-19T09:41:10.635Z",
-      "remoteRevisionNumber": 4
-    },
-    "mp-lb-run/docs/deployment-setup.md": {
-      "storageClass": "text",
-      "hash": "sha256:492246cb97282903aef25ce564fc2ef48f9f54b9582863d6729727781575bf83",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "895a855c-ba08-4f03-9aab-00349a9f6083",
-      "remotePath": "/docs/deployment-setup.md",
-      "remoteUpdatedAt": "2026-05-19T09:41:10.639Z",
-      "remoteRevisionNumber": 7
-    },
-    "mp-lb-run/docs/terraform.md": {
-      "storageClass": "text",
-      "hash": "sha256:8689c7f28ed046293ded1d208d5e64b3d7a9d89bfaa3a19e18b60127d4d61b7f",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "f27d846e-740b-447b-a18d-64faa17069bf",
-      "remotePath": "/docs/terraform.md",
-      "remoteUpdatedAt": "2026-05-18T15:49:39.735Z",
-      "remoteRevisionNumber": 2
-    },
-    "mp-lb-run/extensions/bull-deploy.md": {
-      "storageClass": "text",
-      "hash": "sha256:353f7fb63bddc7acfe855d9a3b81e862abd98645b139cb03f232c6b7ab9204b5",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "dc18976f-a654-46b5-b851-49bcc23c0e4d",
-      "remotePath": "/extensions/bull-deploy.md",
-      "remoteUpdatedAt": "2026-05-19T09:41:10.632Z",
-      "remoteRevisionNumber": 26
-    },
-    "mp-lb-run/extensions/clerk-deploy.md": {
-      "storageClass": "text",
-      "hash": "sha256:32018f5914893ccea69febc590f300654a6b92e2d84af470b329f812bfd15c04",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "790c856e-1c8a-4966-b4ce-71f75625093d",
-      "remotePath": "/extensions/clerk-deploy.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.712Z",
-      "remoteRevisionNumber": 57
-    },
-    "mp-lb-run/extensions/mongodb-deploy.md": {
-      "storageClass": "text",
-      "hash": "sha256:b0db9a5de0f5bd3731690a03338cd8cb1531e35ad4bf2b3e3b95770be3f21201",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "f58347c5-8e1b-4916-b233-d3a9af7a38c8",
-      "remotePath": "/extensions/mongodb-deploy.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.694Z",
-      "remoteRevisionNumber": 31
-    },
-    "mp-lb-run/extensions/redis-deploy.md": {
-      "storageClass": "text",
-      "hash": "sha256:ad4beff93a04de5f419eef81b49db94532b40feb3960998524bd00488032d877",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "ead296b7-a060-4b4e-81f7-bac43cc23c70",
-      "remotePath": "/extensions/redis-deploy.md",
-      "remoteUpdatedAt": "2026-05-19T09:41:11.163Z",
-      "remoteRevisionNumber": 34
-    },
-    "mp-lb-run/extensions/s3-deploy.md": {
-      "storageClass": "text",
-      "hash": "sha256:a854675c3e633bd1248aa7e17533110eb6a40074caffaa473b93b518a7fc8c32",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "e4a13a41-4440-4aab-9d95-8f8633eebe17",
-      "remotePath": "/extensions/s3-deploy.md",
-      "remoteUpdatedAt": "2026-05-19T00:50:44.718Z",
-      "remoteRevisionNumber": 37
-    },
-    "mp-lb-run/scripts/install-deployment.mjs": {
-      "storageClass": "text",
-      "hash": "sha256:3ceeca7d29dc9cf80d8d3774b84e3c53fcd1676ddca4dae354917c9e36ce3aa0",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "691fdf93-3f01-4a46-8d14-0da49750a042",
-      "remotePath": "/scripts/install-deployment.mjs",
-      "remoteUpdatedAt": "2026-05-19T19:03:54.552Z",
-      "remoteRevisionNumber": 10
-    },
-    "mp-lb-run/templates/Dockerfile": {
-      "storageClass": "text",
-      "hash": "sha256:08a872a50f16a0d247d73417b79efe6b2775a0336a2f6e385cd68ec0c11b2b23",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "f213aa15-340a-4b81-b512-711fdd46178b",
-      "remotePath": "/templates/Dockerfile",
-      "remoteUpdatedAt": "2026-05-18T16:27:53.821Z",
-      "remoteRevisionNumber": 1
-    },
-    "mp-lb-run/templates/backend.tf": {
-      "storageClass": "text",
-      "hash": "sha256:f366ff0d47984650ae6763a46255b8ce13fcb90f57e625158d0f90b6c337a4dd",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "9a59494e-484c-4031-b488-5dd0d44cd281",
-      "remotePath": "/templates/backend.tf",
-      "remoteUpdatedAt": "2026-05-19T09:41:11.640Z",
-      "remoteRevisionNumber": 2
-    },
-    "mp-lb-run/templates/budget.tf": {
-      "storageClass": "text",
-      "hash": "sha256:87431f230e0ab0fe45ade59585e9c14925844942e3be617e241c20be2e4d9d04",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "d9ca08da-6052-4495-b870-13bd819a7d43",
-      "remotePath": "/templates/budget.tf",
-      "remoteUpdatedAt": "2026-05-18T16:27:58.018Z",
-      "remoteRevisionNumber": 1
-    },
-    "mp-lb-run/templates/build-runtime-tfvars.mjs": {
-      "storageClass": "text",
-      "hash": "sha256:fbbc8cc79212fbd1250e8a0d2696c291c929e73577f634e5897c29fb114ce924",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "be286da6-3252-4594-b526-7a7612927a4d",
-      "remotePath": "/templates/build-runtime-tfvars.mjs",
-      "remoteUpdatedAt": "2026-05-19T09:41:11.647Z",
-      "remoteRevisionNumber": 5
-    },
-    "mp-lb-run/templates/deploy.yml": {
-      "storageClass": "text",
-      "hash": "sha256:c5ecd627bbc4c47ab5b0d393d47ca9796bb6ae37e5bb5ae743e91081bdf4cbd5",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "382624ff-5c3d-48c7-a196-5f4136dc5d27",
-      "remotePath": "/templates/deploy.yml",
-      "remoteUpdatedAt": "2026-05-19T09:41:11.661Z",
-      "remoteRevisionNumber": 5
-    },
-    "mp-lb-run/templates/dns.tf": {
-      "storageClass": "text",
-      "hash": "sha256:5c88f33df3a931867b75fb3fc393595d094db7c6dd5d8371e6ad66a32efc0f6a",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "5b7d9675-c525-4e63-adb5-95c61069ad15",
-      "remotePath": "/templates/dns.tf",
-      "remoteUpdatedAt": "2026-05-19T09:41:11.658Z",
-      "remoteRevisionNumber": 2
-    },
-    "mp-lb-run/templates/env.production": {
-      "storageClass": "text",
-      "hash": "sha256:4e71bdfc2e54cd415405bd24981bc88cbad9fe76ad0dab40660b8925f2519fdd",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "b64b90e4-7953-43fb-9d83-e46f2ee33d9e",
-      "remotePath": "/templates/env.production",
-      "remoteUpdatedAt": "2026-05-19T09:41:12.002Z",
-      "remoteRevisionNumber": 2
-    },
-    "mp-lb-run/templates/frontend.tf": {
-      "storageClass": "text",
-      "hash": "sha256:25616d5782bf24d5546bb3114332e6166fb173ae86fe66fb9f58225aa52b9f43",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "d8d0af25-8873-4330-b86f-32d4b064effe",
-      "remotePath": "/templates/frontend.tf",
-      "remoteUpdatedAt": "2026-05-18T16:27:56.865Z",
-      "remoteRevisionNumber": 1
-    },
-    "mp-lb-run/templates/load-deployment-env.mjs": {
-      "storageClass": "text",
-      "hash": "sha256:ab06b6cc0ca68c4f340da216cd39bbf680d599a99b1ba74e9ca6e3f70492e8d6",
-      "lastSyncedAt": "2026-06-04T16:05:26.774Z",
-      "remoteFileId": "be88e03c-4246-474a-bbe7-7a57705e4a96",
-      "remotePath": "/templates/load-deployment-env.mjs",
-      "remoteUpdatedAt": "2026-05-19T09:41:11.933Z",
-      "remoteRevisionNumber": 3
-    },
-    "mp-lb-run/templates/main.tf": {
-      "storageClass": "text",
-      "hash": "sha256:fdb91615e37ac26bec4e9617e531aa9a65294f83f406a6db76e521c5bd2f6a9a",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "b332efce-a291-4866-ac40-0811b61215c9",
-      "remotePath": "/templates/main.tf",
-      "remoteUpdatedAt": "2026-05-19T09:41:12.622Z",
-      "remoteRevisionNumber": 2
-    },
-    "mp-lb-run/templates/outputs.tf": {
-      "storageClass": "text",
-      "hash": "sha256:272082e07dc8c5eb32e9f5deb8a4a9246da09a0540c60ce3a3125f77bafbbc0a",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "88668172-68ae-4058-b151-7625e21f2db5",
-      "remotePath": "/templates/outputs.tf",
-      "remoteUpdatedAt": "2026-05-18T16:27:55.683Z",
-      "remoteRevisionNumber": 1
-    },
-    "mp-lb-run/templates/redis.tf": {
-      "storageClass": "text",
-      "hash": "sha256:17e74e2a51fa024581afdc16ed1bc1a1f2ef26f328ffe01b8f83c00ae86e0599",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "1a14752c-ae4e-4155-b5ad-855d00150fab",
-      "remotePath": "/templates/redis.tf",
-      "remoteUpdatedAt": "2026-05-19T09:41:12.344Z",
-      "remoteRevisionNumber": 1
-    },
-    "mp-lb-run/templates/registry.tf": {
-      "storageClass": "text",
-      "hash": "sha256:8fd02cb50bcda1af81f307f2e81e6ce5a6349435fe966f923615e3edd8ce6de2",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "1a770cbf-9be9-40f9-945d-9ae2038ec16a",
-      "remotePath": "/templates/registry.tf",
-      "remoteUpdatedAt": "2026-05-18T16:27:55.097Z",
-      "remoteRevisionNumber": 1
-    },
-    "mp-lb-run/templates/variables.tf": {
-      "storageClass": "text",
-      "hash": "sha256:962ecf94ddb71e5a663857f7632307fa4d3254642675049af9e8e5cd8dc5860f",
-      "lastSyncedAt": "2026-05-31T00:06:07.064Z",
-      "remoteFileId": "5d6ad896-7111-40b5-9857-b59058f70b72",
-      "remotePath": "/templates/variables.tf",
-      "remoteUpdatedAt": "2026-05-19T09:41:12.541Z",
-      "remoteRevisionNumber": 2
+      "remoteUpdatedAt": "2026-06-12T18:37:12.245Z",
+      "remoteRevisionNumber": 9
     }
   },
   "references": {
     "fssstack/skills": {
-      "lastSeenAt": "2026-06-04T16:05:06.354Z",
+      "lastSeenAt": "2026-06-12T18:31:49.425Z",
       "type": "store-reference"
     },
     "fssstack/standards": {
-      "lastSeenAt": "2026-06-04T16:05:06.354Z",
+      "lastSeenAt": "2026-06-12T18:31:49.425Z",
       "type": "store-reference"
     }
   },

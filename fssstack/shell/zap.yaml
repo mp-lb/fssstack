@@ -10,6 +10,15 @@ native:
     cmd: pnpm --filter @example/fss-shell-example-backend dev
     env: "*"
 tasks:
+  context-build:
+    cmds:
+      - node scripts/context-files.mjs build {{REST}}
+  context-copy:
+    cmds:
+      - node scripts/context-files.mjs copy {{REST}}
+  compile-agents:
+    cmds:
+      - zap task context-build -- {{REST}}
   setup:
     cmds:
       - pnpm install
@@ -38,4 +47,5 @@ tasks:
     cmds:
       - pnpm install
       - cp "$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")/.env" . 2>/dev/null || true
+      - '[ ! -f AGENTS.base.md ] || zap task context-copy'
       - grep -qxF '@AGENTS_WORKTREE.md' AGENTS.md || printf '\n@AGENTS_WORKTREE.md\n' >> AGENTS.md

@@ -3,8 +3,9 @@
 The **advisory** tier. Each guide has a strong default path, but real variance
 leaks in (the application, the framework choice, n=1 history), so **deviation is
 expected and fine**. Contrast with the **canon** tier — `fssstack/` (template +
-extensions) and `mp-lb-run/` (deployment) — which is prescriptive and followed to
-a tee, where deviation is a bug.
+extensions) — which is prescriptive and followed to a tee, where deviation is a
+bug. (Deployment canon is Zap Arc / ArcNet, outside this repo; `mp-lb-run/` is a
+tombstone.)
 
 Most guides are a **single file** here. A guide gets its **own subfolder** only
 when it outgrows one file — i.e. it carries `snippets/`, sub-docs, or living state.

@@ -273,9 +273,20 @@ pnpm exec eslint . --fix
 
 Only run shadcn component installs for frontend apps that actually exist, and use each real frontend slug. The `eslint . --fix` pass reformats anything the renames shifted (e.g. an import that now fits on one line), so the project lands lint-clean.
 
-## Create AGENTS.md
+## Create context files
 
-Run `dx read standards/agents-md-template.txt > AGENTS.md`, and follow `dx read standards/update-agents-md.md`.
+Create the project's `agents-md/` source blocks and `agents-md/index.md`, then
+build the committed base context:
+
+```bash
+zap task context-build
+git add agents-md AGENTS.base.md
+```
+
+`AGENTS.md` and `CLAUDE.md` are local generated files and stay gitignored. After
+cloning, a developer who does not need private context can run
+`zap task context-copy`; a developer who wants extra context can run
+`zap task context-build -- ~/some/global.md`.
 
 ## Validate
 

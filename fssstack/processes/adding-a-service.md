@@ -69,10 +69,5 @@ Run the relevant project checks through Zapper tasks.
 
 ## 5. Handle deployment separately
 
-If the service deploys, use the project's deployment adapter documentation.
-
-For the MAP Lab `mp-lb-run` deployment pattern, read:
-
-```bash
-dx --store mp-lb-run read SETUP_PROCESS.md
-```
+If the service deploys, use whatever deployment setup the project has. Cloud
+deployment is out of scope for these docs.

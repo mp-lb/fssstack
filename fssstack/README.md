@@ -60,8 +60,8 @@ frontends, Next.js where it fits, a tRPC backend, and pnpm workspaces.
 - It is **not a fork-me template**. You don't clone this repo; the agent
   assembles a fresh target repo from the shell plus external scaffolders
   (shadcn CLI for Vite, etc.).
-- It does **not** carry deployment config — that lives separately in the
-  `mp-lb-run` payload.
+- It does **not** carry deployment config — deploying the target repo is out
+  of scope for these docs.
 - It assumes **no** authoring tooling is present in your target repo. These docs
   describe how to build the repo, not how this repo is maintained.
 
